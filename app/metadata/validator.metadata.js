@@ -3,21 +3,28 @@
  */
 
 import ValidatorTypes from './validator-types.metadata';
-import {ValidatorException} from '../base/exceptions';
+import {ValidatorException} from '../exceptions';
 
 
 /**
- * Validators help you
+ *
+ * Validators help you define rules with which you will consider the value given for a field as **valid**.
  *
  *
- * @module Metadatio
- * @submodule metadata
+ * @module metadata
  * @class Validator
  * @constructor
- * @param type {string} Define the type of validation to use. Type must be one TODO: Link ValidatorTypes defined.
- * @param validator {string|function} The validator to match values against
+ *
  */
 export default class Validator {
+
+    /**
+     * Creates a new validator instance, for validating using a certain method, with the validator match given
+     *
+     * @method constructor
+     * @param type {string} Define the type of validation to use. Type must be one TODO: Link ValidatorTypes defined.
+     * @param validator {string|function} The validator to match values against
+     */
     constructor(type, validator) {
         this.type = type;
         this.validator = validator;
@@ -63,6 +70,13 @@ export default class Validator {
         }
     }
 
+    /**
+     * Used to validate a value against the validator defined.
+     *
+     * @method validate
+     * @param value {*} Value to validate
+     * @returns {boolean}
+     */
     validate(value) {
         switch(this.type) {
             case ValidatorTypes.exact:

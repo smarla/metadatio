@@ -3,8 +3,6 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import { MetadataIntegrityException } from '../exceptions';
-import {DataTypes, FieldTypes} from '../../metadata';
 
 export default class BaseField extends Component {
 
@@ -37,33 +35,6 @@ export default class BaseField extends Component {
                 { this.props.entity[this.props.metadata.name] }
             </div>
         </div>);
-    }
-
-    static validateMetadata(props, propName, componentName) {
-        const obj = props[propName];
-
-        // Verify basic metadata
-        if(!obj.name) throw new MetadataIntegrityException('Field name is required');
-        if(!obj.dataType) throw new MetadataIntegrityException('Data type is not defined');
-        if(!DataTypes[obj.dataType]) throw new MetadataIntegrityException('Data type is invalid');
-        if(!obj.multiplicity) throw new MetadataIntegrityException('Multiplicity is not defined');
-        if(['one', 'many'].indexOf(obj.multiplicity) === -1) throw new MetadataIntegrityException('Multiplicity is neither \'one\' nor \'many\'');
-
-        // Verify form information
-        if(obj.forms) {
-            for(var form in obj.forms) {
-                var forms = obj.forms;
-
-                // Verify permissions
-                for(var permission in forms[form].permissions) {
-                    if(['r', 'rw'].indexOf(forms[form].permissions[permission]) === -1) throw new MetadataIntegrityException('Permissions set for field are neither \'r\' nor \'rw\'');
-                }
-
-                // Verify field type
-                if(!forms[form].fieldType) throw new MetadataIntegrityException('Field type for form is not defined');
-                if(!FieldTypes[forms[form].fieldType]) throw new MetadataIntegrityException('Field type for form is invalid');
-            }
-        }
     }
 
 }
