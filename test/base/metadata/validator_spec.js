@@ -33,83 +33,197 @@ describe('Validators set for fields', () => {
         }
     });
 
-    it('should validate exact match', () => {
-        const string = 'abc';
-        const match = 'abc';
+    describe('with \'exact match\' type', () => {
+        it('should validate', () => {
+            const string = 'abc';
+            const match = 'abc';
 
-        let validator = new Validator(ValidatorTypes.exact, match);
+            let validator = new Validator(ValidatorTypes.exact, match);
 
-        expect(validator.validate(string)).to.equal(true);
+            expect(validator.validate(string)).to.equal(true);
+        });
+
+        it('should not allow complex objects as validators', (done) => {
+            try {
+                new Validator(ValidatorTypes.exact, {});
+                done(new Error('An exception was expected here'));
+            } catch(e) {
+                expect(e.className).to.equal('ValidatorException');
+                expect(e.message).to.equal('Validator for type \'exact\' must not be an object');
+                done();
+            }
+        });
+
+        it('should not validate complex objects', (done) => {
+            try {
+                new Validator(ValidatorTypes.exact, "123")
+                    .validate({});
+                done(new Error('An exception was expected here'));
+            } catch(e) {
+                expect(e.className).to.equal('ValidatorException');
+                expect(e.message).to.equal('Value provided for validator type \'exact\' must not be an object');
+                done();
+            }
+        });
     });
 
-    it('should validate regular expressions', () => {
-        const string = 'abc';
-        const match = /^abc$/;
+    describe('with \'regex\' type', () => {
+        it('should validate', () => {
+            const string = 'abc';
+            const match = /^abc$/;
 
-        let validator = new Validator(ValidatorTypes.regex, match);
+            let validator = new Validator(ValidatorTypes.regex, match);
 
-        expect(validator.validate(string)).to.deep.equal(!!string.match(match));
+            expect(validator.validate(string)).to.deep.equal(!!string.match(match));
+        });
+
+        it('should not allow other than regular expressions', (done) => {
+            try {
+                new Validator(ValidatorTypes.regex, "123");
+                done(new Error('An exception was expected here'));
+            } catch(e) {
+                expect(e.className).to.equal('ValidatorException');
+                expect(e.message).to.equal('Validator for type \'regex\' must be a regular expression');
+                done();
+            }
+        });
+
+        it('should only accept strings to validate', (done) => {
+            try {
+                new Validator(ValidatorTypes.regex, /abc/)
+                    .validate(123);
+                done(new Error('An exception was expected here'));
+            } catch(e) {
+                expect(e.className).to.equal('ValidatorException');
+                expect(e.message).to.equal('Value provided for validator type \'regex\' must be a string');
+                done();
+            }
+        });
     });
 
-    it('should not allow other than regular expressions for \'regex\' validation', (done) => {
-        try {
-            new Validator(ValidatorTypes.regex, "123");
-            done(new Error('An exception was expected here'));
-        } catch(e) {
-            expect(e.className).to.equal('ValidatorException');
-            expect(e.message).to.equal('Validator for type \'regex\' must be a regular expression');
-            done();
-        }
+    describe('with \'range\' type', () => {
+        it('should validate', () => {
+            const string = 25;
+            const match = { min: 20, max: 30 };
+
+            let validator = new Validator(ValidatorTypes.range, match);
+
+            expect(validator.validate(string)).to.equal(true);
+        });
+
+        it('should specify at least one of \'min\' and \'max\'', (done) => {
+            try {
+                new Validator(ValidatorTypes.range, {});
+                done(new Error('An exception was expected here'));
+            } catch(e) {
+                expect(e.className).to.equal('ValidatorException');
+                expect(e.message).to.equal('Validator for type \'range\' must specify at least one of \'min\' and \'max\'');
+                done();
+            }
+        });
+
+        it('should only receive numbers on \'min\' and \'max\' options', (done) => {
+            try {
+                new Validator(ValidatorTypes.range, {min: "abc"});
+                done(new Error('An exception was expected here'));
+            } catch(e) {
+                expect(e.className).to.equal('ValidatorException');
+                expect(e.message).to.equal('Options (min, max) for \'range\' validators must be numbers');
+                done();
+            }
+        });
+
+        it('should only accept numbers to validate', (done) => {
+            try {
+                new Validator(ValidatorTypes.range, {min: 123})
+                    .validate('wrong');
+                done(new Error('An exception was expected here'));
+            } catch(e) {
+                expect(e.className).to.equal('ValidatorException');
+                expect(e.message).to.equal('Value provided for validator type \'range\' must be a number');
+                done();
+            }
+        });
     });
 
-    it('should validate ranges', () => {
-        const string = 25;
-        const match = { min: 20, max: 30 };
+    describe('with \'length\' type', () => {
+        it('should validate', () => {
+            const string = 'abc';
+            const match = { min: 1, max: 3 };
 
-        let validator = new Validator(ValidatorTypes.range, match);
+            let validator = new Validator(ValidatorTypes.length, match);
 
-        expect(validator.validate(string)).to.equal(true);
+            expect(validator.validate(string)).to.equal(true);
+        });
+
+        it('should specify at least one of \'min\' and \'max\'', (done) => {
+            try {
+                new Validator(ValidatorTypes.length, {});
+                done(new Error('An exception was expected here'));
+            } catch(e) {
+                expect(e.className).to.equal('ValidatorException');
+                expect(e.message).to.equal('Validator for type \'length\' must specify at least one of \'min\' and \'max\'');
+                done();
+            }
+        });
+
+        it('should only receive numbers on \'min\' and \'max\' options', (done) => {
+            try {
+                new Validator(ValidatorTypes.length, {min: "abc"});
+                done(new Error('An exception was expected here'));
+            } catch(e) {
+                expect(e.className).to.equal('ValidatorException');
+                expect(e.message).to.equal('Options (min, max) for \'length\' validators must be numbers');
+                done();
+            }
+        });
+
+        it('should only accept strings and arrays to validate', (done) => {
+            try {
+                new Validator(ValidatorTypes.length, {min: 123})
+                    .validate(123);
+                done(new Error('An exception was expected here'));
+            } catch(e) {
+                expect(e.className).to.equal('ValidatorException');
+                expect(e.message).to.equal('Value provided for validator type \'length\' must be either a string or an array');
+                done();
+            }
+        });
     });
 
-    it('should specify one of \'min\' and \'max\' for \'range\' validation', (done) => {
-        try {
-            new Validator(ValidatorTypes.range, {});
-            done(new Error('An exception was expected here'));
-        } catch(e) {
-            expect(e.className).to.equal('ValidatorException');
-            expect(e.message).to.equal('Validator for type \'range\' must specify at least one of \'min\' and \'max\'');
-            done();
-        }
-    });
+    describe('with \'fn\' type', () => {
+        it('should validate using a custom function', () => {
+            const string = 'this is custom';
+            const match = (value) => {
+                return value === 'this is custom';
+            };
 
-    it('should only receive numbers on \'min\' and \'max\' options for \'range\' validation', (done) => {
-        try {
-            new Validator(ValidatorTypes.range, {min: "abc"});
-            done(new Error('An exception was expected here'));
-        } catch(e) {
-            expect(e.className).to.equal('ValidatorException');
-            expect(e.message).to.equal('Options (min, max) for \'range\' validators must be numbers');
-            done();
-        }
-    });
+            let validator = new Validator(ValidatorTypes.fn, match);
 
-    it('should validate lengths', () => {
-        const string = 'abc';
-        const match = { min: 1, max: 3 };
+            expect(validator.validate(string)).to.equal(true);
+        });
 
-        let validator = new Validator(ValidatorTypes.length, match);
+        it('should only receive functions', (done) => {
+            try {
+                new Validator(ValidatorTypes.fn, 'wrong');
+                done(new Error('An exception was expected here'));
+            } catch(e) {
+                expect(e.className).to.equal('ValidatorException');
+                expect(e.message).to.equal('Validators of type \'fn\' must receive a function to validate against');
+                done();
+            }
+        });
 
-        expect(validator.validate(string)).to.equal(true);
-    });
-
-    it('should validate custom validation functions', () => {
-        const string = 'this is custom';
-        const match = (value) => {
-            return value === 'this is custom';
-        };
-
-        let validator = new Validator(ValidatorTypes.fn, match);
-
-        expect(validator.validate(string)).to.equal(true);
+        it('should only accept validator functions that return either true or false', (done) => {
+            try {
+                new Validator(ValidatorTypes.fn, () =>{ return 'wrong' })
+                    .validate('value');
+                done(new Error('An exception was expected here'));
+            } catch(e) {
+                expect(e.className).to.equal('ValidatorException');
+                expect(e.message).to.equal('Validator functions must return either \'true\' or \'false\'');
+                done();
+            }
+        });
     });
 });
