@@ -2,9 +2,9 @@
  * Created by sm on 01/05/16.
  */
 
+import Validator from './validator.metadata';
 import { MetadataIntegrityException } from '../exceptions';
 import DataTypes from './data-types.metadata';
-import FieldTypes from './field-types.metadata';
 
 /**
  * Defines a field of any entity
@@ -58,17 +58,29 @@ export default class Field {
         /**
          * Define the data type of the element.
          *
-         * # Basic data types
-         *
          * Basic data types are primitive types to define basic data.
          *
          * @property dataType
          * @type {string|Entity}
          */
         this.dataType = props.dataType;
-        this.forms = props.forms;
+
+        /**
+         * Define the multiplicity for the element
+         *
+         * @property multiplicity
+         * @type {string|string|*}
+         */
         this.multiplicity = props.multiplicity;
-        this.validators = props.validators;
+
+        /**
+         * Define the validators for the field
+         *
+         * @property validators
+         * @type {Object}
+         * @default {}
+         */
+        this.validators = props.validators || {};
 
         // Verify basic metadata
         if(!this.name) throw new MetadataIntegrityException('Field name is required');
@@ -77,21 +89,39 @@ export default class Field {
         if(!this.multiplicity) throw new MetadataIntegrityException('Multiplicity is not defined');
         if(['one', 'many'].indexOf(this.multiplicity) === -1) throw new MetadataIntegrityException('Multiplicity is neither \'one\' nor \'many\'');
 
-        // Verify form information
-        if(this.forms) {
-            for(var form in this.forms) {
-                var forms = this.forms;
+        // Verify that validators are Validator instances
+        // If that's the case, all validation there must have been done already
+        for(let validatorName in this.validators) {
+            const validator = this.validators[validatorName];
 
-                // Verify permissions
-                for(var permission in forms[form].permissions) {
-                    if(['r', 'rw'].indexOf(forms[form].permissions[permission]) === -1) throw new MetadataIntegrityException('Permissions set for field are neither \'r\' nor \'rw\'');
-                }
-
-                // Verify field type
-                if(!forms[form].fieldType) throw new MetadataIntegrityException('Field type for form is not defined');
-                if(!FieldTypes[forms[form].fieldType]) throw new MetadataIntegrityException('Field type for form is invalid');
+            if(!(validator instanceof Validator)) {
+                throw new MetadataIntegrityException('Validators must be instances of \'Validator\'');
             }
         }
     }
 
+    /**
+     * Determines whether the value defined for a field is valid.
+     *
+     * @method validate
+     * @param value
+     * @param {validators=this.validators} The validators to match against.
+     * @returns {boolean}
+     */
+    validate(value, validators = this.validators) {
+        for(let validatorName in validators) {
+            const validator = validators[validatorName];
+
+            const validates = validator.validate(value);
+
+            if(!validates) {
+                // TODO Create different validation strategies
+                // BREAK, COMPLETE, THROW [...]
+                return false;
+            }
+
+        }
+
+        return true;
+    }
 }
