@@ -1,2 +1,33 @@
-<h1>Define things with metadata</h1>
-<p></p>
+<h1>Smart, modular apps using metadata</h1>
+<p>Metadatio is a library for building complete metadata specifications for defining the required data model for your apps. Our main goal is to let you extract your data model definition to a separate component, with standalone capabilities of validating itself. Thus, you'd be able to define a consistent data model across all the pieces of your application, with zero-duplicity.</p>
+
+<h2>Entities and fields</h2>
+<p>Metadatio is, at its core, a container for <a href="classes/Entity.html">entities</a> and <a href="classes/Field.html">fields</a>. It contains enough options for creating a compliant data model for almost any application purpose, and includes a built-in validation system for determining whether the values set to the elements of certain metadata effectively complies with the specification configured.</p>
+
+<h2>Modular design</h2>
+<p>Metadatio core contains the entity and field definitions, the validators, the core exceptions and some helper functions to access your metadata easily from anywhere. It has also built-in methods for storing the metadata in memory, maintaining it accessible throughout all your application's lifecycle. This metadata specification will suffice for static metadata definitions, and for unifying validation across all the pieces of your app. </p>
+<p>We are working on several modules that enhance core features, by providing a more specific system depending on the task for which you will use the metadata specification:</p>
+<ul>
+    <li><b>metadatio-react-forms:</b> Form generator using React. This module should be able to build fully working form-based apps using the metadata definition you provided.</li>
+    <li><b>metadatio-api:</b> API definitions for managing elements defined through metadata. </li>
+    <li><b>metadatio-api-contract-testing:</b> Contract-testing system for validating whether an API's features comply with a contract, specified through metadata.</li>
+    <li><b>metadatio-api-raml:</b> RAML generator for building API definitions.</li>
+</ul>
+
+<h2>Technology agnostic</h2>
+<p>
+    Metadatio ships as a <a href="https://www.npmjs.com/package/metadatio">npm module</a>, so it's a perfect suit for JavaScript projects. However, we've built a helper that performs bi-directional JSON conversion of the full metadata definitions, so you can develop the different pieces of your app in separate technologies or languages.
+</p>
+
+<h2>Installation</h2>
+<p>
+    You can install Metadatio easily using npm:
+    <pre>
+        npm install metadatio --save
+    </pre>
+</p>
+
+<h2>Usage</h2>
+<pre>
+
+</pre>
