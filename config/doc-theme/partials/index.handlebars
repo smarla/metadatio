@@ -22,12 +22,96 @@
 <h2>Installation</h2>
 <p>
     You can install Metadatio easily using npm:
-    <pre>
-        npm install metadatio --save
-    </pre>
 </p>
+<pre>
+    npm install metadatio --save
+</pre>
 
 <h2>Usage</h2>
 <pre>
+    import { Entity, Field, DataTypes, Validator, ValidatorTypes } from 'metadatio';
+    class Foo extends Entity {
+        constructor() {
+            super({
+                name: 'foo',
+                label: 'Foo'
+            });
 
+            super.addField(new Field({
+                name: 'name',
+                dataType: DataTypes.string,
+                validators: {
+                    'pattern': new Validator(ValidatorTypes.regex, /^_?(\d|[a-zA-Z]|_|-)$/i),
+                    'lengths': new Validator(ValidatorTypes.lengths, { min: 2, max: 64 }
+                }
+            }));
+        }
+
+        static getInstance() {
+            Foo.instance = new Foo();
+            return Foo.instance;
+        }
+    }
+
+    Metadatio.addEntity(Foo.getInstance());
+</pre>
+
+<h2>Hierarchy</h2>
+<pre>
+    class Bar extends Entity {
+        constructor() {
+            super({
+                name: 'bar',
+                parent: Foo.getInstance()
+            });
+
+            ...
+        }
+
+        static getInstance() {
+            Bar.instance = new Bar();
+            return Bar.instance;
+        }
+    }
+</pre>
+<p>or</p>
+<pre>
+    class Bar extends Foo {
+        constructor() {
+            super({
+                name: 'bar'
+            });
+
+            ...
+        }
+
+        static getInstance() {
+            Bar.instance = new Bar();
+            return Bar.instance;
+        }
+    }
+</pre>
+
+
+<h2>Contextual relationships</h2>
+<pre>
+    class Bar extends Entity {
+        constructor() {
+            super({
+                name: 'bar',
+                ...
+            });
+
+            super.addField(new Field({
+                name: 'foo',
+                dataType: Foo.getInstance(),
+                multiplicity: 'many'
+            }));
+        }
+
+        static getInstance() {
+            Bar.instance = new Bar();
+            return Bar.instance;
+        }
+    }
 </pre>
