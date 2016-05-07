@@ -23,7 +23,7 @@ export default class Validator {
      *
      * @method constructor
      * @param type {string} Define the type of validation to use. Type must be one TODO: Link ValidatorTypes defined.
-     * @param validator {string|function} The validator to match values against
+     * @param validator {string|RegExp|Object|function} The validator to match values against
      */
     constructor(type, validator) {
         this.type = type;
@@ -95,16 +95,16 @@ export default class Validator {
                 if(typeof(value) !== 'number') {
                     throw new ValidatorException('Value provided for validator type \'range\' must be a number');
                 }
-                let rangeMin = this.validator.min ? value >= this.validator.min : true;
-                let rangeMax = this.validator.max ? value <= this.validator.max : true;
+                const rangeMin = this.validator.min ? value >= this.validator.min : true;
+                const rangeMax = this.validator.max ? value <= this.validator.max : true;
                 return rangeMin && rangeMax;
 
             case ValidatorTypes.length:
                 if(typeof(value) !== 'string' && !(value instanceof Array)) {
                     throw new ValidatorException('Value provided for validator type \'length\' must be either a string or an array');
                 }
-                let lengthMin = this.validator.min ? value.length >= this.validator.min : true;
-                let lengthMax = this.validator.max ? value.length <= this.validator.max : true;
+                const lengthMin = this.validator.min ? value.length >= this.validator.min : true;
+                const lengthMax = this.validator.max ? value.length <= this.validator.max : true;
                 return lengthMin && lengthMax;
 
             case ValidatorTypes.fn:

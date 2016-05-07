@@ -5,9 +5,55 @@
 import Validator from './validator';
 import { MetadataIntegrityException } from '../exceptions';
 import DataTypes from './data-types';
+import * as util from './util';
 
 /**
- * Defines a field of any entity
+ * The fields represent each and every property of any entity. Each field is completely sufficient - it stores configuration about the identification, typing and validation of the property - and all {{#crossLink "Entity"}}entity{{/crossLink}} procedures depending on fields dispatch down the action, that it's interpreted isolatedly.
+ *
+ * ## Usage
+ *
+ * ```
+ * const field = new Field({
+ *   name: 'foo',
+ *   [label: 'Foo',]
+ *   [description: 'description...',]
+ *   dataType: 'string',
+ *   [multiplicity: 'one',]
+ *   [validators: {...}]
+ * });
+ * ```
+ *
+ * ## Identification
+ *
+ * All fields must be defined with a {{#crossLink "Field/name:property"}}name{{/crossLink}}, that must be unique within each entity. In addition, you can define a field's {{#crossLink "Field/label:property"}}label{{/crossLink}} - useful for translatable usages.
+ *
+ * ## Data typing
+ *
+ * All fields must have an assigned data type.
+ *
+ * ### Basic data types
+ *
+ * You can make use of several basic data types, all available at the {{#crossLink "DataTypes"}}DataTypes{{/crossLink}} specification.
+ *
+ * ```
+ * string: 'Sample value',
+ * number: 123[.456],
+ * boolean: true|false,
+ * date: new Date()|Timestamp
+ * ```
+ *
+ * ### Reference data types
+ *
+ * You can set a reference to an entity as the data type for a field. This will build a relationship between your field's entity and the target entity, through the field you setup for that.
+ *
+ * ```
+ * const foo = new Entity({ name: 'foo', ... });
+ * const field = new Field({ name: 'bar', dataType: foo });
+ * ```
+ *
+ * #### Referenced validations
+ *
+ * When a field's data type is set as a reference, the validation procedures change for it. Values for the fields with this metadata can be filled either with the whole entity - for inner object saving - or via a `string` or `number` identifying the entity - deep linking approach. In the case you provide complete entities as values, the validation procedures of the target entity's metadata will be applied.
  *
  * @module metadata
  * @class Field
@@ -38,23 +84,17 @@ export default class Field {
          * @property label
          * @type {string}
          */
-        this.label = props.label;
-
-        /**
-         * Textual aid for any user who wants to define a value for this field
-         *
-         * @property hint
-         * @type {null|string}
-         */
-        this.hint = props.hint;
+        
+        this.label = props.label || null;
 
         /**
          * Description for the field
          *
          * @property description
-         * @type {null|string}
+         * @type {string}
+         * @default null
          */
-        this.description = props.description;
+        this.description = props.description || null;
 
         /**
          * Define the data type of the element.
@@ -70,35 +110,35 @@ export default class Field {
          * Define the multiplicity for the element
          *
          * @property multiplicity
-         * @type {string|string|*}
+         * @type {string}
+         * @default 'one'
          */
-        this.multiplicity = props.multiplicity;
+        this.multiplicity = props.multiplicity || 'one';
 
         /**
          * Define the validators for the field
          *
          * @property validators
-         * @type {Object}
+         * @type {Validator*}
          * @default {}
          */
-        this.validators = props.validators || {};
+        this.validators = {};
 
         // Verify basic metadata
-        // TODO: Verify lengths etc...
         if(!this.name) throw new MetadataIntegrityException('Field name is required');
+        if(typeof(this.name) !== 'string') throw new MetadataIntegrityException('Field name must be a string');
+        if(!util.NAME_PATTERN_VALIDATOR.validate(this.name)) throw new MetadataIntegrityException('Field name must comply with the specification');
+        if(!util.NAME_LENGTHS_VALIDATOR.validate(this.name)) throw new MetadataIntegrityException('Field name must have between 2 and 64 characters');
         if(!this.dataType) throw new MetadataIntegrityException('Data type is not defined');
         if(!DataTypes[this.dataType]) throw new MetadataIntegrityException('Data type is invalid');
         if(!this.multiplicity) throw new MetadataIntegrityException('Multiplicity is not defined');
         if(['one', 'many'].indexOf(this.multiplicity) === -1) throw new MetadataIntegrityException('Multiplicity is neither \'one\' nor \'many\'');
 
-        // Verify that validators are Validator instances
-        // If that's the case, all validation there must have been done already
-        for(let validatorName in this.validators) {
-            const validator = this.validators[validatorName];
+        // Add validators
+        for(let validatorName in props.validators) {
+            const validator = props.validators[validatorName];
 
-            if(!(validator instanceof Validator)) {
-                throw new MetadataIntegrityException('Validators must be instances of \'Validator\'');
-            }
+            this.addValidator(validatorName, validator);
         }
     }
 
@@ -134,6 +174,8 @@ export default class Field {
      * @param name {string} The name of the validator
      * @param validator {Validator} The new validator to include
      * @param [overwrite=false] {boolean} Whether to overwrite the validator name, if it exists.
+     * @returns {Field}
+     * @chainable
      */
     addValidator(name, validator, overwrite = false) {
         if(!name || typeof(name) !== 'string' || !name.length) {
@@ -149,5 +191,7 @@ export default class Field {
         }
 
         this.validators[name] = validator;
+
+        return this;
     }
 }

@@ -11,7 +11,7 @@ const EXPECTING_ERROR = new Error('An exception was expected here');
 describe('Base field component', () => {
 
     describe('upon construction', () => {
-        it('should create a new field with basic metadata', () => {
+        it('should be configured with basic metadata', () => {
             const metadata = {
                 name: "name",
                 label: "Name of your app",
@@ -40,6 +40,86 @@ describe('Base field component', () => {
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
                 expect(e.message).to.equal('Field name is required');
+                done();
+            }
+        });
+
+        it('should not allow corrupted metadata (non-string field name)', (done) => {
+            const metadata = {
+                name: 123,
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.string
+
+            };
+
+            try {
+                new Field(metadata);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('MetadataIntegrityException');
+                expect(e.message).to.equal('Field name must be a string');
+                done();
+            }
+        });
+
+        it('should not allow corrupted metadata (wrong field name)', (done) => {
+            const metadata = {
+                name: 'abc$',
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.string
+
+            };
+
+            try {
+                new Field(metadata);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('MetadataIntegrityException');
+                expect(e.message).to.equal('Field name must comply with the specification');
+                done();
+            }
+        });
+
+        it('should not allow corrupted metadata (name length below 2)', (done) => {
+            const metadata = {
+                name: 'a',
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.string
+
+            };
+
+            try {
+                new Field(metadata);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('MetadataIntegrityException');
+                expect(e.message).to.equal('Field name must have between 2 and 64 characters');
+                done();
+            }
+        });
+
+        it('should not allow corrupted metadata (name length above 64)', (done) => {
+            const metadata = {
+                name: 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz',
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.string
+
+            };
+
+            try {
+                new Field(metadata);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('MetadataIntegrityException');
+                expect(e.message).to.equal('Field name must have between 2 and 64 characters');
                 done();
             }
         });
@@ -77,25 +157,6 @@ describe('Base field component', () => {
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
                 expect(e.message).to.equal('Data type is invalid');
-                done();
-            }
-        });
-
-        it('should not allow corrupted metadata (no multiplicity)', (done) => {
-            const metadata = {
-                name: 'name',
-                label: "Name of your app",
-                shortLabel: null,
-                hint: null,
-                dataType: DataTypes.string
-            };
-
-            try {
-                new Field(metadata);
-                done(EXPECTING_ERROR);
-            } catch(e) {
-                expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Multiplicity is not defined');
                 done();
             }
         });
