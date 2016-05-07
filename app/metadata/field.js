@@ -2,9 +2,9 @@
  * Created by sm on 01/05/16.
  */
 
-import Validator from './validator.metadata';
+import Validator from './validator';
 import { MetadataIntegrityException } from '../exceptions';
-import DataTypes from './data-types.metadata';
+import DataTypes from './data-types';
 
 /**
  * Defines a field of any entity
@@ -20,6 +20,7 @@ export default class Field {
      *
      * @method constructor
      * @param props {Object} An object with the properties of the field
+     * @throws {MetadataIntegrityException} If the field's metadata is corrupt in any way, an exception is thrown.
      */
     constructor(props) {
 
@@ -83,6 +84,7 @@ export default class Field {
         this.validators = props.validators || {};
 
         // Verify basic metadata
+        // TODO: Verify lengths etc...
         if(!this.name) throw new MetadataIntegrityException('Field name is required');
         if(!this.dataType) throw new MetadataIntegrityException('Data type is not defined');
         if(!DataTypes[this.dataType]) throw new MetadataIntegrityException('Data type is invalid');
@@ -123,5 +125,29 @@ export default class Field {
         }
 
         return true;
+    }
+
+    /**
+     * Adds a new validator to the field.
+     *
+     * @method addValidator
+     * @param name {string} The name of the validator
+     * @param validator {Validator} The new validator to include
+     * @param [overwrite=false] {boolean} Whether to overwrite the validator name, if it exists.
+     */
+    addValidator(name, validator, overwrite = false) {
+        if(!name || typeof(name) !== 'string' || !name.length) {
+            throw new MetadataIntegrityException('Validator name must be given, and be a string');
+        }
+
+        if(!(validator instanceof Validator)) {
+            throw new MetadataIntegrityException('Validators must be instances of \'Validator\'');
+        }
+        
+        if(!overwrite && this.validators[name] !== undefined) {
+            throw new MetadataIntegrityException('A validator already exists with name' + name + ' and \'overwrite\' flag has not been set')
+        }
+
+        this.validators[name] = validator;
     }
 }

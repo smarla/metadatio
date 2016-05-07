@@ -2,9 +2,9 @@
  * Created by sm on 01/05/16.
  */
 
-import Field from './field.metadata'
-import Validator from './validator.metadata';
-import * as FieldTypes from './field-types.metadata';
+import Field from './field'
+import Validator from './validator';
+import * as FieldTypes from './field-types';
 
 import { MetadataIntegrityException } from '../exceptions';
 

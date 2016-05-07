@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "url": "http://metadat.io/",
   "options": {
-    "linkNative": true,
+    "linkNatives": true,
     "outdir": "docs",
     "themedir": "config/doc-theme"
   }

@@ -2,7 +2,7 @@
  * Created by sm on 01/05/16.
  */
 
-import ValidatorTypes from './validator-types.metadata';
+import ValidatorTypes from './validator-types';
 import {ValidatorException} from '../exceptions';
 
 

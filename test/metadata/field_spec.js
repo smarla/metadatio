@@ -4,204 +4,273 @@
 
 import {expect} from 'chai';
 
-import { Field, DataTypes } from '../../app/metadata';
+import { Field, DataTypes, Validator, ValidatorTypes } from '../../app/metadata';
+
+const EXPECTING_ERROR = new Error('An exception was expected here');
 
 describe('Base field component', () => {
 
-    it('should create a new field with basic metadata', () => {
-        const metadata = {
-            name: "name",
-            label: "Name of your app",
-            shortLabel: null,
-            hint: null,
-            dataType: DataTypes.string
-        };
+    describe('upon construction', () => {
+        it('should create a new field with basic metadata', () => {
+            const metadata = {
+                name: "name",
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.string,
+                multiplicity: 'one'
+            };
 
-        const entity = {
-            name: 'test base component'
-        };
+            const field = new Field(metadata);
 
-        // const field = renderIntoDocument(<BaseField metadata={metadata} entity={entity}></BaseField>);
-        //
-        // const container = findRenderedDOMComponentWithClass(field, 'metadatio-field');
-        //
-        // const label = findRenderedDOMComponentWithTag(field, 'label');
-        // expect(label.textContent).to.equal(metadata.label);
-        //
-        // const input = findRenderedDOMComponentWithClass(field, 'metadatio-field-input');
-        // expect(input.textContent).to.equal(entity.name);
+            expect(field.name).to.equal(metadata.name);
+        });
 
-    });
+        it('should not allow corrupted metadata (no field name)', (done) => {
+            const metadata = {
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.string
+            };
 
-    it('should not allow corrupted metadata (no field name)', (done) => {
-        const metadata = {
-            label: "Name of your app",
-            shortLabel: null,
-            hint: null,
-            dataType: DataTypes.string
-        };
+            try {
+                new Field(metadata);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('MetadataIntegrityException');
+                expect(e.message).to.equal('Field name is required');
+                done();
+            }
+        });
 
-        try {
-            new Field(metadata);
-            done(new Error('An exception was expected here'));
-        } catch(e) {
-            expect(e.className).to.equal('MetadataIntegrityException');
-            expect(e.message).to.equal('Field name is required');
-            done();
-        }
-    });
+        it('should not allow corrupted metadata (no field dataType)', (done) => {
+            const metadata = {
+                name: 'name',
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null
+            };
 
-    it('should not allow corrupted metadata (no field dataType)', (done) => {
-        const metadata = {
-            name: 'name',
-            label: "Name of your app",
-            shortLabel: null,
-            hint: null
-        };
+            try {
+                new Field(metadata);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('MetadataIntegrityException');
+                expect(e.message).to.equal('Data type is not defined');
+                done();
+            }
+        });
 
-        try {
-            new Field(metadata);
-            done(new Error('An exception was expected here'));
-        } catch(e) {
-            expect(e.className).to.equal('MetadataIntegrityException');
-            expect(e.message).to.equal('Data type is not defined');
-            done();
-        }
-    });
+        it('should have valid data type', (done) => {
+            const metadata = {
+                name: 'name',
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: 'wrong'
+            };
 
-    it('should have valid data type', (done) => {
-        const metadata = {
-            name: 'name',
-            label: "Name of your app",
-            shortLabel: null,
-            hint: null,
-            dataType: 'wrong'
-        };
+            try {
+                new Field(metadata);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('MetadataIntegrityException');
+                expect(e.message).to.equal('Data type is invalid');
+                done();
+            }
+        });
 
-        try {
-            new Field(metadata);
-            done(new Error('An exception was expected here'));
-        } catch(e) {
-            expect(e.className).to.equal('MetadataIntegrityException');
-            expect(e.message).to.equal('Data type is invalid');
-            done();
-        }
-    });
+        it('should not allow corrupted metadata (no multiplicity)', (done) => {
+            const metadata = {
+                name: 'name',
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.string
+            };
 
-    it('should not allow corrupted metadata (no multiplicity)', (done) => {
-        const metadata = {
-            name: 'name',
-            label: "Name of your app",
-            shortLabel: null,
-            hint: null,
-            dataType: DataTypes.string
-        };
+            try {
+                new Field(metadata);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('MetadataIntegrityException');
+                expect(e.message).to.equal('Multiplicity is not defined');
+                done();
+            }
+        });
 
-        try {
-            new Field(metadata);
-            done(new Error('An exception was expected here'));
-        } catch(e) {
-            expect(e.className).to.equal('MetadataIntegrityException');
-            expect(e.message).to.equal('Multiplicity is not defined');
-            done();
-        }
-    });
-
-    it('should not allow corrupted metadata (wrong multiplicity)', (done) => {
-        const metadata = {
-            name: 'name',
-            label: "Name of your app",
-            shortLabel: null,
-            hint: null,
-            dataType: DataTypes.string,
-            multiplicity: 'wrong'
-        };
-
-        try {
-            new Field(metadata);
-            done(new Error('An exception was expected here'));
-        } catch(e) {
-            expect(e.className).to.equal('MetadataIntegrityException');
-            expect(e.message).to.equal('Multiplicity is neither \'one\' nor \'many\'');
-            done();
-        }
-    });
-
-    describe('that intends to be used in a form', () => {
-        it('should have valid permissions', (done) => {
+        it('should not allow corrupted metadata (wrong multiplicity)', (done) => {
             const metadata = {
                 name: 'name',
                 label: "Name of your app",
                 shortLabel: null,
                 hint: null,
                 dataType: DataTypes.string,
-                multiplicity: 'one',
-                forms: {
-                    search: {
-                        permissions: {
-                            'some-permission': 'h'
-                        }
-                    }
-                }
+                multiplicity: 'wrong'
             };
 
             try {
                 new Field(metadata);
-                done(new Error('An exception was expected here'));
+                done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Permissions set for field are neither \'r\' nor \'rw\'');
+                expect(e.message).to.equal('Multiplicity is neither \'one\' nor \'many\'');
                 done();
             }
         });
 
-        it('should have a field type', (done) => {
-            const metadata = {
-                name: 'name',
-                label: "Name of your app",
-                shortLabel: null,
-                hint: null,
-                dataType: DataTypes.string,
-                multiplicity: 'one',
-                forms: {
-                    search: {
+        describe('with validations included', () => {
+            it('should successfully include validators to the field', () => {
+                const metadata = {
+                    name: "name",
+                    label: "Name of your app",
+                    shortLabel: null,
+                    hint: null,
+                    dataType: DataTypes.string,
+                    multiplicity: 'one',
+                    validators: {
+                        'valid-characters': new Validator(ValidatorTypes.regex, /123/)
                     }
-                }
-            };
+                };
 
-            try {
-                new Field(metadata);
-                done(new Error('An exception was expected here'));
-            } catch(e) {
-                expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Field type for form is not defined');
-                done();
-            }
-        });
+                const field = new Field(metadata);
 
-        it('should have a valid field type', (done) => {
-            const metadata = {
-                name: 'name',
-                label: "Name of your app",
-                shortLabel: null,
-                hint: null,
-                dataType: DataTypes.string,
-                multiplicity: 'one',
-                forms: {
-                    search: {
-                        fieldType: 'wrong'
+                expect(field.validators).to.deep.equal(metadata.validators);
+            });
+
+            it('should not allow non-Validator instances to be included', (done) => {
+                const metadata = {
+                    name: "name",
+                    label: "Name of your app",
+                    shortLabel: null,
+                    hint: null,
+                    dataType: DataTypes.string,
+                    multiplicity: 'one',
+                    validators: {
+                        'valid-characters': 'wrong'
                     }
-                }
-            };
+                };
 
-            try {
-                new Field(metadata);
-                done(new Error('An exception was expected here'));
-            } catch(e) {
-                expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Field type for form is invalid');
-                done();
-            }
-        });
+                try {
+                    new Field(metadata);
+                    done(EXPECTING_ERROR);
+                } catch(e) {
+                    expect(e.className).to.equal('MetadataIntegrityException');
+                    expect(e.message).to.equal('Validators must be instances of \'Validator\'');
+                    done();
+                }
+            });
+        })
     });
+
+    describe('at runtime', () => {
+        let metadata = null;
+        let field = null;
+
+        beforeEach(() => {
+
+            metadata = {
+                name: "name",
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.string,
+                multiplicity: 'one'
+            };
+
+            field = new Field(metadata);
+        });
+
+        it('should allow to include further validators', () => {
+            const name = 'validator-name';
+            const validator = new Validator(ValidatorTypes.regex, /123/);
+
+            field.addValidator(name, validator);
+
+            expect(field.validators[name]).to.deep.equal(validator);
+        });
+        
+        it('should not allow validators without a name', (done) => {
+            const name = null;
+            const validator = new Validator(ValidatorTypes.regex, /123/);
+
+            try {
+                field.addValidator(name, validator);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('MetadataIntegrityException');
+                expect(e.message).to.equal('Validator name must be given, and be a string');
+                done();
+            }
+        });
+
+        it('should not allow validators with an empty name', (done) => {
+            const name = '';
+            const validator = new Validator(ValidatorTypes.regex, /123/);
+
+            try {
+                field.addValidator(name, validator);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('MetadataIntegrityException');
+                expect(e.message).to.equal('Validator name must be given, and be a string');
+                done();
+            }
+        });
+
+        it('should not allow validators with a non-string name', (done) => {
+            const name = 123;
+            const validator = new Validator(ValidatorTypes.regex, /123/);
+
+            try {
+                field.addValidator(name, validator);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('MetadataIntegrityException');
+                expect(e.message).to.equal('Validator name must be given, and be a string');
+                done();
+            }
+        });
+
+        it('should not allow overwriting validators if not specified', (done) => {
+            const name = 'validator-name';
+            const validator = new Validator(ValidatorTypes.regex, /123/);
+            field.addValidator(name, validator);
+
+            try {
+                field.addValidator(name, validator);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('MetadataIntegrityException');
+                expect(e.message).to.equal('A validator already exists with name' + name + ' and \'overwrite\' flag has not been set');
+                done();
+            }
+        });
+
+        it('should allow overwriting validator if \'overwrite\' flag is set', () => {
+            const name = 'validator-name';
+            const validator = new Validator(ValidatorTypes.regex, /123/);
+            const validator2 = new Validator(ValidatorTypes.exact, 123);
+            field.addValidator(name, validator);
+
+            field.addValidator(name, validator2, true);
+
+            expect(field.validators[name]).to.deep.equal(validator2);
+        });
+
+        it('should not allow non-Validator instances', (done) => {
+            const name = 'validator-name';
+            const validator = 'wrong';
+
+            try {
+                field.addValidator(name, validator);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('MetadataIntegrityException');
+                expect(e.message).to.equal('Validators must be instances of \'Validator\'');
+                done();
+            }
+        });
+    })
 });
