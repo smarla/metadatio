@@ -41,30 +41,34 @@
         <!--{{/if}}-->
     <!--</ul>-->
     <div>
-        <h2>Properties</h2>
-        <div id="props">
-            <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#properties}}
-                        {{>props}}
-                    {{/properties}}
-                </tbody>
-            </table>
-        </div>
+        {{#if properties}}
+            <h2>Properties</h2>
+            <div id="props">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#properties}}
+                            {{>props}}
+                        {{/properties}}
+                    </tbody>
+                </table>
+            </div>
+        {{/if}}
 
-        <h2>Methods</h2>
-        <div id="methods">
-            {{#methods}}
-                {{>method}}
-            {{/methods}}
-        </div>
+        {{#if methods}}
+            <h2>Methods</h2>
+            <div id="methods">
+                {{#methods}}
+                    {{>method}}
+                {{/methods}}
+            </div>
+        {{/if}}
 
 
         <div id="attrs">

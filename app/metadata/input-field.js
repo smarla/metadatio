@@ -6,7 +6,7 @@ import Field from './field'
 import Validator from './validator';
 import * as FieldTypes from './field-types';
 
-import { MetadataIntegrityException } from '../exceptions';
+import { MetadataIntegrityException } from './exceptions';
 
 /**
  * Defines a field that belongs to an entity

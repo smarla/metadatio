@@ -34,7 +34,7 @@ describe('Metadatio entities', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Entity name is required');
+                expect(e.code).to.equal('MIE001');
                 done();
             }
         });
@@ -50,7 +50,7 @@ describe('Metadatio entities', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Entity name must be a string');
+                expect(e.code).to.equal('MIE002');
                 done();
             }
         });
@@ -66,7 +66,7 @@ describe('Metadatio entities', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Entity name must comply with the specification');
+                expect(e.code).to.equal('MIE003');
                 done();
             }
         });
@@ -82,7 +82,7 @@ describe('Metadatio entities', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Entity name must have between 2 a 64 characters');
+                expect(e.code).to.equal('MIE004');
                 done();
             }
         });
@@ -98,7 +98,7 @@ describe('Metadatio entities', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Entity name must have between 2 a 64 characters');
+                expect(e.code).to.equal('MIE004');
                 done();
             }
         });
@@ -121,6 +121,58 @@ describe('Metadatio entities', () => {
             const entity = new Entity(metadata);
 
             expect(entity.fields[0]).to.deep.equal(metadata.fields[0]);
+        });
+    });
+
+    describe('upon validation', () => {
+        it('validate the whole entity against all field validators', () => {
+            const metadata = {
+                name: 'entity',
+                label: 'My Entity',
+                fields: [
+                    new Field({
+                        name: 'name',
+                        shortLabel: null,
+                        hint: null,
+                        dataType: DataTypes.string,
+                        validators: {
+                            pattern: new Validator(ValidatorTypes.regex, /^abc$/)
+                        }
+                    }),
+                    new Field({
+                        name: 'age',
+                        shortLabel: null,
+                        hint: null,
+                        dataType: DataTypes.number,
+                        validators: {
+                            pattern: new Validator(ValidatorTypes.range, { min: 18, max: 64 })
+                        }
+                    })
+                ]
+            };
+
+            const entity = new Entity(metadata);
+
+            const item1 = {
+                name: 'abc',
+                age: 20
+            };
+
+            expect(entity.validate(item1)).to.equal(true);
+
+            const item2 = {
+                name: '123',
+                age: 20
+            };
+
+            expect(entity.validate(item2)).to.equal(false);
+
+            const item3 = {
+                name: 'abc',
+                age: 12
+            };
+
+            expect(entity.validate(item3)).to.equal(false);
         });
     });
 });

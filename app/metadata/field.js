@@ -3,7 +3,7 @@
  */
 
 import Validator from './validator';
-import { MetadataIntegrityException } from '../exceptions';
+import { MetadataIntegrityException, DataValidationException } from './exceptions';
 import DataTypes from './data-types';
 import * as util from './util';
 
@@ -125,14 +125,13 @@ export default class Field {
         this.validators = {};
 
         // Verify basic metadata
-        if(!this.name) throw new MetadataIntegrityException('Field name is required');
-        if(typeof(this.name) !== 'string') throw new MetadataIntegrityException('Field name must be a string');
-        if(!util.NAME_PATTERN_VALIDATOR.validate(this.name)) throw new MetadataIntegrityException('Field name must comply with the specification');
-        if(!util.NAME_LENGTHS_VALIDATOR.validate(this.name)) throw new MetadataIntegrityException('Field name must have between 2 and 64 characters');
-        if(!this.dataType) throw new MetadataIntegrityException('Data type is not defined');
-        if(!DataTypes[this.dataType]) throw new MetadataIntegrityException('Data type is invalid');
-        if(!this.multiplicity) throw new MetadataIntegrityException('Multiplicity is not defined');
-        if(['one', 'many'].indexOf(this.multiplicity) === -1) throw new MetadataIntegrityException('Multiplicity is neither \'one\' nor \'many\'');
+        if(!this.name) throw new MetadataIntegrityException('MIF001');
+        if(typeof(this.name) !== 'string') throw new MetadataIntegrityException('MIF002');
+        if(!util.NAME_PATTERN_VALIDATOR.validate(this.name)) throw new MetadataIntegrityException('MIF003');
+        if(!util.NAME_LENGTHS_VALIDATOR.validate(this.name)) throw new MetadataIntegrityException('MIF004');
+        if(!this.dataType) throw new MetadataIntegrityException('MIF005');
+        if(!DataTypes[this.dataType]) throw new MetadataIntegrityException('MIF006');
+        if(['one', 'many'].indexOf(this.multiplicity) === -1) throw new MetadataIntegrityException('MIF007');
 
         // Add validators
         for(let validatorName in props.validators) {
@@ -151,6 +150,23 @@ export default class Field {
      * @returns {boolean}
      */
     validate(value, validators = this.validators) {
+        // Validate value data type
+        const valueType = typeof(value);
+        switch(this.dataType) {
+            case DataTypes.string:
+                if(valueType !== 'string') throw new DataValidationException('Values for data type \'string\' must be strings');
+                break;
+            case DataTypes.number:
+                if(valueType !== 'number') throw new DataValidationException('Values for data type \'number\' must be numbers');
+                break;
+            case DataTypes.boolean:
+                if([true, false].indexOf(value) === -1) throw new DataValidationException('Values for data type \'boolean\' must be either true or false');
+                break;
+            case DataTypes.date:
+                if(valueType !== 'number' && !(value instanceof Date)) throw new DataValidationException('Values for data type \'date\' must be either dates or timestamps');
+                break;
+        }
+
         for(let validatorName in validators) {
             const validator = validators[validatorName];
 
@@ -179,15 +195,15 @@ export default class Field {
      */
     addValidator(name, validator, overwrite = false) {
         if(!name || typeof(name) !== 'string' || !name.length) {
-            throw new MetadataIntegrityException('Validator name must be given, and be a string');
+            throw new MetadataIntegrityException('MIV001');
         }
 
         if(!(validator instanceof Validator)) {
-            throw new MetadataIntegrityException('Validators must be instances of \'Validator\'');
+            throw new MetadataIntegrityException('MIV002');
         }
         
         if(!overwrite && this.validators[name] !== undefined) {
-            throw new MetadataIntegrityException('A validator already exists with name' + name + ' and \'overwrite\' flag has not been set')
+            throw new MetadataIntegrityException('MIV003')
         }
 
         this.validators[name] = validator;

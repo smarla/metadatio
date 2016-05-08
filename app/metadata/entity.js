@@ -4,7 +4,7 @@
 
 import Field from './field';
 
-import { MetadataIntegrityException } from '../exceptions';
+import { MetadataIntegrityException } from './exceptions';
 import * as util from './util';
 
 /**
@@ -145,10 +145,10 @@ export default class Entity {
          */
         this.fields = [];
 
-        if(!this.name) throw new MetadataIntegrityException('Entity name is required');
-        if(typeof(this.name) !== 'string') throw new MetadataIntegrityException('Entity name must be a string');
-        if(!util.NAME_PATTERN_VALIDATOR.validate(this.name)) throw new MetadataIntegrityException('Entity name must comply with the specification');
-        if(!util.NAME_LENGTHS_VALIDATOR.validate(this.name)) throw new MetadataIntegrityException('Entity name must have between 2 a 64 characters');
+        if(!this.name) throw new MetadataIntegrityException('MIE001');
+        if(typeof(this.name) !== 'string') throw new MetadataIntegrityException('MIE002');
+        if(!util.NAME_PATTERN_VALIDATOR.validate(this.name)) throw new MetadataIntegrityException('MIE003');
+        if(!util.NAME_LENGTHS_VALIDATOR.validate(this.name)) throw new MetadataIntegrityException('MIE004');
 
         if(props.fields) {
             for(let i = 0; i < props.fields.length; i++) {
@@ -168,11 +168,37 @@ export default class Entity {
      * @chainable
      */
     addField(field, overwrite=false) {
-        if (!(field instanceof Field)) throw new MetadataIntegrityException('Entity fields must be instances of field');
-        if(!overwrite && this.fields.filter(item => item.name === field.name).length) throw new MetadataIntegrityException('A field already exist with name ' + field.name + ', and \'overwrite\' flag has not been set');
+        if (!(field instanceof Field)) throw new MetadataIntegrityException('MIE005');
+        if(!overwrite && this.fields.filter(item => item.name === field.name).length) throw new MetadataIntegrityException('MIE006', { name: field.name });
 
         this.fields.push(field);
 
         return this;
+    }
+
+    /**
+     * Validates that an object parameters comply with corresponding field's validation rules.
+     *
+     * @method validate
+     * @param item {Object} The object with the values
+     * @returns {boolean} The validation result
+     * @throws DataValidationException
+     */
+    validate(item) {
+        for(let i = 0; i < this.fields.length; i++) {
+            const field = this.fields[i];
+            const fieldName = field.name;
+
+            const value = item[fieldName];
+
+            // TODO Undefined verifications?
+            if(value === undefined) continue;
+
+            const result = field.validate(value);
+
+            if(!result) return false;
+        }
+
+        return true;
     }
 }

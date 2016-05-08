@@ -19,17 +19,7 @@
             <nav role="navigation" class="main-menu">
                 <ul>
                     {{#modules}}
-                        <li><a href="{{../projectRoot}}modules/{{name}}.html">{{displayName}}</a>
-                            {{#if submodules}}
-                                <ul>
-                                    {{#submodules}}
-                                        <li>
-                                            <a href="{{../../../projectRoot}}modules/{{../name}}.html#{{displayName}}">{{displayName}}</a>
-                                        </li>
-                                    {{/submodules}}
-                                </ul>
-                            {{/if}}
-                        </li>
+                        <li><a href="{{../projectRoot}}modules/{{name}}.html">{{displayName}}</a></li>
                     {{/modules}}
                 </ul>
             </nav>

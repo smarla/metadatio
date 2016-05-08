@@ -39,7 +39,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Field name is required');
+                expect(e.code).to.equal('MIF001');
                 done();
             }
         });
@@ -59,7 +59,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Field name must be a string');
+                expect(e.code).to.equal('MIF002');
                 done();
             }
         });
@@ -79,7 +79,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Field name must comply with the specification');
+                expect(e.code).to.equal('MIF003');
                 done();
             }
         });
@@ -99,7 +99,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Field name must have between 2 and 64 characters');
+                expect(e.code).to.equal('MIF004');
                 done();
             }
         });
@@ -119,7 +119,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Field name must have between 2 and 64 characters');
+                expect(e.code).to.equal('MIF004');
                 done();
             }
         });
@@ -137,7 +137,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Data type is not defined');
+                expect(e.code).to.equal('MIF005');
                 done();
             }
         });
@@ -156,7 +156,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Data type is invalid');
+                expect(e.code).to.equal('MIF006');
                 done();
             }
         });
@@ -176,7 +176,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Multiplicity is neither \'one\' nor \'many\'');
+                expect(e.code).to.equal('MIF007');
                 done();
             }
         });
@@ -218,7 +218,7 @@ describe('Base field component', () => {
                     done(EXPECTING_ERROR);
                 } catch(e) {
                     expect(e.className).to.equal('MetadataIntegrityException');
-                    expect(e.message).to.equal('Validators must be instances of \'Validator\'');
+                    expect(e.code).to.equal('MIV002');
                     done();
                 }
             });
@@ -261,7 +261,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Validator name must be given, and be a string');
+                expect(e.code).to.equal('MIV001');
                 done();
             }
         });
@@ -275,7 +275,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Validator name must be given, and be a string');
+                expect(e.code).to.equal('MIV001');
                 done();
             }
         });
@@ -289,7 +289,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Validator name must be given, and be a string');
+                expect(e.code).to.equal('MIV001');
                 done();
             }
         });
@@ -304,7 +304,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('A validator already exists with name' + name + ' and \'overwrite\' flag has not been set');
+                expect(e.code).to.equal('MIV003');
                 done();
             }
         });
@@ -329,9 +329,133 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('MetadataIntegrityException');
-                expect(e.message).to.equal('Validators must be instances of \'Validator\'');
+                expect(e.code).to.equal('MIV002');
                 done();
             }
         });
-    })
+    });
+
+    describe('upon validation', () => {
+
+        it('should validate that input is a String for string data types', (done) => {
+            const metadata = {
+                name: "name",
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.string,
+                multiplicity: 'one'
+            };
+
+            const field = new Field(metadata);
+
+            const value = 123;
+
+            try {
+                field.validate(value);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('DataValidationException');
+                expect(e.message).to.equal('Values for data type \'string\' must be strings');
+                done();
+            }
+        });
+
+        it('should validate that input is a number for number data types', (done) => {
+            const metadata = {
+                name: "name",
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.number,
+                multiplicity: 'one'
+            };
+
+            const field = new Field(metadata);
+
+            const value = '123';
+
+            try {
+                field.validate(value);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('DataValidationException');
+                expect(e.message).to.equal('Values for data type \'number\' must be numbers');
+                done();
+            }
+        });
+
+        it('should validate that input is a boolean for boolean data types', (done) => {
+            const metadata = {
+                name: "name",
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.boolean,
+                multiplicity: 'one'
+            };
+
+            const field = new Field(metadata);
+
+            const value = '123';
+
+            try {
+                field.validate(value);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('DataValidationException');
+                expect(e.message).to.equal('Values for data type \'boolean\' must be either true or false');
+                done();
+            }
+        });
+
+        it('should validate that input is a date or a timestamp for date data types', (done) => {
+            const metadata = {
+                name: "name",
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.date,
+                multiplicity: 'one'
+            };
+
+            const field = new Field(metadata);
+
+            const value = '123';
+
+            try {
+                field.validate(value);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('DataValidationException');
+                expect(e.message).to.equal('Values for data type \'date\' must be either dates or timestamps');
+                done();
+            }
+        });
+
+        it('should validate data against validators', () => {
+            const metadata = {
+                name: "name",
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.string,
+                multiplicity: 'one',
+                validators: {
+                    pattern: new Validator(ValidatorTypes.regex, /^123$/)
+                }
+            };
+
+            const field = new Field(metadata);
+
+            const value1 = '123';
+            const value2 = 'abc';
+
+            const validate1 = field.validate(value1);
+            const validate2 = field.validate(value2);
+
+            expect(validate1).to.equal(true);
+            expect(validate2).to.equal(false);
+        });
+    });
 });
