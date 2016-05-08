@@ -11,7 +11,7 @@ import {ValidatorException} from '../exceptions';
  * Validators help you define rules with which you will consider the value given for a field as **valid**.
  *
  *
- * @module metadata
+ * @module Core
  * @class Validator
  * @constructor
  *

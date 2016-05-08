@@ -50,7 +50,7 @@ import * as util from './util';
  * Entities are provided with a native validation system, to determine whether the values set within an object that should comply with entity specification are valid. Basically, entity validation targets the value for each {{#crossLink "Field"}}field{{/crossLink}} within the entity, and launches the {{#crossLink "Field/validate:method"}}field's validation system{{/crossLink}}.
  *
  *
- * @module metadata
+ * @module Core
  * @class Entity
  * @constructor
  *

@@ -55,7 +55,7 @@ import * as util from './util';
  *
  * When a field's data type is set as a reference, the validation procedures change for it. Values for the fields with this metadata can be filled either with the whole entity - for inner object saving - or via a `string` or `number` identifying the entity - deep linking approach. In the case you provide complete entities as values, the validation procedures of the target entity's metadata will be applied.
  *
- * @module metadata
+ * @module Core
  * @class Field
  * @constructor
  */

@@ -16,16 +16,23 @@
             <a href="{{projectRoot}}index.html" class="logo-link">
                 <img src="{{projectAssets}}/css/logo.png" height="40" width="153">
             </a>
-            <!--<nav role="navigation" class="main-menu">-->
-                <!--<ul>-->
-                    <!--<li>-->
-                        <!--<a href="docs">Docs</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="live">Live</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</nav>-->
+            <nav role="navigation" class="main-menu">
+                <ul>
+                    {{#modules}}
+                        <li><a href="{{../projectRoot}}modules/{{name}}.html">{{displayName}}</a>
+                            {{#if submodules}}
+                                <ul>
+                                    {{#submodules}}
+                                        <li>
+                                            <a href="{{../../../projectRoot}}modules/{{../name}}.html#{{displayName}}">{{displayName}}</a>
+                                        </li>
+                                    {{/submodules}}
+                                </ul>
+                            {{/if}}
+                        </li>
+                    {{/modules}}
+                </ul>
+            </nav>
         </div>
         <div class="version">
             <em>v{{projectVersion}}</em>

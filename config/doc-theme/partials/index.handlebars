@@ -18,12 +18,12 @@
     <li><b>metadatio-api-raml:</b> RAML generator for building API definitions.</li>
 </ul>
 
-<h2>Technology agnostic</h2>
-<p>
-    Metadatio ships as a <a href="https://www.npmjs.com/package/metadatio">npm module</a>, so it's a perfect suit for JavaScript projects. However, we've built a helper that performs bi-directional JSON conversion of the full metadata definitions, so you can develop the different pieces of your app in separate technologies or languages.
-</p>
+<!--<h2>Technology agnostic</h2>-->
+<!--<p>-->
+    <!--Metadatio ships as a <a href="https://www.npmjs.com/package/metadatio">npm module</a>, so it's a perfect suit for JavaScript projects. However, we've built a helper that performs bi-directional JSON conversion of the full metadata definitions, so you can develop the different pieces of your app in separate technologies or languages.-->
+<!--</p>-->
 
-<h2>Installation</h2>
+<h1>Installation</h1>
 <p>
     You can install Metadatio easily using npm:
 </p>
@@ -31,7 +31,20 @@
     npm install metadatio --save
 </pre>
 
-<h2>Usage</h2>
+<h1>Usage</h1>
+<p>
+    Here you have a small guide on how to use Metadatio. In brief, this are the sections you will find below:
+</p>
+<ul>
+    <li><a href="#create-entities"><b>Creating your entities:</b></a> Define the data model of your app, using native <a href="classes/Entity.html">Entity</a> and <a href="classes/Field.html">Field</a> specification, and attach proper <a href="classes/Validator.html">Validators</a> to your fields.</li>
+    <li><a href="#inheritance"><b>Inheritance:</b></a> Configure hierarchy among your entities, for enriching up the context of the data model.</li>
+    <li><a href="#contextual-relationships"><b>Contextual relationships:</b></a> Describe model links by setting field's data type as references to other entities.</li>
+    <li><a href="#initialize-metadatio"><b>Initialize Metadatio:</b></a> Tell Metadatio about your data model, and package your data model project.</li>
+    <li><a href="#use-metadata"><b>Use your metadata:</b></a> Include your data model on the different pieces of your app, and see how to leverage the metadata you defined, and perform data validations against metadata validators.</li>
+</ul>
+
+<a name="create-entities"></a>
+<h2>Creating your entities</h2>
 <pre>
     import { Entity, Field, DataTypes, Validator, ValidatorTypes } from 'metadatio';
     class Foo extends Entity {
@@ -56,29 +69,10 @@
             return Foo.instance;
         }
     }
-
-    Metadatio.addEntity(Foo.getInstance());
 </pre>
 
-<h2>Hierarchy</h2>
-<pre>
-    class Bar extends Entity {
-        constructor() {
-            super({
-                name: 'bar',
-                parent: Foo.getInstance()
-            });
-
-            ...
-        }
-
-        static getInstance() {
-            Bar.instance = new Bar();
-            return Bar.instance;
-        }
-    }
-</pre>
-<p>or</p>
+<a name="inheritance"></a>
+<h2>Inheritance</h2>
 <pre>
     class Bar extends Foo {
         constructor() {
@@ -89,14 +83,11 @@
             ...
         }
 
-        static getInstance() {
-            Bar.instance = new Bar();
-            return Bar.instance;
-        }
+        ...
     }
 </pre>
 
-
+<a name="contextual-relationships"></a>
 <h2>Contextual relationships</h2>
 <pre>
     class Bar extends Entity {
@@ -113,14 +104,53 @@
             }));
         }
 
-        static getInstance() {
-            Bar.instance = new Bar();
-            return Bar.instance;
-        }
+        ...
     }
 </pre>
-<h1>Contribute</h1>
+
+<a name="initialize-metadatio"></a>
+<h2>Initialize Metadatio</h2>
+<pre>
+    // index.js
+
+    module.exports = {
+        Foo: Foo.getInstance(),
+        Bar: Bar.getInstance()
+    };
+</pre>
+<p>
+    By calling the <code>getInstance()</code> method the entities initialize themselves within Metadatio, and the context is autommatically built.
+</p>
+
+<h3>Export metadata project</h3>
+<p>
+    Normally you'd like to use your metadata from several projects. A good practice good be to package your metadata definitions as a separate project, that is thereafter included within the different pieces of your app. This example publishes the metadata project as a separate <i>npm module</i>. For corporate project this is useful if you have access to a private npm repository. Otherwise you shall think about using a different packaging and shipping method.
+</p>
+<pre>
+    # publish your package
+    npm publish
+    (+ my-project-metadata#1.0.0)
+
+    # and include it on your consumer projects
+    npm install --save my-project-metadata
+</pre>
+
+<a name="use-metadata"></a>
+<h2>Use your metadata</h2>
+<pre>
+    import { Foo } from 'my-project-metadata';
+
+    let testItem = {
+        name: 'test-value';
+    }
+    Foo.validate(testItem); // Returns true
+
+    testItem.name = '123n';
+    Foo.validate(testItem); // Returns false
+</pre>
+
 <a name="contribute"></a>
+<h1>Contribute</h1>
 <p>
     Metadatio is an ongoing project, and there are many cool things that could we extend through modules, but not without your help. Help us build a rich metadata-based system, for being able to use it in many more ways!
 
