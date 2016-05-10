@@ -5,7 +5,7 @@
   "main": "app/index.js",
   "scripts": {
     "build": "webpack --bail --config webpack.config.js",
-    "test-cover": "./node_modules/.bin/babel-node ./node_modules/.bin/isparta cover --root ./app/ ./node_modules/.bin/_mocha -- \"test/**/*.js\"",
+    "test-cover": "./node_modules/.bin/babel-node ./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha -- \"test/**/*.js\"",
     "test": "./node_modules/.bin/babel-node ./node_modules/.bin/_mocha -- \"test/**/*.js\"",
     "doc": "./node_modules/.bin/babel-node ./node_modules/.bin/yuidoc app"
   },
@@ -36,8 +36,7 @@
     "chai-immutable": "^1.5.4",
     "coveralls": "^2.11.9",
     "css-loader": "^0.23.1",
-    "isparta": "^4.0.0",
-    "istanbul": "^0.4.3",
+    "istanbul": "^1.0.0-alpha.2",
     "jsdom": "^8.4.1",
     "json-loader": "^0.5.4",
     "mocha": "^2.4.5",
