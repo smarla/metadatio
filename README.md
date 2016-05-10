@@ -1,3 +1,7 @@
+<img src="http://metadat.io/assets/css/logo.png" width="400">
+
+[![Build Status](https://travis-ci.org/smarla/metadatio.svg?branch=master)](https://travis-ci.org/smarla/metadatio)
+
 <h1>Smart, modular apps using metadata</h1>
 <p>Metadatio is a library for building complete metadata specifications for defining the required data model for your apps. Our main goal is to let you extract your data model definition to a separate component, with standalone capabilities of validating itself. Thus, you'd be able to define a consistent data model across all the pieces of your application, with zero-duplicity.</p>
 
