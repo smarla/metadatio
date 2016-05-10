@@ -50,12 +50,6 @@
     "webpack-dev-server": "^1.14.1",
     "yuidocjs": "^0.10.1"
   },
-  "babel": {
-    "presets": [
-      "es2015",
-      "react"
-    ]
-  },
   "dependencies": {
     "immutable": "^3.8.0",
     "isomorphic-fetch": "^2.2.1",
