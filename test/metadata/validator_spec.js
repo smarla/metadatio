@@ -8,7 +8,7 @@
 
 import {expect} from 'chai';
 
-import {Validator, ValidatorTypes} from '../../app/metadata';
+import {Validator, ValidatorTypes} from '../../app';
 
 describe('Validators set for fields', () => {
    it('should have a type', (done) => {
@@ -31,6 +31,51 @@ describe('Validators set for fields', () => {
             expect(e.message).to.equal('Validator does not have a match to check');
             done();
         }
+    });
+
+    describe('with \'required\' type', () => {
+        it('should not have a validator match', (done) => {
+            try {
+                new Validator(ValidatorTypes.required, {});
+                done(new Error('An exception was expected here'));
+            } catch(e) {
+                expect(e.className).to.equal('ValidatorException');
+                expect(e.message).to.equal('Validator of type \'required\' do not need a validator match');
+                done();
+            }
+        });
+
+        it('should validate', () => {
+            const string = 'abc';
+
+            let validator = new Validator(ValidatorTypes.required);
+
+            expect(validator.validate(string)).to.equal(true);
+        });
+
+        it('should not validate null values', () => {
+            const string = null;
+
+            let validator = new Validator(ValidatorTypes.required);
+
+            expect(validator.validate(string)).to.equal(false);
+        });
+
+        it('should not validate undefined values', () => {
+            const string = undefined;
+
+            let validator = new Validator(ValidatorTypes.required);
+
+            expect(validator.validate(string)).to.equal(false);
+        });
+
+        it('should not validate empty strings', () => {
+            const string = '';
+
+            let validator = new Validator(ValidatorTypes.required);
+
+            expect(validator.validate(string)).to.equal(false);
+        });
     });
 
     describe('with \'exact match\' type', () => {

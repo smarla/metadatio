@@ -4,7 +4,7 @@
 
 import {expect} from 'chai';
 
-import { Field, DataTypes, Validator, ValidatorTypes } from '../../app/metadata';
+import { Field, DataTypes, Validator, ValidatorTypes } from '../../app';
 
 const EXPECTING_ERROR = new Error('An exception was expected here');
 
@@ -336,6 +336,49 @@ describe('Base field component', () => {
     });
 
     describe('upon validation', () => {
+
+        it('should raise an error if value is undefined', (done) => {
+            const metadata = {
+                name: "name",
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.string,
+                multiplicity: 'one'
+            };
+
+            const field = new Field(metadata);
+
+            const value = undefined;
+
+            try {
+                field.validate(value);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('DataValidationException');
+                expect(e.message).to.equal('Field value is undefined');
+                done();
+            }
+        });
+
+        it('should validate null values if there are no validators', () => {
+            const metadata = {
+                name: "name",
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.string,
+                multiplicity: 'one'
+            };
+
+            const field = new Field(metadata);
+
+            const value1 = null;
+
+            const validate1 = field.validate(value1);
+
+            expect(validate1).to.equal(true);
+        });
 
         it('should validate that input is a String for string data types', (done) => {
             const metadata = {

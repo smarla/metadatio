@@ -1,31 +1,23 @@
 /**
- * Created by sm on 30/04/16.
+ * Created by sm on 01/05/16.
  */
 
-import base from './base';
-import forms from './forms';
-import menus from './menus';
-import pages from './pages';
-import React from 'react'
+import DataTypes from './metadata/data-types';
+import FieldTypes from './metadata/field-types';
+import Entity from './metadata/entity';
+import Field from './metadata/field';
+import Validator from './metadata/validator';
+import ValidatorTypes from './metadata/validator-types';
 
-import { render } from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import appReducers from './base/reducers'
-import App from './base/components/app'
+import exceptions from './exceptions';
 
-let store = createStore(appReducers)
+module.exports = {
+    DataTypes,
+    Entity,
+    Field,
+    FieldTypes,
+    Validator,
+    ValidatorTypes,
 
-render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('root')
-)
-
-export default {
-    base,
-    forms,
-    menus,
-    pages
+    exceptions
 };

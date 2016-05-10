@@ -4,7 +4,7 @@
 
 import {expect} from 'chai';
 
-import { Entity, Field, DataTypes, Validator, ValidatorTypes } from '../../app/metadata';
+import { Entity, Field, DataTypes, Validator, ValidatorTypes } from '../../app';
 
 const EXPECTING_ERROR = new Error('An exception was expected here');
 

@@ -3,7 +3,7 @@
  */
 
 import Validator from './validator';
-import { MetadataIntegrityException, DataValidationException } from './exceptions';
+import { MetadataIntegrityException, DataValidationException } from '../exceptions';
 import DataTypes from './data-types';
 import * as util from './util';
 
@@ -150,21 +150,25 @@ export default class Field {
      * @returns {boolean}
      */
     validate(value, validators = this.validators) {
-        // Validate value data type
-        const valueType = typeof(value);
-        switch(this.dataType) {
-            case DataTypes.string:
-                if(valueType !== 'string') throw new DataValidationException('Values for data type \'string\' must be strings');
-                break;
-            case DataTypes.number:
-                if(valueType !== 'number') throw new DataValidationException('Values for data type \'number\' must be numbers');
-                break;
-            case DataTypes.boolean:
-                if([true, false].indexOf(value) === -1) throw new DataValidationException('Values for data type \'boolean\' must be either true or false');
-                break;
-            case DataTypes.date:
-                if(valueType !== 'number' && !(value instanceof Date)) throw new DataValidationException('Values for data type \'date\' must be either dates or timestamps');
-                break;
+        if(value === undefined) throw new DataValidationException('Field value is undefined');
+
+        if(value !== null) {
+            // Validate value data type
+            const valueType = typeof(value);
+            switch(this.dataType) {
+                case DataTypes.string:
+                    if(valueType !== 'string') throw new DataValidationException('Values for data type \'string\' must be strings');
+                    break;
+                case DataTypes.number:
+                    if(valueType !== 'number') throw new DataValidationException('Values for data type \'number\' must be numbers');
+                    break;
+                case DataTypes.boolean:
+                    if([true, false].indexOf(value) === -1) throw new DataValidationException('Values for data type \'boolean\' must be either true or false');
+                    break;
+                case DataTypes.date:
+                    if(valueType !== 'number' && !(value instanceof Date)) throw new DataValidationException('Values for data type \'date\' must be either dates or timestamps');
+                    break;
+            }
         }
 
         for(let validatorName in validators) {

@@ -4,7 +4,7 @@
 
 import Field from './field';
 
-import { MetadataIntegrityException } from './exceptions';
+import { MetadataIntegrityException } from '../exceptions';
 import * as util from './util';
 
 /**
@@ -190,9 +190,6 @@ export default class Entity {
             const fieldName = field.name;
 
             const value = item[fieldName];
-
-            // TODO Undefined verifications?
-            if(value === undefined) continue;
 
             const result = field.validate(value);
 

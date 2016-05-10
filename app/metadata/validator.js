@@ -3,7 +3,7 @@
  */
 
 import ValidatorTypes from './validator-types';
-import {ValidatorException} from './exceptions';
+import {ValidatorException} from '../exceptions';
 
 
 /**
@@ -33,8 +33,12 @@ export default class Validator {
             throw new ValidatorException('Validator type is wrong');
         }
 
-        if(!validator) {
+        if(this.type !== ValidatorTypes.required && !validator) {
             throw new ValidatorException('Validator does not have a match to check');
+        }
+
+        if(this.type === ValidatorTypes.required && validator) {
+            throw new ValidatorException('Validator of type \'required\' do not need a validator match');
         }
 
         switch(this.type) {
@@ -79,6 +83,8 @@ export default class Validator {
      */
     validate(value) {
         switch(this.type) {
+            case ValidatorTypes.required:
+                return value !== null && value !== undefined && value !== '';
             case ValidatorTypes.exact:
                 if(typeof(value) === 'object') {
                     throw new ValidatorException('Value provided for validator type \'exact\' must not be an object');
