@@ -191,9 +191,6 @@ export default class Entity {
 
             const value = item[fieldName];
 
-            // TODO Undefined verifications?
-            if(value === undefined) continue;
-
             const result = field.validate(value);
 
             if(!result) return false;

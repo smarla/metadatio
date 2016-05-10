@@ -4,6 +4,4 @@
 
 import core from './metadata';
 
-module.exports = {
-    core
-};
+export default core;
