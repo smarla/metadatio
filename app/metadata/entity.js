@@ -4,7 +4,7 @@
 
 import Field from './field';
 
-import { MetadataIntegrityException } from './exceptions';
+import { MetadataIntegrityException } from '../exceptions';
 import * as util from './util';
 
 /**

@@ -3,7 +3,7 @@
  */
 
 import Validator from './validator';
-import { MetadataIntegrityException, DataValidationException } from './exceptions';
+import { MetadataIntegrityException, DataValidationException } from '../exceptions';
 import DataTypes from './data-types';
 import * as util from './util';
 

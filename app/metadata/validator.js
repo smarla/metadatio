@@ -3,7 +3,7 @@
  */
 
 import ValidatorTypes from './validator-types';
-import {ValidatorException} from './exceptions';
+import {ValidatorException} from '../exceptions';
 
 
 /**

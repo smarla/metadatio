@@ -8,7 +8,7 @@
 
 import {expect} from 'chai';
 
-import {Validator, ValidatorTypes} from '../../app/metadata';
+import {Validator, ValidatorTypes} from '../../app';
 
 describe('Validators set for fields', () => {
    it('should have a type', (done) => {
