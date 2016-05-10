@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/smarla/metadatio.svg?branch=master)](https://travis-ci.org/smarla/metadatio)
+[![Coverage Status](https://coveralls.io/repos/github/smarla/metadatio/badge.svg?branch=master)](https://coveralls.io/github/smarla/metadatio?branch=master)
 
 <img src="http://metadat.io/assets/css/logo.png" width="400">
 
