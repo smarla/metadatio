@@ -3,3 +3,5 @@
  */
 
 import './app';
+
+module.exports = 'metadatio';

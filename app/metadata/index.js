@@ -10,6 +10,8 @@ import InputField from './input-field';
 import Validator from './validator';
 import ValidatorTypes from './validator-types';
 
+import exceptions from './exceptions';
+
 module.exports = {
     DataTypes,
     Entity,
@@ -17,5 +19,7 @@ module.exports = {
     FieldTypes,
     InputField,
     Validator,
-    ValidatorTypes
+    ValidatorTypes,
+
+    exceptions
 };

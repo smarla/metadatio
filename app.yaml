@@ -1,5 +1,5 @@
 application: metadatio
-version: v0-0-1
+version: v0-2-0
 runtime: php55
 api_version: 1
 
@@ -20,6 +20,5 @@ handlers:
 - url: /modules
   static_dir: modules
 
-- url: /.*(\..*)?
+- url: /(index\.html)?
   script: index.html
-  # upload: index.html
