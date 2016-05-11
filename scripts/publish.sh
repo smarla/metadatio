@@ -9,9 +9,8 @@ set -o errexit -o nounset
 #fi
 
 comment=$(git log -1 --pretty=%B)
-last_tag=$(git describe --abbrev=0)
+current_version=$(git describe --abbrev=0)
 
-current_version="${last_tag//./ }"
 version_array=($current_version)
 change_type="None"
 
@@ -50,7 +49,8 @@ then
   package="package.json"
   yui="yuidoc.json"
   echo "Updating version references"
-  sed -i.bkp 's/0.6.0/0.6.1/g' "$package"
+  sed -i.bkp 's/$current_version/$new_version/g' "$package"
+  sed -i.bkp 's/$current_version/$new_version/g' "$yui"
   git config user.name "Pelayo Sánchez Margareto"
   git config user.email "sanchezmargareto@gmail.com"
   git commit -am "[TRAVIS] [ci skip] ${change_type} updated to ${new_version}"
