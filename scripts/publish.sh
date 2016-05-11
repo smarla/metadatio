@@ -54,4 +54,6 @@ then
   git config user.email "sanchezmargareto@gmail.com"
   git commit -am "${change_type} update to ${new_version}"
   git push origin master
+
+  cat package.json
 fi
