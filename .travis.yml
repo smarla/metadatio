@@ -6,6 +6,9 @@ sudo: false
 cache:
   directories:
     - node_modules
+before_install:
+  - "export TRAVIS_COMMIT_MSG=\"$(git log --format=%B --no-merges -n 1)\""
+  - echo "Commit message > $TRAVIS_COMMIT_MSG"
 script:
   - npm test
   - npm run test:coverage
