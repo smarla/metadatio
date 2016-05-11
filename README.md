@@ -1,15 +1,11 @@
+<img src="http://metadat.io/assets/css/logo.png" width="400">
+
 [![npm version](https://badge.fury.io/js/metadatio.svg)](https://badge.fury.io/js/metadatio)
 [![Build Status](https://travis-ci.org/smarla/metadatio.svg?branch=master)](https://travis-ci.org/smarla/metadatio)
 [![Coverage Status](https://coveralls.io/repos/github/smarla/metadatio/badge.svg?branch=master)](https://coveralls.io/github/smarla/metadatio?branch=master)
 [![Dependency Status](https://david-dm.org/smarla/metadatio.svg)](https://david-dm.org/smarla/metadatio)
 [![devDependency Status](https://david-dm.org/smarla/metadatio/dev-status.svg)](https://david-dm.org/smarla/metadatio#info=devDependencies)
 [![npm](https://img.shields.io/npm/dm/localeval.svg?maxAge=2592000)](https://www.npmjs.com/package/metadatio)
-
-
-
-
-
-<img src="http://metadat.io/assets/css/logo.png" width="400">
 
 <h1>Smart, modular apps using metadata</h1>
 <p>Metadatio is a library for building complete metadata specifications for defining the required data model for your apps. Our main goal is to let you extract your data model definition to a separate component, with standalone capabilities of validating itself. Thus, you'd be able to define a consistent data model across all the pieces of your application, with zero-duplicity.</p>
