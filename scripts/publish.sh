@@ -51,6 +51,6 @@ then
   sed -i.bkp 's/${current_version}/${new_version}/g' *.json
   git config user.name "Pelayo Sánchez Margareto"
   git config user.email "sanchezmargareto@gmail.com"
-  git commit -am "${change_type} update to ${new_version}"
-  git push origin HEAD:master
+  git commit -am "[${change_type}] update to ${new_version}"
+#  git push origin HEAD:master
 fi
