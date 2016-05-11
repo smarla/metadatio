@@ -62,20 +62,7 @@
     "yuidocjs": "^0.10.1"
   },
   "dependencies": {
-    "immutable": "^3.8.0",
-    "isomorphic-fetch": "^2.2.1",
-    "nock": "^8.0.0",
-    "react": "^15.0.1",
-    "react-addons-pure-render-mixin": "^15.0.1",
-    "react-dom": "^15.0.1",
-    "react-intl": "^2.0.1",
-    "react-intl-redux": "0.0.6",
-    "react-redux": "^4.4.5",
-    "react-router": "^2.0.0",
-    "react-router-redux": "^4.0.4",
     "redux": "^3.4.0",
-    "redux-form": "^5.0.1",
-    "redux-thunk": "^2.0.1",
-    "validator": "^5.2.0"
+    "redux-thunk": "^2.0.1"
   }
 }
