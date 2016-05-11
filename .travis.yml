@@ -13,3 +13,6 @@ script:
   - npm test
   - npm run test:coverage
   - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+after_success:
+  - npm run doc
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash scripts/deploy.sh
