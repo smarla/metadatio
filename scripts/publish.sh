@@ -49,7 +49,7 @@ if [[ ${version_change} == 1 ]]
 then
   # Update package.json
   echo "Updating package.json"
-  sed -i 's/${current_version}/${new_version}/g' package.json
+  sed -i 's/${current_version}/${new_version}/g' *.json
   git commit -am "${change_type} update to ${new_version}"
   git push origin master
 fi
