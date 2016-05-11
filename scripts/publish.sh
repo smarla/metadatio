@@ -62,6 +62,7 @@ then
   npm publish
 
   echo "Tag version"
+
   git tag ${new_version}
 
   git push --tags origin HEAD:master
