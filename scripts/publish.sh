@@ -2,16 +2,15 @@
 
 set -o errexit -o nounset
 
-if [ "$TRAVIS_BRANCH" != "master" ]
-then
-  echo "This commit was made against the $TRAVIS_BRANCH and not the master! No deploy!"
-  exit 0
-fi
+#if [ "$TRAVIS_BRANCH" != "master" ]
+#then
+#  echo "This commit was made against the $TRAVIS_BRANCH and not the master! No deploy!"
+#  exit 0
+#fi
 
-#comment=$(git log -1 --pretty=%B)
+comment=$(git log -1 --pretty=%B)
 last_tag=$(git describe --abbrev=0)
 
-comment="[patch] Testing patch change"
 current_version="${last_tag//./ }"
 version_array=($current_version)
 change_type="None"
@@ -49,7 +48,7 @@ if [[ ${version_change} == 1 ]]
 then
   # Update package.json
   echo "Updating version references"
-  sed -i 's/${current_version}/${new_version}/g' *.json
+  sed -i.bkp 's/${current_version}/${new_version}/g' *.json
   git config user.name "Pelayo Sánchez Margareto"
   git config user.email "sanchezmargareto@gmail.com"
   git commit -am "${change_type} update to ${new_version}"
