@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Metadat.io - Smart, modular metadata specifications</title>
+    <link rel="shortcut icon" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <script src="http://yui.yahooapis.com/combo?3.8.0pr2/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4 header-menu">
+            <a href="../index.html" class="logo-link">
+                <img src="../assets/css/logo.png" height="40" width="153">
+            </a>
+            <nav role="navigation" class="main-menu">
+                <ul>
+                        <li><a href="../modules/Core.html">Core</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="version">
+            <!--<em>v0.0.1</em>-->
+            <em>v0.1.0</em>
+        </div>
+    </div>
+    <div class="yui3-g">
+
+        <div id="sidebar" class="yui3-u">
+            <div id="modules" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Modules</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="../modules/Core.html">Core</a>
+                                <ul>
+                                        <li><a href="../modules/Core.html#exceptions">exceptions</a></li>
+                                </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="classes" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Classes</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="../classes/Entity.html">Entity</a></li>
+                            <li><a href="../classes/Field.html">Field</a></li>
+                            <li><a href="../classes/MetadataIntegrityException.html">MetadataIntegrityException</a></li>
+                            <li><a href="../classes/Validator.html">Validator</a></li>
+                            <li><a href="../classes/ValidatorException.html">ValidatorException</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="elements" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Elements</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="methods-on-page" class="sidebox on-page">
+                <div class="hd">
+                    <h2 class="no-toc">Methods On Page</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="#methods_constructor">constructor</a></li>
+                            <li><a href="#methods_addField">addField</a></li>
+                            <li><a href="#methods_validate">validate</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+            
+            
+            <!---->
+            <!--<div id="fileTree" class="sidebox">-->
+                <!--<div class="hd">-->
+                    <!--<h2 class="no-toc">Files</h2>-->
+                <!--</div>-->
+                <!--<div class="bd">-->
+                    <!--<ul><li>src/<ul><li>exceptions/<ul><li><a href="../files/src_exceptions_data-validation.exception.js.html">data-validation.exception.js</a></li><li><a href="../files/src_exceptions_index.js.html">index.js</a></li><li><a href="../files/src_exceptions_metadata-integrity.exception.js.html">metadata-integrity.exception.js</a></li><li><a href="../files/src_exceptions_validator.exception.js.html">validator.exception.js</a></li></ul></li><li><a href="../files/src_index.js.html">index.js</a></li><li>metadata/<ul><li><a href="../files/src_metadata_data-types.js.html">data-types.js</a></li><li><a href="../files/src_metadata_entity.js.html">entity.js</a></li><li><a href="../files/src_metadata_field-types.js.html">field-types.js</a></li><li><a href="../files/src_metadata_field.js.html">field.js</a></li><li><a href="../files/src_metadata_util.js.html">util.js</a></li><li><a href="../files/src_metadata_validator-types.js.html">validator-types.js</a></li><li><a href="../files/src_metadata_validator.js.html">validator.js</a></li></ul></li></ul></li></ul>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!---->
+            
+        </div>
+
+        <div id="main" class="yui3-u">
+            <div class="content"><h1>Entity</h1>
+<!--<span class="foundat">Class defined in: <a href=""><code>src&#x2F;metadata&#x2F;entity.js:10</code></a></span>-->
+<div class="intro"><p>Entities represent real-world elements, that you need to manage within your app.
+Example entities are <em>Person</em>, <em>Car</em>, and whatever else you can imagine.</p>
+<p>Entities by itself don't contain any particular feature - apart from identification, and grouping -. Whilst some Metadatio modules will extend this objects to enrich its features, at it's core an Entity is basically a container for fields.</p>
+<h2>Usage</h2>
+<pre class="code prettyprint"><code>const entity = new Entity({
+  name: 'Friend',
+  [label: 'Friend',]
+  [namespace: 'people',]
+  [description: 'description...',]
+  [fields: [...]]
+});
+</code></pre>
+<h2>Entity hierarchy</h2>
+<p>You can easily define hierarchy between your entities, by leveraging the <a href="../classes/Entity.html#property_parent" class="crosslink">parent</a> property.</p>
+<pre class="code prettyprint"><code>const parent = new Entity({ name: 'parent-entity', ... });
+const child = new Entity({ name: 'child-entity', parent: parent });
+</code></pre>
+<h2>Namespaces</h2>
+<p>Entities are grouped together via <code>namespaces</code>, that shall contain entities dedicated to the same purpose, or that are related among each others.</p>
+<p>The <code>namespace</code> is a String set directly to the entity upon creation. If you don't set a namespace, the value <code>'default'</code> is used. So if you're only planning to use one namespace you can skip this.</p>
+<h2>Fields</h2>
+<p>Fields are instances of <a href="../classes/Field.html" class="crosslink">Field</a>, that you can attach upon entity creation, or at any time, by using the built-in <a href="../classes/Entity.html#method_addField" class="crosslink">addField</a> method.</p>
+<h2>Validation</h2>
+<p>Entities are provided with a native validation system, to determine whether the values set within an object that should comply with entity specification are valid. Basically, entity validation targets the value for each <a href="../classes/Field.html" class="crosslink">field</a> within the entity, and launches the <a href="../classes/Field.html#method_validate" class="crosslink">field's validation system</a>.</p>
+</div>
+
+
+<div id="classdocs">
+    <!--<ul>-->
+        <!---->
+            <!--<li><a href="#methods">Methods</a></li>-->
+        <!---->
+        <!---->
+            <!--<li><a href="#props">Properties</a></li>-->
+        <!---->
+        <!---->
+        <!---->
+    <!--</ul>-->
+    <div>
+            <h2>Properties</h2>
+            <div id="props">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td>
+                                    <a name="property_name"></a>
+                                    <code>name</code>
+                                </td>
+                                <td>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
+                                </td>
+                                <td>
+                                    <p>Stores the name of the entity. This name must be unique across the same <a href="../classes/Entity.html#property_namespace" class="crosslink">namespace</a>. It is the only required value upon construction.</p>
+                            <p>Entity name <strong>must</strong> be a String, with length from 2 to 64 characters. It can only contain <code>a-z, A-Z</code> characters, digits, hyphens and underscores. All names <strong>must</strong> start with an <code>a-z, A-Z</code> or underscore character.</p>
+                            
+                                        <h5>Example</h5>
+                                        <pre class="code prettyprint"><code>new Entity({ name: 'foo-bar_123', ... }) // OK</code></pre>
+                            <pre class="code prettyprint"><code>new Entity({ name: '_foo-bar_123', ... }) // OK</code></pre>
+                            <pre class="code prettyprint"><code>new Entity({ name: '123-foo-bar', ... }) // KO</code></pre>
+                            <pre class="code prettyprint"><code>new Entity({ name: '-foo-bar_123', ... }) // KO</code></pre>
+                            <pre class="code prettyprint"><code>new Entity({ name: 'foo-bar_123$', ... }) // KO</code></pre>
+                            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a name="property_description"></a>
+                                    <code>description</code>
+                                </td>
+                                <td>
+                                    <strong>Null | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
+                                </td>
+                                <td>
+                                    <p>Description for the field</p>
+                            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a name="property_namespace"></a>
+                                    <code>namespace</code>
+                                </td>
+                                <td>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
+                                </td>
+                                <td>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a name="property_label"></a>
+                                    <code>label</code>
+                                </td>
+                                <td>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
+                                </td>
+                                <td>
+                                    <p>Optionnally, you can define a label for the entity. The label would represent a human-readable name for the entity. It's actually useful if you wish to provided translated names for the entity - as you can set a placeholder as label - but otherwise might be not that useful, and with the <a href="../classes/Entity.html#property_name" class="crosslink">name</a> it may suffice.</p>
+                            
+                                        <h5>Example</h5>
+                                        <pre class="code prettyprint"><code>new Entity({ label: 'Foo', ... }) // Plain label</code></pre>
+                            <pre class="code prettyprint"><code>new Entity({ label: 'entities.foo.label', ... }) // Translatable label</code></pre>
+                            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a name="property_parent"></a>
+                                    <code>parent</code>
+                                </td>
+                                <td>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a> | <a href="../classes/Entity.html" class="crosslink">Entity</a></strong> <br>
+                                </td>
+                                <td>
+                                    <p>Parent entity. If an entity is an extension of some one more basic, you can link here the parent entity.</p>
+                            <p>If your entity extends from another, <strong>it will inherit parent's validation rules</strong> too. The fields you extended on the child class will be validated with your defined validators, but those defined at parent's level will be validated with theirs. If you wish to override a field's validation for a parent within a child, simply include such field in the child's <a href="../classes/Entity.html#property_fields" class="crosslink">fields</a> array.</p>
+                            
+                                        <h5>Example</h5>
+                                        <pre class="code prettyprint"><code>const parent = new Entity({ name: 'parent-entity', ... });</code></pre>
+                            <pre class="code prettyprint"><code>const child = new Entity({ name: 'child-entity', parent: parent });</code></pre>
+                            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a name="property_fields"></a>
+                                    <code>fields</code>
+                                </td>
+                                <td>
+                                    <strong><a href="../classes/Field.html" class="crosslink">[Field]</a></strong> <br>
+                                </td>
+                                <td>
+                                    <p>Entity fields</p>
+                            
+                                        <h5>Example</h5>
+                                        <pre class="code prettyprint"><code>[new Field({ name: 'foo', ...})] // OK</code></pre>
+                            <pre class="code prettyprint"><code>[{ name: 'foo' }] // KO</code></pre>
+                            
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Methods</h2>
+            <div id="methods">
+                    <a name="method_constructor"></a>
+                    <div class="method item">
+                         <strong
+                            class="name"><code>constructor</code></strong>( <code>props </code> ) 
+                        <br>
+                        <p>Constructor for the class</p>
+                    
+                            <h4>Parameters:</h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                                <code>props</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="../classes/Entity.html" class="crosslink">Entity</a></strong>
+                                        </td>
+                                        <td>
+                                            <p>Properties for setting up the entity</p>
+                    
+                                        </td>
+                                    </tr>
+                    
+                                </tbody>
+                            </table>
+                            <h5>Example</h5>
+                            <pre class="code prettyprint"><code> const entity = new Entity({ name: 'my-entity', ... }) // Create your entity
+                     .addField(...) // Add your fields</code></pre>
+                    
+                    </div>
+                    <a name="method_addField"></a>
+                    <div class="method item">
+                        <a href="../classes/Entity.html" class="crosslink">Entity</a> <strong
+                            class="name"><code>addField</code></strong>( <code>field, [overwrite=false] </code> ) 
+                        <br>
+                        <p>Adds a field to the entity</p>
+                    
+                            <h4>Parameters:</h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                                <code>field</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="../classes/Field.html" class="crosslink">Field</a></strong>
+                                        </td>
+                                        <td>
+                                            <p>The field to append</p>
+                    
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                                <code>[overwrite=false]</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong>
+                                        </td>
+                                        <td>
+                                            <p>Whether to overwrite the field with same name (if it exists)</p>
+                    
+                                        </td>
+                                    </tr>
+                    
+                                </tbody>
+                            </table>
+                                <br>
+                                <div class="returns">
+                                    <strong>Returns:</strong> <a href="../classes/Entity.html" class="crosslink">Entity</a> </div>
+                    </div>
+                    <a name="method_validate"></a>
+                    <div class="method item">
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong
+                            class="name"><code>validate</code></strong>( <code>item </code> ) 
+                        <br>
+                        <p>Validates that an object parameters comply with corresponding field's validation rules.</p>
+                    
+                            <h4>Parameters:</h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                                <code>item</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong>
+                                        </td>
+                                        <td>
+                                            <p>The object with the values</p>
+                    
+                                        </td>
+                                    </tr>
+                    
+                                </tbody>
+                            </table>
+                                <br>
+                                <div class="returns">
+                                    <strong>Returns:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <p>The validation result</p>
+                    </div>
+                                <br>
+                                <div class="throws">
+                                    <strong>Throws:</strong> <p>DataValidationException</p>
+                    </div>
+                    </div>
+            </div>
+
+
+        <div id="attrs">
+        </div>
+        <div id="events">
+        </div>
+    </div>
+</div>
+</div>
+        </div>
+    </div>
+</div>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68065842-3', 'auto');
+    ga('send', 'pageview');
+
+</script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/js/tabs.js"></script>
+</body>
+</html>

@@ -7,6 +7,97 @@
         "url": "http://metadat.io/"
     },
     "files": {
+        "src/exceptions/data-validation.exception.js": {
+            "name": "src/exceptions/data-validation.exception.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/exceptions/index.js": {
+            "name": "src/exceptions/index.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/exceptions/metadata-integrity.exception.js": {
+            "name": "src/exceptions/metadata-integrity.exception.js",
+            "modules": {
+                "exceptions": 1
+            },
+            "classes": {
+                "MetadataIntegrityException": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/exceptions/validator.exception.js": {
+            "name": "src/exceptions/validator.exception.js",
+            "modules": {},
+            "classes": {
+                "ValidatorException": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/metadata/data-types.js": {
+            "name": "src/metadata/data-types.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/metadata/entity.js": {
+            "name": "src/metadata/entity.js",
+            "modules": {
+                "Core": 1
+            },
+            "classes": {
+                "Entity": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/metadata/field-types.js": {
+            "name": "src/metadata/field-types.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/metadata/field.js": {
+            "name": "src/metadata/field.js",
+            "modules": {},
+            "classes": {
+                "Field": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/metadata/util.js": {
+            "name": "src/metadata/util.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/metadata/validator-types.js": {
+            "name": "src/metadata/validator-types.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/metadata/validator.js": {
+            "name": "src/metadata/validator.js",
+            "modules": {},
+            "classes": {
+                "Validator": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/index.js": {
             "name": "src/index.js",
             "modules": {},
@@ -15,18 +106,836 @@
             "namespaces": {}
         }
     },
-    "modules": {},
-    "classes": {},
+    "modules": {
+        "Core": {
+            "name": "Core",
+            "submodules": {
+                "exceptions": 1
+            },
+            "elements": {},
+            "classes": {
+                "MetadataIntegrityException": 1,
+                "ValidatorException": 1,
+                "Entity": 1,
+                "Field": 1,
+                "Validator": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/metadata/validator.js",
+            "line": 9,
+            "description": "Entities represent real-world elements, that you need to manage within your app.\nExample entities are _Person_, _Car_, and whatever else you can imagine.\n\nEntities by itself don't contain any particular feature - apart from identification, and grouping -. Whilst some Metadatio modules will extend this objects to enrich its features, at it's core an Entity is basically a container for fields.\n\n## Usage\n\n```\nconst entity = new Entity({\n  name: 'Friend',\n  [label: 'Friend',]\n  [namespace: 'people',]\n  [description: 'description...',]\n  [fields: [...]]\n});\n```\n\n## Entity hierarchy\n\nYou can easily define hierarchy between your entities, by leveraging the {{#crossLink \"Entity/parent:property\"}}parent{{/crossLink}} property.\n\n```\nconst parent = new Entity({ name: 'parent-entity', ... });\nconst child = new Entity({ name: 'child-entity', parent: parent });\n```\n\n## Namespaces\n\nEntities are grouped together via `namespaces`, that shall contain entities dedicated to the same purpose, or that are related among each others.\n\nThe `namespace` is a String set directly to the entity upon creation. If you don't set a namespace, the value `'default'` is used. So if you're only planning to use one namespace you can skip this.\n\n\n## Fields\n\nFields are instances of {{#crossLink \"Field\"}}Field{{/crossLink}}, that you can attach upon entity creation, or at any time, by using the built-in {{#crossLink \"Entity/addField:method\"}}addField{{/crossLink}} method.\n\n## Validation\n\nEntities are provided with a native validation system, to determine whether the values set within an object that should comply with entity specification are valid. Basically, entity validation targets the value for each {{#crossLink \"Field\"}}field{{/crossLink}} within the entity, and launches the {{#crossLink \"Field/validate:method\"}}field's validation system{{/crossLink}}.",
+            "is_constructor": 1
+        },
+        "exceptions": {
+            "name": "exceptions",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "MetadataIntegrityException": 1,
+                "ValidatorException": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "Core",
+            "namespace": "",
+            "file": "src/exceptions/validator.exception.js",
+            "line": 5,
+            "description": "When you instance Metadatio entities and fields, some data health checks are performed. If in the data you declared to configure your element is corrupt in any way, this exception will be thrown.",
+            "is_constructor": 1
+        }
+    },
+    "classes": {
+        "MetadataIntegrityException": {
+            "name": "MetadataIntegrityException",
+            "shortname": "MetadataIntegrityException",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "submodule": "exceptions",
+            "namespace": "",
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 5,
+            "description": "When you instance Metadatio entities and fields, some data health checks are performed. If in the data you declared to configure your element is corrupt in any way, this exception will be thrown."
+        },
+        "ValidatorException": {
+            "name": "ValidatorException",
+            "shortname": "ValidatorException",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "submodule": "exceptions",
+            "namespace": "",
+            "file": "src/exceptions/validator.exception.js",
+            "line": 5
+        },
+        "Entity": {
+            "name": "Entity",
+            "shortname": "Entity",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "src/metadata/entity.js",
+            "line": 10,
+            "description": "Entities represent real-world elements, that you need to manage within your app.\nExample entities are _Person_, _Car_, and whatever else you can imagine.\n\nEntities by itself don't contain any particular feature - apart from identification, and grouping -. Whilst some Metadatio modules will extend this objects to enrich its features, at it's core an Entity is basically a container for fields.\n\n## Usage\n\n```\nconst entity = new Entity({\n  name: 'Friend',\n  [label: 'Friend',]\n  [namespace: 'people',]\n  [description: 'description...',]\n  [fields: [...]]\n});\n```\n\n## Entity hierarchy\n\nYou can easily define hierarchy between your entities, by leveraging the {{#crossLink \"Entity/parent:property\"}}parent{{/crossLink}} property.\n\n```\nconst parent = new Entity({ name: 'parent-entity', ... });\nconst child = new Entity({ name: 'child-entity', parent: parent });\n```\n\n## Namespaces\n\nEntities are grouped together via `namespaces`, that shall contain entities dedicated to the same purpose, or that are related among each others.\n\nThe `namespace` is a String set directly to the entity upon creation. If you don't set a namespace, the value `'default'` is used. So if you're only planning to use one namespace you can skip this.\n\n\n## Fields\n\nFields are instances of {{#crossLink \"Field\"}}Field{{/crossLink}}, that you can attach upon entity creation, or at any time, by using the built-in {{#crossLink \"Entity/addField:method\"}}addField{{/crossLink}} method.\n\n## Validation\n\nEntities are provided with a native validation system, to determine whether the values set within an object that should comply with entity specification are valid. Basically, entity validation targets the value for each {{#crossLink \"Field\"}}field{{/crossLink}} within the entity, and launches the {{#crossLink \"Field/validate:method\"}}field's validation system{{/crossLink}}."
+        },
+        "Field": {
+            "name": "Field",
+            "shortname": "Field",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "src/metadata/field.js",
+            "line": 10,
+            "description": "The fields represent each and every property of any entity. Each field is completely sufficient - it stores configuration about the identification, typing and validation of the property - and all {{#crossLink \"Entity\"}}entity{{/crossLink}} procedures depending on fields dispatch down the action, that it's interpreted isolatedly.\n\n## Usage\n\n```\nconst field = new Field({\n  name: 'foo',\n  [label: 'Foo',]\n  [description: 'description...',]\n  dataType: 'string',\n  [multiplicity: 'one',]\n  [validators: {...}]\n});\n```\n\n## Identification\n\nAll fields must be defined with a {{#crossLink \"Field/name:property\"}}name{{/crossLink}}, that must be unique within each entity. In addition, you can define a field's {{#crossLink \"Field/label:property\"}}label{{/crossLink}} - useful for translatable usages.\n\n## Data typing\n\nAll fields must have an assigned data type.\n\n### Basic data types\n\nYou can make use of several basic data types, all available at the {{#crossLink \"DataTypes\"}}DataTypes{{/crossLink}} specification.\n\n```\nstring: 'Sample value',\nnumber: 123[.456],\nboolean: true|false,\ndate: new Date()|Timestamp\n```\n\n### Reference data types\n\nYou can set a reference to an entity as the data type for a field. This will build a relationship between your field's entity and the target entity, through the field you setup for that.\n\n```\nconst foo = new Entity({ name: 'foo', ... });\nconst field = new Field({ name: 'bar', dataType: foo });\n```\n\n#### Referenced validations\n\nWhen a field's data type is set as a reference, the validation procedures change for it. Values for the fields with this metadata can be filled either with the whole entity - for inner object saving - or via a `string` or `number` identifying the entity - deep linking approach. In the case you provide complete entities as values, the validation procedures of the target entity's metadata will be applied."
+        },
+        "Validator": {
+            "name": "Validator",
+            "shortname": "Validator",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "src/metadata/validator.js",
+            "line": 9,
+            "description": "Validators help you define rules with which you will consider the value given for a field as **valid**."
+        }
+    },
     "elements": {},
     "classitems": [
+        {
+            "file": "src/exceptions/data-validation.exception.js",
+            "line": 1,
+            "description": "Created by sm on 01/05/16.",
+            "class": "MetadataIntegrityException"
+        },
+        {
+            "file": "src/exceptions/index.js",
+            "line": 1,
+            "description": "Created by sm on 01/05/16.",
+            "class": "MetadataIntegrityException"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 1,
+            "description": "Created by sm on 01/05/16.",
+            "class": "MetadataIntegrityException"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 22,
+            "description": "### Entity name is required.\n\nThis error is thrown when you try to create an entity, and the description object you used does not contain a `name` param.",
+            "example": [
+                "\n    new Entity({});"
+            ],
+            "itemtype": "attribute",
+            "name": "MIE001",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 33,
+            "description": "### Entity name must be a String.\n\nThrown when you try to set a non-string value as entity name.",
+            "example": [
+                "\n    new Entity({ name: 123 });"
+            ],
+            "itemtype": "attribute",
+            "name": "MIE002",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 45,
+            "description": "### Entity name must comply with the specification.\n\nAll entity names must comply with a specification: They must start by an A-Z or an underscore, and contain only letters, numbers, hyphens and underscores.",
+            "example": [
+                "\n    new Entity({ name: '1abc' })",
+                "\n    new Entity({ name: '-abc' })",
+                "\n    new Entity({ name: 'abc$' })"
+            ],
+            "itemtype": "attribute",
+            "name": "MIE003",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 60,
+            "description": "### Entity name must have between 2 a 64 characters.\n\nAll Metadatio entities must comply with these length requirements to be valid.",
+            "example": [
+                "\n    new Entity({ name: 'a' })",
+                "\n    new Entity({ name: 'a..za..za..za..z' }) // More than 64 characters :)"
+            ],
+            "itemtype": "attribute",
+            "name": "MIE004",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 73,
+            "description": "### Entity fields must be instances of field.\n\nThis error occurs when you try to append a non-Field object as entity's field.",
+            "example": [
+                "\n    new Entity({ ... fields: [{...}] })",
+                "\n    someEntity.addField({})"
+            ],
+            "itemtype": "attribute",
+            "name": "MIE005",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 86,
+            "description": "### A field already exist with name {{name}}, and 'overwrite' flag has not been set.\n\nWhen you append a field to an entity, an existence verification is done on the field name. The {{#crossLink Entity/addField:method}}addField{{/crossLink}} method contains an optional `overwrite` flag - that bypasses this verification process. If you don't set the flag, you will get this error.",
+            "example": [
+                "\n    const entity = new Entity({ ... fields: [new Field({ name: 'foo'})] })",
+                "\n    entity.addField(new Field({ name: 'foo' }))"
+            ],
+            "itemtype": "attribute",
+            "name": "MIE006",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 99,
+            "description": "### Field name is required.\n\nThis error is thrown when you try to create an field, and the description object you used does not contain a `name` param.",
+            "example": [
+                "\n    new Field({})"
+            ],
+            "itemtype": "attribute",
+            "name": "MIF001",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 110,
+            "description": "### Field name must be a string.\n\nThis error is thrown when you set a non-string value as field name",
+            "example": [
+                "\n    new Field({ name: 123, ... })"
+            ],
+            "itemtype": "attribute",
+            "name": "MIF002",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 121,
+            "description": "### Field name must comply with the specification.\n\nAs entities, all field names must comply with the specification -i.e.   must start by an A-Z or an underscore, and contain only letters, numbers, hyphens and underscores.",
+            "example": [
+                "\n    new Field({ name: '1abc', ... })",
+                "\n    new Field({ name: '-abc', ... })",
+                "\n    new Field({ name: 'abc$', ... })"
+            ],
+            "itemtype": "attribute",
+            "name": "MIF003",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 136,
+            "description": "### Field name must have between 2 and 64 characters.\n\nAll field names lengths must be between defined bounds",
+            "example": [
+                "\n    new Field({ name: 'a', ... })",
+                "\n    new Field({ name: 'a..za..za..za..z', ... }) // More than 64 characters :D"
+            ],
+            "itemtype": "attribute",
+            "name": "MIF004",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 149,
+            "description": "### Data type is not defined.\n\nThis exception is thrown when you define a field without a data type. Data typing your fields is essential for proper working, and thus not assigning it will result in this error.",
+            "example": [
+                "\n    new Field({ name: 'foo' })"
+            ],
+            "itemtype": "attribute",
+            "name": "MIF005",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 160,
+            "description": "### Data type is invalid.\n\nThis exception occurs when you set an invalid data type to a field. Data types can only be String, Number, Boolean, Date, and references to other entities",
+            "example": [
+                "\n    new Field({ name: 'foo', dataType: 'wrong' })"
+            ],
+            "itemtype": "attribute",
+            "name": "MIF006",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 171,
+            "description": "### Multiplicity is neither \\'one\\' nor \\'many\\'.\n\nYou will get this error if you setup a multiplicity for an entity that is neither 'one' nor 'many'. The {{#crossLink Field/multiplicity:property}}multiplicity{{/crossLink}} is optional, and by default is set to 'one'.",
+            "example": [
+                "\n    new Field({ ... multiplicity: 'wrong' })"
+            ],
+            "itemtype": "attribute",
+            "name": "MIF007",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 182,
+            "description": "### Validator name must be given, and be a string.\n\nWhen you attach validators to a field, you must define a *string* name for the validator - for logging purposes. When you associate a validator to a field without a name set - or with a name that is not a string -, you will get this error.",
+            "example": [
+                "\n    someField.addValidator(null, new Validator(...))",
+                "\n    someField.addValidator(123, new Validator(...))"
+            ],
+            "itemtype": "attribute",
+            "name": "MIV001",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 195,
+            "description": "### Validators must be instances of \\'Validator\\'.\n\nEvery time you include a validator to a field, the value you set as validator is checked, to verify that it is an instance of {{#crossLink Validator}}Validator{{/crossLink}}. If that's not the case, this exception is thrown.",
+            "example": [
+                "\n    new Field({ ... validators: { 'pattern': {} } })",
+                "\n    someField.addValidator('pattern', {});"
+            ],
+            "itemtype": "attribute",
+            "name": "MIV002",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/metadata-integrity.exception.js",
+            "line": 208,
+            "description": "### A validator already exists with name {{name}} and 'overwrite' flag has not been set.\n\nWhen you include a validator to a field at runtime, a name verification is launched. If the validator name you set already exists, and you haven't set the `overwrite` flag, this error will occur.",
+            "example": [
+                "\n    const someField = new Field({ ... validators: { 'pattern': ... } } });",
+                "\n    someField.addValidator('pattern': new Validator(...));"
+            ],
+            "itemtype": "attribute",
+            "name": "MIV003",
+            "class": "MetadataIntegrityException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/validator.exception.js",
+            "line": 1,
+            "description": "Created by sm on 01/05/16.",
+            "class": "ValidatorException",
+            "module": "Core"
+        },
+        {
+            "file": "src/exceptions/validator.exception.js",
+            "line": 15,
+            "description": "Constructs a new exception",
+            "itemtype": "method",
+            "name": "constructor",
+            "params": [
+                {
+                    "name": "e",
+                    "description": ""
+                }
+            ],
+            "class": "ValidatorException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/metadata/data-types.js",
+            "line": 1,
+            "description": "Created by sm on 01/05/16.",
+            "class": "Entity",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/entity.js",
+            "line": 1,
+            "description": "Created by sm on 06/05/16.",
+            "class": "Entity",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/entity.js",
+            "line": 60,
+            "description": "Constructor for the class",
+            "itemtype": "method",
+            "name": "constructor",
+            "params": [
+                {
+                    "name": "props",
+                    "description": "Properties for setting up the entity",
+                    "type": "Entity"
+                }
+            ],
+            "example": [
+                "\n     const entity = new Entity({ name: 'my-entity', ... }) // Create your entity\n     .addField(...) // Add your fields"
+            ],
+            "class": "Entity",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/entity.js",
+            "line": 71,
+            "description": "Stores the name of the entity. This name must be unique across the same {{#crossLink \"Entity/namespace:property\"}}namespace{{/crossLink}}. It is the only required value upon construction.\n\nEntity name **must** be a String, with length from 2 to 64 characters. It can only contain `a-z, A-Z` characters, digits, hyphens and underscores. All names **must** start with an `a-z, A-Z` or underscore character.",
+            "example": [
+                "\n    new Entity({ name: 'foo-bar_123', ... }) // OK",
+                "\n    new Entity({ name: '_foo-bar_123', ... }) // OK",
+                "\n    new Entity({ name: '123-foo-bar', ... }) // KO",
+                "\n    new Entity({ name: '-foo-bar_123', ... }) // KO",
+                "\n    new Entity({ name: 'foo-bar_123$', ... }) // KO"
+            ],
+            "itemtype": "property",
+            "name": "name",
+            "type": "{String}",
+            "class": "Entity",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/entity.js",
+            "line": 92,
+            "description": "Description for the field",
+            "itemtype": "property",
+            "name": "description",
+            "type": "{null|string}",
+            "class": "Entity",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/entity.js",
+            "line": 100,
+            "itemtype": "property",
+            "name": "namespace",
+            "type": "{string}",
+            "default": "'default'",
+            "class": "Entity",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/entity.js",
+            "line": 107,
+            "description": "Optionnally, you can define a label for the entity. The label would represent a human-readable name for the entity. It's actually useful if you wish to provided translated names for the entity - as you can set a placeholder as label - but otherwise might be not that useful, and with the {{#crossLink \"Entity/name:property\"}}name{{/crossLink}} it may suffice.",
+            "example": [
+                "\n    new Entity({ label: 'Foo', ... }) // Plain label",
+                "\n    new Entity({ label: 'entities.foo.label', ... }) // Translatable label"
+            ],
+            "itemtype": "property",
+            "name": "label",
+            "type": "{String}",
+            "default": "null",
+            "class": "Entity",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/entity.js",
+            "line": 121,
+            "description": "Parent entity. If an entity is an extension of some one more basic, you can link here the parent entity.\n\n\nIf your entity extends from another, **it will inherit parent's validation rules** too. The fields you extended on the child class will be validated with your defined validators, but those defined at parent's level will be validated with theirs. If you wish to override a field's validation for a parent within a child, simply include such field in the child's {{#crossLink \"Entity/fields:property\"}}fields{{/crossLink}} array.",
+            "itemtype": "property",
+            "name": "parent",
+            "type": "{String|Entity}",
+            "default": "null",
+            "example": [
+                "\n    const parent = new Entity({ name: 'parent-entity', ... });",
+                "\n    const child = new Entity({ name: 'child-entity', parent: parent });"
+            ],
+            "class": "Entity",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/entity.js",
+            "line": 137,
+            "description": "Entity fields",
+            "itemtype": "property",
+            "name": "fields",
+            "type": "{[Field]}",
+            "example": [
+                "\n    [new Field({ name: 'foo', ...})] // OK",
+                "\n    [{ name: 'foo' }] // KO"
+            ],
+            "class": "Entity",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/entity.js",
+            "line": 161,
+            "description": "Adds a field to the entity",
+            "itemtype": "method",
+            "name": "addField",
+            "params": [
+                {
+                    "name": "field",
+                    "description": "The field to append",
+                    "type": "Field"
+                },
+                {
+                    "name": "overwrite",
+                    "description": "Whether to overwrite the field with same name (if it exists)",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "false"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Entity"
+            },
+            "chainable": 1,
+            "class": "Entity",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/entity.js",
+            "line": 179,
+            "description": "Validates that an object parameters comply with corresponding field's validation rules.",
+            "itemtype": "method",
+            "name": "validate",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "The object with the values",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The validation result",
+                "type": "Boolean"
+            },
+            "throws": {
+                "description": "DataValidationException"
+            },
+            "class": "Entity",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field-types.js",
+            "line": 1,
+            "description": "Created by sm on 01/05/16.",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.js",
+            "line": 1,
+            "description": "Created by sm on 01/05/16.",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.js",
+            "line": 64,
+            "description": "Constructor for the class",
+            "itemtype": "method",
+            "name": "constructor",
+            "params": [
+                {
+                    "name": "props",
+                    "description": "An object with the properties of the field",
+                    "type": "Object"
+                }
+            ],
+            "throws": {
+                "description": "If the field's metadata is corrupt in any way, an exception is thrown.",
+                "type": "MetadataIntegrityException"
+            },
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.js",
+            "line": 73,
+            "description": "The **name** for the field. A field's name **must** be unique within each entity.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "{string}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.js",
+            "line": 81,
+            "description": "Label for the field. This defines the human-readable name for the field.",
+            "itemtype": "property",
+            "name": "label",
+            "type": "{string}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.js",
+            "line": 90,
+            "description": "Description for the field",
+            "itemtype": "property",
+            "name": "description",
+            "type": "{string}",
+            "default": "null",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.js",
+            "line": 99,
+            "description": "Define the data type of the element.\n\nBasic data types are primitive types to define basic data.",
+            "itemtype": "property",
+            "name": "dataType",
+            "type": "{string|Entity}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.js",
+            "line": 109,
+            "description": "Define the multiplicity for the element",
+            "itemtype": "property",
+            "name": "multiplicity",
+            "type": "{string}",
+            "default": "'one'",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.js",
+            "line": 118,
+            "description": "Define the validators for the field",
+            "itemtype": "property",
+            "name": "validators",
+            "type": "{Validator*}",
+            "default": "{}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.js",
+            "line": 144,
+            "description": "Determines whether the value defined for a field is valid.",
+            "itemtype": "method",
+            "name": "validate",
+            "params": [
+                {
+                    "name": "value",
+                    "description": ""
+                },
+                {
+                    "name": "The",
+                    "description": "validators to match against.",
+                    "type": "validators=this.validators"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.js",
+            "line": 190,
+            "description": "Adds a new validator to the field.",
+            "itemtype": "method",
+            "name": "addValidator",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the validator",
+                    "type": "String"
+                },
+                {
+                    "name": "validator",
+                    "description": "The new validator to include",
+                    "type": "Validator"
+                },
+                {
+                    "name": "overwrite",
+                    "description": "Whether to overwrite the validator name, if it exists.",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "false"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Field"
+            },
+            "chainable": 1,
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/util.js",
+            "line": 1,
+            "description": "Created by sm on 07/05/16.",
+            "class": "Validator",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/validator-types.js",
+            "line": 1,
+            "description": "Created by sm on 01/05/16.",
+            "class": "Validator",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/validator.js",
+            "line": 1,
+            "description": "Created by sm on 01/05/16.",
+            "class": "Validator",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/validator.js",
+            "line": 21,
+            "description": "Creates a new validator instance, for validating using a certain method, with the validator match given",
+            "itemtype": "method",
+            "name": "constructor",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "Define the type of validation to use. Type must be one TODO: Link ValidatorTypes defined.",
+                    "type": "String"
+                },
+                {
+                    "name": "validator",
+                    "description": "The validator to match values against",
+                    "type": "String|RegExp|Object|function"
+                }
+            ],
+            "class": "Validator",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/validator.js",
+            "line": 77,
+            "description": "Used to validate a value against the validator defined.",
+            "itemtype": "method",
+            "name": "validate",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "Value to validate",
+                    "type": "*"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Validator",
+            "module": "Core"
+        },
         {
             "file": "src/index.js",
             "line": 1,
             "description": "Created by sm on 01/05/16.",
-            "class": ""
+            "class": "",
+            "module": "Core"
         }
     ],
     "warnings": [
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/metadata/entity.js:161"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/metadata/entity.js:179"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/metadata/field.js:144"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/metadata/field.js:190"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/metadata/validator.js:77"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 01/05/16.",
+            "line": " src/exceptions/data-validation.exception.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 01/05/16.",
+            "line": " src/exceptions/index.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 01/05/16.",
+            "line": " src/exceptions/metadata-integrity.exception.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 01/05/16.",
+            "line": " src/exceptions/validator.exception.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 01/05/16.",
+            "line": " src/metadata/data-types.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 06/05/16.",
+            "line": " src/metadata/entity.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 01/05/16.",
+            "line": " src/metadata/field-types.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 01/05/16.",
+            "line": " src/metadata/field.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 07/05/16.",
+            "line": " src/metadata/util.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 01/05/16.",
+            "line": " src/metadata/validator-types.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 01/05/16.",
+            "line": " src/metadata/validator.js:1"
+        },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
             "line": " src/index.js:1"

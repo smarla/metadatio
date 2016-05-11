@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Metadat.io - Smart, modular metadata specifications</title>
+    <link rel="shortcut icon" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <script src="http://yui.yahooapis.com/combo?3.8.0pr2/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4 header-menu">
+            <a href="../index.html" class="logo-link">
+                <img src="../assets/css/logo.png" height="40" width="153">
+            </a>
+            <nav role="navigation" class="main-menu">
+                <ul>
+                        <li><a href="../modules/Core.html">Core</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="version">
+            <!--<em>v0.0.1</em>-->
+            <em>v0.1.0</em>
+        </div>
+    </div>
+    <div class="yui3-g">
+
+        <div id="sidebar" class="yui3-u">
+            <div id="modules" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Modules</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="../modules/Core.html">Core</a>
+                                <ul>
+                                        <li><a href="../modules/Core.html#exceptions">exceptions</a></li>
+                                </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="classes" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Classes</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="../classes/Entity.html">Entity</a></li>
+                            <li><a href="../classes/Field.html">Field</a></li>
+                            <li><a href="../classes/MetadataIntegrityException.html">MetadataIntegrityException</a></li>
+                            <li><a href="../classes/Validator.html">Validator</a></li>
+                            <li><a href="../classes/ValidatorException.html">ValidatorException</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="elements" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Elements</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="methods-on-page" class="sidebox on-page">
+                <div class="hd">
+                    <h2 class="no-toc">Methods On Page</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="#methods_constructor">constructor</a></li>
+                            <li><a href="#methods_validate">validate</a></li>
+                            <li><a href="#methods_addValidator">addValidator</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+            
+            
+            <!---->
+            <!--<div id="fileTree" class="sidebox">-->
+                <!--<div class="hd">-->
+                    <!--<h2 class="no-toc">Files</h2>-->
+                <!--</div>-->
+                <!--<div class="bd">-->
+                    <!--<ul><li>src/<ul><li>exceptions/<ul><li><a href="../files/src_exceptions_data-validation.exception.js.html">data-validation.exception.js</a></li><li><a href="../files/src_exceptions_index.js.html">index.js</a></li><li><a href="../files/src_exceptions_metadata-integrity.exception.js.html">metadata-integrity.exception.js</a></li><li><a href="../files/src_exceptions_validator.exception.js.html">validator.exception.js</a></li></ul></li><li><a href="../files/src_index.js.html">index.js</a></li><li>metadata/<ul><li><a href="../files/src_metadata_data-types.js.html">data-types.js</a></li><li><a href="../files/src_metadata_entity.js.html">entity.js</a></li><li><a href="../files/src_metadata_field-types.js.html">field-types.js</a></li><li><a href="../files/src_metadata_field.js.html">field.js</a></li><li><a href="../files/src_metadata_util.js.html">util.js</a></li><li><a href="../files/src_metadata_validator-types.js.html">validator-types.js</a></li><li><a href="../files/src_metadata_validator.js.html">validator.js</a></li></ul></li></ul></li></ul>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!---->
+            
+        </div>
+
+        <div id="main" class="yui3-u">
+            <div class="content"><h1>Field</h1>
+<!--<span class="foundat">Class defined in: <a href=""><code>src&#x2F;metadata&#x2F;field.js:10</code></a></span>-->
+<div class="intro"><p>The fields represent each and every property of any entity. Each field is completely sufficient - it stores configuration about the identification, typing and validation of the property - and all <a href="../classes/Entity.html" class="crosslink">entity</a> procedures depending on fields dispatch down the action, that it's interpreted isolatedly.</p>
+<h2>Usage</h2>
+<pre class="code prettyprint"><code>const field = new Field({
+  name: 'foo',
+  [label: 'Foo',]
+  [description: 'description...',]
+  dataType: 'string',
+  [multiplicity: 'one',]
+  [validators: {...}]
+});
+</code></pre>
+<h2>Identification</h2>
+<p>All fields must be defined with a <a href="../classes/Field.html#property_name" class="crosslink">name</a>, that must be unique within each entity. In addition, you can define a field's <a href="../classes/Field.html#property_label" class="crosslink">label</a> - useful for translatable usages.</p>
+<h2>Data typing</h2>
+<p>All fields must have an assigned data type.</p>
+<h3>Basic data types</h3>
+<p>You can make use of several basic data types, all available at the DataTypes specification.</p>
+<pre class="code prettyprint"><code>string: 'Sample value',
+number: 123[.456],
+boolean: true|false,
+date: new Date()|Timestamp
+</code></pre>
+<h3>Reference data types</h3>
+<p>You can set a reference to an entity as the data type for a field. This will build a relationship between your field's entity and the target entity, through the field you setup for that.</p>
+<pre class="code prettyprint"><code>const foo = new Entity({ name: 'foo', ... });
+const field = new Field({ name: 'bar', dataType: foo });
+</code></pre>
+<h4>Referenced validations</h4>
+<p>When a field's data type is set as a reference, the validation procedures change for it. Values for the fields with this metadata can be filled either with the whole entity - for inner object saving - or via a <code>string</code> or <code>number</code> identifying the entity - deep linking approach. In the case you provide complete entities as values, the validation procedures of the target entity's metadata will be applied.</p>
+</div>
+
+
+<div id="classdocs">
+    <!--<ul>-->
+        <!---->
+            <!--<li><a href="#methods">Methods</a></li>-->
+        <!---->
+        <!---->
+            <!--<li><a href="#props">Properties</a></li>-->
+        <!---->
+        <!---->
+        <!---->
+    <!--</ul>-->
+    <div>
+            <h2>Properties</h2>
+            <div id="props">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td>
+                                    <a name="property_name"></a>
+                                    <code>name</code>
+                                </td>
+                                <td>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
+                                </td>
+                                <td>
+                                    <p>The <strong>name</strong> for the field. A field's name <strong>must</strong> be unique within each entity.</p>
+                            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a name="property_label"></a>
+                                    <code>label</code>
+                                </td>
+                                <td>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
+                                </td>
+                                <td>
+                                    <p>Label for the field. This defines the human-readable name for the field.</p>
+                            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a name="property_description"></a>
+                                    <code>description</code>
+                                </td>
+                                <td>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
+                                </td>
+                                <td>
+                                    <p>Description for the field</p>
+                            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a name="property_dataType"></a>
+                                    <code>dataType</code>
+                                </td>
+                                <td>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a> | <a href="../classes/Entity.html" class="crosslink">Entity</a></strong> <br>
+                                </td>
+                                <td>
+                                    <p>Define the data type of the element.</p>
+                            <p>Basic data types are primitive types to define basic data.</p>
+                            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a name="property_multiplicity"></a>
+                                    <code>multiplicity</code>
+                                </td>
+                                <td>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
+                                </td>
+                                <td>
+                                    <p>Define the multiplicity for the element</p>
+                            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a name="property_validators"></a>
+                                    <code>validators</code>
+                                </td>
+                                <td>
+                                    <strong><a href="../classes/Validator.html" class="crosslink">Validator*</a></strong> <br>
+                                </td>
+                                <td>
+                                    <p>Define the validators for the field</p>
+                            
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Methods</h2>
+            <div id="methods">
+                    <a name="method_constructor"></a>
+                    <div class="method item">
+                         <strong
+                            class="name"><code>constructor</code></strong>( <code>props </code> ) 
+                        <br>
+                        <p>Constructor for the class</p>
+                    
+                            <h4>Parameters:</h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                                <code>props</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong>
+                                        </td>
+                                        <td>
+                                            <p>An object with the properties of the field</p>
+                    
+                                        </td>
+                                    </tr>
+                    
+                                </tbody>
+                            </table>
+                                <br>
+                                <div class="throws">
+                                    <strong>Throws:</strong> <a href="../classes/MetadataIntegrityException.html" class="crosslink">MetadataIntegrityException</a> <p>If the field's metadata is corrupt in any way, an exception is thrown.</p>
+                    </div>
+                    </div>
+                    <a name="method_validate"></a>
+                    <div class="method item">
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong
+                            class="name"><code>validate</code></strong>( <code>value, The </code> ) 
+                        <br>
+                        <p>Determines whether the value defined for a field is valid.</p>
+                    
+                            <h4>Parameters:</h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                                <code>value</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong>
+                                        </td>
+                                        <td>
+                                             
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                                <code>The</code>
+                                        </td>
+                                        <td>
+                                            <strong>validators=this.validators</strong>
+                                        </td>
+                                        <td>
+                                            <p>validators to match against.</p>
+                    
+                                        </td>
+                                    </tr>
+                    
+                                </tbody>
+                            </table>
+                                <br>
+                                <div class="returns">
+                                    <strong>Returns:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> </div>
+                    </div>
+                    <a name="method_addValidator"></a>
+                    <div class="method item">
+                        <a href="../classes/Field.html" class="crosslink">Field</a> <strong
+                            class="name"><code>addValidator</code></strong>( <code>name, validator, [overwrite=false] </code> ) 
+                        <br>
+                        <p>Adds a new validator to the field.</p>
+                    
+                            <h4>Parameters:</h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                                <code>name</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong>
+                                        </td>
+                                        <td>
+                                            <p>The name of the validator</p>
+                    
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                                <code>validator</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="../classes/Validator.html" class="crosslink">Validator</a></strong>
+                                        </td>
+                                        <td>
+                                            <p>The new validator to include</p>
+                    
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                                <code>[overwrite=false]</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong>
+                                        </td>
+                                        <td>
+                                            <p>Whether to overwrite the validator name, if it exists.</p>
+                    
+                                        </td>
+                                    </tr>
+                    
+                                </tbody>
+                            </table>
+                                <br>
+                                <div class="returns">
+                                    <strong>Returns:</strong> <a href="../classes/Field.html" class="crosslink">Field</a> </div>
+                    </div>
+            </div>
+
+
+        <div id="attrs">
+        </div>
+        <div id="events">
+        </div>
+    </div>
+</div>
+</div>
+        </div>
+    </div>
+</div>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68065842-3', 'auto');
+    ga('send', 'pageview');
+
+</script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/js/tabs.js"></script>
+</body>
+</html>
