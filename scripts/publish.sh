@@ -48,8 +48,10 @@ new_version="${major}.${minor}.${patch}"
 if [[ ${version_change} == 1 ]]
 then
   # Update package.json
-  echo "Updating package.json"
+  echo "Updating version references"
   sed -i 's/${current_version}/${new_version}/g' *.json
+  git config user.name "Pelayo Sánchez Margareto"
+  git config user.email "sanchezmargareto@gmail.com"
   git commit -am "${change_type} update to ${new_version}"
   git push origin master
 fi

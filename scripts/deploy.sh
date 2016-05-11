@@ -14,7 +14,7 @@ cd docs
 
 git init
 git config user.name "Pelayo Sánchez Margareto"
-git config user.email "san"
+git config user.email "sanchezmargareto@gmail.com"
 
 git remote add upstream "https://$GH_TOKEN@github.com/smarla/metadatio.git"
 git fetch upstream
