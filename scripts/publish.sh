@@ -64,5 +64,5 @@ then
 
   git tag ${new_version}
 
-  git push --tags origin HEAD:master
+  git push origin HEAD:master
 fi
