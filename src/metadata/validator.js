@@ -122,7 +122,5 @@ export default class Validator {
                 return value;
 
         }
-
-        return false;
     }
 }

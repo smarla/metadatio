@@ -428,7 +428,26 @@ describe('Base field component', () => {
             }
         });
 
-        it('should validate that input is a boolean for boolean data types', (done) => {
+        it('should accept a boolean value for boolean data types', () => {
+            const metadata = {
+                name: "name",
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.boolean,
+                multiplicity: 'one'
+            };
+
+            const field = new Field(metadata);
+
+            const value = true;
+
+            const validation = field.validate(value);
+
+            expect(validation).to.equal(true);
+        });
+
+        it('should fail if input is not a boolean for boolean data types', (done) => {
             const metadata = {
                 name: "name",
                 label: "Name of your app",
@@ -452,7 +471,26 @@ describe('Base field component', () => {
             }
         });
 
-        it('should validate that input is a date or a timestamp for date data types', (done) => {
+        it('should accept a date or a timestamp for date data types', () => {
+            const metadata = {
+                name: "name",
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.date,
+                multiplicity: 'one'
+            };
+
+            const field = new Field(metadata);
+
+            const value = new Date();
+
+            const validates = field.validate(value);
+
+            expect(validates).to.equal(true);
+        });
+
+        it('should fail if input is not a date nor a timestamp for date data types', (done) => {
             const metadata = {
                 name: "name",
                 label: "Name of your app",
