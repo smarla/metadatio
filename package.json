@@ -7,7 +7,7 @@
     "build": "webpack --bail --config webpack.config.js",
     "test:coverage": "babel-node ./node_modules/istanbul/lib/cli.js cover test/index.js",
     "test": "babel-node test/index.js",
-    "doc": "./node_modules/.bin/babel-node ./node_modules/.bin/yuidoc app"
+    "doc": "babel-node ./node_modules/.bin/yuidoc app"
   },
   "repository": {
     "type": "git",
