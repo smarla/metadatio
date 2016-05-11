@@ -53,7 +53,5 @@ then
   git config user.name "Pelayo Sánchez Margareto"
   git config user.email "sanchezmargareto@gmail.com"
   git commit -am "${change_type} update to ${new_version}"
-  git push origin master
-
-  cat package.json
+  git push origin HEAD:master
 fi
