@@ -50,7 +50,7 @@ then
   package="package.json"
   yui="yuidoc.json"
   echo "Updating version references"
-  sed -i.bkp "s/{$last_tag}/${new_version}/g" "$package"
+  sed -i.bkp "s/\"version\": \"0.6.0\"/\"version\": \"0.6.1\"/g" "$package"
   sed -i.bkp "s/${last_tag}/${new_version}/g" "$yui"
   git config user.name "Pelayo Sánchez Margareto"
   git config user.email "sanchezmargareto@gmail.com"
