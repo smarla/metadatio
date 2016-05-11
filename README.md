@@ -6,7 +6,6 @@
 [![Dependency Status](https://david-dm.org/smarla/metadatio.svg)](https://david-dm.org/smarla/metadatio)
 [![devDependency Status](https://david-dm.org/smarla/metadatio/dev-status.svg)](https://david-dm.org/smarla/metadatio#info=devDependencies)
 [![npm](https://img.shields.io/npm/dm/localeval.svg?maxAge=2592000)](https://www.npmjs.com/package/metadatio)
-[![Inline docs](http://inch-ci.org/github/smarla/metadatio.svg?branch=master)](http://inch-ci.org/github/smarla/metadatio)
 
 <h1>Smart, modular apps using metadata</h1>
 <p>Metadatio is a library for building complete metadata specifications for defining the required data model for your apps. Our main goal is to let you extract your data model definition to a separate component, with standalone capabilities of validating itself. Thus, you'd be able to define a consistent data model across all the pieces of your application, with zero-duplicity.</p>
