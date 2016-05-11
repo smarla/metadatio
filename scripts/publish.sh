@@ -9,3 +9,5 @@ then
 fi
 
 comment=$(git log -1 --pretty=%B)
+
+echo "${comment}";
