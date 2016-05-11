@@ -1,7 +1,7 @@
 [![npm version](https://badge.fury.io/js/metadatio.svg)](https://badge.fury.io/js/metadatio)
 [![Build Status](https://travis-ci.org/smarla/metadatio.svg?branch=master)](https://travis-ci.org/smarla/metadatio)
 [![Coverage Status](https://coveralls.io/repos/github/smarla/metadatio/badge.svg?branch=master)](https://coveralls.io/github/smarla/metadatio?branch=master)
-![Dependency Status](https://david-dm.org/smarla/metadatio.svg)](https://david-dm.org/smarla/metadatio)
+[!Dependency Status](https://david-dm.org/smarla/metadatio.svg)](https://david-dm.org/smarla/metadatio)
 [![devDependency Status](https://david-dm.org/smarla/metadatio/dev-status.svg)](https://david-dm.org/smarla/metadatio#info=devDependencies)
 [![npm](https://img.shields.io/npm/dm/localeval.svg?maxAge=2592000)](https://www.npmjs.com/package/metadatio)
 
