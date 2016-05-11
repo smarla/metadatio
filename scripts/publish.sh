@@ -51,7 +51,7 @@ then
   yui="yuidoc.json"
   echo "Updating version references"
   sed -i.bkp "s/\"version\": \"$last_tag\"/\"version\": \"$new_version\"/g" "$package"
-  sed -i.bkp "s/${last_tag}/${new_version}/g" "$yui"
+  sed -i.bkp "s/$last_tag/$new_version/g" "$yui"
   git config user.name "Pelayo Sánchez Margareto"
   git config user.email "sanchezmargareto@gmail.com"
   git commit -am "[TRAVIS] [ci skip] ${change_type} updated to ${new_version}"
