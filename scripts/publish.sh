@@ -49,9 +49,8 @@ then
   # Update package.json
   package="package.json"
   yui="yuidoc.json"
-  pattern=\"version\":\s\"\d+\.\d+\.\d+\"
   echo "Updating version references"
-  sed -i 's,'"$pattern"',\"version\": \""$new_version"\",' "$package"
+  sed -i 's/0.6.0/0.6.1/g' "$package"
   git config user.name "Pelayo Sánchez Margareto"
   git config user.email "sanchezmargareto@gmail.com"
   git commit -am "[TRAVIS] [ci skip] ${change_type} updated to ${new_version}"
