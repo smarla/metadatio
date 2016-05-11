@@ -48,8 +48,8 @@ if [[ ${version_change} == 1 ]]
 then
   # Update package.json
   echo "Updating version references"
-  sed 's/${current_version}/${new_version}/g' package.json > package.json.bkp
-  sed 's/${current_version}/${new_version}/g' yuidoc.json > yuidoc.json.bkp
+  sed -i"any_symbol" 's/${current_version}/${new_version}/g' package.json
+  sed -i"any_symbol" 's/${current_version}/${new_version}/g' yuidoc.json > yuidoc.json
   git config user.name "Pelayo Sánchez Margareto"
   git config user.email "sanchezmargareto@gmail.com"
   git commit -am "[TRAVIS] [ci skip] ${change_type} updated to ${new_version}"
