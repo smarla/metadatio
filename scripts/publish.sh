@@ -55,7 +55,14 @@ then
   git config user.name "Pelayo Sánchez Margareto"
   git config user.email "sanchezmargareto@gmail.com"
   git commit -am "[TRAVIS] [ci skip] ${change_type} updated to ${new_version}"
-#  git push origin HEAD:master
 
   echo "Versions updated"
+  echo "Packaging npm"
+
+  npm publish
+
+  echo "Tag version"
+  git tag ${new_version}
+
+  git push --tags origin HEAD:master
 fi
