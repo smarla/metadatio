@@ -9,7 +9,7 @@ cache:
 script:
   - npm run test:coverage
   - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash scripts/publish.sh
+#  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash scripts/publish.sh
   - npm run doc
 after_success:
   - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash scripts/deploy.sh
