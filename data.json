@@ -1,0 +1,35 @@
+{
+    "project": {
+        "name": "Metadatio",
+        "description": "Use metadata to build things",
+        "logo": "../graphic/logo_400.png",
+        "version": "0.0.1",
+        "url": "http://metadat.io/"
+    },
+    "files": {
+        "src/index.js": {
+            "name": "src/index.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {},
+    "elements": {},
+    "classitems": [
+        {
+            "file": "src/index.js",
+            "line": 1,
+            "description": "Created by sm on 01/05/16.",
+            "class": ""
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type\nCreated by sm on 01/05/16.",
+            "line": " src/index.js:1"
+        }
+    ]
+}

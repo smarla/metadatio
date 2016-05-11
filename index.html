@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Metadat.io - Smart, modular metadata specifications</title>
+    <link rel="shortcut icon" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="./assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="./assets/css/main.css" id="site_styles">
+    <script src="http://yui.yahooapis.com/combo?3.8.0pr2/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4 header-menu">
+            <a href="./index.html" class="logo-link">
+                <img src="./assets/css/logo.png" height="40" width="153">
+            </a>
+            <nav role="navigation" class="main-menu">
+                <ul>
+                </ul>
+            </nav>
+        </div>
+        <div class="version">
+            <!--<em>v0.0.1</em>-->
+            <em>v0.1.0</em>
+        </div>
+    </div>
+    <div class="yui3-g">
+
+        <div id="sidebar" class="yui3-u">
+            <div id="modules" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Modules</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="classes" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Classes</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="elements" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Elements</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            <!---->
+            
+        </div>
+
+        <div id="main" class="yui3-u">
+            <div class="content"><a href="#contribute">
+    <img src="assets/images/contribute.png" width="100%">
+</a>
+
+<h1>Smart, modular apps using metadata</h1>
+<p>Metadatio is a library for building complete metadata specifications for defining the required data model for your apps. Our main goal is to let you extract your data model definition to a separate component, with standalone capabilities of validating itself. Thus, you'd be able to define a consistent data model across all the pieces of your application, with zero-duplicity.</p>
+
+<h2>Entities and fields</h2>
+<p>Metadatio is, at its core, a container for <a href="classes/Entity.html">entities</a> and <a href="classes/Field.html">fields</a>. It contains enough options for creating a compliant data model for almost any application purpose, and includes a built-in validation system for determining whether the values set to the elements of certain metadata effectively complies with the specification configured.</p>
+
+<h2>Modular design</h2>
+<p>Metadatio core contains the entity and field definitions, the validators, the core exceptions and some helper functions to access your metadata easily from anywhere. It has also built-in methods for storing the metadata in memory, maintaining it accessible throughout all your application's lifecycle. This metadata specification will suffice for static metadata definitions, and for unifying validation across all the pieces of your app. </p>
+<p>We are working on several modules that enhance core features, by providing a more specific system depending on the task for which you will use the metadata specification:</p>
+<ul>
+    <li><b>metadatio-react-forms:</b> Form generator using React. This module should be able to build fully working form-based apps using the metadata definition you provided.</li>
+    <li><b>metadatio-api:</b> API definitions for managing elements defined through metadata. </li>
+    <li><b>metadatio-api-contract-testing:</b> Contract-testing system for validating whether an API's features comply with a contract, specified through metadata.</li>
+    <li><b>metadatio-api-raml:</b> RAML generator for building API definitions.</li>
+</ul>
+
+<!--<h2>Technology agnostic</h2>-->
+<!--<p>-->
+    <!--Metadatio ships as a <a href="https://www.npmjs.com/package/metadatio">npm module</a>, so it's a perfect suit for JavaScript projects. However, we've built a helper that performs bi-directional JSON conversion of the full metadata definitions, so you can develop the different pieces of your app in separate technologies or languages.-->
+<!--</p>-->
+
+<h1>Installation</h1>
+<p>
+    You can install Metadatio easily using npm:
+</p>
+<pre>
+    npm install metadatio --save
+</pre>
+
+<h1>Usage</h1>
+<p>
+    Here you have a small guide on how to use Metadatio. In brief, this are the sections you will find below:
+</p>
+<ul>
+    <li><a href="#create-entities"><b>Creating your entities:</b></a> Define the data model of your app, using native <a href="classes/Entity.html">Entity</a> and <a href="classes/Field.html">Field</a> specification, and attach proper <a href="classes/Validator.html">Validators</a> to your fields.</li>
+    <li><a href="#inheritance"><b>Inheritance:</b></a> Configure hierarchy among your entities, for enriching up the context of the data model.</li>
+    <li><a href="#contextual-relationships"><b>Contextual relationships:</b></a> Describe model links by setting field's data type as references to other entities.</li>
+    <li><a href="#initialize-metadatio"><b>Initialize Metadatio:</b></a> Tell Metadatio about your data model, and package your data model project.</li>
+    <li><a href="#use-metadata"><b>Use your metadata:</b></a> Include your data model on the different pieces of your app, and see how to leverage the metadata you defined, and perform data validations against metadata validators.</li>
+</ul>
+
+<a name="create-entities"></a>
+<h2>Creating your entities</h2>
+<pre>
+    import { Entity, Field, DataTypes, Validator, ValidatorTypes } from 'metadatio';
+    class Foo extends Entity {
+        constructor() {
+            super({
+                name: 'foo',
+                label: 'Foo'
+            });
+
+            super.addField(new Field({
+                name: 'name',
+                dataType: DataTypes.string,
+                validators: {
+                    'pattern': new Validator(ValidatorTypes.regex, /^_?(\d|[a-zA-Z]|_|-)$/i),
+                    'lengths': new Validator(ValidatorTypes.lengths, { min: 2, max: 64 }
+                }
+            }));
+        }
+
+        static getInstance() {
+            Foo.instance = new Foo();
+            return Foo.instance;
+        }
+    }
+</pre>
+
+<a name="inheritance"></a>
+<h2>Inheritance</h2>
+<pre>
+    class Bar extends Foo {
+        constructor() {
+            super({
+                name: 'bar'
+            });
+
+            ...
+        }
+
+        ...
+    }
+</pre>
+
+<a name="contextual-relationships"></a>
+<h2>Contextual relationships</h2>
+<pre>
+    class Bar extends Entity {
+        constructor() {
+            super({
+                name: 'bar',
+                ...
+            });
+
+            super.addField(new Field({
+                name: 'foo',
+                dataType: Foo.getInstance(),
+                multiplicity: 'many'
+            }));
+        }
+
+        ...
+    }
+</pre>
+
+<a name="initialize-metadatio"></a>
+<h2>Initialize Metadatio</h2>
+<pre>
+    // index.js
+
+    module.exports = {
+        Foo: Foo.getInstance(),
+        Bar: Bar.getInstance()
+    };
+</pre>
+<p>
+    By calling the <code>getInstance()</code> method the entities initialize themselves within Metadatio, and the context is autommatically built.
+</p>
+
+<h3>Export metadata project</h3>
+<p>
+    Normally you'd like to use your metadata from several projects. A good practice good be to package your metadata definitions as a separate project, that is thereafter included within the different pieces of your app. This example publishes the metadata project as a separate <i>npm module</i>. For corporate project this is useful if you have access to a private npm repository. Otherwise you shall think about using a different packaging and shipping method.
+</p>
+<pre>
+    # publish your package
+    npm publish
+    (+ my-project-metadata#1.0.0)
+
+    # and include it on your consumer projects
+    npm install --save my-project-metadata
+</pre>
+
+<a name="use-metadata"></a>
+<h2>Use your metadata</h2>
+<pre>
+    import { Foo } from 'my-project-metadata';
+
+    let testItem = {
+        name: 'test-value';
+    }
+    Foo.validate(testItem); // Returns true
+
+    testItem.name = '123n';
+    Foo.validate(testItem); // Returns false
+</pre>
+
+<a name="contribute"></a>
+<h1>Contribute</h1>
+<p>
+    Metadatio is an ongoing project, and there are many cool things that could we extend through modules, but not without your help. Help us build a rich metadata-based system, for being able to use it in many more ways!
+
+    There are several ongoing projects for building up some extensions of Metadatio core:
+</p>
+<ul>
+    <li><b>metadatio-react-forms:</b> Form generator using React. This module should be able to build fully working form-based apps using the metadata definition you provided.</li>
+    <li><b>metadatio-api:</b> API definitions for managing elements defined through metadata. </li>
+    <li><b>metadatio-api-contract-testing:</b> Contract-testing system for validating whether an API's features comply with a contract, specified through metadata.</li>
+    <li><b>metadatio-api-raml:</b> RAML generator for building API definitions.</li>
+</ul>
+<p>
+    These projects are under analysis or development, and completely opened for your collaboration. We are also working on some other languages to migrate the core:
+</p>
+<ul>
+    <li><b>metadatio-java:</b> Java annotation framework and core definer for using Metadatio on Java projects.</li>
+    <li><b>metadatio-python:</b> Python annotation framework and core definer for using Metadatio on Python projects.</li>
+    <li><b>metadatio-php:</b> PHP library to build and manage Metadatio features on PHP projects.</li>
+    <li><b>metadatio-go:</b> GoLang library to build and manage Metadatio features on Go projects.</li>
+</ul>
+<p>For maintaining our <i>technology agnostic</i> principle, we are working on a <b>docker container shipping mode</b>, to allow you to use Metadatio on any project you want, even if there's not an language-specific system for the language you are using.</p>
+<p>
+    And of course, you can make any other enhancement to the core or any module, or build your custom modules for extending Metadatio even more. But please, if you do any of that, care to share alike :).
+</p>
+<h1>License</h1>
+<p>
+    Metadatio and all its modules are published under MIT license. You are therefore allowed to use any of Metadatio functionality on any project you wish, for either personal use, and business profit.
+</p>
+</div>
+        </div>
+    </div>
+</div>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-68065842-3', 'auto');
+    ga('send', 'pageview');
+
+</script>
+<script src="./assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="./assets/js/yui-prettify.js"></script>
+<script src="./assets/js/tabs.js"></script>
+</body>
+</html>
