@@ -1,15 +1,24 @@
----
 language: node_js
 node_js:
-  - "4"
+- '4'
 sudo: false
 cache:
   directories:
-    - node_modules
+  - node_modules
 script:
-  - npm run test:coverage
-  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash scripts/publish.sh
-  - npm run doc
+- npm run test:coverage
+- cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
+  scripts/publish.sh
+- npm run doc
 after_success:
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash scripts/deploy.sh
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
+  scripts/deploy.sh
+deploy:
+  provider: npm
+  email: sanchezmargareto@gmail.com
+  api_key:
+    secure: Ai7IWY+V6AglUQYbsVznB0Zl1ZtlmD3ea/2rhRMTk5PV8d3YdFGK2N/ePs6QcAMf2hrlWw9N45ZpsxvKT4OSKWGXvhE7BFgJ3uYzSM2Ky1ihPHhiH4n3GNd/haKZlztYZZGJFzvzGwRHNrIXX9dl+6/O0P9e6pJpoOa+T6vwUjSFDqVuQB0do5R1He8HaQUG72jwNdp7jzGV+8clzx9+GQOwPkusQrb7YCtt6MxerhDlQyExRByNngqLMsdN3TAVVH1aDbxd1FBQLePKitshG3udcM/SX1dZfajmNapGkeit0MjMz1sNuQd5txKXS2OCkwXL6ahFY9R1ZZLgXJhJWo2/mOX4Fjek+1ccYA8u+GWBHCUZ32n8AMYoF6F1TYacHuJ2dXg8Rkv4M7CwB3IXrEYqZqEKqOXREbQ86M6ygNseAq3MO/O9ScDksNKlmy8g77UVb06nBX+Oo9TJ9cQ/GI8Pgo5E4h2om4GxfNZ+ogg0vuZXyZj4DiYNNtphY4Xz4hR822U0nNcVwGAW6OoeM3qhOS7Yq2EwlSDWHejxBFwZoCB8RKdMRv0cCsvGvSjDlUeM6c7dBHltK6hro9R24EDPEonPKYkmi12Cjr8XbbxpjwSZHfgGj878ad9YdLsOEgKNXLn4XnHqK7L8SJgCVpXOIHvf8JEAMpBzXR4rNPQ=
+  on:
+    tags: true
+    repo: smarla/metadatio

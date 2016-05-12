@@ -63,8 +63,6 @@ then
   echo "Commit message: $(git log -1 --pretty=%B)"
 
   echo "Versions updated"
-  echo "Packaging npm"
-
   echo "Tag version"
 
   git tag $new_version
