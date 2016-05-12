@@ -44,7 +44,7 @@ then
   version_change=1
   major=$((major+1))
   minor=0
-  major=0
+  patch=0
 fi
 
 new_version="${major}.${minor}.${patch}"
