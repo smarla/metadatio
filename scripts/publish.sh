@@ -36,12 +36,15 @@ then
   change_type="minor"
   version_change=1
   minor=$((minor+1));
+  patch=0
 
 elif [[ $comment =~ $major_regex ]]
 then
   change_type="major"
   version_change=1
   major=$((major+1))
+  minor=0
+  major=0
 fi
 
 new_version="${major}.${minor}.${patch}"
