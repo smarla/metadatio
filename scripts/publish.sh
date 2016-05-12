@@ -55,16 +55,15 @@ then
   echo "YUIDoc.json version changed"
   git config user.name "Pelayo Sánchez Margareto"
   git config user.email "sanchezmargareto@gmail.com"
+  echo "Git properties set"
   git commit -am "[TRAVIS] [ci skip] ${change_type} updated to ${new_version}"
 
   echo "Versions updated"
   echo "Packaging npm"
 
-#  npm publish
-
   echo "Tag version"
 
-  git tag ${new_version}
+  git tag $new_version
 
   git push origin HEAD:master
 fi
