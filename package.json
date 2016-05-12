@@ -1,7 +1,7 @@
 {
   "name": "metadatio",
   "version": "0.7.8",
-  "description": "",
+  "description": "Metadatio handles data objects using metadata",
   "main": "app/index.js",
   "scripts": {
     "build": "webpack --bail --config webpack.config.js",
