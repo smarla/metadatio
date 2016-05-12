@@ -22,4 +22,4 @@ deploy:
   on:
     repo: smarla/metadatio
     branch: master
-    condition: $version_change = 1
+    condition: $(git log -1 --pretty=%B) =~ '^\[patch|minor|major\'
