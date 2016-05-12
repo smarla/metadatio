@@ -9,7 +9,9 @@ set -o errexit -o nounset
 #fi
 
 comment=$(git log -1 --pretty=%B)
-last_tag=$(git describe --abbrev=0)
+#last_tag=$(git describe --abbrev=0)
+
+last_tag=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
 
 current_version="${last_tag//./ }"
 version_array=($current_version)
@@ -65,7 +67,7 @@ then
 
   echo "Tag version"
 
-  git tag $new_version
+#  git tag $new_version
 
   git push origin HEAD:master
 fi
