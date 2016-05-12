@@ -62,7 +62,7 @@ then
   git fetch upstream
   git reset upstream/releases
 
-  git commit -am "[RELEASE] [ci skip] ${change_type} updated to ${new_version}"
+  git commit -am "[RELEASE] ${change_type} updated to ${new_version}"
 
   git tag $new_version
 
