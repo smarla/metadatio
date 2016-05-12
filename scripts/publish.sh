@@ -69,5 +69,6 @@ then
 
 #  git tag $new_version
 
-  git push origin HEAD:master
+  git remote add upstream "https://$GH_TOKEN@github.com/smarla/metadatio.git"
+  git push upstream HEAD:master
 fi
