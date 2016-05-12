@@ -48,6 +48,7 @@ then
 fi
 
 new_version="${major}.${minor}.${patch}"
+export version_change;
 
 if [[ ${version_change} == 1 ]]
 then
