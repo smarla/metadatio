@@ -22,4 +22,4 @@ deploy:
   on:
     repo: smarla/metadatio
     branch: master
-    condition: $VERSION_CHANGED = 1
+    condition: $version_change = 1

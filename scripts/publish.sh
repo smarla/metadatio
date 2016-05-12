@@ -69,6 +69,4 @@ then
 
   git remote add upstream "https://$GH_TOKEN@github.com/smarla/metadatio.git"
   git push --tags upstream HEAD:master
-
-  export VERSION_CHANGED=1
 fi
