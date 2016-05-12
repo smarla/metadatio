@@ -61,7 +61,7 @@ then
   git config user.name "Pelayo Sánchez Margareto"
   git config user.email "sanchezmargareto@gmail.com"
   echo "Git properties set"
-  git commit -am "[TRAVIS] [ci skip] ${change_type} updated to ${new_version}"
+  git commit -am "[RELEASE] [ci skip] ${change_type} updated to ${new_version}"
   echo "Version update commited"
   echo "Commit message: $(git log -1 --pretty=%B)"
 
