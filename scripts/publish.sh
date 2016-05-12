@@ -53,20 +53,11 @@ if [[ ${version_change} == 1 ]]
 then
   package="package.json"
   yui="yuidoc.json"
-  echo "Updating version references"
   sed -i "s/\"version\": \"$last_tag\"/\"version\": \"$new_version\"/g" "$package"
-  echo "Package.json version changed"
   sed -i "s/\"version\": \"${last_tag}\"/\"version\": \"${new_version}\"/g" "$yui"
-  echo "YUIDoc.json version changed"
   git config user.name "Pelayo Sánchez Margareto"
   git config user.email "sanchezmargareto@gmail.com"
-  echo "Git properties set"
   git commit -am "[RELEASE] [ci skip] ${change_type} updated to ${new_version}"
-  echo "Version update commited"
-  echo "Commit message: $(git log -1 --pretty=%B)"
-
-  echo "Versions updated"
-  echo "Tag version"
 
   git tag $new_version
 
