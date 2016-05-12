@@ -15,9 +15,11 @@
   },
   "keywords": [
     "metadata",
-    "konga",
-    "react",
-    "redux"
+    "data model",
+    "metadatio",
+    "data",
+    "data definitions",
+    "modeling"
   ],
   "author": "Pelayo Sanchez <sanchezmargareto@gmail.com> (https://github.com/pritok)",
   "license": "MIT",
