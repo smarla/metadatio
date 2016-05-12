@@ -2,11 +2,11 @@
 
 set -o errexit -o nounset
 
-#if [ "$TRAVIS_BRANCH" != "master" ]
-#then
-#  echo "This commit was made against the $TRAVIS_BRANCH and not the master! No deploy!"
-#  exit 0
-#fi
+if [ "$TRAVIS_BRANCH" != "master" ]
+then
+  echo "This commit was made against the $TRAVIS_BRANCH and not the master! No deploy!"
+  exit 0
+fi
 
 comment=$(git log -1 --pretty=%B)
 #last_tag=$(git describe --abbrev=0)
@@ -51,9 +51,9 @@ then
   package="package.json"
   yui="yuidoc.json"
   echo "Updating version references"
-  sed -i.bkp "s/\"version\": \"$last_tag\"/\"version\": \"$new_version\"/g" "$package"
+  sed -i "s/\"version\": \"$last_tag\"/\"version\": \"$new_version\"/g" "$package"
   echo "Package.json version changed"
-  sed -i.bkp "s/\"version\": \"${last_tag}\"/\"version\": \"${new_version}\"/g" "$yui"
+  sed -i "s/\"version\": \"${last_tag}\"/\"version\": \"${new_version}\"/g" "$yui"
   echo "YUIDoc.json version changed"
   git config user.name "Pelayo Sánchez Margareto"
   git config user.email "sanchezmargareto@gmail.com"
