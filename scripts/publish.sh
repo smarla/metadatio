@@ -67,8 +67,8 @@ then
 
   echo "Tag version"
 
-#  git tag $new_version
+  git tag $new_version
 
   git remote add upstream "https://$GH_TOKEN@github.com/smarla/metadatio.git"
-  git push upstream HEAD:master
+  git push --tags upstream HEAD:master
 fi
