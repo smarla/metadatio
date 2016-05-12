@@ -57,10 +57,15 @@ then
   sed -i "s/\"version\": \"${last_tag}\"/\"version\": \"${new_version}\"/g" "$yui"
   git config user.name "Pelayo Sánchez Margareto"
   git config user.email "sanchezmargareto@gmail.com"
+
+  git remote add upstream "https://$GH_TOKEN@github.com/smarla/metadatio.git"
+  git fetch upstream
+  git reset upstream/releases
+
   git commit -am "[RELEASE] [ci skip] ${change_type} updated to ${new_version}"
 
   git tag $new_version
 
-  git remote add upstream "https://$GH_TOKEN@github.com/smarla/metadatio.git"
-  git push --tags upstream HEAD:master
+
+  git push --tags upstream HEAD:releases
 fi
