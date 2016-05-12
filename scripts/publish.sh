@@ -57,6 +57,8 @@ then
   git config user.email "sanchezmargareto@gmail.com"
   echo "Git properties set"
   git commit -am "[TRAVIS] [ci skip] ${change_type} updated to ${new_version}"
+  echo "Version update commited"
+  echo "Commit message: $(git log -1 --pretty=%B)"
 
   echo "Versions updated"
   echo "Packaging npm"
