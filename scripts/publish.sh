@@ -62,7 +62,7 @@ then
       git commit -am "[${change_type} RELEASE] updated to ${new_version}"
 
       git tag $new_version
-      git push --tags upstream HEAD:releases
+      git push --tags upstream HEAD:latest
     fi
 else
     echo "Skipping phase on branch $TRAVIS_BRANCH"
