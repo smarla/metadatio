@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
 comment=$(git log -1 --pretty=%B)
-echo $comment;
 
-if [[ $comment =~ '^\[patch|minor|major\]' ]]
+if [[ $comment =~ '^\[(patch|minor|major)\]' ]]
 then
+
+    echo 'Starting NPM publishing'
 
     git pull origin master
 
