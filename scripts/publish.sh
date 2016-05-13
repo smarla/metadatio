@@ -63,7 +63,7 @@ then
   git fetch upstream
   git tag $new_version
 
-  git commit -am "[RELEASE] ${change_type} updated to ${new_version} [ci skip]"
+  git commit -am "[${change_type} RELEASE] updated to ${new_version} [ci skip]"
 
 
   git push --tags upstream HEAD:master
