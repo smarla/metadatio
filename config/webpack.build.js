@@ -24,9 +24,9 @@ module.exports = {
         extensions: ['', '.js', '.jsx', '.css']
     },
     output: {
-        path: __dirname + '/dist',
+        path: __dirname + '/build',
         publicPath: '/',
-        filename: 'bundle.js'
+        filename: 'metadatio.js'
     },
     devServer: {
         contentBase: './dist',

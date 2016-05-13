@@ -4,7 +4,7 @@
   "description": "Metadatio handles data objects using metadata",
   "main": "app/index.js",
   "scripts": {
-    "build": "webpack --bail --config webpack.config.js",
+    "build": "webpack --bail --config config/webpack.build.js",
     "test:coverage": "babel-node ./node_modules/istanbul/lib/cli.js cover test/index.js",
     "test": "babel-node test/index.js",
     "doc": "babel-node ./node_modules/.bin/yuidoc -N -C --no-sort src"
