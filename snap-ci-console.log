@@ -4,25 +4,25 @@ $ [32mgit clone git@localhost:smarla/metadatio .[0m
 Cloning into '.'...
 Warning: Permanently added 'localhost' (RSA) to the list of known hosts.
 Command [32mgit clone git@localhost:smarla/metadatio .[0m exited successfully with status 0.
-Took 0.6691 seconds.
+Took 0.55847 seconds.
 
 $ [32mgit checkout master[0m
 /opt/local/gnocci/vendor/cache/mixlib-shellout-e30a3b6a9e49/lib/mixlib/shellout/unix.rb:277: warning: Insecure world writable dir /opt/local/rbenv/shims in PATH, mode 040777
 Already on 'master'
 Your branch is up-to-date with 'origin/master'.
 Command [32mgit checkout master[0m exited successfully with status 0.
-Took 0.0427 seconds.
+Took 0.03679 seconds.
 
-$ [32mgit reset --hard 8cd6fe30df971682944eb3deb13b7f5b40bab7bb[0m
+$ [32mgit reset --hard 04d3c8f581f2f6be1ab451aacd4ab0dc283952e0[0m
 /opt/local/gnocci/vendor/cache/mixlib-shellout-e30a3b6a9e49/lib/mixlib/shellout/unix.rb:277: warning: Insecure world writable dir /opt/local/rbenv/shims in PATH, mode 040777
-HEAD is now at 8cd6fe3 [patch] including package.json good replacement
-Command [32mgit reset --hard 8cd6fe30df971682944eb3deb13b7f5b40bab7bb[0m exited successfully with status 0.
-Took 0.04465 seconds.
+HEAD is now at 04d3c8f ignoring everything on builds
+Command [32mgit reset --hard 04d3c8f581f2f6be1ab451aacd4ab0dc283952e0[0m exited successfully with status 0.
+Took 0.04393 seconds.
 
 $ [32mgit submodule update --init --recursive[0m
 /opt/local/gnocci/vendor/cache/mixlib-shellout-e30a3b6a9e49/lib/mixlib/shellout/unix.rb:277: warning: Insecure world writable dir /opt/local/rbenv/shims in PATH, mode 040777
 Command [32mgit submodule update --init --recursive[0m exited successfully with status 0.
-Took 0.04487 seconds.
+Took 0.05138 seconds.
 
 $ export SNAP_CI=true
 $ export CI=true
@@ -30,11 +30,11 @@ $ export SNAP_CACHE_DIR=/var/go
 $ export LANG=en_US.UTF-8
 $ export LC_ALL=en_US.UTF-8
 $ export SNAP_WORKING_DIR=/var/snap-ci/repo
-$ export SNAP_PIPELINE_COUNTER=7
+$ export SNAP_PIPELINE_COUNTER=8
 $ export SNAP_STAGE_NAME=Test
 $ export SNAP_BRANCH=master
-$ export SNAP_COMMIT=8cd6fe30df971682944eb3deb13b7f5b40bab7bb
-$ export SNAP_COMMIT_SHORT=8cd6fe3
+$ export SNAP_COMMIT=04d3c8f581f2f6be1ab451aacd4ab0dc283952e0
+$ export SNAP_COMMIT_SHORT=04d3c8f
 $ export SNAP_TRACKING_PIPELINE=true
 $ export SNAP_INTEGRATION_PIPELINE=false
 
@@ -42,11 +42,11 @@ $ [32mnvm install v6.0.0 2>/dev/null[0m
 Downloading https://private-vzhost01-blue.snap-ci.com:443/repositories/nodejs.org/dist/v6.0.0/node-v6.0.0-linux-x64.tar.xz...
 Now using node v6.0.0 (npm v3.8.6)
 Command [32mnvm install v6.0.0 2>/dev/null[0m exited successfully with status 0.
-Took 7.99 seconds.
+Took 5.86 seconds.
 
 $ [32mif [ -d ${SNAP_CACHE_DIR}/node_modules ]; then mv -f ${SNAP_CACHE_DIR}/node_modules .; fi # move any cached node_modules into the currently working directory[0m
 Command [32mif [ -d ${SNAP_CACHE_DIR}/node_modules ]; then mv -f ${SNAP_CACHE_DIR}/node_modules .; fi # move any cached node_modules into the currently working directory[0m exited successfully with status 0.
-Took 7.99 seconds.
+Took 5.86 seconds.
 
 $ [32mnpm install[0m
 npm WARN deprecated jade@0.26.3: Jade has been renamed to pug, please install the latest version of pug instead of jade
@@ -799,7 +799,7 @@ metadatio@0.7.22 /var/snap-ci/repo
 npm WARN optional Skipping failed optional dependency /chokidar/fsevents:
 npm WARN notsup Not compatible with your operating system or architecture: fsevents@1.0.12
 Command [32mnpm install[0m exited successfully with status 0.
-Took 1 minute 5.85 seconds.
+Took 1 minute 7.93 seconds.
 
 $ [32mbash scripts/test.sh[0m
 
@@ -887,7 +887,7 @@ $ [32mbash scripts/test.sh[0m
       ✓ should only accept validator functions that return either true or false
 
 
-  59 passing (63ms)
+  59 passing (65ms)
 
 
 =============================== Coverage summary ===============================
@@ -897,10 +897,10 @@ Functions    : 100% ( 7/7 )
 Lines        : 100% ( 152/152 )
 ================================================================================
 Command [32mbash scripts/test.sh[0m exited successfully with status 0.
-Took 1 minute 16.56 seconds.
+Took 1 minute 19.08 seconds.
 
 $ [32mif [ -d /var/snap-ci/repo/node_modules ]; then mv -f /var/snap-ci/repo/node_modules /var/go; fi # cache the node_modules for the subsequent builds[0m
 Command [32mif [ -d /var/snap-ci/repo/node_modules ]; then mv -f /var/snap-ci/repo/node_modules /var/go; fi # cache the node_modules for the subsequent builds[0m exited successfully with status 0.
-Took 1 minute 16.57 seconds.
+Took 1 minute 19.09 seconds.
 
 Saving console log for later

@@ -1,7 +1,1 @@
-.idea/
-build/
-node_modules/
-coverage/
-docs/
-
-*.log
+*\n!metadatio.js

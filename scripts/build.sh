@@ -14,7 +14,8 @@ git remote add upstream "https://$GH_TOKEN@github.com/smarla/metadatio.git"
 git fetch upstream
 git reset upstream/builds
 
-touch .
+touch .gitignore
+echo "*\n!metadatio.js" > .gitignore
 
 git add -A .
 git commit -m "Build ${rev}"
