@@ -2,7 +2,7 @@
   "name": "Metadatio",
   "description": "Use metadata to build things",
   "logo": "../graphic/logo_400.png",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "url": "http://metadat.io/",
   "options": {
     "linkNatives": true,
