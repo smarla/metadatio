@@ -3,7 +3,7 @@
         "name": "Metadatio",
         "description": "Use metadata to build things",
         "logo": "../graphic/logo_400.png",
-        "version": "0.7.22",
+        "version": "0.0.3",
         "url": "http://metadat.io/"
     },
     "files": {
