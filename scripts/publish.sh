@@ -59,12 +59,9 @@ then
       git remote add upstream "https://$GH_TOKEN@github.com/smarla/metadatio.git"
       git fetch upstream
 
-      git tag $new_version
-      git push upstream --tags
-
       git commit -am "[${change_type} RELEASE] updated to ${new_version} [ci skip]"
 
-
+      git tag $new_version
       git push --tags upstream HEAD:master
     fi
 else
