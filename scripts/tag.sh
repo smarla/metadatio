@@ -48,8 +48,8 @@ if [[ ${version_change} == 1 ]]
 then
   package="package.json"
   yui="yuidoc.json"
-  sed -i "s/\"version\": \"VERSION\"/\"version\": \"$new_version\"/g" "$package"
-  sed -i "s/\"version\": \"VERSION\"/\"version\": \"${new_version}\"/g" "$yui"
+  sed -i "s/\"version\": \"${last_tag}\"/\"version\": \"$new_version\"/g" "$package"
+  sed -i "s/\"version\": \"${last_tag}\"/\"version\": \"${new_version}\"/g" "$yui"
   git config user.name "Pelayo Sánchez Margareto"
   git config user.email "sanchezmargareto@gmail.com"
 
