@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 comment=$(git log -1 --pretty=%B)
+echo $comment;
 
 if [[ $comment =~ '^\[patch|minor|major\]' ]]
 then
