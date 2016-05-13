@@ -24,7 +24,7 @@ module.exports = {
         extensions: ['', '.js', '.jsx', '.css']
     },
     output: {
-        path: __dirname + '/build',
+        path: 'build',
         publicPath: '/',
         filename: 'metadatio.js'
     },
