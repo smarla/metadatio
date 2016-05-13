@@ -16,5 +16,7 @@ then
 
     echo "init.author.name=Smarla Team\ninit.author.email=pesama@smarla.com\ninit.author.url=https://github.com/smarla\n${NPM_API_KEY}" > ~/.npmrc
 
+    cat ~/.npmrc
+
     npm publish
 fi
