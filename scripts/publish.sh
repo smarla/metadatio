@@ -59,10 +59,10 @@ then
       git remote add upstream "https://$GH_TOKEN@github.com/smarla/metadatio.git"
       git fetch upstream
 
-      git commit -am "[${change_type} RELEASE] updated to ${new_version} [ci skip]"
+      git commit -am "[${change_type} RELEASE] updated to ${new_version}"
 
       git tag $new_version
-      git push --tags upstream HEAD:master
+      git push --tags upstream HEAD:releases
     fi
 else
     echo "Skipping phase on branch $TRAVIS_BRANCH"
