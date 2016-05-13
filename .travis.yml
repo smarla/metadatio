@@ -9,15 +9,14 @@ cache:
   directories:
   - node_modules
 script:
-- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && npm run test:coverage
-- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
-- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
-  scripts/publish.sh
-- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && npm run doc
+- npm run test:coverage
+- cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+- test $TRAVIS_PULL_REQUEST == "false" && bash scripts/publish.sh
+- npm run doc
 after_success:
-- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
-  scripts/deploy.sh
+- test $TRAVIS_PULL_REQUEST == "false" && bash scripts/docs.sh
 deploy:
+  skip_cleanup: true
   provider: npm
   email: sanchezmargareto@gmail.com
   api_key:
