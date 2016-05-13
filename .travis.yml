@@ -10,14 +10,11 @@ cache:
   directories:
   - node_modules
 script:
-- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && npm run test:coverage
-- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
-- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
-  scripts/publish.sh
-- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && npm run doc
+- npm run test:coverage
+- cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+- bash scripts/publish.sh
 after_success:
-- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
-  scripts/deploy.sh
+- bash scripts/docs.sh
 deploy:
   provider: npm
   email: sanchezmargareto@gmail.com
