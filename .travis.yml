@@ -15,6 +15,7 @@ script:
 after_success:
 - bash scripts/docs.sh
 deploy:
+  skip_cleanup: true
   provider: npm
   email: sanchezmargareto@gmail.com
   api_key:
