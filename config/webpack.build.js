@@ -12,9 +12,9 @@ module.exports = {
             test: /\.scss$/,
             loader: "style!css!sass"
         }, {
-            test: /\.jsx?$/,
+            test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'react-hot!babel'
+            loader: 'babel'
         }, {
             test: /\.json$/,
             loader: 'json-loader'
@@ -41,6 +41,8 @@ module.exports = {
 
         // Reference: http://webpack.github.io/docs/list-of-plugins.html#dedupeplugin
         // Dedupe modules in the output
-        new webpack.optimize.DedupePlugin()
+        new webpack.optimize.DedupePlugin(),
+
+        new webpack.optimize.UglifyJsPlugin({minimize: true})
     ]
 };
