@@ -4,6 +4,7 @@ set -o errexit -o nounset
 
 if [ "$TRAVIS_BRANCH" == "master" ]
 then
+    npm run doc
 
     rev=$(git rev-parse --short HEAD)
 
@@ -24,4 +25,6 @@ then
     git add -A .
     git commit -m "rebuild pages at ${rev}"
     git push -q upstream HEAD:gh-pages
+else
+    echo "Skipping phase on branch $TRAVIS_BRANCH"
 fi

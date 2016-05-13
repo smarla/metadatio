@@ -67,4 +67,6 @@ then
 
       git push --tags upstream HEAD:master
     fi
+else
+    echo "Skipping phase on branch $TRAVIS_BRANCH"
 fi

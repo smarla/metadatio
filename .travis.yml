@@ -10,8 +10,7 @@ cache:
   directories:
   - node_modules
 script:
-- npm run test:coverage
-- cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+- bash scripts/test.sh
 - bash scripts/publish.sh
 after_success:
 - bash scripts/docs.sh
