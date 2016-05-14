@@ -2,7 +2,9 @@
 
 set -o errexit -o nounset
 
-if [[ $version_change == 1 ]]
+cat ${new_version}
+
+if [[ ${version_change} == 1 ]]
 then
   git config user.name "SNAP BOT"
   git config user.email "snapbot@smarla.com"
