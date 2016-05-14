@@ -8,7 +8,7 @@ import { Store as StoreClass } from '../src/store';
 
 const EXPECTING_ERROR = new Error('An exception was expected here');
 
-describe.only('Metadatio store', () => {
+describe('Metadatio store', () => {
     let Store = null;
 
     beforeEach(() => {
@@ -120,7 +120,7 @@ describe.only('Metadatio store', () => {
                 };
 
                 const action = {
-                    value: 'action'
+                    type: 'action'
                 };
 
                 Store.dispatch(action);
@@ -137,7 +137,7 @@ describe.only('Metadatio store', () => {
             });
         });
 
-        describe.skip('the action dispatcher', () => {
+        describe('the action dispatcher', () => {
             beforeEach(() => {
                 Store.configure(Map({}));
             });
@@ -148,15 +148,95 @@ describe.only('Metadatio store', () => {
                     done(EXPECTING_ERROR);
                 } catch(e) {
                     expect(e.className).to.equal('StoreException');
-                    expect(e.code).to.equal('STA001');
+                    expect(e.code).to.equal('STD001');
                     done();
                 }
             });
 
-            it('should be chainable', () => {
-                const ret = Store.dispatch({});
-                expect(ret).to.equal(Store);
+            it('should receive objects that have a \'type\' attribute', (done) => {
+                try {
+                    Store.dispatch({});
+                    done(EXPECTING_ERROR);
+                } catch(e) {
+                    expect(e.className).to.equal('StoreException');
+                    expect(e.code).to.equal('STD002');
+                    done();
+                }
+            });
+
+            it('should receive objects whose \'type\' attribute is a string', (done) => {
+                try {
+                    Store.dispatch({ type: 123 });
+                    done(EXPECTING_ERROR);
+                } catch(e) {
+                    expect(e.className).to.equal('StoreException');
+                    expect(e.code).to.equal('STD003');
+                    done();
+                }
             })
+        });
+
+        describe('the reducer async injection', () => {
+            beforeEach(() => {
+                Store.configure(Map({}));
+            });
+
+            it('should receive a name for the reducer', (done) => {
+                try {
+                    Store.injectAsync();
+                    done(EXPECTING_ERROR);
+                } catch(e) {
+                    expect(e.className).to.equal('StoreException');
+                    expect(e.code).to.equal('STI001');
+                    done();
+                }
+            });
+
+            it('should only accept strings for the reducer name', (done) => {
+                try {
+                    Store.injectAsync(123);
+                    done(EXPECTING_ERROR);
+                } catch(e) {
+                    expect(e.className).to.equal('StoreException');
+                    expect(e.code).to.equal('STI002');
+                    done();
+                }
+            });
+
+            it('should receive a reducer to inject', (done) => {
+                try {
+                    Store.injectAsync('reducer');
+                    done(EXPECTING_ERROR);
+                } catch(e) {
+                    expect(e.className).to.equal('StoreException');
+                    expect(e.code).to.equal('STI003');
+                    done();
+                }
+            });
+
+            it('should receive a function as reducer', (done) => {
+                try {
+                    Store.injectAsync('reducer', {});
+                    done(EXPECTING_ERROR);
+                } catch(e) {
+                    expect(e.className).to.equal('StoreException');
+                    expect(e.code).to.equal('STI004');
+                    done();
+                }
+            });
+
+            it('should not allow two reducers with the same name', (done) => {
+                try {
+                    Store.injectAsync('reducer', () => Store.getState());
+                    Store.injectAsync('reducer', () => Store.getState());
+                    done(EXPECTING_ERROR);
+                } catch(e) {
+                    console.log(e);
+                    expect(e.className).to.equal('StoreException');
+                    expect(e.code).to.equal('STI005');
+                    done();
+                }
+            });
         });
     });
 

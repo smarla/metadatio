@@ -15,6 +15,16 @@ export default class StoreException extends Error {
 
         'STC001': 'The store can only be configured once',
 
+        'STD001': 'Actions sent to dispatch must be objects',
+        'STD002': 'Actions sent to dispatch must have a \'type\' attribute',
+        'STD003': 'Action type must be a string',
+
+        'STI001': 'All injected reducers must have a name defined',
+        'STI002': 'Reducer names must be strings',
+        'STI003': 'A reducer must be provided for injection',
+        'STI004': 'Reducers must be plain functions',
+        'STI005': 'There is already a reducer with name {{name}}',
+
         'STS001': 'The states must be instances of immutable.Map'
     }
 }

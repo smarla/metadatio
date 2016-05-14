@@ -13,7 +13,7 @@ import { Map } from 'immutable';
  * Metadatio store.
  *
  * @module Core
- * @element Store
+ * @class Store
  */
 export class Store {
     constructor() {
@@ -45,13 +45,8 @@ export class Store {
      * @chainable
      */
     configure(initialState) {
-        if(this.configured) {
-            throw new StoreException('STC001');
-        }
-
-        if(!(initialState instanceof Map)) {
-            throw new StoreException('STS001');
-        }
+        if(this.configured) throw new StoreException('STC001');
+        if(!(initialState instanceof Map)) throw new StoreException('STS001');
 
         this.store = createStore(createReducer(), initialState);
         this.configured = true;
@@ -62,14 +57,19 @@ export class Store {
      * Injects a new reducer within the store. This is called whenever you add a new element to the metadata object, as every element within Metadatio has its own, specific reducer for performing and monitoring their actions. By adding such reducer via this method is directly engaged through the store, and the reducers are recombined.
      *
      * @method injectAsync
-     * @param name
-     * @param reducer
+     * @param name {string} The name of the reducer to inject
+     * @param reducer {function} The reducer to inject
      * @returns {Store}
      */
     injectAsync(name, reducer) {
-        if(!this.configured) {
-            throw new StoreException('ST002');
-        }
+        if(!this.configured) throw new StoreException('ST002');
+        if(!name) throw new StoreException('STI001');
+        if(typeof(name) !== 'string') throw new StoreException('STI002');
+        if(!reducer) throw new StoreException('STI003');
+        if(typeof(reducer) !== 'function') throw new StoreException('STI004');
+        if(this.asyncReducers[name] !== undefined) throw new StoreException('STI005');
+
+        this.asyncReducers[name] = reducer;
 
         this.store.replaceReducer(createReducer(this.asyncReducers));
         return this;
@@ -83,9 +83,10 @@ export class Store {
      * @chainable
      */
     dispatch(action) {
-        if(!this.configured) {
-            throw new StoreException('ST001');
-        }
+        if(!this.configured) throw new StoreException('ST001');
+        if(typeof(action) !== 'object') throw new StoreException('STD001');
+        if(!action.type) throw new StoreException('STD002');
+        if(typeof(action.type) !== 'string') throw new StoreException('STD003');
 
         this.store.dispatch(action);
         return this;
@@ -98,9 +99,7 @@ export class Store {
      * @returns {Object}
      */
     getState() {
-        if(!this.configured) {
-            throw new StoreException('ST003');
-        }
+        if(!this.configured) throw new StoreException('ST003');
 
         return this.store.getState();
     }
