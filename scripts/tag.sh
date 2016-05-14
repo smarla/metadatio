@@ -2,7 +2,7 @@
 
 set -o errexit -o nounset
 
-cat ${new_version}
+echo ${new_version}
 
 if [[ ${version_change} == 1 ]]
 then
