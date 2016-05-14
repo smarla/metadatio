@@ -16,12 +16,11 @@ const argv = Minimist(process.argv.slice(2), {
 const types = argv._;
 const globPatterns = {
     unit: `test/**/${argv.component ? argv.component : '*'}.spec.js`,
-    integration: 'test/integration/**/*.js',
 };
 
 let pattern;
 
-if (types.indexOf('unit') + types.indexOf('integration') === -2) {
+if (types.indexOf('unit') === -1) {
     pattern = Object.keys(globPatterns).map((n) => globPatterns[n]);
 } else {
     pattern = types.map((n) => globPatterns[n]);

@@ -6,8 +6,12 @@ import DataValidationException from './data-validation.exception';
 import MetadataIntegrityException from './metadata-integrity.exception';
 import ValidatorException from './validator.exception';
 
+import StoreException from './store.exception';
+
 module.exports = {
     DataValidationException,
     MetadataIntegrityException,
-    ValidatorException
+    ValidatorException,
+
+    StoreException
 };

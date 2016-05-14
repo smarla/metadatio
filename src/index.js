@@ -9,6 +9,8 @@ import Field from './metadata/field';
 import Validator from './metadata/validator';
 import ValidatorTypes from './metadata/validator-types';
 
+import Store from './store';
+
 import exceptions from './exceptions';
 
 module.exports = {
@@ -19,5 +21,7 @@ module.exports = {
     Validator,
     ValidatorTypes,
 
-    exceptions
+    exceptions,
+
+    Store
 };
