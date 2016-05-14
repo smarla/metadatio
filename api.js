@@ -4,6 +4,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Entity",
         "Field",
         "MetadataIntegrityException",
+        "Store",
         "Validator",
         "ValidatorException"
     ],
@@ -23,8 +24,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "When you instance Metadatio entities and fields, some data health checks are performed. If in the data you declared to configure your element is corrupt in any way, this exception will be thrown."
         }
     ],
-    "elements": [
-        "Store"
-    ]
+    "elements": []
 } };
 });

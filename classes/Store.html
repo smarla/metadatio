@@ -77,9 +77,10 @@
                 </div>
                 <div class="bd">
                     <ul>
-                            <li><a href="#methods_constructor">constructor</a></li>
-                            <li><a href="#methods_validate">validate</a></li>
-                            <li><a href="#methods_addValidator">addValidator</a></li>
+                            <li><a href="#methods_configure">configure</a></li>
+                            <li><a href="#methods_injectAsync">injectAsync</a></li>
+                            <li><a href="#methods_dispatch">dispatch</a></li>
+                            <li><a href="#methods_getState">getState</a></li>
                     </ul>
                 </div>
             </div>
@@ -101,37 +102,9 @@
         </div>
 
         <div id="main" class="yui3-u">
-            <div class="content"><h1>Field</h1>
-<!--<span class="foundat">Class defined in: <a href=""><code>src&#x2F;metadata&#x2F;field.js:10</code></a></span>-->
-<div class="intro"><p>The fields represent each and every property of any entity. Each field is completely sufficient - it stores configuration about the identification, typing and validation of the property - and all <a href="../classes/Entity.html" class="crosslink">entity</a> procedures depending on fields dispatch down the action, that it's interpreted isolatedly.</p>
-<h2>Usage</h2>
-<pre class="code prettyprint"><code>const field = new Field({
-  name: 'foo',
-  [label: 'Foo',]
-  [description: 'description...',]
-  dataType: 'string',
-  [multiplicity: 'one',]
-  [validators: {...}]
-});
-</code></pre>
-<h2>Identification</h2>
-<p>All fields must be defined with a <a href="../classes/Field.html#property_name" class="crosslink">name</a>, that must be unique within each entity. In addition, you can define a field's <a href="../classes/Field.html#property_label" class="crosslink">label</a> - useful for translatable usages.</p>
-<h2>Data typing</h2>
-<p>All fields must have an assigned data type.</p>
-<h3>Basic data types</h3>
-<p>You can make use of several basic data types, all available at the DataTypes specification.</p>
-<pre class="code prettyprint"><code>string: 'Sample value',
-number: 123[.456],
-boolean: true|false,
-date: new Date()|Timestamp
-</code></pre>
-<h3>Reference data types</h3>
-<p>You can set a reference to an entity as the data type for a field. This will build a relationship between your field's entity and the target entity, through the field you setup for that.</p>
-<pre class="code prettyprint"><code>const foo = new Entity({ name: 'foo', ... });
-const field = new Field({ name: 'bar', dataType: foo });
-</code></pre>
-<h4>Referenced validations</h4>
-<p>When a field's data type is set as a reference, the validation procedures change for it. Values for the fields with this metadata can be filled either with the whole entity - for inner object saving - or via a <code>string</code> or <code>number</code> identifying the entity - deep linking approach. In the case you provide complete entities as values, the validation procedures of the target entity's metadata will be applied.</p>
+            <div class="content"><h1>Store</h1>
+<!--<span class="foundat">Class defined in: <a href=""><code>src&#x2F;store.js:12</code></a></span>-->
+<div class="intro"><p>Metadatio store.</p>
 </div>
 
 
@@ -160,80 +133,27 @@ const field = new Field({ name: 'bar', dataType: foo });
                     <tbody>
                             <tr>
                                 <td>
-                                    <a name="property_name"></a>
-                                    <code>name</code>
+                                    <a name="property_configured"></a>
+                                    <code>configured</code>
                                 </td>
                                 <td>
-                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong> <br>
                                 </td>
                                 <td>
-                                    <p>The <strong>name</strong> for the field. A field's name <strong>must</strong> be unique within each entity.</p>
+                                    <p>Determines whether the store has been configured. Upon configuration, the store is created and engaged with the defined reducers. But until this phase passes the store would not be set, and thus it's usage will result in errors. This flag is useful to avoid unexpected errors when using the store.</p>
                             
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a name="property_label"></a>
-                                    <code>label</code>
+                                    <a name="property_asyncReducers"></a>
+                                    <code>asyncReducers</code>
                                 </td>
                                 <td>
-                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong> <br>
                                 </td>
                                 <td>
-                                    <p>Label for the field. This defines the human-readable name for the field.</p>
-                            
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a name="property_description"></a>
-                                    <code>description</code>
-                                </td>
-                                <td>
-                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
-                                </td>
-                                <td>
-                                    <p>Description for the field</p>
-                            
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a name="property_dataType"></a>
-                                    <code>dataType</code>
-                                </td>
-                                <td>
-                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a> | <a href="../classes/Entity.html" class="crosslink">Entity</a></strong> <br>
-                                </td>
-                                <td>
-                                    <p>Define the data type of the element.</p>
-                            <p>Basic data types are primitive types to define basic data.</p>
-                            
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a name="property_multiplicity"></a>
-                                    <code>multiplicity</code>
-                                </td>
-                                <td>
-                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
-                                </td>
-                                <td>
-                                    <p>Define the multiplicity for the element</p>
-                            
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a name="property_validators"></a>
-                                    <code>validators</code>
-                                </td>
-                                <td>
-                                    <strong><a href="../classes/Validator.html" class="crosslink">Validator*</a></strong> <br>
-                                </td>
-                                <td>
-                                    <p>Define the validators for the field</p>
+                                    <p>Contains all the element-specific reducers (relative to each element of your app) that are injected to the store asynchronously once you declare your elements - i.e. entities, fields and validators.</p>
                             
                                 </td>
                             </tr>
@@ -243,12 +163,12 @@ const field = new Field({ name: 'bar', dataType: foo });
 
             <h2>Methods</h2>
             <div id="methods">
-                    <a name="method_constructor"></a>
+                    <a name="method_configure"></a>
                     <div class="method item">
                          <strong
-                            class="name"><code>constructor</code></strong>( <code>props </code> ) 
+                            class="name"><code>configure</code></strong>( <code>initialState </code> ) 
                         <br>
-                        <p>Constructor for the class</p>
+                        <p>Configures the store. It receives the initial state for the store, and it engages the reducers</p>
                     
                             <h4>Parameters:</h4>
                             <table>
@@ -262,77 +182,26 @@ const field = new Field({ name: 'bar', dataType: foo });
                                 <tbody>
                                     <tr>
                                         <td>
-                                                <code>props</code>
+                                                <code>initialState</code>
                                         </td>
                                         <td>
                                             <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong>
                                         </td>
                                         <td>
-                                            <p>An object with the properties of the field</p>
+                                            <p>The initial state for the store</p>
                     
                                         </td>
                                     </tr>
                     
                                 </tbody>
                             </table>
-                                <br>
-                                <div class="throws">
-                                    <strong>Throws:</strong> <a href="../classes/MetadataIntegrityException.html" class="crosslink">MetadataIntegrityException</a> <p>If the field's metadata is corrupt in any way, an exception is thrown.</p>
                     </div>
-                    </div>
-                    <a name="method_validate"></a>
+                    <a name="method_injectAsync"></a>
                     <div class="method item">
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong
-                            class="name"><code>validate</code></strong>( <code>value, The </code> ) 
+                        <a href="../classes/Store.html" class="crosslink">Store</a> <strong
+                            class="name"><code>injectAsync</code></strong>( <code>name, reducer </code> ) 
                         <br>
-                        <p>Determines whether the value defined for a field is valid.</p>
-                    
-                            <h4>Parameters:</h4>
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Description</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                                <code>value</code>
-                                        </td>
-                                        <td>
-                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong>
-                                        </td>
-                                        <td>
-                                             
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                                <code>The</code>
-                                        </td>
-                                        <td>
-                                            <strong>validators=this.validators</strong>
-                                        </td>
-                                        <td>
-                                            <p>validators to match against.</p>
-                    
-                                        </td>
-                                    </tr>
-                    
-                                </tbody>
-                            </table>
-                                <br>
-                                <div class="returns">
-                                    <strong>Returns:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> </div>
-                    </div>
-                    <a name="method_addValidator"></a>
-                    <div class="method item">
-                        <a href="../classes/Field.html" class="crosslink">Field</a> <strong
-                            class="name"><code>addValidator</code></strong>( <code>name, validator, [overwrite=false] </code> ) 
-                        <br>
-                        <p>Adds a new validator to the field.</p>
+                        <p>Injects a new reducer within the store. This is called whenever you add a new element to the metadata object, as every element within Metadatio has its own, specific reducer for performing and monitoring their actions. By adding such reducer via this method is directly engaged through the store, and the reducers are recombined.</p>
                     
                             <h4>Parameters:</h4>
                             <table>
@@ -352,31 +221,19 @@ const field = new Field({ name: 'bar', dataType: foo });
                                             <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong>
                                         </td>
                                         <td>
-                                            <p>The name of the validator</p>
+                                            <p>The name of the reducer to inject</p>
                     
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                                <code>validator</code>
+                                                <code>reducer</code>
                                         </td>
                                         <td>
-                                            <strong><a href="../classes/Validator.html" class="crosslink">Validator</a></strong>
+                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></strong>
                                         </td>
                                         <td>
-                                            <p>The new validator to include</p>
-                    
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                                <code>[overwrite=false]</code>
-                                        </td>
-                                        <td>
-                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong>
-                                        </td>
-                                        <td>
-                                            <p>Whether to overwrite the validator name, if it exists.</p>
+                                            <p>The reducer to inject</p>
                     
                                         </td>
                                     </tr>
@@ -385,7 +242,51 @@ const field = new Field({ name: 'bar', dataType: foo });
                             </table>
                                 <br>
                                 <div class="returns">
-                                    <strong>Returns:</strong> <a href="../classes/Field.html" class="crosslink">Field</a> </div>
+                                    <strong>Returns:</strong> <a href="../classes/Store.html" class="crosslink">Store</a> </div>
+                    </div>
+                    <a name="method_dispatch"></a>
+                    <div class="method item">
+                         <strong
+                            class="name"><code>dispatch</code></strong>( <code>action </code> ) 
+                        <br>
+                        <p>Dispatches an action through the store. This is just a gateway to call the Redux action dispatcher.</p>
+                    
+                            <h4>Parameters:</h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                                <code>action</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong>
+                                        </td>
+                                        <td>
+                                            <p>The object that describes what happened</p>
+                    
+                                        </td>
+                                    </tr>
+                    
+                                </tbody>
+                            </table>
+                    </div>
+                    <a name="method_getState"></a>
+                    <div class="method item">
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a> <strong
+                            class="name"><code>getState</code></strong>( <code>  </code> ) 
+                        <br>
+                        <p>Returns the current state</p>
+                    
+                                <br>
+                                <div class="returns">
+                                    <strong>Returns:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a> </div>
                     </div>
             </div>
 
