@@ -10,7 +10,8 @@ then
 
     echo 'Starting NPM publishing'
 
-    git pull origin master
+    git pull origin HEAD:master
+    git log -p -1
 
     touch ~/.npmrc
 
