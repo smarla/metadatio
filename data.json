@@ -32,6 +32,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/exceptions/store.exception.js": {
+            "name": "src/exceptions/store.exception.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/exceptions/validator.exception.js": {
             "name": "src/exceptions/validator.exception.js",
             "modules": {},
@@ -75,6 +82,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/metadata/metadatio.js": {
+            "name": "src/metadata/metadatio.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/metadata/util.js": {
             "name": "src/metadata/util.js",
             "modules": {},
@@ -98,8 +112,22 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/reducers/index.js": {
+            "name": "src/reducers/index.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/index.js": {
             "name": "src/index.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/store.js": {
+            "name": "src/store.js",
             "modules": {},
             "classes": {},
             "fors": {},
@@ -112,7 +140,9 @@
             "submodules": {
                 "exceptions": 1
             },
-            "elements": {},
+            "elements": {
+                "Store": 1
+            },
             "classes": {
                 "MetadataIntegrityException": 1,
                 "ValidatorException": 1,
@@ -220,7 +250,13 @@
             "description": "Validators help you define rules with which you will consider the value given for a field as **valid**."
         }
     },
-    "elements": {},
+    "elements": {
+        "Store": {
+            "name": "Store",
+            "attributes": [],
+            "module": "Core"
+        }
+    },
     "classitems": [
         {
             "file": "src/exceptions/data-validation.exception.js",
@@ -242,7 +278,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 22,
+            "line": 21,
             "description": "### Entity name is required.\n\nThis error is thrown when you try to create an entity, and the description object you used does not contain a `name` param.",
             "example": [
                 "\n    new Entity({});"
@@ -255,7 +291,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 33,
+            "line": 32,
             "description": "### Entity name must be a String.\n\nThrown when you try to set a non-string value as entity name.",
             "example": [
                 "\n    new Entity({ name: 123 });"
@@ -268,7 +304,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 45,
+            "line": 44,
             "description": "### Entity name must comply with the specification.\n\nAll entity names must comply with a specification: They must start by an A-Z or an underscore, and contain only letters, numbers, hyphens and underscores.",
             "example": [
                 "\n    new Entity({ name: '1abc' })",
@@ -283,7 +319,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 60,
+            "line": 59,
             "description": "### Entity name must have between 2 a 64 characters.\n\nAll Metadatio entities must comply with these length requirements to be valid.",
             "example": [
                 "\n    new Entity({ name: 'a' })",
@@ -297,7 +333,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 73,
+            "line": 72,
             "description": "### Entity fields must be instances of field.\n\nThis error occurs when you try to append a non-Field object as entity's field.",
             "example": [
                 "\n    new Entity({ ... fields: [{...}] })",
@@ -311,7 +347,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 86,
+            "line": 85,
             "description": "### A field already exist with name {{name}}, and 'overwrite' flag has not been set.\n\nWhen you append a field to an entity, an existence verification is done on the field name. The {{#crossLink Entity/addField:method}}addField{{/crossLink}} method contains an optional `overwrite` flag - that bypasses this verification process. If you don't set the flag, you will get this error.",
             "example": [
                 "\n    const entity = new Entity({ ... fields: [new Field({ name: 'foo'})] })",
@@ -325,7 +361,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 99,
+            "line": 98,
             "description": "### Field name is required.\n\nThis error is thrown when you try to create an field, and the description object you used does not contain a `name` param.",
             "example": [
                 "\n    new Field({})"
@@ -338,7 +374,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 110,
+            "line": 109,
             "description": "### Field name must be a string.\n\nThis error is thrown when you set a non-string value as field name",
             "example": [
                 "\n    new Field({ name: 123, ... })"
@@ -351,7 +387,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 121,
+            "line": 120,
             "description": "### Field name must comply with the specification.\n\nAs entities, all field names must comply with the specification -i.e.   must start by an A-Z or an underscore, and contain only letters, numbers, hyphens and underscores.",
             "example": [
                 "\n    new Field({ name: '1abc', ... })",
@@ -366,7 +402,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 136,
+            "line": 135,
             "description": "### Field name must have between 2 and 64 characters.\n\nAll field names lengths must be between defined bounds",
             "example": [
                 "\n    new Field({ name: 'a', ... })",
@@ -380,7 +416,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 149,
+            "line": 148,
             "description": "### Data type is not defined.\n\nThis exception is thrown when you define a field without a data type. Data typing your fields is essential for proper working, and thus not assigning it will result in this error.",
             "example": [
                 "\n    new Field({ name: 'foo' })"
@@ -393,7 +429,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 160,
+            "line": 159,
             "description": "### Data type is invalid.\n\nThis exception occurs when you set an invalid data type to a field. Data types can only be String, Number, Boolean, Date, and references to other entities",
             "example": [
                 "\n    new Field({ name: 'foo', dataType: 'wrong' })"
@@ -406,7 +442,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 171,
+            "line": 170,
             "description": "### Multiplicity is neither \\'one\\' nor \\'many\\'.\n\nYou will get this error if you setup a multiplicity for an entity that is neither 'one' nor 'many'. The {{#crossLink Field/multiplicity:property}}multiplicity{{/crossLink}} is optional, and by default is set to 'one'.",
             "example": [
                 "\n    new Field({ ... multiplicity: 'wrong' })"
@@ -419,7 +455,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 182,
+            "line": 181,
             "description": "### Validator name must be given, and be a string.\n\nWhen you attach validators to a field, you must define a *string* name for the validator - for logging purposes. When you associate a validator to a field without a name set - or with a name that is not a string -, you will get this error.",
             "example": [
                 "\n    someField.addValidator(null, new Validator(...))",
@@ -433,7 +469,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 195,
+            "line": 194,
             "description": "### Validators must be instances of \\'Validator\\'.\n\nEvery time you include a validator to a field, the value you set as validator is checked, to verify that it is an instance of {{#crossLink Validator}}Validator{{/crossLink}}. If that's not the case, this exception is thrown.",
             "example": [
                 "\n    new Field({ ... validators: { 'pattern': {} } })",
@@ -447,7 +483,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 208,
+            "line": 207,
             "description": "### A validator already exists with name {{name}} and 'overwrite' flag has not been set.\n\nWhen you include a validator to a field at runtime, a name verification is launched. If the validator name you set already exists, and you haven't set the `overwrite` flag, this error will occur.",
             "example": [
                 "\n    const someField = new Field({ ... validators: { 'pattern': ... } } });",
@@ -458,6 +494,13 @@
             "class": "MetadataIntegrityException",
             "module": "Core",
             "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/store.exception.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "ValidatorException",
+            "module": "Core"
         },
         {
             "file": "src/exceptions/validator.exception.js",
@@ -802,6 +845,13 @@
             "module": "Core"
         },
         {
+            "file": "src/metadata/metadatio.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "Validator",
+            "module": "Core"
+        },
+        {
             "file": "src/metadata/util.js",
             "line": 1,
             "description": "Created by sm on 07/05/16.",
@@ -864,9 +914,113 @@
             "module": "Core"
         },
         {
+            "file": "src/reducers/index.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "",
+            "module": "Core"
+        },
+        {
             "file": "src/index.js",
             "line": 1,
             "description": "Created by sm on 01/05/16.",
+            "class": "",
+            "module": "Core"
+        },
+        {
+            "file": "src/store.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "",
+            "module": "Core"
+        },
+        {
+            "file": "src/store.js",
+            "line": 21,
+            "description": "Determines whether the store has been configured. Upon configuration, the store is created and engaged with the defined reducers. But until this phase passes the store would not be set, and thus it's usage will result in errors. This flag is useful to avoid unexpected errors when using the store.",
+            "itemtype": "property",
+            "name": "configured",
+            "type": "{boolean}",
+            "class": "",
+            "module": "Core"
+        },
+        {
+            "file": "src/store.js",
+            "line": 31,
+            "description": "Contains all the element-specific reducers (relative to each element of your app) that are injected to the store asynchronously once you declare your elements - i.e. entities, fields and validators.",
+            "itemtype": "property",
+            "name": "asyncReducers",
+            "type": "{Object}",
+            "class": "",
+            "module": "Core"
+        },
+        {
+            "file": "src/store.js",
+            "line": 40,
+            "description": "Configures the store. It receives the initial state for the store, and it engages the reducers",
+            "itemtype": "method",
+            "name": "configure",
+            "params": [
+                {
+                    "name": "initialState",
+                    "description": "The initial state for the store",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "",
+            "module": "Core"
+        },
+        {
+            "file": "src/store.js",
+            "line": 61,
+            "description": "Injects a new reducer within the store. This is called whenever you add a new element to the metadata object, as every element within Metadatio has its own, specific reducer for performing and monitoring their actions. By adding such reducer via this method is directly engaged through the store, and the reducers are recombined.",
+            "itemtype": "method",
+            "name": "injectAsync",
+            "params": [
+                {
+                    "name": "name",
+                    "description": ""
+                },
+                {
+                    "name": "reducer",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Store"
+            },
+            "class": "",
+            "module": "Core"
+        },
+        {
+            "file": "src/store.js",
+            "line": 78,
+            "description": "Dispatches an action through the store. This is just a gateway to call the Redux action dispatcher.",
+            "itemtype": "method",
+            "name": "dispatch",
+            "params": [
+                {
+                    "name": "action",
+                    "description": "The object that describes what happened",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "",
+            "module": "Core"
+        },
+        {
+            "file": "src/store.js",
+            "line": 94,
+            "description": "Returns the current state",
+            "itemtype": "method",
+            "name": "getState",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
             "class": "",
             "module": "Core"
         }
@@ -893,6 +1047,14 @@
             "line": " src/metadata/validator.js:77"
         },
         {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/store.js:61"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/store.js:94"
+        },
+        {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
             "line": " src/exceptions/data-validation.exception.js:1"
         },
@@ -903,6 +1065,10 @@
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
             "line": " src/exceptions/metadata-integrity.exception.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/exceptions/store.exception.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
@@ -925,6 +1091,10 @@
             "line": " src/metadata/field.js:1"
         },
         {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/metadata/metadatio.js:1"
+        },
+        {
             "message": "Missing item type\nCreated by sm on 07/05/16.",
             "line": " src/metadata/util.js:1"
         },
@@ -937,8 +1107,16 @@
             "line": " src/metadata/validator.js:1"
         },
         {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/index.js:1"
+        },
+        {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
             "line": " src/index.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/store.js:1"
         }
     ]
 }

@@ -89,60 +89,29 @@
         </div>
 
         <div id="main" class="yui3-u">
-            <div class="content">
-<h2>Core</h2>
-<div class="intro"><p>Entities represent real-world elements, that you need to manage within your app.
-Example entities are <em>Person</em>, <em>Car</em>, and whatever else you can imagine.</p>
-<p>Entities by itself don't contain any particular feature - apart from identification, and grouping -. Whilst some Metadatio modules will extend this objects to enrich its features, at it's core an Entity is basically a container for fields.</p>
-<h2>Usage</h2>
-<pre class="code prettyprint"><code>const entity = new Entity({
-  name: 'Friend',
-  [label: 'Friend',]
-  [namespace: 'people',]
-  [description: 'description...',]
-  [fields: [...]]
-});
-</code></pre>
-<h2>Entity hierarchy</h2>
-<p>You can easily define hierarchy between your entities, by leveraging the <a href="../classes/Entity.html#property_parent" class="crosslink">parent</a> property.</p>
-<pre class="code prettyprint"><code>const parent = new Entity({ name: 'parent-entity', ... });
-const child = new Entity({ name: 'child-entity', parent: parent });
-</code></pre>
-<h2>Namespaces</h2>
-<p>Entities are grouped together via <code>namespaces</code>, that shall contain entities dedicated to the same purpose, or that are related among each others.</p>
-<p>The <code>namespace</code> is a String set directly to the entity upon creation. If you don't set a namespace, the value <code>'default'</code> is used. So if you're only planning to use one namespace you can skip this.</p>
-<h2>Fields</h2>
-<p>Fields are instances of <a href="../classes/Field.html" class="crosslink">Field</a>, that you can attach upon entity creation, or at any time, by using the built-in <a href="../classes/Entity.html#method_addField" class="crosslink">addField</a> method.</p>
-<h2>Validation</h2>
-<p>Entities are provided with a native validation system, to determine whether the values set within an object that should comply with entity specification are valid. Basically, entity validation targets the value for each <a href="../classes/Field.html" class="crosslink">field</a> within the entity, and launches the <a href="../classes/Field.html#method_validate" class="crosslink">field's validation system</a>.</p>
+            <div class="content"><h1>&ltStore&gt;</h1>
+<div class="box meta">
+
+            Module: <a href="../modules/Core.html">Core</a>
+
 </div>
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        <p>This module has the following classes:</p>
-        <ul>
-            <li><a href="../classes/Entity.html">Entity</a></li>
-            <li><a href="../classes/Field.html">Field</a></li>
-            <li><a href="../classes/MetadataIntegrityException.html">MetadataIntegrityException</a></li>
-            <li><a href="../classes/Validator.html">Validator</a></li>
-            <li><a href="../classes/ValidatorException.html">ValidatorException</a></li>
-        </ul>
-    </div>
-    <div class="yui3-u-1-2">
-        <p>This module has the following elements:</p>
-        <ul>
-            <li><a href="../elements/Store.html">Store</a></li>
-        </ul>
-    </div>
-    <div class="yui3-u-1-2">
-        <p>This module has the following submodules:</p>
-        <ul>
-            <li id="exceptions"><a href="../modules/exceptions.html">exceptions</a><p>When you instance Metadatio entities and fields, some data health checks are performed. If in the data you declared to configure your element is corrupt in any way, this exception will be thrown.</p></li>
-        </ul>
-    </div>
+
+<div class="box intro">
+    
+
+    <ul class="definitions">
+
+    </ul>
 </div>
-<br><br>
-<span class="foundat">Module description found: <a href=""><code>src&#x2F;metadata&#x2F;validator.js:9</code></a></span>
+
+
+
+<div class="index-section attrs">
+    <h2>Attributes</h2>
+
+    <p>This element has no defined attributes.</p>
+</div>
 </div>
         </div>
     </div>
