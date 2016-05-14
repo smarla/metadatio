@@ -4,10 +4,6 @@ set -o errexit -o nounset
 
 if [[ ${version_change} == 1 ]]
 then
-  package="package.json"
-  yui="yuidoc.json"
-  sed -i "s/\"version\": \"${last_tag}\"/\"version\": \"$new_version\"/g" "$package"
-  sed -i "s/\"version\": \"${last_tag}\"/\"version\": \"${new_version}\"/g" "$yui"
   git config user.name "SNAP BOT"
   git config user.email "snapbot@smarla.com"
 

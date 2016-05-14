@@ -43,3 +43,11 @@ fi
 
 export new_version="${major}.${minor}.${patch}"
 export version_change
+
+if [[ ${version_change} ]]
+then
+  package="package.json"
+  yui="yuidoc.json"
+  sed -i "s/\"version\": \"${last_tag}\"/\"version\": \"$new_version\"/g" "$package"
+  sed -i "s/\"version\": \"${last_tag}\"/\"version\": \"${new_version}\"/g" "$yui"
+fi
