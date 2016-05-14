@@ -137,7 +137,7 @@ describe.only('Metadatio store', () => {
             });
         });
 
-        describe('the action dispatcher', () => {
+        describe.skip('the action dispatcher', () => {
             beforeEach(() => {
                 Store.configure(Map({}));
             });
