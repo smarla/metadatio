@@ -20,22 +20,25 @@ export class EntitiesReducer {
     }
 
     metadataReducers() {
-        const reducer = new EntityReducer('1234-abcd');
-        const reducers = {
-            '1234-abcd': reducer.combine()
-        };
-
-        return combineReducers(reducers);
+        const reducers = [];
+        return reducers;
     }
 
     getReducers() {
         const data = this.dataReducer;
         const metadata = this.metadataReducers();
 
-        return combineReducers({
-            data,
-            metadata
-        });
+        const reducers = { data };
+
+        if(metadata.length) {
+            reducers.metadata = {};
+            for(let i = 0; i < metadata.length; i++) {
+                const reducer = metadata[i];
+                reducers.metadata[reducer.uuid] = reducer;
+            }
+        }
+
+        return combineReducers(reducers);
     }
 
     static getInstance() {

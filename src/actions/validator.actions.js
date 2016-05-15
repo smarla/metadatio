@@ -3,13 +3,15 @@
  */
 
 export class ValidatorActions {
+    static VALIDATION_OK = 'validation_ok';
+    static VALIDATION_KO = 'validation_ko';
 
     constructor() {
 
     }
 
     validate(uuid, value) {
-        
+
     }
 
     static getInstance() {

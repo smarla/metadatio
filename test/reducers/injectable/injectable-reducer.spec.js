@@ -2,8 +2,10 @@
  * Created by sm on 14/05/16.
  */
 
-import { InjectableReducer } from '../../../src/reducers/injectable';
 import { expect } from 'chai';
+import { Map } from 'immutable'
+
+import { InjectableReducer } from '../../../src/reducers/injectable';
 
 const EXPECTING_ERROR = new Error('An exception was expected here');
 
@@ -45,7 +47,7 @@ describe('The injectable reducer', () => {
 
         it('should verify that the object has an initial state', (done) => {
             try {
-                new InjectableReducer({ uuid: '1234-abcd' })
+                new InjectableReducer({ uuid: '1234-abcd' });
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('ReducerException');
@@ -59,4 +61,22 @@ describe('The injectable reducer', () => {
             expect(typeof(injectable.reduce)).to.equal('function');
         });
     });
-})
+
+    describe('upon reduction', () => {
+        it('should return the initial state if nothing is received', () => {
+            const initialState = Map({});
+            const reducer = new InjectableReducer({ uuid: '1234-abcd', initialState });
+            const reduction = reducer.reduce();
+            expect(reduction).to.equal(initialState);
+        });
+
+        it('should return the same state it receives', () => {
+            const initialState = Map({});
+            const reducer = new InjectableReducer({ uuid: '1234-abcd', initialState });
+
+            const finalState = Map({});
+            const reduction = reducer.reduce(finalState);
+            expect(reduction).to.equal(finalState);
+        });
+    })
+});
