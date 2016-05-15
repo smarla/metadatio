@@ -20,6 +20,7 @@
             <nav role="navigation" class="main-menu">
                 <ul>
                         <li><a href="../modules/Core.html">Core</a></li>
+                        <li><a href="../modules/Reducers.html">Reducers</a></li>
                 </ul>
             </nav>
         </div>
@@ -41,6 +42,11 @@
                                         <li><a href="../modules/Core.html#exceptions">exceptions</a></li>
                                 </ul>
                             </li>
+                            <li><a href="../modules/Reducers.html">Reducers</a>
+                                <ul>
+                                        <li><a href="../modules/Reducers.html#injectable">injectable</a></li>
+                                </ul>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -57,6 +63,7 @@
                             <li><a href="../classes/Store.html">Store</a></li>
                             <li><a href="../classes/Validator.html">Validator</a></li>
                             <li><a href="../classes/ValidatorException.html">ValidatorException</a></li>
+                            <li><a href="../classes/ValidatorReducer.html">ValidatorReducer</a></li>
                     </ul>
                 </div>
             </div>
@@ -93,7 +100,7 @@
                     <!--<h2 class="no-toc">Files</h2>-->
                 <!--</div>-->
                 <!--<div class="bd">-->
-                    <!--<ul><li>src/<ul><li>actions/<ul><li><a href="../files/src_actions_entity.actions.js.html">entity.actions.js</a></li><li><a href="../files/src_actions_field.actions.js.html">field.actions.js</a></li><li><a href="../files/src_actions_metadatio.actions.js.html">metadatio.actions.js</a></li><li><a href="../files/src_actions_validator.actions.js.html">validator.actions.js</a></li></ul></li><li>exceptions/<ul><li><a href="../files/src_exceptions_data-validation.exception.js.html">data-validation.exception.js</a></li><li><a href="../files/src_exceptions_index.js.html">index.js</a></li><li><a href="../files/src_exceptions_metadata-integrity.exception.js.html">metadata-integrity.exception.js</a></li><li><a href="../files/src_exceptions_reducer.exception.js.html">reducer.exception.js</a></li><li><a href="../files/src_exceptions_store.exception.js.html">store.exception.js</a></li><li><a href="../files/src_exceptions_validator.exception.js.html">validator.exception.js</a></li></ul></li><li><a href="../files/src_index.js.html">index.js</a></li><li>metadata/<ul><li><a href="../files/src_metadata_data-types.js.html">data-types.js</a></li><li><a href="../files/src_metadata_entity.js.html">entity.js</a></li><li><a href="../files/src_metadata_field-types.js.html">field-types.js</a></li><li><a href="../files/src_metadata_field.js.html">field.js</a></li><li><a href="../files/src_metadata_metadatio.js.html">metadatio.js</a></li><li><a href="../files/src_metadata_util.js.html">util.js</a></li><li><a href="../files/src_metadata_validator-types.js.html">validator-types.js</a></li><li><a href="../files/src_metadata_validator.js.html">validator.js</a></li></ul></li><li>reducers/<ul><li><a href="../files/src_reducers_entities.reducer.js.html">entities.reducer.js</a></li><li><a href="../files/src_reducers_index.js.html">index.js</a></li><li>injectable/<ul><li><a href="../files/src_reducers_injectable_entity.reducer.js.html">entity.reducer.js</a></li><li><a href="../files/src_reducers_injectable_field.reducer.js.html">field.reducer.js</a></li><li><a href="../files/src_reducers_injectable_index.js.html">index.js</a></li><li><a href="../files/src_reducers_injectable_injectable.reducer.js.html">injectable.reducer.js</a></li><li><a href="../files/src_reducers_injectable_validator.reducer.js.html">validator.reducer.js</a></li></ul></li><li><a href="../files/src_reducers_metadatio.reducer.js.html">metadatio.reducer.js</a></li></ul></li><li><a href="../files/src_store.js.html">store.js</a></li></ul></li></ul>-->
+                    <!--<ul><li>src/<ul><li>actions/<ul><li><a href="../files/src_actions_entity.actions.js.html">entity.actions.js</a></li><li><a href="../files/src_actions_field.actions.js.html">field.actions.js</a></li><li><a href="../files/src_actions_metadatio.actions.js.html">metadatio.actions.js</a></li><li><a href="../files/src_actions_validator.actions.js.html">validator.actions.js</a></li></ul></li><li>exceptions/<ul><li><a href="../files/src_exceptions_data-validation.exception.js.html">data-validation.exception.js</a></li><li><a href="../files/src_exceptions_index.js.html">index.js</a></li><li><a href="../files/src_exceptions_metadata-integrity.exception.js.html">metadata-integrity.exception.js</a></li><li><a href="../files/src_exceptions_reducer.exception.js.html">reducer.exception.js</a></li><li><a href="../files/src_exceptions_store.exception.js.html">store.exception.js</a></li><li><a href="../files/src_exceptions_validator.exception.js.html">validator.exception.js</a></li></ul></li><li><a href="../files/src_index.js.html">index.js</a></li><li>metadata/<ul><li><a href="../files/src_metadata_data-types.js.html">data-types.js</a></li><li><a href="../files/src_metadata_entity.js.html">entity.js</a></li><li><a href="../files/src_metadata_field-types.js.html">field-types.js</a></li><li><a href="../files/src_metadata_field.js.html">field.js</a></li><li><a href="../files/src_metadata_index.js.html">index.js</a></li><li><a href="../files/src_metadata_metadatio.js.html">metadatio.js</a></li><li><a href="../files/src_metadata_util.js.html">util.js</a></li><li><a href="../files/src_metadata_validator-types.js.html">validator-types.js</a></li><li><a href="../files/src_metadata_validator.js.html">validator.js</a></li></ul></li><li>reducers/<ul><li><a href="../files/src_reducers_entities.reducer.js.html">entities.reducer.js</a></li><li><a href="../files/src_reducers_index.js.html">index.js</a></li><li>injectable/<ul><li><a href="../files/src_reducers_injectable_entity.reducer.js.html">entity.reducer.js</a></li><li><a href="../files/src_reducers_injectable_field.reducer.js.html">field.reducer.js</a></li><li><a href="../files/src_reducers_injectable_index.js.html">index.js</a></li><li><a href="../files/src_reducers_injectable_injectable.reducer.js.html">injectable.reducer.js</a></li><li><a href="../files/src_reducers_injectable_validator.reducer.js.html">validator.reducer.js</a></li></ul></li></ul></li><li><a href="../files/src_store.js.html">store.js</a></li></ul></li></ul>-->
                 <!--</div>-->
             <!--</div>-->
             <!---->
