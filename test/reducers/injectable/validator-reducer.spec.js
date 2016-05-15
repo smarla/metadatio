@@ -14,7 +14,7 @@ const EXPECTING_ERROR = new Error('An exception was expected here');
 describe('The validator reducer', () => {
     let reducer = null;
     let validator = null;
-    
+
     beforeEach(() => {
         validator = new Validator(ValidatorTypes.required);
         reducer = new ValidatorReducer('uuid', validator);
@@ -119,7 +119,7 @@ describe('The validator reducer', () => {
         expect(state).to.equal(nextState);
     });
 
-    it('should mutate when it listens to an interesting action', () => {
+    it('should set validity to true when it listens to a VALIATION_OK action', () => {
         const state = Map({
             uuid: '123',
             valid: true,
@@ -128,5 +128,18 @@ describe('The validator reducer', () => {
 
         const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_OK, uuid: '123' });
         expect(state).to.not.equal(nextState);
+        expect(nextState.get('valid')).to.equal(true);
+    });
+
+    it('should set validity to false when it listens to a VALIATION_KO action', () => {
+        const state = Map({
+            uuid: '123',
+            valid: true,
+            validator
+        });
+
+        const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_KO, uuid: '123' });
+        expect(state).to.not.equal(nextState);
+        expect(nextState.get('valid')).to.equal(false);
     });
 });

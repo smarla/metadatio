@@ -83,13 +83,11 @@ export default class ValidatorReducer extends InjectableReducer {
                     uuid: action.uuid,
                     valid: true
                 });
-                break;
             case ValidatorActions.VALIDATION_KO:
                 return Map({
                     uuid: action.uuid,
                     valid: false
                 });
-                break;
         }
 
         return state;
