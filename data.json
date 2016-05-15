@@ -3,10 +3,38 @@
         "name": "Metadatio",
         "description": "Use metadata to build things",
         "logo": "../graphic/logo_400.png",
-        "version": "0.7.53",
+        "version": "0.7.54",
         "url": "http://metadat.io/"
     },
     "files": {
+        "src/actions/entity.actions.js": {
+            "name": "src/actions/entity.actions.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/actions/field.actions.js": {
+            "name": "src/actions/field.actions.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/actions/metadatio.actions.js": {
+            "name": "src/actions/metadatio.actions.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/actions/validator.actions.js": {
+            "name": "src/actions/validator.actions.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/exceptions/data-validation.exception.js": {
             "name": "src/exceptions/data-validation.exception.js",
             "modules": {},
@@ -29,6 +57,13 @@
             "classes": {
                 "MetadataIntegrityException": 1
             },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/exceptions/reducer.exception.js": {
+            "name": "src/exceptions/reducer.exception.js",
+            "modules": {},
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -112,8 +147,57 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/reducers/injectable/entity.reducer.js": {
+            "name": "src/reducers/injectable/entity.reducer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/reducers/injectable/field.reducer.js": {
+            "name": "src/reducers/injectable/field.reducer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/reducers/injectable/index.js": {
+            "name": "src/reducers/injectable/index.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/reducers/injectable/injectable.reducer.js": {
+            "name": "src/reducers/injectable/injectable.reducer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/reducers/injectable/validator.reducer.js": {
+            "name": "src/reducers/injectable/validator.reducer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/reducers/entities.reducer.js": {
+            "name": "src/reducers/entities.reducer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/reducers/index.js": {
             "name": "src/reducers/index.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/reducers/metadatio.reducer.js": {
+            "name": "src/reducers/metadatio.reducer.js",
             "modules": {},
             "classes": {},
             "fors": {},
@@ -267,6 +351,30 @@
     },
     "elements": {},
     "classitems": [
+        {
+            "file": "src/actions/entity.actions.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "MetadataIntegrityException"
+        },
+        {
+            "file": "src/actions/field.actions.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "MetadataIntegrityException"
+        },
+        {
+            "file": "src/actions/metadatio.actions.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "MetadataIntegrityException"
+        },
+        {
+            "file": "src/actions/validator.actions.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "MetadataIntegrityException"
+        },
         {
             "file": "src/exceptions/data-validation.exception.js",
             "line": 1,
@@ -503,6 +611,13 @@
             "class": "MetadataIntegrityException",
             "module": "Core",
             "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "ValidatorException",
+            "module": "Core"
         },
         {
             "file": "src/exceptions/store.exception.js",
@@ -923,7 +1038,56 @@
             "module": "Core"
         },
         {
+            "file": "src/reducers/injectable/entity.reducer.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "Store",
+            "module": "Core"
+        },
+        {
+            "file": "src/reducers/injectable/field.reducer.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "Store",
+            "module": "Core"
+        },
+        {
+            "file": "src/reducers/injectable/index.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "Store",
+            "module": "Core"
+        },
+        {
+            "file": "src/reducers/injectable/injectable.reducer.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "Store",
+            "module": "Core"
+        },
+        {
+            "file": "src/reducers/injectable/validator.reducer.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "Store",
+            "module": "Core"
+        },
+        {
+            "file": "src/reducers/entities.reducer.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "Store",
+            "module": "Core"
+        },
+        {
             "file": "src/reducers/index.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "Store",
+            "module": "Core"
+        },
+        {
+            "file": "src/reducers/metadatio.reducer.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
             "class": "Store",
@@ -1066,6 +1230,22 @@
             "line": " src/store.js:95"
         },
         {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/actions/entity.actions.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/actions/field.actions.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/actions/metadatio.actions.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/actions/validator.actions.js:1"
+        },
+        {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
             "line": " src/exceptions/data-validation.exception.js:1"
         },
@@ -1076,6 +1256,10 @@
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
             "line": " src/exceptions/metadata-integrity.exception.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/exceptions/reducer.exception.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 14/05/16.",
@@ -1119,7 +1303,35 @@
         },
         {
             "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/injectable/entity.reducer.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/injectable/field.reducer.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/injectable/index.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/injectable/injectable.reducer.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/injectable/validator.reducer.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/entities.reducer.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
             "line": " src/reducers/index.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/metadatio.reducer.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
