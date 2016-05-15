@@ -44,9 +44,9 @@ export class Store {
      * @param initialState {Object} The initial state for the store
      * @chainable
      */
-    configure(initialState) {
+    configure(initialState = undefined) {
         if(this.configured) throw new StoreException('STC001');
-        if(!(initialState instanceof Map)) throw new StoreException('STS001');
+        if(initialState !== undefined && !(initialState instanceof Map)) throw new StoreException('STS001');
 
         this.store = createStore(createReducer(), initialState);
         this.configured = true;

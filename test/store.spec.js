@@ -58,14 +58,14 @@ describe('Metadatio store', () => {
 
     describe('upon configuration', () => {
         it('should change its state to \'configured\'', () => {
-            Store.configure(Map({}));
+            Store.configure();
             expect(Store.configured).to.equal(true);
         });
 
         it('should not allow a second configuration attempt', (done) => {
             try {
-                Store.configure(Map({}));
-                Store.configure(Map({}));
+                Store.configure();
+                Store.configure();
                 done(EXPECTING_ERROR)
             } catch(e) {
                 expect(e.className).to.equal('StoreException');
@@ -87,15 +87,14 @@ describe('Metadatio store', () => {
             });
 
             it('should be fetchable', () => {
-                const map = Map({});
-                Store.configure(map);
-                expect(Store.getState()).to.equal(map);
+                Store.configure();
+                expect(Store.getState()).to.not.equal();
             });
         });
 
         describe('the \'actual\' store', () => {
             beforeEach(() => {
-                Store.configure(Map({}));
+                Store.configure();
             });
 
             it('should be initialized', () => {
@@ -110,7 +109,7 @@ describe('Metadatio store', () => {
 
         describe('the store wrapper', () => {
             beforeEach(() => {
-                Store.configure(Map({}));
+                Store.configure();
             });
 
             it('should dispatch store actions', () => {
@@ -139,7 +138,7 @@ describe('Metadatio store', () => {
 
         describe('the action dispatcher', () => {
             beforeEach(() => {
-                Store.configure(Map({}));
+                Store.configure();
             });
 
             it('should only accept objects', (done) => {
@@ -177,12 +176,9 @@ describe('Metadatio store', () => {
         });
 
         describe('the reducer async injection', () => {
-            beforeEach(() => {
-                Store.configure(Map({}));
-            });
-
             it('should receive a name for the reducer', (done) => {
                 try {
+                    Store.configure();
                     Store.injectAsync();
                     done(EXPECTING_ERROR);
                 } catch(e) {
@@ -194,6 +190,7 @@ describe('Metadatio store', () => {
 
             it('should only accept strings for the reducer name', (done) => {
                 try {
+                    Store.configure();
                     Store.injectAsync(123);
                     done(EXPECTING_ERROR);
                 } catch(e) {
@@ -205,6 +202,7 @@ describe('Metadatio store', () => {
 
             it('should receive a reducer to inject', (done) => {
                 try {
+                    Store.configure();
                     Store.injectAsync('reducer');
                     done(EXPECTING_ERROR);
                 } catch(e) {
@@ -216,6 +214,7 @@ describe('Metadatio store', () => {
 
             it('should receive a function as reducer', (done) => {
                 try {
+                    Store.configure();
                     Store.injectAsync('reducer', {});
                     done(EXPECTING_ERROR);
                 } catch(e) {
@@ -227,11 +226,11 @@ describe('Metadatio store', () => {
 
             it('should not allow two reducers with the same name', (done) => {
                 try {
+                    Store.configure();
                     Store.injectAsync('reducer', () => Store.getState());
                     Store.injectAsync('reducer', () => Store.getState());
                     done(EXPECTING_ERROR);
                 } catch(e) {
-                    console.log(e);
                     expect(e.className).to.equal('StoreException');
                     expect(e.code).to.equal('STI005');
                     done();
