@@ -83,15 +83,22 @@
             "fors": {},
             "namespaces": {}
         },
-        "src/metadata/data-types.js": {
-            "name": "src/metadata/data-types.js",
+        "src/metadata/data-types.metadata.js": {
+            "name": "src/metadata/data-types.metadata.js",
             "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "src/metadata/entity.js": {
-            "name": "src/metadata/entity.js",
+        "src/metadata/element.metadata.js": {
+            "name": "src/metadata/element.metadata.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/metadata/entity.metadata.js": {
+            "name": "src/metadata/entity.metadata.js",
             "modules": {},
             "classes": {
                 "Entity": 1
@@ -99,15 +106,15 @@
             "fors": {},
             "namespaces": {}
         },
-        "src/metadata/field-types.js": {
-            "name": "src/metadata/field-types.js",
+        "src/metadata/field-types.metadata.js": {
+            "name": "src/metadata/field-types.metadata.js",
             "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "src/metadata/field.js": {
-            "name": "src/metadata/field.js",
+        "src/metadata/field.metadata.js": {
+            "name": "src/metadata/field.metadata.js",
             "modules": {},
             "classes": {
                 "Field": 1
@@ -129,22 +136,22 @@
             "fors": {},
             "namespaces": {}
         },
-        "src/metadata/util.js": {
-            "name": "src/metadata/util.js",
+        "src/metadata/util.metadata.js": {
+            "name": "src/metadata/util.metadata.js",
             "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "src/metadata/validator-types.js": {
-            "name": "src/metadata/validator-types.js",
+        "src/metadata/validator-types.metadata.js": {
+            "name": "src/metadata/validator-types.metadata.js",
             "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "src/metadata/validator.js": {
-            "name": "src/metadata/validator.js",
+        "src/metadata/validator.metadata.js": {
+            "name": "src/metadata/validator.metadata.js",
             "modules": {},
             "classes": {
                 "Validator": 1
@@ -280,7 +287,7 @@
             "fors": {},
             "namespaces": {},
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 11
+            "line": 10
         },
         "injectable": {
             "name": "injectable",
@@ -296,7 +303,7 @@
             "module": "Reducers",
             "namespace": "",
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 11,
+            "line": 10,
             "description": "This reducer is in charge of controlling all actions dispatched to change the validation status for a field.",
             "extends": "InjectableReducer",
             "is_constructor": 1
@@ -342,7 +349,7 @@
             "extension_for": [],
             "module": "Core",
             "namespace": "",
-            "file": "src/metadata/entity.js",
+            "file": "src/metadata/entity.metadata.js",
             "line": 10,
             "description": "Entities represent real-world elements, that you need to manage within your app.\nExample entities are _Person_, _Car_, and whatever else you can imagine.\n\nEntities by itself don't contain any particular feature - apart from identification, and grouping -. Whilst some Metadatio modules will extend this objects to enrich its features, at it's core an Entity is basically a container for fields.\n\n## Usage\n\n```\nconst entity = new Entity({\n  name: 'Friend',\n  [label: 'Friend',]\n  [namespace: 'people',]\n  [description: 'description...',]\n  [fields: [...]]\n});\n```\n\n## Entity hierarchy\n\nYou can easily define hierarchy between your entities, by leveraging the {{#crossLink \"Entity/parent:property\"}}parent{{/crossLink}} property.\n\n```\nconst parent = new Entity({ name: 'parent-entity', ... });\nconst child = new Entity({ name: 'child-entity', parent: parent });\n```\n\n## Namespaces\n\nEntities are grouped together via `namespaces`, that shall contain entities dedicated to the same purpose, or that are related among each others.\n\nThe `namespace` is a String set directly to the entity upon creation. If you don't set a namespace, the value `'default'` is used. So if you're only planning to use one namespace you can skip this.\n\n\n## Fields\n\nFields are instances of {{#crossLink \"Field\"}}Field{{/crossLink}}, that you can attach upon entity creation, or at any time, by using the built-in {{#crossLink \"Entity/addField:method\"}}addField{{/crossLink}} method.\n\n## Validation\n\nEntities are provided with a native validation system, to determine whether the values set within an object that should comply with entity specification are valid. Basically, entity validation targets the value for each {{#crossLink \"Field\"}}field{{/crossLink}} within the entity, and launches the {{#crossLink \"Field/validate:method\"}}field's validation system{{/crossLink}}."
         },
@@ -356,8 +363,8 @@
             "extension_for": [],
             "module": "Core",
             "namespace": "",
-            "file": "src/metadata/field.js",
-            "line": 10,
+            "file": "src/metadata/field.metadata.js",
+            "line": 11,
             "description": "The fields represent each and every property of any entity. Each field is completely sufficient - it stores configuration about the identification, typing and validation of the property - and all {{#crossLink \"Entity\"}}entity{{/crossLink}} procedures depending on fields dispatch down the action, that it's interpreted isolatedly.\n\n## Usage\n\n```\nconst field = new Field({\n  name: 'foo',\n  [label: 'Foo',]\n  [description: 'description...',]\n  dataType: 'string',\n  [multiplicity: 'one',]\n  [validators: {...}]\n});\n```\n\n## Identification\n\nAll fields must be defined with a {{#crossLink \"Field/name:property\"}}name{{/crossLink}}, that must be unique within each entity. In addition, you can define a field's {{#crossLink \"Field/label:property\"}}label{{/crossLink}} - useful for translatable usages.\n\n## Data typing\n\nAll fields must have an assigned data type.\n\n### Basic data types\n\nYou can make use of several basic data types, all available at the {{#crossLink \"DataTypes\"}}DataTypes{{/crossLink}} specification.\n\n```\nstring: 'Sample value',\nnumber: 123[.456],\nboolean: true|false,\ndate: new Date()|Timestamp\n```\n\n### Reference data types\n\nYou can set a reference to an entity as the data type for a field. This will build a relationship between your field's entity and the target entity, through the field you setup for that.\n\n```\nconst foo = new Entity({ name: 'foo', ... });\nconst field = new Field({ name: 'bar', dataType: foo });\n```\n\n#### Referenced validations\n\nWhen a field's data type is set as a reference, the validation procedures change for it. Values for the fields with this metadata can be filled either with the whole entity - for inner object saving - or via a `string` or `number` identifying the entity - deep linking approach. In the case you provide complete entities as values, the validation procedures of the target entity's metadata will be applied."
         },
         "Validator": {
@@ -370,8 +377,8 @@
             "extension_for": [],
             "module": "Core",
             "namespace": "",
-            "file": "src/metadata/validator.js",
-            "line": 9,
+            "file": "src/metadata/validator.metadata.js",
+            "line": 10,
             "description": "Validators help you define rules with which you will consider the value given for a field as **valid**."
         },
         "FieldReducer": {
@@ -401,7 +408,7 @@
             "submodule": "injectable",
             "namespace": "",
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 11,
+            "line": 10,
             "description": "This reducer is in charge of controlling all actions dispatched to change the validation status for a field."
         },
         "Store": {
@@ -720,21 +727,28 @@
             "submodule": "exceptions"
         },
         {
-            "file": "src/metadata/data-types.js",
+            "file": "src/metadata/data-types.metadata.js",
             "line": 1,
             "description": "Created by sm on 01/05/16.",
             "class": "Entity",
             "module": "Core"
         },
         {
-            "file": "src/metadata/entity.js",
+            "file": "src/metadata/element.metadata.js",
+            "line": 1,
+            "description": "Created by sm on 16/05/16.",
+            "class": "Entity",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/entity.metadata.js",
             "line": 1,
             "description": "Created by sm on 06/05/16.",
             "class": "Entity",
             "module": "Core"
         },
         {
-            "file": "src/metadata/entity.js",
+            "file": "src/metadata/entity.metadata.js",
             "line": 60,
             "description": "Constructor for the class",
             "itemtype": "method",
@@ -753,7 +767,7 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/entity.js",
+            "file": "src/metadata/entity.metadata.js",
             "line": 71,
             "description": "Stores the name of the entity. This name must be unique across the same {{#crossLink \"Entity/namespace:property\"}}namespace{{/crossLink}}. It is the only required value upon construction.\n\nEntity name **must** be a String, with length from 2 to 64 characters. It can only contain `a-z, A-Z` characters, digits, hyphens and underscores. All names **must** start with an `a-z, A-Z` or underscore character.",
             "example": [
@@ -770,7 +784,7 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/entity.js",
+            "file": "src/metadata/entity.metadata.js",
             "line": 92,
             "description": "Description for the field",
             "itemtype": "property",
@@ -780,7 +794,7 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/entity.js",
+            "file": "src/metadata/entity.metadata.js",
             "line": 100,
             "itemtype": "property",
             "name": "namespace",
@@ -790,7 +804,7 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/entity.js",
+            "file": "src/metadata/entity.metadata.js",
             "line": 107,
             "description": "Optionnally, you can define a label for the entity. The label would represent a human-readable name for the entity. It's actually useful if you wish to provided translated names for the entity - as you can set a placeholder as label - but otherwise might be not that useful, and with the {{#crossLink \"Entity/name:property\"}}name{{/crossLink}} it may suffice.",
             "example": [
@@ -805,7 +819,7 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/entity.js",
+            "file": "src/metadata/entity.metadata.js",
             "line": 121,
             "description": "Parent entity. If an entity is an extension of some one more basic, you can link here the parent entity.\n\n\nIf your entity extends from another, **it will inherit parent's validation rules** too. The fields you extended on the child class will be validated with your defined validators, but those defined at parent's level will be validated with theirs. If you wish to override a field's validation for a parent within a child, simply include such field in the child's {{#crossLink \"Entity/fields:property\"}}fields{{/crossLink}} array.",
             "itemtype": "property",
@@ -820,7 +834,7 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/entity.js",
+            "file": "src/metadata/entity.metadata.js",
             "line": 137,
             "description": "Entity fields",
             "itemtype": "property",
@@ -834,7 +848,7 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/entity.js",
+            "file": "src/metadata/entity.metadata.js",
             "line": 161,
             "description": "Adds a field to the entity",
             "itemtype": "method",
@@ -862,7 +876,7 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/entity.js",
+            "file": "src/metadata/entity.metadata.js",
             "line": 179,
             "description": "Validates that an object parameters comply with corresponding field's validation rules.",
             "itemtype": "method",
@@ -885,22 +899,22 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/field-types.js",
+            "file": "src/metadata/field-types.metadata.js",
             "line": 1,
             "description": "Created by sm on 01/05/16.",
             "class": "Field",
             "module": "Core"
         },
         {
-            "file": "src/metadata/field.js",
+            "file": "src/metadata/field.metadata.js",
             "line": 1,
             "description": "Created by sm on 01/05/16.",
             "class": "Field",
             "module": "Core"
         },
         {
-            "file": "src/metadata/field.js",
-            "line": 64,
+            "file": "src/metadata/field.metadata.js",
+            "line": 65,
             "description": "Constructor for the class",
             "itemtype": "method",
             "name": "constructor",
@@ -919,8 +933,8 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/field.js",
-            "line": 73,
+            "file": "src/metadata/field.metadata.js",
+            "line": 75,
             "description": "The **name** for the field. A field's name **must** be unique within each entity.",
             "itemtype": "property",
             "name": "name",
@@ -929,8 +943,8 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/field.js",
-            "line": 81,
+            "file": "src/metadata/field.metadata.js",
+            "line": 83,
             "description": "Label for the field. This defines the human-readable name for the field.",
             "itemtype": "property",
             "name": "label",
@@ -939,8 +953,8 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/field.js",
-            "line": 90,
+            "file": "src/metadata/field.metadata.js",
+            "line": 92,
             "description": "Description for the field",
             "itemtype": "property",
             "name": "description",
@@ -950,8 +964,8 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/field.js",
-            "line": 99,
+            "file": "src/metadata/field.metadata.js",
+            "line": 101,
             "description": "Define the data type of the element.\n\nBasic data types are primitive types to define basic data.",
             "itemtype": "property",
             "name": "dataType",
@@ -960,8 +974,8 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/field.js",
-            "line": 109,
+            "file": "src/metadata/field.metadata.js",
+            "line": 111,
             "description": "Define the multiplicity for the element",
             "itemtype": "property",
             "name": "multiplicity",
@@ -971,8 +985,8 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/field.js",
-            "line": 118,
+            "file": "src/metadata/field.metadata.js",
+            "line": 120,
             "description": "Define the validators for the field",
             "itemtype": "property",
             "name": "validators",
@@ -982,8 +996,8 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/field.js",
-            "line": 144,
+            "file": "src/metadata/field.metadata.js",
+            "line": 146,
             "description": "Determines whether the value defined for a field is valid.",
             "itemtype": "method",
             "name": "validate",
@@ -1006,8 +1020,8 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/field.js",
-            "line": 190,
+            "file": "src/metadata/field.metadata.js",
+            "line": 192,
             "description": "Adds a new validator to the field.",
             "itemtype": "method",
             "name": "addValidator",
@@ -1053,29 +1067,29 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/util.js",
+            "file": "src/metadata/util.metadata.js",
             "line": 1,
             "description": "Created by sm on 07/05/16.",
             "class": "Validator",
             "module": "Core"
         },
         {
-            "file": "src/metadata/validator-types.js",
+            "file": "src/metadata/validator-types.metadata.js",
             "line": 1,
             "description": "Created by sm on 01/05/16.",
             "class": "Validator",
             "module": "Core"
         },
         {
-            "file": "src/metadata/validator.js",
+            "file": "src/metadata/validator.metadata.js",
             "line": 1,
             "description": "Created by sm on 01/05/16.",
             "class": "Validator",
             "module": "Core"
         },
         {
-            "file": "src/metadata/validator.js",
-            "line": 21,
+            "file": "src/metadata/validator.metadata.js",
+            "line": 22,
             "description": "Creates a new validator instance, for validating using a certain method, with the validator match given",
             "itemtype": "method",
             "name": "constructor",
@@ -1095,8 +1109,8 @@
             "module": "Core"
         },
         {
-            "file": "src/metadata/validator.js",
-            "line": 77,
+            "file": "src/metadata/validator.metadata.js",
+            "line": 80,
             "description": "Used to validate a value against the validator defined.",
             "itemtype": "method",
             "name": "validate",
@@ -1164,7 +1178,7 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 59,
+            "line": 67,
             "description": "Performs a reduction on a validator state, upon a validation change action.",
             "itemtype": "method",
             "name": "reduce",
@@ -1209,8 +1223,8 @@
         },
         {
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 22,
-            "description": "Contains the initial state for any Validator. Upon construction, this property is filled with the Validator data for further control.\n\nThe basic structure of the `initialState` is:\n\n```\n{\n  uuid: 'Unique ID of the validator',\n  valid: true, // Whether the validation succeeded\n  validator: Validator // The actual validator to match against\n}\n```",
+            "line": 21,
+            "description": "Contains the initial state for any Validator. Upon construction, this property is filled with the Validator data for further control.\n\nThe basic structure of the `initialState` is:\n\n```\n{\n  uuid: 'Unique ID of the validator',\n  valid: true, // Whether the validation succeeded\n}\n```",
             "itemtype": "property",
             "name": "initialState",
             "static": 1,
@@ -1221,20 +1235,22 @@
         },
         {
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 45,
+            "line": 42,
             "description": "Constructor for the validator reducer",
             "itemtype": "method",
             "name": "constructor",
             "params": [
                 {
-                    "name": "uuid",
-                    "description": "Unique ID for the validator",
-                    "type": "String"
+                    "name": "validator",
+                    "description": "The validator that will perform changes on this state",
+                    "type": "Validator"
                 },
                 {
-                    "name": "validator",
-                    "description": "The validator that performs the validation",
-                    "type": "Validator"
+                    "name": "valid",
+                    "description": "If you want to provide an initial validity for the validator",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "null"
                 }
             ],
             "class": "ValidatorReducer",
@@ -1389,27 +1405,27 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/entity.js:161"
+            "line": " src/metadata/entity.metadata.js:161"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/entity.js:179"
+            "line": " src/metadata/entity.metadata.js:179"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/field.js:144"
+            "line": " src/metadata/field.metadata.js:146"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/field.js:190"
+            "line": " src/metadata/field.metadata.js:192"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/validator.js:77"
+            "line": " src/metadata/validator.metadata.js:80"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/field.reducer.js:59"
+            "line": " src/reducers/injectable/field.reducer.js:67"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -1465,19 +1481,23 @@
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
-            "line": " src/metadata/data-types.js:1"
+            "line": " src/metadata/data-types.metadata.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 16/05/16.",
+            "line": " src/metadata/element.metadata.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 06/05/16.",
-            "line": " src/metadata/entity.js:1"
+            "line": " src/metadata/entity.metadata.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
-            "line": " src/metadata/field-types.js:1"
+            "line": " src/metadata/field-types.metadata.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
-            "line": " src/metadata/field.js:1"
+            "line": " src/metadata/field.metadata.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
@@ -1489,15 +1509,15 @@
         },
         {
             "message": "Missing item type\nCreated by sm on 07/05/16.",
-            "line": " src/metadata/util.js:1"
+            "line": " src/metadata/util.metadata.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
-            "line": " src/metadata/validator-types.js:1"
+            "line": " src/metadata/validator-types.metadata.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
-            "line": " src/metadata/validator.js:1"
+            "line": " src/metadata/validator.metadata.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 14/05/16.",
