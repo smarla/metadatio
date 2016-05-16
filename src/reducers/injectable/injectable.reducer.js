@@ -16,6 +16,7 @@ export default class InjectableReducer {
     }
     
     reduce(state = this.initialState) {
+
         return state;
     }
 }

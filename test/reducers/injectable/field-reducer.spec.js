@@ -5,19 +5,13 @@
 import { Map } from 'immutable';
 import { expect } from 'chai';
 
-import { ValidatorReducer } from '../../../src/reducers/injectable';
-import { Validator, ValidatorTypes } from '../../../src/metadata';
-import { ValidatorActions } from '../../../src/actions/validator.actions';
-
 const EXPECTING_ERROR = new Error('An exception was expected here');
 
-describe('The validator reducer', () => {
+describe.skip('The field reducer', () => {
     let reducer = null;
-    let validator = null;
 
     beforeEach(() => {
-        validator = new Validator(ValidatorTypes.required);
-        reducer = new ValidatorReducer('uuid', validator);
+        reducer = new ValidatorReducer('uuid');
     });
 
     it('should verify that a state object is given', (done) => {
@@ -26,7 +20,7 @@ describe('The validator reducer', () => {
             done(EXPECTING_ERROR);
         } catch(e) {
             expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RI003')
+            expect(e.code).to.equal('RIV003')
             done();
         }
     });
@@ -37,7 +31,7 @@ describe('The validator reducer', () => {
             done(EXPECTING_ERROR);
         } catch(e) {
             expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RI004')
+            expect(e.code).to.equal('RIV004')
             done();
         }
     });
@@ -48,7 +42,7 @@ describe('The validator reducer', () => {
             done(EXPECTING_ERROR);
         } catch(e) {
             expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RI005')
+            expect(e.code).to.equal('RIV005')
             done();
         }
     });
@@ -59,7 +53,7 @@ describe('The validator reducer', () => {
             done(EXPECTING_ERROR);
         } catch(e) {
             expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RI006')
+            expect(e.code).to.equal('RIV006')
             done();
         }
     });
@@ -70,7 +64,7 @@ describe('The validator reducer', () => {
             done(EXPECTING_ERROR);
         } catch(e) {
             expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RI007')
+            expect(e.code).to.equal('RIV007')
             done();
         }
     });
@@ -81,7 +75,7 @@ describe('The validator reducer', () => {
             done(EXPECTING_ERROR);
         } catch(e) {
             expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RI008')
+            expect(e.code).to.equal('RIV008')
             done();
         }
     });
@@ -92,16 +86,16 @@ describe('The validator reducer', () => {
             done(EXPECTING_ERROR);
         } catch(e) {
             expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RI009')
+            expect(e.code).to.equal('RIV009')
             done();
         }
     });
 
-    it('should return the same state on any action not interesting for the validator', () => {
+    it('should return the same state on any action not interesting for the field', () => {
         const state = Map({
             uuid: '123',
             valid: true,
-            validator
+            field
         });
 
         const nextState = reducer.reduce(state, { type: 'SOME_UNWANTED_ACTION', uuid: '123' });
@@ -112,7 +106,7 @@ describe('The validator reducer', () => {
         const state = Map({
             uuid: '123',
             valid: true,
-            validator
+            field
         });
 
         const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_OK, uuid: 'abc' });
@@ -123,7 +117,7 @@ describe('The validator reducer', () => {
         const state = Map({
             uuid: '123',
             valid: true,
-            validator
+            field
         });
 
         const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_OK, uuid: '123' });
@@ -135,7 +129,7 @@ describe('The validator reducer', () => {
         const state = Map({
             uuid: '123',
             valid: true,
-            validator
+            field
         });
 
         const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_KO, uuid: '123' });

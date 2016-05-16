@@ -5,7 +5,6 @@
 import { Map } from 'immutable';
 import InjectableReducer from './injectable.reducer';
 import { ReducerException } from '../../exceptions';
-import { Validator } from '../../metadata';
 
 import { ValidatorActions } from '../../actions/validator.actions';
 
@@ -66,13 +65,13 @@ export default class ValidatorReducer extends InjectableReducer {
      * @returns {immutable.Map}
      */
     reduce(state = ValidatorReducer.initialState, action) {
-        if(!state) throw new ReducerException('RIV003');
-        if(!(state instanceof Map)) throw new ReducerException('RIV004');
-        if(!action) throw new ReducerException('RIV005');
-        if(typeof(action) !== 'object') throw new ReducerException('RIV006');
-        if(!action.type) throw new ReducerException('RIV007');
-        if(typeof(action.type) !== 'string') throw new ReducerException('RIV008');
-        if(!action.uuid) throw new ReducerException('RIV009');
+        if(!state) throw new ReducerException('RI003');
+        if(!(state instanceof Map)) throw new ReducerException('RI004');
+        if(!action) throw new ReducerException('RI005');
+        if(typeof(action) !== 'object') throw new ReducerException('RI006');
+        if(!action.type) throw new ReducerException('RI007');
+        if(typeof(action.type) !== 'string') throw new ReducerException('RI008');
+        if(!action.uuid) throw new ReducerException('RI009');
 
         if(action.uuid !== state.get('uuid')) return state;
 
