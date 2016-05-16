@@ -46,22 +46,41 @@ export default class FieldReducer extends InjectableReducer {
      * Constructor for the validator reducer
      *
      * @method constructor
-     * @param uuid {string} Unique ID for the validator
-     * @param validator {Field} The validator that performs the validation
+     * @param field {Field} The field to associate with the reducer
      */
-    constructor(uuid, validator) {
+    constructor(field) {
         super({
-            uuid: uuid,
-            initialState: FieldReducer.initialState
+            uuid: field.uuid,
+            initialState: Map({
+                uuid: field.uuid,
+                value: null,
+                valid: true
+            })
         });
     }
 
+    /**
+     * Combines the field information reducer - that handles the data within this reducer - and the inner validation and history reducers.
+     *
+     * @method combine
+     * @returns {Reducer<S>|Function}
+     */
     combine() {
         const validators = this.getValidatorReducers();
         return combineReducers({
             info: this.reduce,
             validators
         });
+    }
+
+    /**
+     * Returns a combined reducer including all validators within the field.
+     *
+     * @returns {Reducer<S>|Function}
+     */
+    getValidatorReducers() {
+        const reducers = {};
+        return combineReducers(reducers);
     }
 
     /**
@@ -75,7 +94,7 @@ export default class FieldReducer extends InjectableReducer {
     reduce(state = FieldReducer.initialState, action) {
         InjectableReducer.verify(state, action);
         if(action.uuid !== state.get('uuid')) return state;
-        
+
         switch(action.type) {
             case FieldActions.VALUE_CHANGED:
                 return Map({
