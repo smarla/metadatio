@@ -8,7 +8,7 @@ import { expect } from 'chai';
 import { FieldReducer } from '../../../src/reducers/injectable';
 import { FieldActions } from '../../../src/actions/field.actions';
 
-describe.only('The field reducer', () => {
+describe('The field reducer', () => {
     let reducer = null;
 
     beforeEach(() => {
