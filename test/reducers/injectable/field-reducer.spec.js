@@ -15,8 +15,6 @@ describe('The field reducer', () => {
         reducer = new FieldReducer('uuid');
     });
 
-
-
     it('should return the same state on any action not interesting for the validator', () => {
         const state = Map({
             uuid: '123',

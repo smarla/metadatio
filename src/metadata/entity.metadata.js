@@ -2,10 +2,10 @@
  * Created by sm on 06/05/16.
  */
 
-import Field from './field';
+import Field from './field.metadata';
 
 import { MetadataIntegrityException } from '../exceptions';
-import * as util from './util';
+import * as util from './util.metadata';
 
 /**
  * Entities represent real-world elements, that you need to manage within your app.

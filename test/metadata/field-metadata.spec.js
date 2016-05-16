@@ -11,6 +11,20 @@ const EXPECTING_ERROR = new Error('An exception was expected here');
 describe('Base field component', () => {
 
     describe('upon construction', () => {
+        it('should expose a uuid', () => {
+            const metadata = {
+                name: "name",
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.string,
+                multiplicity: 'one'
+            };
+
+            const field = new Field(metadata);
+            expect(!field.uuid).to.equal(false);
+        });
+
         it('should be configured with basic metadata', () => {
             const metadata = {
                 name: "name",

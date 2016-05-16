@@ -4,7 +4,6 @@
 
 import { Map } from 'immutable';
 import InjectableReducer from './injectable.reducer';
-import { ReducerException } from '../../exceptions';
 
 import { ValidatorActions } from '../../actions/validator.actions';
 
@@ -28,7 +27,6 @@ export default class ValidatorReducer extends InjectableReducer {
      * {
      *   uuid: 'Unique ID of the validator',
      *   valid: true, // Whether the validation succeeded
-     *   validator: Validator // The actual validator to match against
      * }
      * ```
      *
@@ -38,21 +36,23 @@ export default class ValidatorReducer extends InjectableReducer {
      */
     static initialState = Map({
         uuid: null,
-        valid: true,
-        validated_at: null
+        valid: true
     });
 
     /**
      * Constructor for the validator reducer
      *
      * @method constructor
-     * @param uuid {string} Unique ID for the validator
-     * @param validator {Validator} The validator that performs the validation
+     * @param validator {Validator} The validator that will perform changes on this state
+     * @param [valid=null] {Boolean} If you want to provide an initial validity for the validator
      */
-    constructor(uuid, validator) {
+    constructor(validator, valid) {
         super({
-            uuid: uuid,
-            initialState: ValidatorReducer.initialState
+            uuid: validator.uuid,
+            initialState: Map({
+                uuid: validator.uuid,
+                valid: valid
+            })
         });
     }
 

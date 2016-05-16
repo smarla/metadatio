@@ -7,12 +7,14 @@ import { expect } from 'chai';
 
 import { ValidatorReducer } from '../../../src/reducers/injectable';
 import { ValidatorActions } from '../../../src/actions/validator.actions';
+import { Validator, ValidatorTypes } from '../../../src/metadata';
 
 describe('The validator reducer', () => {
     let reducer = null;
 
     beforeEach(() => {
-        reducer = new ValidatorReducer('uuid');
+        let validator = new Validator(ValidatorTypes.required);
+        reducer = new ValidatorReducer(validator);
     });
 
     it('should return the same state on any action not interesting for the validator', () => {

@@ -2,10 +2,11 @@
  * Created by sm on 01/05/16.
  */
 
-import Validator from './validator';
+import Element from './element.metadata';
+import Validator from './validator.metadata';
 import { MetadataIntegrityException, DataValidationException } from '../exceptions';
-import DataTypes from './data-types';
-import * as util from './util';
+import DataTypes from './data-types.metadata';
+import * as util from './util.metadata';
 
 /**
  * The fields represent each and every property of any entity. Each field is completely sufficient - it stores configuration about the identification, typing and validation of the property - and all {{#crossLink "Entity"}}entity{{/crossLink}} procedures depending on fields dispatch down the action, that it's interpreted isolatedly.
@@ -59,7 +60,7 @@ import * as util from './util';
  * @class Field
  * @constructor
  */
-export default class Field {
+export default class Field extends Element {
 
     /**
      * Constructor for the class
@@ -69,6 +70,7 @@ export default class Field {
      * @throws {MetadataIntegrityException} If the field's metadata is corrupt in any way, an exception is thrown.
      */
     constructor(props) {
+        super();
 
         /**
          * The **name** for the field. A field's name **must** be unique within each entity.

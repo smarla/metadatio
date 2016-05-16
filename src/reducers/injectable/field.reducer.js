@@ -56,6 +56,14 @@ export default class FieldReducer extends InjectableReducer {
         });
     }
 
+    combine() {
+        const validators = this.getValidatorReducers();
+        return combineReducers({
+            info: this.reduce,
+            validators
+        });
+    }
+
     /**
      * Performs a reduction on a validator state, upon a validation change action.
      *
@@ -67,8 +75,7 @@ export default class FieldReducer extends InjectableReducer {
     reduce(state = FieldReducer.initialState, action) {
         InjectableReducer.verify(state, action);
         if(action.uuid !== state.get('uuid')) return state;
-
-        // TODO Save history
+        
         switch(action.type) {
             case FieldActions.VALUE_CHANGED:
                 return Map({

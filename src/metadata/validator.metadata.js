@@ -2,7 +2,8 @@
  * Created by sm on 01/05/16.
  */
 
-import ValidatorTypes from './validator-types';
+import Element from './element.metadata';
+import ValidatorTypes from './validator-types.metadata';
 import {ValidatorException} from '../exceptions';
 
 
@@ -16,7 +17,7 @@ import {ValidatorException} from '../exceptions';
  * @constructor
  *
  */
-export default class Validator {
+export default class Validator extends Element {
 
     /**
      * Creates a new validator instance, for validating using a certain method, with the validator match given
@@ -26,6 +27,8 @@ export default class Validator {
      * @param validator {string|RegExp|Object|function} The validator to match values against
      */
     constructor(type, validator) {
+        super();
+
         this.type = type;
         this.validator = validator;
 
