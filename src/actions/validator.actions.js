@@ -3,8 +3,8 @@
  */
 
 export class ValidatorActions {
-    static VALIDATION_OK = 'validation_ok';
-    static VALIDATION_KO = 'validation_ko';
+    static VALIDATION_OK = 'validator_validation_ok';
+    static VALIDATION_KO = 'validator_validation_ko';
 
     constructor() {
 

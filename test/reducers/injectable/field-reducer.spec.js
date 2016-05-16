@@ -5,97 +5,23 @@
 import { Map } from 'immutable';
 import { expect } from 'chai';
 
-const EXPECTING_ERROR = new Error('An exception was expected here');
+import { FieldReducer } from '../../../src/reducers/injectable';
+import { FieldActions } from '../../../src/actions/field.actions';
 
-describe.skip('The field reducer', () => {
+describe.only('The field reducer', () => {
     let reducer = null;
 
     beforeEach(() => {
-        reducer = new ValidatorReducer('uuid');
+        reducer = new FieldReducer('uuid');
     });
 
-    it('should verify that a state object is given', (done) => {
-        try {
-            reducer.reduce(null);
-            done(EXPECTING_ERROR);
-        } catch(e) {
-            expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RIV003')
-            done();
-        }
-    });
 
-    it('should verify that the state object is an immutable Map', (done) => {
-        try {
-            reducer.reduce('wrong');
-            done(EXPECTING_ERROR);
-        } catch(e) {
-            expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RIV004')
-            done();
-        }
-    });
 
-    it('should receive an action to process', (done) => {
-        try {
-            reducer.reduce();
-            done(EXPECTING_ERROR);
-        } catch(e) {
-            expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RIV005')
-            done();
-        }
-    });
-
-    it('should receive an object as action', (done) => {
-        try {
-            reducer.reduce(undefined, 'wrong');
-            done(EXPECTING_ERROR);
-        } catch(e) {
-            expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RIV006')
-            done();
-        }
-    });
-
-    it('should receive an action with a \'type\' defined', (done) => {
-        try {
-            reducer.reduce(undefined, {});
-            done(EXPECTING_ERROR);
-        } catch(e) {
-            expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RIV007')
-            done();
-        }
-    });
-
-    it('should receive a string as action type', (done) => {
-        try {
-            reducer.reduce(undefined, { type: 123 });
-            done(EXPECTING_ERROR);
-        } catch(e) {
-            expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RIV008')
-            done();
-        }
-    });
-
-    it('should receive an action with a \'uuid\' defined', (done) => {
-        try {
-            reducer.reduce(undefined, { type: 'SOME_ACTION' });
-            done(EXPECTING_ERROR);
-        } catch(e) {
-            expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RIV009')
-            done();
-        }
-    });
-
-    it('should return the same state on any action not interesting for the field', () => {
+    it('should return the same state on any action not interesting for the validator', () => {
         const state = Map({
             uuid: '123',
             valid: true,
-            field
+            value: 'abc'
         });
 
         const nextState = reducer.reduce(state, { type: 'SOME_UNWANTED_ACTION', uuid: '123' });
@@ -106,33 +32,33 @@ describe.skip('The field reducer', () => {
         const state = Map({
             uuid: '123',
             valid: true,
-            field
+            value: 'abc'
         });
 
-        const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_OK, uuid: 'abc' });
+        const nextState = reducer.reduce(state, { type: FieldActions.VALUE_CHANGED, uuid: 'abc' });
         expect(state).to.equal(nextState);
     });
 
-    it('should set validity to true when it listens to a VALIATION_OK action', () => {
+    it('should set validity to true when it listens to a VALUE_CHANGED action', () => {
         const state = Map({
             uuid: '123',
             valid: true,
-            field
+            value: 'abc'
         });
 
-        const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_OK, uuid: '123' });
+        const nextState = reducer.reduce(state, { type: FieldActions.VALUE_CHANGED, uuid: '123', value: 'bcd' });
         expect(state).to.not.equal(nextState);
-        expect(nextState.get('valid')).to.equal(true);
+        expect(nextState.get('value')).to.equal('bcd');
     });
 
-    it('should set validity to false when it listens to a VALIATION_KO action', () => {
+    it('should set validity to false when it listens to a VALIDATION_CHANGED action', () => {
         const state = Map({
             uuid: '123',
             valid: true,
-            field
+            value: 'abc'
         });
 
-        const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_KO, uuid: '123' });
+        const nextState = reducer.reduce(state, { type: FieldActions.VALIDATION_CHANGED, uuid: '123', valid: false });
         expect(state).to.not.equal(nextState);
         expect(nextState.get('valid')).to.equal(false);
     });
