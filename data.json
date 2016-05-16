@@ -161,8 +161,12 @@
         },
         "src/reducers/injectable/field.reducer.js": {
             "name": "src/reducers/injectable/field.reducer.js",
-            "modules": {},
-            "classes": {},
+            "modules": {
+                "injectable": 1
+            },
+            "classes": {
+                "FieldReducer": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -182,9 +186,7 @@
         },
         "src/reducers/injectable/validator.reducer.js": {
             "name": "src/reducers/injectable/validator.reducer.js",
-            "modules": {
-                "injectable": 1
-            },
+            "modules": {},
             "classes": {
                 "ValidatorReducer": 1
             },
@@ -272,18 +274,20 @@
             },
             "elements": {},
             "classes": {
+                "FieldReducer": 1,
                 "ValidatorReducer": 1
             },
             "fors": {},
             "namespaces": {},
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 12
+            "line": 11
         },
         "injectable": {
             "name": "injectable",
             "submodules": {},
             "elements": {},
             "classes": {
+                "FieldReducer": 1,
                 "ValidatorReducer": 1
             },
             "fors": {},
@@ -292,7 +296,7 @@
             "module": "Reducers",
             "namespace": "",
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 12,
+            "line": 11,
             "description": "This reducer is in charge of controlling all actions dispatched to change the validation status for a field.",
             "extends": "InjectableReducer",
             "is_constructor": 1
@@ -370,6 +374,21 @@
             "line": 9,
             "description": "Validators help you define rules with which you will consider the value given for a field as **valid**."
         },
+        "FieldReducer": {
+            "name": "FieldReducer",
+            "shortname": "FieldReducer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Reducers",
+            "submodule": "injectable",
+            "namespace": "",
+            "file": "src/reducers/injectable/field.reducer.js",
+            "line": 11,
+            "description": "This reducer is in charge of controlling all actions dispatched to change the validation status for a field."
+        },
         "ValidatorReducer": {
             "name": "ValidatorReducer",
             "shortname": "ValidatorReducer",
@@ -382,7 +401,7 @@
             "submodule": "injectable",
             "namespace": "",
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 12,
+            "line": 11,
             "description": "This reducer is in charge of controlling all actions dispatched to change the validation status for a field."
         },
         "Store": {
@@ -1099,40 +1118,98 @@
             "file": "src/reducers/injectable/entity.reducer.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
-            "class": "ValidatorReducer",
+            "class": "FieldReducer",
             "module": "Core"
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
-            "class": "ValidatorReducer",
+            "class": "FieldReducer",
             "module": "Core"
+        },
+        {
+            "file": "src/reducers/injectable/field.reducer.js",
+            "line": 22,
+            "description": "Contains the initial state for any Field. Upon construction, this property is filled with the Field data for further control.\n\nThe basic structure of the `initialState` is:\n\n```\n{\n  uuid: 'Unique ID of the validator',\n  valid: true, // Whether the validation succeeded\n  validator: Field // The actual validator to match against\n}\n```",
+            "itemtype": "property",
+            "name": "initialState",
+            "static": 1,
+            "type": "{immutable.Map}",
+            "class": "FieldReducer",
+            "module": "Reducers",
+            "submodule": "injectable"
+        },
+        {
+            "file": "src/reducers/injectable/field.reducer.js",
+            "line": 45,
+            "description": "Constructor for the validator reducer",
+            "itemtype": "method",
+            "name": "constructor",
+            "params": [
+                {
+                    "name": "uuid",
+                    "description": "Unique ID for the validator",
+                    "type": "String"
+                },
+                {
+                    "name": "validator",
+                    "description": "The validator that performs the validation",
+                    "type": "Field"
+                }
+            ],
+            "class": "FieldReducer",
+            "module": "Reducers",
+            "submodule": "injectable"
+        },
+        {
+            "file": "src/reducers/injectable/field.reducer.js",
+            "line": 59,
+            "description": "Performs a reduction on a validator state, upon a validation change action.",
+            "itemtype": "method",
+            "name": "reduce",
+            "params": [
+                {
+                    "name": "state",
+                    "description": ""
+                },
+                {
+                    "name": "action",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "immutable.Map"
+            },
+            "class": "FieldReducer",
+            "module": "Reducers",
+            "submodule": "injectable"
         },
         {
             "file": "src/reducers/injectable/index.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
             "class": "ValidatorReducer",
-            "module": "Core"
+            "module": "Reducers"
         },
         {
             "file": "src/reducers/injectable/injectable.reducer.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
             "class": "ValidatorReducer",
-            "module": "Core"
+            "module": "Reducers"
         },
         {
             "file": "src/reducers/injectable/validator.reducer.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
             "class": "ValidatorReducer",
-            "module": "Core"
+            "module": "Reducers"
         },
         {
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 23,
+            "line": 22,
             "description": "Contains the initial state for any Validator. Upon construction, this property is filled with the Validator data for further control.\n\nThe basic structure of the `initialState` is:\n\n```\n{\n  uuid: 'Unique ID of the validator',\n  valid: true, // Whether the validation succeeded\n  validator: Validator // The actual validator to match against\n}\n```",
             "itemtype": "property",
             "name": "initialState",
@@ -1144,7 +1221,7 @@
         },
         {
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 46,
+            "line": 45,
             "description": "Constructor for the validator reducer",
             "itemtype": "method",
             "name": "constructor",
@@ -1166,7 +1243,7 @@
         },
         {
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 60,
+            "line": 59,
             "description": "Performs a reduction on a validator state, upon a validation change action.",
             "itemtype": "method",
             "name": "reduce",
@@ -1332,7 +1409,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/validator.reducer.js:60"
+            "line": " src/reducers/injectable/field.reducer.js:59"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/reducers/injectable/validator.reducer.js:59"
         },
         {
             "message": "replacing incorrect tag: returns with return",

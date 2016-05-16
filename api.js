@@ -3,6 +3,7 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "Entity",
         "Field",
+        "FieldReducer",
         "MetadataIntegrityException",
         "Store",
         "Validator",

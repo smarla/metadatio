@@ -86,6 +86,7 @@
                 <div class="bd">
                     <ul>
                             <li><a href="#methods_constructor">constructor</a></li>
+                            <li><a href="#methods_reduce">reduce</a></li>
                     </ul>
                 </div>
             </div>
@@ -107,9 +108,10 @@
         </div>
 
         <div id="main" class="yui3-u">
-            <div class="content"><h1>ValidatorException</h1>
-<!--<span class="foundat">Class defined in: <a href=""><code>src&#x2F;exceptions&#x2F;validator.exception.js:5</code></a></span>-->
-<div class="intro"></div>
+            <div class="content"><h1>FieldReducer</h1>
+<!--<span class="foundat">Class defined in: <a href=""><code>src&#x2F;reducers&#x2F;injectable&#x2F;field.reducer.js:11</code></a></span>-->
+<div class="intro"><p>This reducer is in charge of controlling all actions dispatched to change the validation status for a field.</p>
+</div>
 
 
 <div id="classdocs">
@@ -118,19 +120,55 @@
             <!--<li><a href="#methods">Methods</a></li>-->
         <!---->
         <!---->
+            <!--<li><a href="#props">Properties</a></li>-->
+        <!---->
         <!---->
         <!---->
     <!--</ul>-->
     <div>
+            <h2>Properties</h2>
+            <div id="props">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td>
+                                    <a name="property_initialState"></a>
+                                    <code>initialState</code>
+                                </td>
+                                <td>
+                                    <strong>immutable.Map</strong>  <em>(static)</em><br>
+                                </td>
+                                <td>
+                                    <p>Contains the initial state for any Field. Upon construction, this property is filled with the Field data for further control.</p>
+                            <p>The basic structure of the <code>initialState</code> is:</p>
+                            <pre class="code prettyprint"><code>{
+                              uuid: 'Unique ID of the validator',
+                              valid: true, // Whether the validation succeeded
+                              validator: Field // The actual validator to match against
+                            }
+                            </code></pre>
+                            
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h2>Methods</h2>
             <div id="methods">
                     <a name="method_constructor"></a>
                     <div class="method item">
                          <strong
-                            class="name"><code>constructor</code></strong>( <code>e </code> ) 
+                            class="name"><code>constructor</code></strong>( <code>uuid, validator </code> ) 
                         <br>
-                        <p>Constructs a new exception</p>
+                        <p>Constructor for the validator reducer</p>
                     
                             <h4>Parameters:</h4>
                             <table>
@@ -144,7 +182,63 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                                <code>e</code>
+                                                <code>uuid</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong>
+                                        </td>
+                                        <td>
+                                            <p>Unique ID for the validator</p>
+                    
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                                <code>validator</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="../classes/Field.html" class="crosslink">Field</a></strong>
+                                        </td>
+                                        <td>
+                                            <p>The validator that performs the validation</p>
+                    
+                                        </td>
+                                    </tr>
+                    
+                                </tbody>
+                            </table>
+                    </div>
+                    <a name="method_reduce"></a>
+                    <div class="method item">
+                        immutable.Map <strong
+                            class="name"><code>reduce</code></strong>( <code>state, action </code> ) 
+                        <br>
+                        <p>Performs a reduction on a validator state, upon a validation change action.</p>
+                    
+                            <h4>Parameters:</h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                                <code>state</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong>
+                                        </td>
+                                        <td>
+                                             
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                                <code>action</code>
                                         </td>
                                         <td>
                                             <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong>
@@ -156,6 +250,9 @@
                     
                                 </tbody>
                             </table>
+                                <br>
+                                <div class="returns">
+                                    <strong>Returns:</strong> immutable.Map </div>
                     </div>
             </div>
 
