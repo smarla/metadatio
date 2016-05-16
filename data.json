@@ -1162,13 +1162,8 @@
             "name": "constructor",
             "params": [
                 {
-                    "name": "uuid",
-                    "description": "Unique ID for the validator",
-                    "type": "String"
-                },
-                {
-                    "name": "validator",
-                    "description": "The validator that performs the validation",
+                    "name": "field",
+                    "description": "The field to associate with the reducer",
                     "type": "Field"
                 }
             ],
@@ -1178,7 +1173,33 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 67,
+            "line": 62,
+            "description": "Combines the field information reducer - that handles the data within this reducer - and the inner validation and history reducers.",
+            "itemtype": "method",
+            "name": "combine",
+            "return": {
+                "description": "",
+                "type": "Reducer<S>|Function"
+            },
+            "class": "FieldReducer",
+            "module": "Reducers",
+            "submodule": "injectable"
+        },
+        {
+            "file": "src/reducers/injectable/field.reducer.js",
+            "line": 76,
+            "description": "Returns a combined reducer including all validators within the field.",
+            "return": {
+                "description": "",
+                "type": "Reducer<S>|Function"
+            },
+            "class": "FieldReducer",
+            "module": "Reducers",
+            "submodule": "injectable"
+        },
+        {
+            "file": "src/reducers/injectable/field.reducer.js",
+            "line": 86,
             "description": "Performs a reduction on a validator state, upon a validation change action.",
             "itemtype": "method",
             "name": "reduce",
@@ -1425,7 +1446,15 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/field.reducer.js:67"
+            "line": " src/reducers/injectable/field.reducer.js:62"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/reducers/injectable/field.reducer.js:76"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/reducers/injectable/field.reducer.js:86"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -1526,6 +1555,10 @@
         {
             "message": "Missing item type\nCreated by sm on 14/05/16.",
             "line": " src/reducers/injectable/field.reducer.js:1"
+        },
+        {
+            "message": "Missing item type\nReturns a combined reducer including all validators within the field.",
+            "line": " src/reducers/injectable/field.reducer.js:76"
         },
         {
             "message": "Missing item type\nCreated by sm on 14/05/16.",

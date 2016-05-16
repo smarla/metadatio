@@ -86,6 +86,7 @@
                 <div class="bd">
                     <ul>
                             <li><a href="#methods_constructor">constructor</a></li>
+                            <li><a href="#methods_combine">combine</a></li>
                             <li><a href="#methods_reduce">reduce</a></li>
                     </ul>
                 </div>
@@ -166,7 +167,7 @@
                     <a name="method_constructor"></a>
                     <div class="method item">
                          <strong
-                            class="name"><code>constructor</code></strong>( <code>uuid, validator </code> ) 
+                            class="name"><code>constructor</code></strong>( <code>field </code> ) 
                         <br>
                         <p>Constructor for the validator reducer</p>
                     
@@ -182,31 +183,30 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                                <code>uuid</code>
-                                        </td>
-                                        <td>
-                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong>
-                                        </td>
-                                        <td>
-                                            <p>Unique ID for the validator</p>
-                    
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                                <code>validator</code>
+                                                <code>field</code>
                                         </td>
                                         <td>
                                             <strong><a href="../classes/Field.html" class="crosslink">Field</a></strong>
                                         </td>
                                         <td>
-                                            <p>The validator that performs the validation</p>
+                                            <p>The field to associate with the reducer</p>
                     
                                         </td>
                                     </tr>
                     
                                 </tbody>
                             </table>
+                    </div>
+                    <a name="method_combine"></a>
+                    <div class="method item">
+                        Reducer<S> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a> <strong
+                            class="name"><code>combine</code></strong>( <code>  </code> ) 
+                        <br>
+                        <p>Combines the field information reducer - that handles the data within this reducer - and the inner validation and history reducers.</p>
+                    
+                                <br>
+                                <div class="returns">
+                                    <strong>Returns:</strong> Reducer<S> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a> </div>
                     </div>
                     <a name="method_reduce"></a>
                     <div class="method item">
