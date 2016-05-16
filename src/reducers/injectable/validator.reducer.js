@@ -65,16 +65,9 @@ export default class ValidatorReducer extends InjectableReducer {
      * @returns {immutable.Map}
      */
     reduce(state = ValidatorReducer.initialState, action) {
-        if(!state) throw new ReducerException('RI003');
-        if(!(state instanceof Map)) throw new ReducerException('RI004');
-        if(!action) throw new ReducerException('RI005');
-        if(typeof(action) !== 'object') throw new ReducerException('RI006');
-        if(!action.type) throw new ReducerException('RI007');
-        if(typeof(action.type) !== 'string') throw new ReducerException('RI008');
-        if(!action.uuid) throw new ReducerException('RI009');
-
+        InjectableReducer.verify(state, action);
         if(action.uuid !== state.get('uuid')) return state;
-
+        
         // TODO Save history
         switch(action.type) {
             case ValidatorActions.VALIDATION_OK:

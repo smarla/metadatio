@@ -62,6 +62,85 @@ describe('The injectable reducer', () => {
         });
     });
 
+    describe('upon reduction verification', () => {
+        it('should verify that a state object is given', (done) => {
+            try {
+                InjectableReducer.verify(null);
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('ReducerException');
+                expect(e.code).to.equal('RI003');
+                done();
+            }
+        });
+
+        it('should verify that the state object is an immutable Map', (done) => {
+            try {
+                InjectableReducer.verify('wrong');
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('ReducerException');
+                expect(e.code).to.equal('RI004');
+                done();
+            }
+        });
+
+        it('should receive an action to process', (done) => {
+            try {
+                InjectableReducer.verify(Map({}));
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('ReducerException');
+                expect(e.code).to.equal('RI005');
+                done();
+            }
+        });
+
+        it('should receive an object as action', (done) => {
+            try {
+                InjectableReducer.verify(Map({}), 'wrong');
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('ReducerException');
+                expect(e.code).to.equal('RI006');
+                done();
+            }
+        });
+
+        it('should receive an action with a \'type\' defined', (done) => {
+            try {
+                InjectableReducer.verify(Map({}), {});
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('ReducerException');
+                expect(e.code).to.equal('RI007');
+                done();
+            }
+        });
+
+        it('should receive a string as action type', (done) => {
+            try {
+                InjectableReducer.verify(Map({}), { type: 123 });
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('ReducerException');
+                expect(e.code).to.equal('RI008');
+                done();
+            }
+        });
+
+        it('should receive an action with a \'uuid\' defined', (done) => {
+            try {
+                InjectableReducer.verify(Map({}), { type: 'SOME_ACTION' });
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('ReducerException');
+                expect(e.code).to.equal('RI009');
+                done();
+            }
+        });
+    });
+
     describe('upon reduction', () => {
         it('should return the initial state if nothing is received', () => {
             const initialState = Map({});
@@ -78,5 +157,5 @@ describe('The injectable reducer', () => {
             const reduction = reducer.reduce(finalState);
             expect(reduction).to.equal(finalState);
         });
-    })
+    });
 });

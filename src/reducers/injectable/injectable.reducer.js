@@ -2,6 +2,7 @@
  * Created by sm on 14/05/16.
  */
 
+import { Map } from 'immutable';
 import { ReducerException } from '../../exceptions';
 
 export default class InjectableReducer {
@@ -16,7 +17,16 @@ export default class InjectableReducer {
     }
     
     reduce(state = this.initialState) {
-
         return state;
+    }
+
+    static verify(state, action) {
+        if(!state) throw new ReducerException('RI003');
+        if(!(state instanceof Map)) throw new ReducerException('RI004');
+        if(!action) throw new ReducerException('RI005');
+        if(typeof(action) !== 'object') throw new ReducerException('RI006');
+        if(!action.type) throw new ReducerException('RI007');
+        if(typeof(action.type) !== 'string') throw new ReducerException('RI008');
+        if(!action.uuid) throw new ReducerException('RI009');
     }
 }

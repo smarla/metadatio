@@ -13,95 +13,17 @@ const EXPECTING_ERROR = new Error('An exception was expected here');
 
 describe('The validator reducer', () => {
     let reducer = null;
-    let validator = null;
 
     beforeEach(() => {
-        validator = new Validator(ValidatorTypes.required);
-        reducer = new ValidatorReducer('uuid', validator);
+        reducer = new ValidatorReducer('uuid');
     });
 
-    it('should verify that a state object is given', (done) => {
-        try {
-            reducer.reduce(null);
-            done(EXPECTING_ERROR);
-        } catch(e) {
-            expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RI003')
-            done();
-        }
-    });
 
-    it('should verify that the state object is an immutable Map', (done) => {
-        try {
-            reducer.reduce('wrong');
-            done(EXPECTING_ERROR);
-        } catch(e) {
-            expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RI004')
-            done();
-        }
-    });
-
-    it('should receive an action to process', (done) => {
-        try {
-            reducer.reduce();
-            done(EXPECTING_ERROR);
-        } catch(e) {
-            expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RI005')
-            done();
-        }
-    });
-
-    it('should receive an object as action', (done) => {
-        try {
-            reducer.reduce(undefined, 'wrong');
-            done(EXPECTING_ERROR);
-        } catch(e) {
-            expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RI006')
-            done();
-        }
-    });
-
-    it('should receive an action with a \'type\' defined', (done) => {
-        try {
-            reducer.reduce(undefined, {});
-            done(EXPECTING_ERROR);
-        } catch(e) {
-            expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RI007')
-            done();
-        }
-    });
-
-    it('should receive a string as action type', (done) => {
-        try {
-            reducer.reduce(undefined, { type: 123 });
-            done(EXPECTING_ERROR);
-        } catch(e) {
-            expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RI008')
-            done();
-        }
-    });
-
-    it('should receive an action with a \'uuid\' defined', (done) => {
-        try {
-            reducer.reduce(undefined, { type: 'SOME_ACTION' });
-            done(EXPECTING_ERROR);
-        } catch(e) {
-            expect(e.className).to.equal('ReducerException');
-            expect(e.code).to.equal('RI009')
-            done();
-        }
-    });
 
     it('should return the same state on any action not interesting for the validator', () => {
         const state = Map({
             uuid: '123',
-            valid: true,
-            validator
+            valid: true
         });
 
         const nextState = reducer.reduce(state, { type: 'SOME_UNWANTED_ACTION', uuid: '123' });
@@ -111,8 +33,7 @@ describe('The validator reducer', () => {
     it('should return the same state on any action with different uuid', () => {
         const state = Map({
             uuid: '123',
-            valid: true,
-            validator
+            valid: true
         });
 
         const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_OK, uuid: 'abc' });
@@ -122,8 +43,7 @@ describe('The validator reducer', () => {
     it('should set validity to true when it listens to a VALIATION_OK action', () => {
         const state = Map({
             uuid: '123',
-            valid: true,
-            validator
+            valid: true
         });
 
         const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_OK, uuid: '123' });
@@ -134,8 +54,7 @@ describe('The validator reducer', () => {
     it('should set validity to false when it listens to a VALIATION_KO action', () => {
         const state = Map({
             uuid: '123',
-            valid: true,
-            validator
+            valid: true
         });
 
         const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_KO, uuid: '123' });
