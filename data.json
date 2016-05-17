@@ -21,6 +21,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/actions/index.js": {
+            "name": "src/actions/index.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/actions/metadatio.actions.js": {
             "name": "src/actions/metadatio.actions.js",
             "modules": {},
@@ -350,7 +357,7 @@
             "module": "Core",
             "namespace": "",
             "file": "src/metadata/entity.metadata.js",
-            "line": 10,
+            "line": 11,
             "description": "Entities represent real-world elements, that you need to manage within your app.\nExample entities are _Person_, _Car_, and whatever else you can imagine.\n\nEntities by itself don't contain any particular feature - apart from identification, and grouping -. Whilst some Metadatio modules will extend this objects to enrich its features, at it's core an Entity is basically a container for fields.\n\n## Usage\n\n```\nconst entity = new Entity({\n  name: 'Friend',\n  [label: 'Friend',]\n  [namespace: 'people',]\n  [description: 'description...',]\n  [fields: [...]]\n});\n```\n\n## Entity hierarchy\n\nYou can easily define hierarchy between your entities, by leveraging the {{#crossLink \"Entity/parent:property\"}}parent{{/crossLink}} property.\n\n```\nconst parent = new Entity({ name: 'parent-entity', ... });\nconst child = new Entity({ name: 'child-entity', parent: parent });\n```\n\n## Namespaces\n\nEntities are grouped together via `namespaces`, that shall contain entities dedicated to the same purpose, or that are related among each others.\n\nThe `namespace` is a String set directly to the entity upon creation. If you don't set a namespace, the value `'default'` is used. So if you're only planning to use one namespace you can skip this.\n\n\n## Fields\n\nFields are instances of {{#crossLink \"Field\"}}Field{{/crossLink}}, that you can attach upon entity creation, or at any time, by using the built-in {{#crossLink \"Entity/addField:method\"}}addField{{/crossLink}} method.\n\n## Validation\n\nEntities are provided with a native validation system, to determine whether the values set within an object that should comply with entity specification are valid. Basically, entity validation targets the value for each {{#crossLink \"Field\"}}field{{/crossLink}} within the entity, and launches the {{#crossLink \"Field/validate:method\"}}field's validation system{{/crossLink}}."
         },
         "Field": {
@@ -438,6 +445,12 @@
             "file": "src/actions/field.actions.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
+            "class": "MetadataIntegrityException"
+        },
+        {
+            "file": "src/actions/index.js",
+            "line": 1,
+            "description": "Created by sm on 17/05/16.",
             "class": "MetadataIntegrityException"
         },
         {
@@ -749,7 +762,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 60,
+            "line": 61,
             "description": "Constructor for the class",
             "itemtype": "method",
             "name": "constructor",
@@ -768,7 +781,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 71,
+            "line": 73,
             "description": "Stores the name of the entity. This name must be unique across the same {{#crossLink \"Entity/namespace:property\"}}namespace{{/crossLink}}. It is the only required value upon construction.\n\nEntity name **must** be a String, with length from 2 to 64 characters. It can only contain `a-z, A-Z` characters, digits, hyphens and underscores. All names **must** start with an `a-z, A-Z` or underscore character.",
             "example": [
                 "\n    new Entity({ name: 'foo-bar_123', ... }) // OK",
@@ -785,7 +798,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 92,
+            "line": 94,
             "description": "Description for the field",
             "itemtype": "property",
             "name": "description",
@@ -795,7 +808,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 100,
+            "line": 102,
             "itemtype": "property",
             "name": "namespace",
             "type": "{string}",
@@ -805,7 +818,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 107,
+            "line": 109,
             "description": "Optionnally, you can define a label for the entity. The label would represent a human-readable name for the entity. It's actually useful if you wish to provided translated names for the entity - as you can set a placeholder as label - but otherwise might be not that useful, and with the {{#crossLink \"Entity/name:property\"}}name{{/crossLink}} it may suffice.",
             "example": [
                 "\n    new Entity({ label: 'Foo', ... }) // Plain label",
@@ -820,7 +833,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 121,
+            "line": 123,
             "description": "Parent entity. If an entity is an extension of some one more basic, you can link here the parent entity.\n\n\nIf your entity extends from another, **it will inherit parent's validation rules** too. The fields you extended on the child class will be validated with your defined validators, but those defined at parent's level will be validated with theirs. If you wish to override a field's validation for a parent within a child, simply include such field in the child's {{#crossLink \"Entity/fields:property\"}}fields{{/crossLink}} array.",
             "itemtype": "property",
             "name": "parent",
@@ -835,7 +848,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 137,
+            "line": 139,
             "description": "Entity fields",
             "itemtype": "property",
             "name": "fields",
@@ -849,7 +862,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 161,
+            "line": 163,
             "description": "Adds a field to the entity",
             "itemtype": "method",
             "name": "addField",
@@ -877,7 +890,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 179,
+            "line": 181,
             "description": "Validates that an object parameters comply with corresponding field's validation rules.",
             "itemtype": "method",
             "name": "validate",
@@ -1149,7 +1162,7 @@
             "itemtype": "property",
             "name": "initialState",
             "static": 1,
-            "type": "{immutable.Map}",
+            "type": "{Map}",
             "class": "FieldReducer",
             "module": "Reducers",
             "submodule": "injectable"
@@ -1179,7 +1192,7 @@
             "name": "combine",
             "return": {
                 "description": "",
-                "type": "Reducer<S>|Function"
+                "type": "Reducer"
             },
             "class": "FieldReducer",
             "module": "Reducers",
@@ -1187,7 +1200,7 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 94,
+            "line": 96,
             "description": "Performs a reduction on a validator state, upon a validation change action.",
             "itemtype": "method",
             "name": "reduce",
@@ -1203,7 +1216,7 @@
             ],
             "return": {
                 "description": "",
-                "type": "immutable.Map"
+                "type": "Map"
             },
             "class": "FieldReducer",
             "module": "Reducers",
@@ -1414,11 +1427,11 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/entity.metadata.js:161"
+            "line": " src/metadata/entity.metadata.js:163"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/entity.metadata.js:179"
+            "line": " src/metadata/entity.metadata.js:181"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -1438,7 +1451,7 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/field.reducer.js:94"
+            "line": " src/reducers/injectable/field.reducer.js:96"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -1459,6 +1472,10 @@
         {
             "message": "Missing item type\nCreated by sm on 14/05/16.",
             "line": " src/actions/field.actions.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 17/05/16.",
+            "line": " src/actions/index.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 14/05/16.",
