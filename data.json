@@ -287,7 +287,7 @@
             "fors": {},
             "namespaces": {},
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 10
+            "line": 12
         },
         "injectable": {
             "name": "injectable",
@@ -303,7 +303,7 @@
             "module": "Reducers",
             "namespace": "",
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 10,
+            "line": 12,
             "description": "This reducer is in charge of controlling all actions dispatched to change the validation status for a field.",
             "extends": "InjectableReducer",
             "is_constructor": 1
@@ -393,7 +393,7 @@
             "submodule": "injectable",
             "namespace": "",
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 11,
+            "line": 13,
             "description": "This reducer is in charge of controlling all actions dispatched to change the validation status for a field."
         },
         "ValidatorReducer": {
@@ -408,7 +408,7 @@
             "submodule": "injectable",
             "namespace": "",
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 10,
+            "line": 12,
             "description": "This reducer is in charge of controlling all actions dispatched to change the validation status for a field."
         },
         "Store": {
@@ -1144,7 +1144,7 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 22,
+            "line": 24,
             "description": "Contains the initial state for any Field. Upon construction, this property is filled with the Field data for further control.\n\nThe basic structure of the `initialState` is:\n\n```\n{\n  uuid: 'Unique ID of the validator',\n  valid: true, // Whether the validation succeeded\n  validator: Field // The actual validator to match against\n}\n```",
             "itemtype": "property",
             "name": "initialState",
@@ -1156,7 +1156,7 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 45,
+            "line": 47,
             "description": "Constructor for the validator reducer",
             "itemtype": "method",
             "name": "constructor",
@@ -1173,7 +1173,7 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 62,
+            "line": 75,
             "description": "Combines the field information reducer - that handles the data within this reducer - and the inner validation and history reducers.",
             "itemtype": "method",
             "name": "combine",
@@ -1187,19 +1187,7 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 76,
-            "description": "Returns a combined reducer including all validators within the field.",
-            "return": {
-                "description": "",
-                "type": "Reducer<S>|Function"
-            },
-            "class": "FieldReducer",
-            "module": "Reducers",
-            "submodule": "injectable"
-        },
-        {
-            "file": "src/reducers/injectable/field.reducer.js",
-            "line": 86,
+            "line": 89,
             "description": "Performs a reduction on a validator state, upon a validation change action.",
             "itemtype": "method",
             "name": "reduce",
@@ -1244,7 +1232,7 @@
         },
         {
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 21,
+            "line": 23,
             "description": "Contains the initial state for any Validator. Upon construction, this property is filled with the Validator data for further control.\n\nThe basic structure of the `initialState` is:\n\n```\n{\n  uuid: 'Unique ID of the validator',\n  valid: true, // Whether the validation succeeded\n}\n```",
             "itemtype": "property",
             "name": "initialState",
@@ -1256,7 +1244,7 @@
         },
         {
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 42,
+            "line": 44,
             "description": "Constructor for the validator reducer",
             "itemtype": "method",
             "name": "constructor",
@@ -1280,7 +1268,7 @@
         },
         {
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 59,
+            "line": 64,
             "description": "Performs a reduction on a validator state, upon a validation change action.",
             "itemtype": "method",
             "name": "reduce",
@@ -1446,19 +1434,15 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/field.reducer.js:62"
+            "line": " src/reducers/injectable/field.reducer.js:75"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/field.reducer.js:76"
+            "line": " src/reducers/injectable/field.reducer.js:89"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/field.reducer.js:86"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/validator.reducer.js:59"
+            "line": " src/reducers/injectable/validator.reducer.js:64"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -1555,10 +1539,6 @@
         {
             "message": "Missing item type\nCreated by sm on 14/05/16.",
             "line": " src/reducers/injectable/field.reducer.js:1"
-        },
-        {
-            "message": "Missing item type\nReturns a combined reducer including all validators within the field.",
-            "line": " src/reducers/injectable/field.reducer.js:76"
         },
         {
             "message": "Missing item type\nCreated by sm on 14/05/16.",
