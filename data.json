@@ -393,7 +393,7 @@
             "submodule": "injectable",
             "namespace": "",
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 13,
+            "line": 14,
             "description": "This reducer is in charge of controlling all actions dispatched to change the validation status for a field."
         },
         "ValidatorReducer": {
@@ -1144,7 +1144,7 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 24,
+            "line": 25,
             "description": "Contains the initial state for any Field. Upon construction, this property is filled with the Field data for further control.\n\nThe basic structure of the `initialState` is:\n\n```\n{\n  uuid: 'Unique ID of the validator',\n  valid: true, // Whether the validation succeeded\n  validator: Field // The actual validator to match against\n}\n```",
             "itemtype": "property",
             "name": "initialState",
@@ -1156,7 +1156,7 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 47,
+            "line": 48,
             "description": "Constructor for the validator reducer",
             "itemtype": "method",
             "name": "constructor",
@@ -1173,7 +1173,7 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 75,
+            "line": 76,
             "description": "Combines the field information reducer - that handles the data within this reducer - and the inner validation and history reducers.",
             "itemtype": "method",
             "name": "combine",
@@ -1187,7 +1187,7 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 89,
+            "line": 94,
             "description": "Performs a reduction on a validator state, upon a validation change action.",
             "itemtype": "method",
             "name": "reduce",
@@ -1434,11 +1434,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/field.reducer.js:75"
+            "line": " src/reducers/injectable/field.reducer.js:76"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/field.reducer.js:89"
+            "line": " src/reducers/injectable/field.reducer.js:94"
         },
         {
             "message": "replacing incorrect tag: returns with return",
