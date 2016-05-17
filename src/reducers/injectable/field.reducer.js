@@ -3,6 +3,7 @@
  */
 
 import { Map } from 'immutable';
+import { combineReducers } from 'redux';
 
 import { Field } from '../../metadata';
 import InjectableReducer from './injectable.reducer';
@@ -79,7 +80,11 @@ export default class FieldReducer extends InjectableReducer {
      * @returns {Reducer<S>|Function}
      */
     combine() {
-        const validators = combineReducers(this.validators.map(item => item.reduce));
+        const validators = {};
+        for(let validatorName in this.validators) {
+            const validator = this.validators[validatorName];
+            validators[validatorName] = validator.reduce;
+        }
         return combineReducers({
             info: this.reduce,
             validators
