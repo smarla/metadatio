@@ -2,6 +2,7 @@
  * Created by sm on 06/05/16.
  */
 
+import Element from './element.metadata';
 import Field from './field.metadata';
 
 import { MetadataIntegrityException } from '../exceptions';
@@ -55,7 +56,7 @@ import * as util from './util.metadata';
  * @constructor
  *
  */
-export default class Entity {
+export default class Entity extends Element {
 
     /**
      * Constructor for the class
@@ -67,6 +68,7 @@ export default class Entity {
      *      .addField(...) // Add your fields
      */
     constructor(props) {
+        super();
 
         /**
          * Stores the name of the entity. This name must be unique across the same {{#crossLink "Entity/namespace:property"}}namespace{{/crossLink}}. It is the only required value upon construction.

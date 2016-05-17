@@ -5,6 +5,7 @@
 import { Map } from 'immutable';
 import { combineReducers } from 'redux';
 
+import { EntityActions } from '../../actions/entity.actions';
 import { Entity } from '../../metadata';
 import InjectableReducer from './injectable.reducer';
 import FieldReducer from './field.reducer';
@@ -14,7 +15,7 @@ import { ReducerException } from '../../exceptions';
 export default class EntityReducer extends InjectableReducer {
     static initialState = Map({
         uuid: null,
-        entityType: null
+        changedAt: null
     });
 
     constructor(entity) {
@@ -23,19 +24,48 @@ export default class EntityReducer extends InjectableReducer {
 
         super({
             uuid: entity.uuid,
-            initialState: EntityReducer.initialState
+            initialState: Map({
+                uuid: entity.uuid,
+                changedAt: null
+            })
         });
+
+        this.fields = {};
+        for(let i = 0; i < entity.fields.length; i++) {
+            const field = entity.fields[i];
+            const fieldName = field.name;
+            const uuid = field.uuid;
+            const reducer = new FieldReducer(field);
+            this.fields[fieldName] = reducer;
+        }
     }
 
     combine() {
-        const fields = this.getFieldReducers();
+        const objFields = {};
+        for(let fieldName in this.fields) {
+            const field = this.fields[fieldName];
+            objFields[fieldName] = field.reduce;
+        }
+
+        const fields = combineReducers(objFields);
         return combineReducers({
             info: this.reduce,
             fields
         });
     }
 
-    reduce(state = EntityReducer.initialState) {
+    reduce(state = EntityReducer.initialState, action) {
+        InjectableReducer.verify(state, action);
+        if(action.uuid !== state.get('uuid')) return state;
+
+        switch(action.type) {
+            case EntityActions.ENTITY_CHANGED:
+                return Map({
+                    uuid: state.get('uuid'),
+                    changedAt: action.changedAt
+                });
+        }
+
         return state;
     }
 }

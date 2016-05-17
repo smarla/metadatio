@@ -37,7 +37,7 @@ export default class FieldReducer extends InjectableReducer {
      *
      * @property initialState
      * @static
-     * @type {immutable.Map}
+     * @type {Map}
      */
     static initialState = Map({
         uuid: null,
@@ -77,14 +77,16 @@ export default class FieldReducer extends InjectableReducer {
      * Combines the field information reducer - that handles the data within this reducer - and the inner validation and history reducers.
      *
      * @method combine
-     * @returns {Reducer<S>|Function}
+     * @returns {Reducer}
      */
     combine() {
-        const validators = {};
+        const objValidators = {};
         for(let validatorName in this.validators) {
             const validator = this.validators[validatorName];
-            validators[validatorName] = validator.reduce;
+            objValidators[validatorName] = validator.reduce;
         }
+
+        const validators = combineReducers(objValidators);
         return combineReducers({
             info: this.reduce,
             validators
@@ -97,7 +99,7 @@ export default class FieldReducer extends InjectableReducer {
      * @method reduce
      * @param state
      * @param action
-     * @returns {immutable.Map}
+     * @returns {Map}
      */
     reduce(state = FieldReducer.initialState, action) {
         InjectableReducer.verify(state, action);

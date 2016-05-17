@@ -96,14 +96,12 @@ describe('The field reducer', () => {
             reducer = new FieldReducer(field);
         });
 
-        describe('for combining resources', () => {
+        describe('to combine reducer with validators\'', () => {
             it('should expose a \'combine\' function', () => {
-                expect(!reducer.combine).to.equal(false);
                 expect(typeof(reducer.combine)).to.equal('function');
             });
 
             it('should return a combined reducer', () => {
-                expect(!reducer.combine()).to.equal(false);
                 expect(typeof(reducer.combine())).to.equal('function');
             });
         });
