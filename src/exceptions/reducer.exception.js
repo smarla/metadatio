@@ -21,6 +21,15 @@ export default class ReducerException extends Error {
         'RI006': 'The action to reduce must be an object',
         'RI007': 'All actions must contain a \'type\' attribute',
         'RI008': 'Action type sent to reducer must be a string',
-        'RI009': 'All actions must contain a \'uuid\' attribute'
+        'RI009': 'All actions must contain a \'uuid\' attribute',
+
+        'RIE001': 'Entity reducer needs an entity as input',
+        'RIE002': 'Entity reducer needs an instance of Entity',
+
+        'RIF001': 'Field reducer needs a field as input',
+        'RIF002': 'Field reducer needs an instance of Field',
+
+        'RIV001': 'Validator reducer needs a validator as input',
+        'RIV002': 'Validator reducer needs an instance of Validator'
     };
 }

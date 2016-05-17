@@ -3,9 +3,11 @@
  */
 
 import { Map } from 'immutable';
-import InjectableReducer from './injectable.reducer';
-import { ReducerException } from '../../exceptions';
 
+import { Field } from '../../metadata';
+import InjectableReducer from './injectable.reducer';
+import ValidatorReducer from './validator.reducer';
+import { ReducerException } from '../../exceptions';
 import { FieldActions } from '../../actions/field.actions';
 
 /**
@@ -49,6 +51,9 @@ export default class FieldReducer extends InjectableReducer {
      * @param field {Field} The field to associate with the reducer
      */
     constructor(field) {
+        if(!field) throw new ReducerException('RIF001');
+        if(!(field instanceof Field)) throw new ReducerException('RIF002');
+
         super({
             uuid: field.uuid,
             initialState: Map({
@@ -57,6 +62,14 @@ export default class FieldReducer extends InjectableReducer {
                 valid: true
             })
         });
+
+        this.validators = {};
+        for(let validatorName in field.validators) {
+            const validator = field.validators[validatorName];
+            const uuid = validator.uuid;
+            const reducer = new ValidatorReducer(validator);
+            this.validators[validatorName] = reducer;
+        }
     }
 
     /**
@@ -66,21 +79,11 @@ export default class FieldReducer extends InjectableReducer {
      * @returns {Reducer<S>|Function}
      */
     combine() {
-        const validators = this.getValidatorReducers();
+        const validators = combineReducers(this.validators.map(item => item.reduce));
         return combineReducers({
             info: this.reduce,
             validators
         });
-    }
-
-    /**
-     * Returns a combined reducer including all validators within the field.
-     *
-     * @returns {Reducer<S>|Function}
-     */
-    getValidatorReducers() {
-        const reducers = {};
-        return combineReducers(reducers);
     }
 
     /**

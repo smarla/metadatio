@@ -3,9 +3,11 @@
  */
 
 import { Map } from 'immutable';
-import InjectableReducer from './injectable.reducer';
 
+import { Validator } from '../../metadata';
+import InjectableReducer from './injectable.reducer';
 import { ValidatorActions } from '../../actions/validator.actions';
+import { ReducerException } from '../../exceptions';
 
 /**
  * This reducer is in charge of controlling all actions dispatched to change the validation status for a field.
@@ -47,6 +49,9 @@ export default class ValidatorReducer extends InjectableReducer {
      * @param [valid=null] {Boolean} If you want to provide an initial validity for the validator
      */
     constructor(validator, valid) {
+        if(!validator) throw new ReducerException('RIV001');
+        if(!(validator instanceof Validator)) throw new ReducerException('RIV002');
+
         super({
             uuid: validator.uuid,
             initialState: Map({

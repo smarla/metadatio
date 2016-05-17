@@ -9,53 +9,82 @@ import { ValidatorReducer } from '../../../src/reducers/injectable';
 import { ValidatorActions } from '../../../src/actions/validator.actions';
 import { Validator, ValidatorTypes } from '../../../src/metadata';
 
+const EXPECTING_ERROR = new Error('An exception was expected here');
+
 describe('The validator reducer', () => {
-    let reducer = null;
 
-    beforeEach(() => {
-        let validator = new Validator(ValidatorTypes.required);
-        reducer = new ValidatorReducer(validator);
-    });
-
-    it('should return the same state on any action not interesting for the validator', () => {
-        const state = Map({
-            uuid: '123',
-            valid: true
+    describe('upon construction', () => {
+        it('should a parameter as input', (done) => {
+            try {
+                new ValidatorReducer();
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('ReducerException');
+                expect(e.code).to.equal('RIV001');
+                done();
+            }
         });
 
-        const nextState = reducer.reduce(state, { type: 'SOME_UNWANTED_ACTION', uuid: '123' });
-        expect(state).to.equal(nextState);
+        it('should receive an instance of field', (done) => {
+            try {
+                new ValidatorReducer('wrong');
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('ReducerException');
+                expect(e.code).to.equal('RIV002');
+                done();
+            }
+        });
     });
 
-    it('should return the same state on any action with different uuid', () => {
-        const state = Map({
-            uuid: '123',
-            valid: true
+    describe('upon reduction', () => {
+        let reducer = null;
+
+        beforeEach(() => {
+            let validator = new Validator(ValidatorTypes.required);
+            reducer = new ValidatorReducer(validator);
         });
 
-        const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_OK, uuid: 'abc' });
-        expect(state).to.equal(nextState);
-    });
+        it('should return the same state on any action not interesting for the validator', () => {
+            const state = Map({
+                uuid: '123',
+                valid: true
+            });
 
-    it('should set validity to true when it listens to a VALIDATION_OK action', () => {
-        const state = Map({
-            uuid: '123',
-            valid: true
+            const nextState = reducer.reduce(state, { type: 'SOME_UNWANTED_ACTION', uuid: '123' });
+            expect(state).to.equal(nextState);
         });
 
-        const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_OK, uuid: '123' });
-        expect(state).to.not.equal(nextState);
-        expect(nextState.get('valid')).to.equal(true);
-    });
+        it('should return the same state on any action with different uuid', () => {
+            const state = Map({
+                uuid: '123',
+                valid: true
+            });
 
-    it('should set validity to false when it listens to a VALIDATION_KO action', () => {
-        const state = Map({
-            uuid: '123',
-            valid: true
+            const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_OK, uuid: 'abc' });
+            expect(state).to.equal(nextState);
         });
 
-        const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_KO, uuid: '123' });
-        expect(state).to.not.equal(nextState);
-        expect(nextState.get('valid')).to.equal(false);
+        it('should set validity to true when it listens to a VALIDATION_OK action', () => {
+            const state = Map({
+                uuid: '123',
+                valid: true
+            });
+
+            const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_OK, uuid: '123' });
+            expect(state).to.not.equal(nextState);
+            expect(nextState.get('valid')).to.equal(true);
+        });
+
+        it('should set validity to false when it listens to a VALIDATION_KO action', () => {
+            const state = Map({
+                uuid: '123',
+                valid: true
+            });
+
+            const nextState = reducer.reduce(state, { type: ValidatorActions.VALIDATION_KO, uuid: '123' });
+            expect(state).to.not.equal(nextState);
+            expect(nextState.get('valid')).to.equal(false);
+        });
     });
 });

@@ -6,34 +6,96 @@ import { Map } from 'immutable';
 import { expect } from 'chai';
 
 import { DataTypes, Field, Validator, ValidatorTypes } from '../../../src/metadata';
-import { FieldReducer } from '../../../src/reducers/injectable';
+import { FieldReducer, ValidatorReducer } from '../../../src/reducers/injectable';
 import { FieldActions } from '../../../src/actions/field.actions';
 
-describe('The field reducer', () => {
-    let reducer = null;
-    let field = null;
+const EXPECTING_ERROR = new Error('An exception was expected here');
 
-    beforeEach(() => {
-        field = new Field({
-            name: "name",
-            label: "Name of your app",
-            shortLabel: null,
-            hint: null,
-            dataType: DataTypes.string,
-            multiplicity: 'one',
-            validators: {
-                pattern: new Validator(ValidatorTypes.regex, /^123$/)
+describe('The field reducer', () => {
+
+    describe('upon construction', () => {
+        it('should a parameter as input', (done) => {
+            try {
+                new FieldReducer();
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('ReducerException');
+                expect(e.code).to.equal('RIF001');
+                done();
             }
         });
 
-        reducer = new FieldReducer(field);
-    });
+        it('should receive an instance of field', (done) => {
+            try {
+                new FieldReducer('wrong');
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('ReducerException');
+                expect(e.code).to.equal('RIF002');
+                done();
+            }
+        });
 
-    describe('upon construction', () => {
-        
+        describe('for engaging validation', () => {
+
+            it('should create one validator reducer instances for fields with one validator', () => {
+                const field = new Field({
+                    name: "name",
+                    label: "Name of your app",
+                    shortLabel: null,
+                    hint: null,
+                    dataType: DataTypes.string,
+                    multiplicity: 'one',
+                    validators: {
+                        pattern: new Validator(ValidatorTypes.regex, /^123$/)
+                    }
+                });
+
+                const reducer = new FieldReducer(field);
+                expect(reducer.validators.pattern).to.be.an.instanceof(ValidatorReducer);
+            });
+
+            it('should create two validator reducer instances for fields with two validators', () => {
+                const field = new Field({
+                    name: "name",
+                    label: "Name of your app",
+                    shortLabel: null,
+                    hint: null,
+                    dataType: DataTypes.string,
+                    multiplicity: 'one',
+                    validators: {
+                        pattern: new Validator(ValidatorTypes.regex, /^123$/),
+                        lengths: new Validator(ValidatorTypes.length, { min: 1, max: 4 })
+                    }
+                });
+
+                const reducer = new FieldReducer(field);
+                expect(reducer.validators.pattern).to.be.an.instanceof(ValidatorReducer);
+                expect(reducer.validators.lengths).to.be.an.instanceof(ValidatorReducer);
+            });
+        });
     });
 
     describe('upon reduction', () => {
+        let reducer = null;
+        let field = null;
+
+        beforeEach(() => {
+            field = new Field({
+                name: "name",
+                label: "Name of your app",
+                shortLabel: null,
+                hint: null,
+                dataType: DataTypes.string,
+                multiplicity: 'one',
+                validators: {
+                    pattern: new Validator(ValidatorTypes.regex, /^123$/)
+                }
+            });
+
+            reducer = new FieldReducer(field);
+        });
+
         it('should return the same state on any action not interesting for the validator', () => {
             const state = Map({
                 uuid: '123',

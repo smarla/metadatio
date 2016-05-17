@@ -3,10 +3,13 @@
  */
 
 import { Map } from 'immutable';
+import { combineReducers } from 'redux';
+
+import { Entity } from '../../metadata';
 import InjectableReducer from './injectable.reducer';
 import FieldReducer from './field.reducer';
+import { ReducerException } from '../../exceptions';
 
-import { combineReducers } from 'redux';
 
 export default class EntityReducer extends InjectableReducer {
     static initialState = Map({
@@ -14,8 +17,14 @@ export default class EntityReducer extends InjectableReducer {
         entityType: null
     });
 
-    constructor(uuid) {
-        super({ uuid: uuid, initialState: EntityReducer.initialState});
+    constructor(entity) {
+        if(!entity) throw new ReducerException('RIE001');
+        if(!(entity instanceof Entity)) throw new ReducerException('RIE002');
+
+        super({
+            uuid: entity.uuid,
+            initialState: EntityReducer.initialState
+        });
     }
 
     combine() {
@@ -28,14 +37,5 @@ export default class EntityReducer extends InjectableReducer {
 
     reduce(state = EntityReducer.initialState) {
         return state;
-    }
-
-    getFieldReducers() {
-        const reducer = new FieldReducer('f456-765-abc');
-        const reducers = {
-            'f456-765-abc': reducer.combine()
-        };
-
-        return combineReducers(reducers);
     }
 }
