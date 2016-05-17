@@ -99,9 +99,9 @@
         </div>
 
         <div id="main" class="yui3-u">
-            <div class="content"><h1>MetadataIntegrityException</h1>
-<!--<span class="foundat">Class defined in: <a href=""><code>src&#x2F;exceptions&#x2F;metadata-integrity.exception.js:5</code></a></span>-->
-<div class="intro"><p>When you instance Metadatio entities and fields, some data health checks are performed. If in the data you declared to configure your element is corrupt in any way, this exception will be thrown.</p>
+            <div class="content"><h1>ReducerException</h1>
+<!--<span class="foundat">Class defined in: <a href=""><code>src&#x2F;exceptions&#x2F;reducer.exception.js:5</code></a></span>-->
+<div class="intro"><p>Defines an exception thrown within the Reducer system. Whenever some reduction process fails, you will get this exception. There are several reasons for which you could get a <code>ReducerException</code>.</p>
 </div>
 
 
@@ -119,223 +119,184 @@
 
 
         <div id="attrs">
-                <a name="exception_MIE001"></a>
+                <a name="exception_RBI001"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIE001</code> 
+                    Code: <code>RBI001</code> 
                     
                     
                     <br>
-                    <h3>Entity name is required.</h3>
-                <p>This error is thrown when you try to create an entity, and the description object you used does not contain a <code>name</code> param.</p>
+                    <h3>Base Injectable reducer needs an object to be configured</h3>
+                <p>In order to create an , you need to provide an object defining the injectable</p>
                 
                         <h5>Example</h5>
-                        <pre class="code prettyprint"><code>new Entity({});</code></pre>
+                        <pre class="code prettyprint"><code>new InjectableReducer()</code></pre>
                 
                 </div>
-                <a name="exception_MIE002"></a>
+                <a name="exception_RBI002"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIE002</code> 
+                    Code: <code>RBI002</code> 
                     
                     
                     <br>
-                    <h3>Entity name must be a String.</h3>
-                <p>Thrown when you try to set a non-string value as entity name.</p>
+                    <h3>Base Injectable reducer cannot be configured with a non-object</h3>
+                <p> must receive an instance of object</p>
                 
                         <h5>Example</h5>
-                        <pre class="code prettyprint"><code>new Entity({ name: 123 });</code></pre>
+                        <pre class="code prettyprint"><code>new InjectableReducer('wrong')</code></pre>
                 
                 </div>
-                <a name="exception_MIE003"></a>
+                <a name="exception_RBI003"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIE003</code> 
+                    Code: <code>RBI003</code> 
                     
                     
                     <br>
-                    <h3>Entity name must comply with the specification.</h3>
-                <p>All entity names must comply with a specification: They must start by an A-Z or an underscore, and contain only letters, numbers, hyphens and underscores.</p>
+                    <h3>You need to provide a UUID to create an injectable resource</h3>
+                <p>There could be many reducers for the same purpose, so an <strong>uuid</strong> is needed to identify the target of our actions - all actions targeted to an {{#crossLink InjectableReducer}}injectable{{/crossLink}} <strong>must</strong> have an uuid present too.</p>
+                <p>Metadatio uses {{#crossLink <a href="https://www.npmjs.com/package/shortid">https://www.npmjs.com/package/shortid</a>}}shortid{{/crossLink}} library for generating short ids.</p>
                 
                         <h5>Example</h5>
-                        <pre class="code prettyprint"><code>new Entity({ name: '1abc' })</code></pre>
-                <pre class="code prettyprint"><code>new Entity({ name: '-abc' })</code></pre>
-                <pre class="code prettyprint"><code>new Entity({ name: 'abc$' })</code></pre>
+                        <pre class="code prettyprint"><code>new InjectableResource({});</code></pre>
                 
                 </div>
-                <a name="exception_MIE004"></a>
+                <a name="exception_RBI004"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIE004</code> 
+                    Code: <code>RBI004</code> 
                     
                     
                     <br>
-                    <h3>Entity name must have between 2 a 64 characters.</h3>
-                <p>All Metadatio entities must comply with these length requirements to be valid.</p>
+                    <h3>All injectable reducers must have an initial state</h3>
+                <p>You need to provide an initial state for the injectable reducer upon creation</p>
                 
                         <h5>Example</h5>
-                        <pre class="code prettyprint"><code>new Entity({ name: 'a' })</code></pre>
-                <pre class="code prettyprint"><code>new Entity({ name: 'a..za..za..za..z' }) // More than 64 characters :)</code></pre>
+                        <pre class="code prettyprint"><code>new InjectableResource({ uuid: 'xyz' });</code></pre>
                 
                 </div>
-                <a name="exception_MIE005"></a>
+                <a name="exception_RI003"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIE005</code> 
+                    Code: <code>RI003</code> 
                     
                     
                     <br>
-                    <h3>Entity fields must be instances of field.</h3>
-                <p>This error occurs when you try to append a non-Field object as entity's field.</p>
-                
-                        <h5>Example</h5>
-                        <pre class="code prettyprint"><code>new Entity({ ... fields: [{...}] })</code></pre>
-                <pre class="code prettyprint"><code>someEntity.addField({})</code></pre>
+                    <h3>Every reducer needs a state object when reducing</h3>
+                <p>This exception occurs upon reduction, whenever a reducer is called without a given state. If you've configured {{#crossLink <a href="http://redux.js.org/">http://redux.js.org/</a>}}Redux{{/crossLink}} you shouldn't get this error - as it will be Redux the one who calls your reducer, and it will <strong>always</strong> send a <code>state</code>.</p>
                 
                 </div>
-                <a name="exception_MIE006"></a>
+                <a name="exception_RI004"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIE006</code> 
+                    Code: <code>RI004</code> 
                     
                     
                     <br>
-                    <h3>A field already exist with name , and 'overwrite' flag has not been set.</h3>
-                <p>When you append a field to an entity, an existence verification is done on the field name. The  method contains an optional <code>overwrite</code> flag - that bypasses this verification process. If you don't set the flag, you will get this error.</p>
-                
-                        <h5>Example</h5>
-                        <pre class="code prettyprint"><code>const entity = new Entity({ ... fields: [new Field({ name: 'foo'})] })</code></pre>
-                <pre class="code prettyprint"><code>entity.addField(new Field({ name: 'foo' }))</code></pre>
+                    <h3>All states must be instances of Map</h3>
+                <p>All native reducers within Metadatio work specifically with {{#crossLink <a href="https://www.npmjs.com/package/immutable">https://www.npmjs.com/package/immutable</a>}}Immutable{{/crossLink}} maps. If you try to set a state as a non-map instance, you will get this error.</p>
                 
                 </div>
-                <a name="exception_MIF001"></a>
+                <a name="exception_RI005"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIF001</code> 
+                    Code: <code>RI005</code> 
                     
                     
                     <br>
-                    <h3>Field name is required.</h3>
-                <p>This error is thrown when you try to create an field, and the description object you used does not contain a <code>name</code> param.</p>
-                
-                        <h5>Example</h5>
-                        <pre class="code prettyprint"><code>new Field({})</code></pre>
+                    <h3>Every reducer needs an action to reduce</h3>
+                <p>This error occurs when a reducer is called without an action.</p>
                 
                 </div>
-                <a name="exception_MIF002"></a>
+                <a name="exception_RI006"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIF002</code> 
+                    Code: <code>RI006</code> 
                     
                     
                     <br>
-                    <h3>Field name must be a string.</h3>
-                <p>This error is thrown when you set a non-string value as field name</p>
-                
-                        <h5>Example</h5>
-                        <pre class="code prettyprint"><code>new Field({ name: 123, ... })</code></pre>
+                    <h3>The action to reduce must be an object</h3>
+                <p>All actions sent to the reducer must be objects</p>
                 
                 </div>
-                <a name="exception_MIF003"></a>
+                <a name="exception_RI007"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIF003</code> 
+                    Code: <code>RI007</code> 
                     
                     
                     <br>
-                    <h3>Field name must comply with the specification.</h3>
-                <p>As entities, all field names must comply with the specification -i.e.   must start by an A-Z or an underscore, and contain only letters, numbers, hyphens and underscores.</p>
-                
-                        <h5>Example</h5>
-                        <pre class="code prettyprint"><code>new Field({ name: '1abc', ... })</code></pre>
-                <pre class="code prettyprint"><code>new Field({ name: '-abc', ... })</code></pre>
-                <pre class="code prettyprint"><code>new Field({ name: 'abc$', ... })</code></pre>
+                    <h3>All actions must contain a 'type' attribute</h3>
+                <p>Actions are defined via a <code>type</code> attribute. So this parameter is needed, as otherwise the action will not have any identity for the reducer.</p>
                 
                 </div>
-                <a name="exception_MIF004"></a>
+                <a name="exception_RI008"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIF004</code> 
+                    Code: <code>RI008</code> 
                     
                     
                     <br>
-                    <h3>Field name must have between 2 and 64 characters.</h3>
-                <p>All field names lengths must be between defined bounds</p>
+                    <h3>Action type sent to reducer must be a string</h3>
+                <p>The <code>type</code> attribute must be a String</p>
                 
                         <h5>Example</h5>
-                        <pre class="code prettyprint"><code>new Field({ name: 'a', ... })</code></pre>
-                <pre class="code prettyprint"><code>new Field({ name: 'a..za..za..za..z', ... }) // More than 64 characters :D</code></pre>
+                        <pre class="code prettyprint"><code>reducer.reduce(state, { type: 123 })</code></pre>
                 
                 </div>
-                <a name="exception_MIF005"></a>
+                <a name="exception_RI009"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIF005</code> 
+                    Code: <code>RI009</code> 
                     
                     
                     <br>
-                    <h3>Data type is not defined.</h3>
-                <p>This exception is thrown when you define a field without a data type. Data typing your fields is essential for proper working, and thus not assigning it will result in this error.</p>
-                
-                        <h5>Example</h5>
-                        <pre class="code prettyprint"><code>new Field({ name: 'foo' })</code></pre>
+                    <h3>All actions must contain a 'uuid' attribute</h3>
+                <p>Every action that arrives at an injectable reducer needs to be targeted with a uuid. As these reducers are not unique, otherwise your action could trigger an unwanted behavior.</p>
                 
                 </div>
-                <a name="exception_MIF006"></a>
+                <a name="exception_RIE001"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIF006</code> 
+                    Code: <code>RIE001</code> 
                     
                     
                     <br>
-                    <h3>Data type is invalid.</h3>
-                <p>This exception occurs when you set an invalid data type to a field. Data types can only be String, Number, Boolean, Date, and references to other entities</p>
-                
-                        <h5>Example</h5>
-                        <pre class="code prettyprint"><code>new Field({ name: 'foo', dataType: 'wrong' })</code></pre>
+                    <h3>Entity reducer needs an entity as input</h3>
                 
                 </div>
-                <a name="exception_MIF007"></a>
+                <a name="exception_RIE002"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIF007</code> 
+                    Code: <code>RIE002</code> 
                     
                     
                     <br>
-                    <h3>Multiplicity is neither 'one' nor 'many'.</h3>
-                <p>You will get this error if you setup a multiplicity for an entity that is neither 'one' nor 'many'. The  is optional, and by default is set to 'one'.</p>
-                
-                        <h5>Example</h5>
-                        <pre class="code prettyprint"><code>new Field({ ... multiplicity: 'wrong' })</code></pre>
+                    <h3>Entity reducer needs an instance of Entity</h3>
                 
                 </div>
-                <a name="exception_MIV001"></a>
+                <a name="exception_RIF001"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIV001</code> 
+                    Code: <code>RIF001</code> 
                     
                     
                     <br>
-                    <h3>Validator name must be given, and be a string.</h3>
-                <p>When you attach validators to a field, you must define a <em>string</em> name for the validator - for logging purposes. When you associate a validator to a field without a name set - or with a name that is not a string -, you will get this error.</p>
-                
-                        <h5>Example</h5>
-                        <pre class="code prettyprint"><code>someField.addValidator(null, new Validator(...))</code></pre>
-                <pre class="code prettyprint"><code>someField.addValidator(123, new Validator(...))</code></pre>
+                    <h3>Field reducer needs a field as input</h3>
                 
                 </div>
-                <a name="exception_MIV002"></a>
+                <a name="exception_RIF002"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIV002</code> 
+                    Code: <code>RIF002</code> 
                     
                     
                     <br>
-                    <h3>Validators must be instances of 'Validator'.</h3>
-                <p>Every time you include a validator to a field, the value you set as validator is checked, to verify that it is an instance of . If that's not the case, this exception is thrown.</p>
-                
-                        <h5>Example</h5>
-                        <pre class="code prettyprint"><code>new Field({ ... validators: { 'pattern': {} } })</code></pre>
-                <pre class="code prettyprint"><code>someField.addValidator('pattern', {});</code></pre>
+                    <h3>Field reducer needs an instance of Field</h3>
                 
                 </div>
-                <a name="exception_MIV003"></a>
+                <a name="exception_RIV001"></a>
                 <div class="attrs item item-error">
-                    Code: <code>MIV003</code> 
+                    Code: <code>RIV001</code> 
                     
                     
                     <br>
-                    <h3>A validator already exists with name {{name}} and 'overwrite' flag has not been set.</h3>
-                <p>When you include a validator to a field at runtime, a name verification is launched. If the validator name you set already exists, and you haven't set the <code>overwrite</code> flag, this error will occur.</p>
+                    <h3>Validator reducer needs a validator as input</h3>
                 
-                        <h5>Example</h5>
-                        <pre class="code prettyprint"><code>const someField = new Field({ ... validators: { 'pattern': ... } } });</code></pre>
-                <pre class="code prettyprint"><code>someField.addValidator('pattern': new Validator(...));</code></pre>
+                </div>
+                <a name="exception_RIV002"></a>
+                <div class="attrs item item-error">
+                    Code: <code>RIV002</code> 
+                    
+                    
+                    <br>
+                    <h3>Validator reducer needs an instance of Validator</h3>
                 
                 </div>
         </div>

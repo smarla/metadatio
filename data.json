@@ -44,8 +44,12 @@
         },
         "src/exceptions/data-validation.exception.js": {
             "name": "src/exceptions/data-validation.exception.js",
-            "modules": {},
-            "classes": {},
+            "modules": {
+                "exceptions": 1
+            },
+            "classes": {
+                "DataValidationException": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -58,9 +62,7 @@
         },
         "src/exceptions/metadata-integrity.exception.js": {
             "name": "src/exceptions/metadata-integrity.exception.js",
-            "modules": {
-                "exceptions": 1
-            },
+            "modules": {},
             "classes": {
                 "MetadataIntegrityException": 1
             },
@@ -70,7 +72,9 @@
         "src/exceptions/reducer.exception.js": {
             "name": "src/exceptions/reducer.exception.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "ReducerException": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -248,7 +252,9 @@
             },
             "elements": {},
             "classes": {
+                "DataValidationException": 1,
                 "MetadataIntegrityException": 1,
+                "ReducerException": 1,
                 "ValidatorException": 1,
                 "Entity": 1,
                 "Field": 1,
@@ -268,7 +274,9 @@
             "submodules": {},
             "elements": {},
             "classes": {
+                "DataValidationException": 1,
                 "MetadataIntegrityException": 1,
+                "ReducerException": 1,
                 "ValidatorException": 1
             },
             "fors": {},
@@ -278,7 +286,8 @@
             "namespace": "",
             "file": "src/exceptions/validator.exception.js",
             "line": 5,
-            "description": "When you instance Metadatio entities and fields, some data health checks are performed. If in the data you declared to configure your element is corrupt in any way, this exception will be thrown.",
+            "description": "This exception is thrown whenever there is an error while validating your data.",
+            "extends": "Error",
             "is_constructor": 1
         },
         "Reducers": {
@@ -317,6 +326,21 @@
         }
     },
     "classes": {
+        "DataValidationException": {
+            "name": "DataValidationException",
+            "shortname": "DataValidationException",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "submodule": "exceptions",
+            "namespace": "",
+            "file": "src/exceptions/data-validation.exception.js",
+            "line": 5,
+            "description": "This exception is thrown whenever there is an error while validating your data."
+        },
         "MetadataIntegrityException": {
             "name": "MetadataIntegrityException",
             "shortname": "MetadataIntegrityException",
@@ -331,6 +355,21 @@
             "file": "src/exceptions/metadata-integrity.exception.js",
             "line": 5,
             "description": "When you instance Metadatio entities and fields, some data health checks are performed. If in the data you declared to configure your element is corrupt in any way, this exception will be thrown."
+        },
+        "ReducerException": {
+            "name": "ReducerException",
+            "shortname": "ReducerException",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "submodule": "exceptions",
+            "namespace": "",
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 5,
+            "description": "Defines an exception thrown within the Reducer system. Whenever some reduction process fails, you will get this exception. There are several reasons for which you could get a `ReducerException`."
         },
         "ValidatorException": {
             "name": "ValidatorException",
@@ -439,49 +478,51 @@
             "file": "src/actions/entity.actions.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
-            "class": "MetadataIntegrityException"
+            "class": "DataValidationException"
         },
         {
             "file": "src/actions/field.actions.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
-            "class": "MetadataIntegrityException"
+            "class": "DataValidationException"
         },
         {
             "file": "src/actions/index.js",
             "line": 1,
             "description": "Created by sm on 17/05/16.",
-            "class": "MetadataIntegrityException"
+            "class": "DataValidationException"
         },
         {
             "file": "src/actions/metadatio.actions.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
-            "class": "MetadataIntegrityException"
+            "class": "DataValidationException"
         },
         {
             "file": "src/actions/validator.actions.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
-            "class": "MetadataIntegrityException"
+            "class": "DataValidationException"
         },
         {
             "file": "src/exceptions/data-validation.exception.js",
             "line": 1,
             "description": "Created by sm on 01/05/16.",
-            "class": "MetadataIntegrityException"
+            "class": "DataValidationException"
         },
         {
             "file": "src/exceptions/index.js",
             "line": 1,
             "description": "Created by sm on 01/05/16.",
-            "class": "MetadataIntegrityException"
+            "class": "MetadataIntegrityException",
+            "module": "Core"
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
             "line": 1,
             "description": "Created by sm on 01/05/16.",
-            "class": "MetadataIntegrityException"
+            "class": "MetadataIntegrityException",
+            "module": "Core"
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
@@ -706,8 +747,193 @@
             "file": "src/exceptions/reducer.exception.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
-            "class": "ValidatorException",
+            "class": "ReducerException",
             "module": "Core"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 22,
+            "description": "### Base Injectable reducer needs an object to be configured\n\nIn order to create an {{#crossLink InjectableReducer}}Injectable reducer{{/crossLink}}, you need to provide an object defining the injectable",
+            "example": [
+                "\n    new InjectableReducer()"
+            ],
+            "itemtype": "attribute",
+            "name": "RBI001",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 34,
+            "description": "### Base Injectable reducer cannot be configured with a non-object\n\n{{#crossLink InjectableReducer}}Injectable reducers{{/crossLink}} must receive an instance of object",
+            "example": [
+                "\n    new InjectableReducer('wrong')"
+            ],
+            "itemtype": "attribute",
+            "name": "RBI002",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 46,
+            "description": "### You need to provide a UUID to create an injectable resource\n\nThere could be many reducers for the same purpose, so an **uuid** is needed to identify the target of our actions - all actions targeted to an {{#crossLink InjectableReducer}}injectable{{/crossLink}} **must** have an uuid present too.\n\nMetadatio uses {{#crossLink https://www.npmjs.com/package/shortid}}shortid{{/crossLink}} library for generating short ids.",
+            "example": [
+                "\n    new InjectableResource({});"
+            ],
+            "itemtype": "attribute",
+            "name": "RBI003",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 60,
+            "description": "### All injectable reducers must have an initial state\n\nYou need to provide an initial state for the injectable reducer upon creation",
+            "example": [
+                "\n    new InjectableResource({ uuid: 'xyz' });"
+            ],
+            "itemtype": "attribute",
+            "name": "RBI004",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 72,
+            "description": "### Every reducer needs a state object when reducing\n\nThis exception occurs upon reduction, whenever a reducer is called without a given state. If you've configured {{#crossLink http://redux.js.org/}}Redux{{/crossLink}} you shouldn't get this error - as it will be Redux the one who calls your reducer, and it will **always** send a `state`.",
+            "itemtype": "attribute",
+            "name": "RI003",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 81,
+            "description": "### All states must be instances of Map\n\nAll native reducers within Metadatio work specifically with {{#crossLink https://www.npmjs.com/package/immutable}}Immutable{{/crossLink}} maps. If you try to set a state as a non-map instance, you will get this error.",
+            "itemtype": "attribute",
+            "name": "RI004",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 90,
+            "description": "### Every reducer needs an action to reduce\n\nThis error occurs when a reducer is called without an action.",
+            "itemtype": "attribute",
+            "name": "RI005",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 99,
+            "description": "### The action to reduce must be an object\n\nAll actions sent to the reducer must be objects",
+            "itemtype": "attribute",
+            "name": "RI006",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 108,
+            "description": "### All actions must contain a 'type' attribute\n\nActions are defined via a `type` attribute. So this parameter is needed, as otherwise the action will not have any identity for the reducer.",
+            "itemtype": "attribute",
+            "name": "RI007",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 117,
+            "description": "### Action type sent to reducer must be a string\n\nThe `type` attribute must be a String",
+            "example": [
+                "\n    reducer.reduce(state, { type: 123 })"
+            ],
+            "itemtype": "attribute",
+            "name": "RI008",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 129,
+            "description": "### All actions must contain a \\'uuid\\' attribute\n\nEvery action that arrives at an injectable reducer needs to be targeted with a uuid. As these reducers are not unique, otherwise your action could trigger an unwanted behavior.",
+            "itemtype": "attribute",
+            "name": "RI009",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 138,
+            "description": "### Entity reducer needs an entity as input",
+            "itemtype": "attribute",
+            "name": "RIE001",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 147,
+            "description": "### Entity reducer needs an instance of Entity",
+            "itemtype": "attribute",
+            "name": "RIE002",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 154,
+            "description": "### Field reducer needs a field as input",
+            "itemtype": "attribute",
+            "name": "RIF001",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 161,
+            "description": "### Field reducer needs an instance of Field",
+            "itemtype": "attribute",
+            "name": "RIF002",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 168,
+            "description": "### Validator reducer needs a validator as input",
+            "itemtype": "attribute",
+            "name": "RIV001",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 175,
+            "description": "### Validator reducer needs an instance of Validator",
+            "itemtype": "attribute",
+            "name": "RIV002",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
         },
         {
             "file": "src/exceptions/store.exception.js",

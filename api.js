@@ -1,10 +1,12 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "DataValidationException",
         "Entity",
         "Field",
         "FieldReducer",
         "MetadataIntegrityException",
+        "ReducerException",
         "Store",
         "Validator",
         "ValidatorException",
@@ -25,7 +27,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "exceptions",
             "name": "exceptions",
-            "description": "When you instance Metadatio entities and fields, some data health checks are performed. If in the data you declared to configure your element is corrupt in any way, this exception will be thrown."
+            "description": "This exception is thrown whenever there is an error while validating your data."
         },
         {
             "displayName": "injectable",
