@@ -177,6 +177,9 @@ export default class ReducerException extends Error {
          *
          * @attribute RIV002
          */
-        'RIV002': 'Validator reducer needs an instance of Validator'
+        'RIV002': 'Validator reducer needs an instance of Validator',
+
+        'RD001': 'Data reducers need an object to be configured',
+        'RD002': 'Data reducers need to receive an instance of Data'
     };
 }

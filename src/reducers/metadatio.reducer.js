@@ -7,14 +7,14 @@ import { combineReducers } from 'redux';
 
 import { EntityReducer } from './injectable';
 
-export class EntitiesReducer {
+export class MetadatioReducer {
     static dataInitalState = List.of();
 
     constructor() {
 
     }
 
-    dataReducer(state = EntitiesReducer.dataInitalState) {
+    dataReducer(state = MetadatioReducer.dataInitalState) {
 
         return state;
     }
@@ -42,9 +42,9 @@ export class EntitiesReducer {
     }
 
     static getInstance() {
-        if(!EntitiesReducer.instance) EntitiesReducer.instance = new EntitiesReducer();
-        return EntitiesReducer.instance;
+        if(!MetadatioReducer.instance) MetadatioReducer.instance = new MetadatioReducer();
+        return MetadatioReducer.instance;
     }
 }
 
-export default EntitiesReducer.getInstance();
+export default MetadatioReducer.getInstance();
