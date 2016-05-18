@@ -101,6 +101,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/metadata/data.metadata.js": {
+            "name": "src/metadata/data.metadata.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/metadata/element.metadata.js": {
             "name": "src/metadata/element.metadata.js",
             "modules": {},
@@ -170,6 +177,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/reducers/injectable/data.reducer.js": {
+            "name": "src/reducers/injectable/data.reducer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/reducers/injectable/entity.reducer.js": {
             "name": "src/reducers/injectable/entity.reducer.js",
             "modules": {},
@@ -211,15 +225,15 @@
             "fors": {},
             "namespaces": {}
         },
-        "src/reducers/entities.reducer.js": {
-            "name": "src/reducers/entities.reducer.js",
+        "src/reducers/index.js": {
+            "name": "src/reducers/index.js",
             "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "src/reducers/index.js": {
-            "name": "src/reducers/index.js",
+        "src/reducers/metadatio.reducer.js": {
+            "name": "src/reducers/metadatio.reducer.js",
             "modules": {},
             "classes": {},
             "fors": {},
@@ -973,6 +987,13 @@
             "module": "Core"
         },
         {
+            "file": "src/metadata/data.metadata.js",
+            "line": 1,
+            "description": "Created by sm on 18/05/16.",
+            "class": "Entity",
+            "module": "Core"
+        },
+        {
             "file": "src/metadata/element.metadata.js",
             "line": 1,
             "description": "Created by sm on 16/05/16.",
@@ -1368,6 +1389,13 @@
             "module": "Core"
         },
         {
+            "file": "src/reducers/injectable/data.reducer.js",
+            "line": 1,
+            "description": "Created by sm on 18/05/16.",
+            "class": "FieldReducer",
+            "module": "Core"
+        },
+        {
             "file": "src/reducers/injectable/entity.reducer.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
@@ -1530,14 +1558,14 @@
             "submodule": "injectable"
         },
         {
-            "file": "src/reducers/entities.reducer.js",
+            "file": "src/reducers/index.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
             "class": "Store",
             "module": "Reducers"
         },
         {
-            "file": "src/reducers/index.js",
+            "file": "src/reducers/metadatio.reducer.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
             "class": "Store",
@@ -1740,6 +1768,10 @@
             "line": " src/metadata/data-types.metadata.js:1"
         },
         {
+            "message": "Missing item type\nCreated by sm on 18/05/16.",
+            "line": " src/metadata/data.metadata.js:1"
+        },
+        {
             "message": "Missing item type\nCreated by sm on 16/05/16.",
             "line": " src/metadata/element.metadata.js:1"
         },
@@ -1776,6 +1808,10 @@
             "line": " src/metadata/validator.metadata.js:1"
         },
         {
+            "message": "Missing item type\nCreated by sm on 18/05/16.",
+            "line": " src/reducers/injectable/data.reducer.js:1"
+        },
+        {
             "message": "Missing item type\nCreated by sm on 14/05/16.",
             "line": " src/reducers/injectable/entity.reducer.js:1"
         },
@@ -1797,11 +1833,11 @@
         },
         {
             "message": "Missing item type\nCreated by sm on 14/05/16.",
-            "line": " src/reducers/entities.reducer.js:1"
+            "line": " src/reducers/index.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 14/05/16.",
-            "line": " src/reducers/index.js:1"
+            "line": " src/reducers/metadatio.reducer.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
