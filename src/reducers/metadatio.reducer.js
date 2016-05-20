@@ -2,43 +2,35 @@
  * Created by sm on 14/05/16.
  */
 
-import { List } from 'immutable';
+import { Map } from 'immutable';
 import { combineReducers } from 'redux';
 
 import { EntityReducer } from './injectable';
+import RawMapReducer from './injectable/raw-map.reducer.js';
+import { MetadatioActions } from '../actions';
 
 export class MetadatioReducer {
-    static dataInitalState = List.of();
+    static initialState = Map({});
 
     constructor() {
+        const config_uuid = 'config';
+        const config_subreducers = { set: MetadatioActions.CONFIG_SET, delete: MetadatioActions.CONFIG_DELETE };
+        this.configReducer = new RawMapReducer({ uuid: config_uuid, subreducers: config_subreducers });
 
+        const data_uuid = 'data';
+        const data_subreducers = { set: MetadatioActions.DATA_SET, delete: MetadatioActions.DATA_DELETE };
+        this.dataReducer = new RawMapReducer({ uuid: data_uuid, subreducers: data_subreducers });
     }
 
-    dataReducer(state = MetadatioReducer.dataInitalState) {
-
+    reduce(state = MetadatioReducer.initialState, action) {
         return state;
     }
 
-    metadataReducers() {
-        const reducers = [];
-        return reducers;
-    }
-
-    getReducers() {
-        const data = this.dataReducer;
-        const metadata = this.metadataReducers();
-
-        const reducers = { data };
-
-        if(metadata.length) {
-            reducers.metadata = {};
-            for(let i = 0; i < metadata.length; i++) {
-                const reducer = metadata[i];
-                reducers.metadata[reducer.uuid] = reducer;
-            }
-        }
-
-        return combineReducers(reducers);
+    doReduce() {
+        return (state, action) => {
+            const instance = MetadatioReducer.getInstance();
+            return instance.reduce(state, action);
+        };
     }
 
     static getInstance() {

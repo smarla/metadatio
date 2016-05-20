@@ -2,9 +2,12 @@
  * Created by sm on 20/05/16.
  */
 
-import { ReducerException } from '../exceptions';
+import { Map } from 'immutable';
 
-export default class RawMapReducer {
+import InjectableReducer from './injectable.reducer';
+import { ReducerException } from '../../exceptions';
+
+export default class RawMapReducer extends InjectableReducer {
     constructor(props) {
         if(!props) throw new ReducerException('RRM001');
         if(typeof(props) !== 'object') throw new ReducerException('RRM002');
@@ -15,7 +18,11 @@ export default class RawMapReducer {
             if(typeof(props.subreducers[item]) !== 'string') throw new ReducerException('RRM006');
         }
 
-        // this.subreducers =
+        const uuid = props.uuid;
+        const initialState = Map({ uuid });
+        super({ uuid, initialState });
+
+        this.subreducers = props.subreducers;
     }
 
 }

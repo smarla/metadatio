@@ -4,7 +4,7 @@
 
 import { expect } from 'chai';
 
-import RawMapReducer from '../../src/reducers/raw-map.reducer';
+import RawMapReducer from '../../src/reducers/injectable/raw-map.reducer.js';
 
 const EXPECTING_ERROR = new Error('An exception was expected here');
 
@@ -75,5 +75,9 @@ describe('The raw map reducer', () => {
                 done();
             }
         });
+    });
+    
+    describe('upon reduction', () => {
+        
     });
 });

@@ -6,7 +6,7 @@ import MetadatioReducer from './metadatio.reducer';
 import { combineReducers } from 'redux';
 
 export default function createReducer(asyncReducers) {
-    const metadatio = MetadatioReducer.getReducers();
+    const metadatio = MetadatioReducer.doReduce();
 
     return combineReducers({
         metadatio,
