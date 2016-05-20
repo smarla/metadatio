@@ -202,6 +202,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/reducers/injectable/raw-map.reducer.js": {
+            "name": "src/reducers/injectable/raw-map.reducer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/reducers/injectable/validator.reducer.js": {
             "name": "src/reducers/injectable/validator.reducer.js",
             "modules": {},
@@ -220,13 +227,6 @@
         },
         "src/reducers/metadatio.reducer.js": {
             "name": "src/reducers/metadatio.reducer.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "src/reducers/raw-map.reducer.js": {
-            "name": "src/reducers/raw-map.reducer.js",
             "modules": {},
             "classes": {},
             "fors": {},
@@ -1470,6 +1470,13 @@
             "module": "Reducers"
         },
         {
+            "file": "src/reducers/injectable/raw-map.reducer.js",
+            "line": 1,
+            "description": "Created by sm on 20/05/16.",
+            "class": "ValidatorReducer",
+            "module": "Reducers"
+        },
+        {
             "file": "src/reducers/injectable/validator.reducer.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
@@ -1547,13 +1554,6 @@
             "file": "src/reducers/metadatio.reducer.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
-            "class": "Store",
-            "module": "Reducers"
-        },
-        {
-            "file": "src/reducers/raw-map.reducer.js",
-            "line": 1,
-            "description": "Created by sm on 20/05/16.",
             "class": "Store",
             "module": "Reducers"
         },
@@ -1806,6 +1806,10 @@
             "line": " src/reducers/injectable/injectable.reducer.js:1"
         },
         {
+            "message": "Missing item type\nCreated by sm on 20/05/16.",
+            "line": " src/reducers/injectable/raw-map.reducer.js:1"
+        },
+        {
             "message": "Missing item type\nCreated by sm on 14/05/16.",
             "line": " src/reducers/injectable/validator.reducer.js:1"
         },
@@ -1816,10 +1820,6 @@
         {
             "message": "Missing item type\nCreated by sm on 14/05/16.",
             "line": " src/reducers/metadatio.reducer.js:1"
-        },
-        {
-            "message": "Missing item type\nCreated by sm on 20/05/16.",
-            "line": " src/reducers/raw-map.reducer.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
