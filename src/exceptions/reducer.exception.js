@@ -186,6 +186,10 @@ export default class ReducerException extends Error {
         'RRM003': 'The Raw Map reducer needs a subreducers object with the specific subreducers - i.e. set, delete',
         'RRM004': 'The subreducers attribute must be an object',
         'RRM005': 'The only attributes accepted as subreducers are set and delete',
-        'RRM006': 'The subreducer attributes must be strings'
+        'RRM006': 'The subreducer attributes must be strings',
+        'RRM007': 'Raw-map reducer needs a \'key\' for setting an parameter',
+        'RRM008': 'Raw-map reducer needs a \'value\' for setting a parameter',
+        'RRM009': 'Raw-map reducer needs a \'key\' for deleting an parameter',
+        'RRM010': 'The \'key\' parameter needs to be a String'
     };
 }

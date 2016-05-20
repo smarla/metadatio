@@ -10,8 +10,8 @@ export class ValidatorActions {
 
     }
 
-    validate(uuid, value) {
-
+    validate(validator, value) {
+        const result = validator.validate(value);
     }
 
     static getInstance() {
