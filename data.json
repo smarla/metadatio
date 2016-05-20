@@ -884,7 +884,7 @@
         },
         {
             "file": "src/exceptions/reducer.exception.js",
-            "line": 138,
+            "line": 140,
             "description": "### Entity reducer needs an entity as input",
             "itemtype": "attribute",
             "name": "RIE001",
@@ -894,7 +894,7 @@
         },
         {
             "file": "src/exceptions/reducer.exception.js",
-            "line": 147,
+            "line": 149,
             "description": "### Entity reducer needs an instance of Entity",
             "itemtype": "attribute",
             "name": "RIE002",
@@ -904,7 +904,7 @@
         },
         {
             "file": "src/exceptions/reducer.exception.js",
-            "line": 154,
+            "line": 156,
             "description": "### Field reducer needs a field as input",
             "itemtype": "attribute",
             "name": "RIF001",
@@ -914,7 +914,7 @@
         },
         {
             "file": "src/exceptions/reducer.exception.js",
-            "line": 161,
+            "line": 163,
             "description": "### Field reducer needs an instance of Field",
             "itemtype": "attribute",
             "name": "RIF002",
@@ -924,7 +924,7 @@
         },
         {
             "file": "src/exceptions/reducer.exception.js",
-            "line": 168,
+            "line": 170,
             "description": "### Validator reducer needs a validator as input",
             "itemtype": "attribute",
             "name": "RIV001",
@@ -934,7 +934,7 @@
         },
         {
             "file": "src/exceptions/reducer.exception.js",
-            "line": 175,
+            "line": 177,
             "description": "### Validator reducer needs an instance of Validator",
             "itemtype": "attribute",
             "name": "RIV002",
