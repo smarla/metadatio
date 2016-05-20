@@ -3,7 +3,7 @@
  */
 
 import { createStore } from 'redux';
-import createReducer from './reducers';
+import { CombinedReducer } from './reducers';
 
 import { StoreException } from './exceptions';
 
@@ -44,11 +44,11 @@ export class Store {
      * @param initialState {Object} The initial state for the store
      * @chainable
      */
-    configure(initialState = undefined) {
+    configure(initialState) {
         if(this.configured) throw new StoreException('STC001');
         if(initialState !== undefined && !(initialState instanceof Map)) throw new StoreException('STS001');
 
-        this.store = createStore(createReducer(), initialState);
+        this.store = createStore(CombinedReducer(), initialState);
         this.configured = true;
         return this;
     }
@@ -71,7 +71,7 @@ export class Store {
 
         this.asyncReducers[name] = reducer;
 
-        this.store.replaceReducer(createReducer(this.asyncReducers));
+        this.store.replaceReducer(CombinedReducer(this.asyncReducers));
         return this;
     }
 

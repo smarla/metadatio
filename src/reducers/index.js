@@ -2,14 +2,22 @@
  * Created by sm on 14/05/16.
  */
 
-import MetadatioReducer from './metadatio.reducer';
 import { combineReducers } from 'redux';
 
-export default function createReducer(asyncReducers) {
-    const metadatio = MetadatioReducer.doReduce();
+import MetadatioReducer from './metadatio.reducer';
+import injectable from './injectable';
+
+const CombinedReducer = (asyncReducers) => {
+    const metadatio = MetadatioReducer.reducers();
 
     return combineReducers({
-        metadatio,
+        ...metadatio,
         ...asyncReducers
     });
-}
+};
+
+module.exports = {
+    CombinedReducer,
+    MetadatioReducer,
+    injectable
+};

@@ -107,12 +107,12 @@ describe('The entity reducer', () => {
                 ]
             });
 
+            reducer = new EntityReducer(entity);
+
             state = Map({
-                uuid: entity.uuid,
+                uuid: reducer.uuid,
                 changedAt: null
             });
-
-            reducer = new EntityReducer(entity);
         });
 
         describe('to combine reducer with fields\'', () => {
@@ -127,7 +127,7 @@ describe('The entity reducer', () => {
 
         it('should return the same state for a non interesting action', () => {
             const reduction = InjectableReducer.doReduce()(state, {
-                uuid: entity.uuid,
+                uuid: reducer.uuid,
                 type: 'SOME_UNWANTED_ACTION'
             });
             expect(reduction).to.equal(state);
@@ -143,7 +143,7 @@ describe('The entity reducer', () => {
 
         it('should change state on a ENTITY_CHANGED action', () => {
             const reduction = InjectableReducer.doReduce()(state, {
-                uuid: entity.uuid,
+                uuid: reducer.uuid,
                 type: EntityActions.ENTITY_CHANGED,
                 changedAt: new Date()
             });

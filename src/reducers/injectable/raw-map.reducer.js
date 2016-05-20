@@ -19,10 +19,15 @@ export default class RawMapReducer extends InjectableReducer {
         }
 
         const uuid = props.uuid;
-        const initialState = Map({ uuid });
+        const initialState = Map({ uuid, storage: [] });
         super({ uuid, initialState });
 
         this.subreducers = props.subreducers;
+        this.initialState = initialState;
+    }
+
+    reduce(state = this.initialState, action) {
+        return state;
     }
 
 }

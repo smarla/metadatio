@@ -5,7 +5,7 @@
 import { Map } from 'immutable';
 import { combineReducers } from 'redux';
 
-import { EntityReducer } from './injectable';
+import { InjectableReducer, EntityReducer } from './injectable';
 import RawMapReducer from './injectable/raw-map.reducer.js';
 import { MetadatioActions } from '../actions';
 
@@ -22,14 +22,14 @@ export class MetadatioReducer {
         this.dataReducer = new RawMapReducer({ uuid: data_uuid, subreducers: data_subreducers });
     }
 
-    reduce(state = MetadatioReducer.initialState, action) {
-        return state;
-    }
+    reducers() {
+        const config = InjectableReducer.doReduce();
+        const data = InjectableReducer.doReduce();
+        const entities = null; // TODO
 
-    doReduce() {
-        return (state, action) => {
-            const instance = MetadatioReducer.getInstance();
-            return instance.reduce(state, action);
+        return {
+            config,
+            data
         };
     }
 

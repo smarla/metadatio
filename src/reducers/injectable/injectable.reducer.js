@@ -22,6 +22,10 @@ export default class InjectableReducer {
         return state;
     }
 
+    static initialState = Map({
+        uuid: null
+    });
+
     static verify(state, action) {
         if(!state) throw new ReducerException('RI003');
         if(!(state instanceof Map)) throw new ReducerException('RI004');
@@ -45,14 +49,17 @@ export default class InjectableReducer {
     }
 
     static doReduce() {
-        return (state, action) => {
-            InjectableReducer.verify(state, action);
+        return (state = Map({}), action) => {
+            if(!action.uuid) return state;
             if(action.uuid !== state.get('uuid')) return state;
+
+            InjectableReducer.verify(state, action);
 
             const instance = InjectableReducer.instanceStore(action.uuid);
             if(!instance) {
                 throw new ReducerException('RIS001');
             }
+
 
             return instance.reduce(state, action);
         };

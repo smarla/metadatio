@@ -172,6 +172,15 @@ describe('The injectable reducer', () => {
             expect(typeof(InjectableReducer.doReduce())).to.equal('function');
         });
 
+        it('should return the state when comes an action without uuid', () => {
+            const initialState = Map({});
+            const reducer = new InjectableReducer({ uuid: '1234-abcd', initialState });
+
+            const state = Map({});
+            const result = InjectableReducer.doReduce()(state, { type: 'TEST' });
+            expect(result).to.equal(state);
+        });
+
         it('should verify that an instance exists in storage', (done) => {
             const initialState = Map({
                 uuid: '1234-abcd'

@@ -3,6 +3,8 @@
  */
 
 export class MetadatioActions {
+    static REDUX_INIT       = '@@redux/INIT';
+
     static DATA_SET         = 'metadatio_data_set';
     static DATA_DELETE      = 'metadatio_data_delete';
 
