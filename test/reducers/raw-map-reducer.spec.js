@@ -3,8 +3,11 @@
  */
 
 import { expect } from 'chai';
+import { Map } from 'immutable';
 
-import RawMapReducer from '../../src/reducers/injectable/raw-map.reducer.js';
+import { MetadatioActions } from '../../src/actions';
+import { RawMapReducer } from '../../src/reducers/injectable';
+import { MetadatioReducer } from '../../src/reducers';
 
 const EXPECTING_ERROR = new Error('An exception was expected here');
 
@@ -78,6 +81,39 @@ describe('The raw map reducer', () => {
     });
     
     describe('upon reduction', () => {
-        
+        let reducer = null;
+
+        beforeEach(() => {
+            const uuid = '123';
+            const subreducers = { set: 'set', delete: 'delete' };
+            reducer = new RawMapReducer({ uuid, subreducers })
+        });
+
+        it('should store a value when requested', () => {
+            const state = Map({});
+            const action = {
+                type: 'set',
+                uuid: reducer.uuid,
+                key: 'SOME_PARAMETER',
+                value: 'SOME_VALUE'
+            };
+
+            const nextState = reducer.reduce(state, action);
+            expect(nextState).to.not.equal(state);
+            expect(nextState.get(action.key)).to.equal(action.value);
+        });
+
+        it('should delete a value when requested', () => {
+            const state = Map({ 'SOME_PARAMETER': 'SOME_VALUE' });
+            const action = {
+                type: 'delete',
+                uuid: reducer.uuid,
+                key: 'SOME_PARAMETER'
+            };
+
+            const nextState = reducer.reduce(state, action);
+            expect(nextState).to.not.equal(state);
+            expect(nextState.get(action.key)).to.be.undefined;
+        });
     });
 });

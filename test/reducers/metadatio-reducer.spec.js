@@ -3,6 +3,7 @@
  */
 
 import { expect } from 'chai';
+import { Map } from 'immutable';
 
 import { MetadatioActions } from '../../src/actions/metadatio.actions';
 import MetadatioReducer from '../../src/reducers/metadatio.reducer';

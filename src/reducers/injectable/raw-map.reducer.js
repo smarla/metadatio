@@ -27,6 +27,14 @@ export default class RawMapReducer extends InjectableReducer {
     }
 
     reduce(state = this.initialState, action) {
+        switch(action.type) {
+            case this.subreducers.set:
+                return state.set(action.key, action.value);
+
+            case this.subreducers.delete:
+                return state.delete(action.key);
+        }
+
         return state;
     }
 
