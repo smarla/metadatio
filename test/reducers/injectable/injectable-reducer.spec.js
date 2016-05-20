@@ -60,6 +60,11 @@ describe('The injectable reducer', () => {
             const injectable = new InjectableReducer({ uuid: '1234-abcd', initialState: {} });
             expect(typeof(injectable.reduce)).to.equal('function');
         });
+
+        it('should store the instance within the injectable storage', () => {
+            const injectable = new InjectableReducer({ uuid: '1234-abcd', initialState: {} });
+            expect(InjectableReducer.instanceStore(injectable.uuid)).to.equal(injectable);
+        });
     });
 
     describe('upon reduction verification', () => {
@@ -156,6 +161,32 @@ describe('The injectable reducer', () => {
             const finalState = Map({});
             const reduction = reducer.reduce(finalState);
             expect(reduction).to.equal(finalState);
+        });
+    });
+
+    describe('upon scoped reduction', () => {
+        it('should return a function as reducer', () => {
+            const initialState = Map({});
+            const reducer = new InjectableReducer({ uuid: '1234-abcd', initialState });
+
+            expect(typeof(InjectableReducer.doReduce())).to.equal('function');
+        });
+
+        it('should verify that an instance exists in storage', (done) => {
+            const initialState = Map({
+                uuid: '1234-abcd'
+            });
+            const reducer = new InjectableReducer({ uuid: '1234-abcd', initialState });
+
+            delete InjectableReducer.storage[reducer.uuid];
+            try {
+                InjectableReducer.doReduce()(initialState, { type: 'TEST', uuid: reducer.uuid });
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('ReducerException');
+                expect(e.code).to.equal('RIS001');
+                done();
+            }
         });
     });
 });

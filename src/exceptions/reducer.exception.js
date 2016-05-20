@@ -135,6 +135,8 @@ export default class ReducerException extends Error {
          */
         'RI009': 'All actions must contain a \'uuid\' attribute',
 
+        'RIS001': 'Scoped reduction needs an instance stored in Injectable storage',
+
         /**
          * ### Entity reducer needs an entity as input
          * 

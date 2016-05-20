@@ -39,7 +39,6 @@ export default class InjectableReducer {
 
         if(reducer) {
             InjectableReducer.storage[uuid] = reducer;
-            console.log('Storing ' + uuid);
         }
 
         return InjectableReducer.storage[uuid];
@@ -50,12 +49,12 @@ export default class InjectableReducer {
             InjectableReducer.verify(state, action);
             if(action.uuid !== state.get('uuid')) return state;
 
-            const instance = InjectableReducer.storage[action.uuid];
+            const instance = InjectableReducer.instanceStore(action.uuid);
             if(!instance) {
-                throw new ReducerException(action.uuid)
+                throw new ReducerException('RIS001');
             }
 
-            return instance.reduce.call(this, state, action);
+            return instance.reduce(state, action);
         };
     }
 }
