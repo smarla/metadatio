@@ -10,7 +10,7 @@ import { ValidatorActions } from '../../src/actions/validator.actions';
 
 const mockStore = configureStore();
 
-describe.only('The validator actions', () => {
+describe('The validator actions', () => {
     let store = null;
     let validator = null;
     let actions = null;
