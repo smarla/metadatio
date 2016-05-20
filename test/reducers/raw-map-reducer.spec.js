@@ -115,5 +115,15 @@ describe('The raw map reducer', () => {
             expect(nextState).to.not.equal(state);
             expect(nextState.get(action.key)).to.be.undefined;
         });
+
+        it('should return the same state for any unwanted action', () => {
+            const state = Map({});
+            const action = {
+                type: 'other'
+            };
+
+            const nextState = reducer.reduce(state, action);
+            expect(nextState).to.equal(state);
+        });
     });
 });
