@@ -179,7 +179,11 @@ export default class ReducerException extends Error {
          */
         'RIV002': 'Validator reducer needs an instance of Validator',
 
-        'RD001': 'Data reducers need an object to be configured',
-        'RD002': 'Data reducers need to receive an instance of Data'
+        'RRM001': 'The Raw Map reducer needs an object sent',
+        'RRM002': 'The attribute sent to the Raw Map reducer must be an object',
+        'RRM003': 'The Raw Map reducer needs a subreducers object with the specific subreducers - i.e. set, delete',
+        'RRM004': 'The subreducers attribute must be an object',
+        'RRM005': 'The only attributes accepted as subreducers are set and delete',
+        'RRM006': 'The subreducer attributes must be strings'
     };
 }

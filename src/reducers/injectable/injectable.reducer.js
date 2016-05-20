@@ -14,6 +14,8 @@ export default class InjectableReducer {
 
         this.uuid = props.uuid;
         this.initialState = props.initialState;
+
+        InjectableReducer.instanceStore(this.uuid, this);
     }
     
     reduce(state = this.initialState) {
@@ -28,5 +30,32 @@ export default class InjectableReducer {
         if(!action.type) throw new ReducerException('RI007');
         if(typeof(action.type) !== 'string') throw new ReducerException('RI008');
         if(!action.uuid) throw new ReducerException('RI009');
+    }
+
+    static instanceStore(uuid, reducer) {
+        if(!InjectableReducer.storage) {
+            InjectableReducer.storage = {};
+        }
+
+        if(reducer) {
+            InjectableReducer.storage[uuid] = reducer;
+            console.log('Storing ' + uuid);
+        }
+
+        return InjectableReducer.storage[uuid];
+    }
+
+    static doReduce() {
+        return (state, action) => {
+            InjectableReducer.verify(state, action);
+            if(action.uuid !== state.get('uuid')) return state;
+
+            const instance = InjectableReducer.storage[action.uuid];
+            if(!instance) {
+                throw new ReducerException(action.uuid)
+            }
+
+            return instance.reduce.call(this, state, action);
+        };
     }
 }

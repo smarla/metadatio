@@ -44,20 +44,17 @@ export default class EntityReducer extends InjectableReducer {
         const objFields = {};
         for(let fieldName in this.fields) {
             const field = this.fields[fieldName];
-            objFields[fieldName] = field.reduce;
+            objFields[fieldName] = InjectableReducer.doReduce();
         }
 
         const fields = combineReducers(objFields);
         return combineReducers({
-            info: this.reduce,
+            info: InjectableReducer.doReduce(),
             fields
         });
     }
 
     reduce(state = EntityReducer.initialState, action) {
-        InjectableReducer.verify(state, action);
-        if(action.uuid !== state.get('uuid')) return state;
-
         switch(action.type) {
             case EntityActions.ENTITY_CHANGED:
                 return Map({

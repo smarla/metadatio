@@ -7,7 +7,7 @@ import { Map } from 'immutable';
 
 import { EntityActions } from '../../../src/actions/entity.actions';
 import {Entity, Field, DataTypes} from '../../../src/metadata';
-import { EntityReducer, FieldReducer } from '../../../src/reducers/injectable';
+import { InjectableReducer, EntityReducer, FieldReducer } from '../../../src/reducers/injectable';
 
 const EXPECTING_ERROR = new Error('An exception was expected here');
 
@@ -126,7 +126,7 @@ describe('The entity reducer', () => {
         });
 
         it('should return the same state for a non interesting action', () => {
-            const reduction = reducer.reduce(state, {
+            const reduction = InjectableReducer.doReduce()(state, {
                 uuid: entity.uuid,
                 type: 'SOME_UNWANTED_ACTION'
             });
@@ -134,7 +134,7 @@ describe('The entity reducer', () => {
         });
 
         it('should return the same state for a different uuid', () => {
-            const reduction = reducer.reduce(state, {
+            const reduction = InjectableReducer.doReduce()(state, {
                 uuid: '123',
                 type: EntityActions.ENTITY_CHANGED
             });
@@ -142,7 +142,7 @@ describe('The entity reducer', () => {
         });
 
         it('should change state on a ENTITY_CHANGED action', () => {
-            const reduction = reducer.reduce(state, {
+            const reduction = InjectableReducer.doReduce()(state, {
                 uuid: entity.uuid,
                 type: EntityActions.ENTITY_CHANGED,
                 changedAt: new Date()

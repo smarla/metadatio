@@ -70,10 +70,6 @@ export default class ValidatorReducer extends InjectableReducer {
      * @returns {immutable.Map}
      */
     reduce(state = ValidatorReducer.initialState, action) {
-        InjectableReducer.verify(state, action);
-        if(action.uuid !== state.get('uuid')) return state;
-        
-        // TODO Save history
         switch(action.type) {
             case ValidatorActions.VALIDATION_OK:
                 return Map({

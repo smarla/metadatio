@@ -2,7 +2,6 @@
  * Created by sm on 01/05/16.
  */
 
-import Data from './data.metadata';
 import DataTypes from './data-types.metadata';
 import Element from './element.metadata';
 import Entity from './entity.metadata';
@@ -12,7 +11,6 @@ import Validator from './validator.metadata';
 import ValidatorTypes from './validator-types.metadata';
 
 module.exports = {
-    Data,
     DataTypes,
     Element,
     Entity,

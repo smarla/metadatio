@@ -52,9 +52,6 @@ export default class FieldReducer extends InjectableReducer {
      * @param field {Field} The field to associate with the reducer
      */
     constructor(field) {
-        if(!field) throw new ReducerException('RIF001');
-        if(!(field instanceof Field)) throw new ReducerException('RIF002');
-
         super({
             uuid: field.uuid,
             initialState: Map({
@@ -83,12 +80,12 @@ export default class FieldReducer extends InjectableReducer {
         const objValidators = {};
         for(let validatorName in this.validators) {
             const validator = this.validators[validatorName];
-            objValidators[validatorName] = validator.reduce;
+            objValidators[validatorName] = InjectableReducer.doReduce();
         }
 
         const validators = combineReducers(objValidators);
         return combineReducers({
-            info: this.reduce,
+            info: InjectableReducer.doReduce(),
             validators
         });
     }
@@ -102,9 +99,6 @@ export default class FieldReducer extends InjectableReducer {
      * @returns {Map}
      */
     reduce(state = FieldReducer.initialState, action) {
-        InjectableReducer.verify(state, action);
-        if(action.uuid !== state.get('uuid')) return state;
-
         switch(action.type) {
             case FieldActions.VALUE_CHANGED:
                 return Map({
