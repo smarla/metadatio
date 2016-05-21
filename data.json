@@ -1243,7 +1243,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 146,
+            "line": 148,
             "description": "Determines whether the value defined for a field is valid.",
             "itemtype": "method",
             "name": "validate",
@@ -1267,7 +1267,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 192,
+            "line": 194,
             "description": "Adds a new validator to the field.",
             "itemtype": "method",
             "name": "addValidator",
@@ -1419,7 +1419,7 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 73,
+            "line": 72,
             "description": "Combines the field information reducer - that handles the data within this reducer - and the inner validation and history reducers.",
             "itemtype": "method",
             "name": "combine",
@@ -1433,7 +1433,7 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 93,
+            "line": 92,
             "description": "Performs a reduction on a validator state, upon a validation change action.",
             "itemtype": "method",
             "name": "reduce",
@@ -1675,11 +1675,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/field.metadata.js:146"
+            "line": " src/metadata/field.metadata.js:148"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/field.metadata.js:192"
+            "line": " src/metadata/field.metadata.js:194"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -1687,11 +1687,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/field.reducer.js:73"
+            "line": " src/reducers/injectable/field.reducer.js:72"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/field.reducer.js:93"
+            "line": " src/reducers/injectable/field.reducer.js:92"
         },
         {
             "message": "replacing incorrect tag: returns with return",
