@@ -29,52 +29,25 @@ export default class Validator extends Element {
     constructor(type, validator) {
         super();
 
+        this.validateConfig(type, validator);
         this.type = type;
         this.validator = validator;
+    }
 
-        if(!ValidatorTypes[this.type]) {
-            throw new ValidatorException('Validator type is wrong');
-        }
+    get type() {
+        return this.attr('type');
+    }
 
-        if(this.type !== ValidatorTypes.required && !validator) {
-            throw new ValidatorException('Validator does not have a match to check');
-        }
+    set type(type) {
+        this.attr('type', type);
+    }
 
-        if(this.type === ValidatorTypes.required && validator) {
-            throw new ValidatorException('Validator of type \'required\' do not need a validator match');
-        }
+    get validator() {
+        return this.attr('validator');
+    }
 
-        switch(this.type) {
-            case ValidatorTypes.exact:
-                if(typeof(this.validator) === 'object') {
-                    throw new ValidatorException('Validator for type \'exact\' must not be an object');
-                }
-                break;
-
-            case ValidatorTypes.regex:
-                if(!(this.validator instanceof RegExp)) {
-                    throw new ValidatorException('Validator for type \'regex\' must be a regular expression');
-                }
-                break;
-
-            case ValidatorTypes.range:
-            case ValidatorTypes.length:
-                if(this.validator.min === undefined && this.validator.max === undefined) {
-                    throw new ValidatorException('Validator for type \'' + this.type + '\' must specify at least one of \'min\' and \'max\'')
-                }
-
-                if((this.validator.min !== undefined && typeof(this.validator.min) !== 'number') || (this.validator.max !== undefined && typeof(this.validator.max) !== 'number')) {
-                    throw new ValidatorException('Options (min, max) for \'' + this.type + '\' validators must be numbers');
-                }
-
-                break;
-
-            case ValidatorTypes.fn:
-                if(typeof(this.validator) !== 'function') {
-                    throw new ValidatorException('Validators of type \'fn\' must receive a function to validate against');
-                }
-                break;
-        }
+    set validator(validator) {
+        this.attr('validator', validator);
     }
 
     /**
@@ -124,6 +97,52 @@ export default class Validator extends Element {
                 
                 return value;
 
+        }
+    }
+
+    validateConfig(type, validator) {
+        if(!ValidatorTypes[type]) {
+            throw new ValidatorException('Validator type is wrong');
+        }
+
+        if(type !== ValidatorTypes.required && !validator) {
+            throw new ValidatorException('Validator does not have a match to check');
+        }
+
+        if(type === ValidatorTypes.required && validator) {
+            throw new ValidatorException('Validator of type \'required\' do not need a validator match');
+        }
+
+        switch(type) {
+            case ValidatorTypes.exact:
+                if (typeof(validator) === 'object') {
+                    throw new ValidatorException('Validator for type \'exact\' must not be an object');
+                }
+                break;
+
+            case ValidatorTypes.regex:
+                if (!(validator instanceof RegExp)) {
+                    throw new ValidatorException('Validator for type \'regex\' must be a regular expression');
+                }
+                break;
+
+            case ValidatorTypes.range:
+            case ValidatorTypes.length:
+                if (validator.min === undefined && validator.max === undefined) {
+                    throw new ValidatorException('Validator for type \'' + type + '\' must specify at least one of \'min\' and \'max\'')
+                }
+
+                if ((validator.min !== undefined && typeof(validator.min) !== 'number') || (validator.max !== undefined && typeof(validator.max) !== 'number')) {
+                    throw new ValidatorException('Options (min, max) for \'' + type + '\' validators must be numbers');
+                }
+
+                break;
+
+            case ValidatorTypes.fn:
+                if (typeof(validator) !== 'function') {
+                    throw new ValidatorException('Validators of type \'fn\' must receive a function to validate against');
+                }
+                break;
         }
     }
 }
