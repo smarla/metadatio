@@ -9,7 +9,7 @@ import { Field } from '../../metadata';
 import InjectableReducer from './injectable.reducer';
 import ValidatorReducer from './validator.reducer';
 import { ReducerException } from '../../exceptions';
-import { FieldActions } from '../../actions/field.actions';
+import FieldActions from '../../actions/field.actions';
 
 /**
  * This reducer is in charge of controlling all actions dispatched to change the validation status for a field.
@@ -56,8 +56,7 @@ export default class FieldReducer extends InjectableReducer {
             uuid: field.uuid,
             initialState: Map({
                 uuid: field.uuid,
-                value: null,
-                valid: true
+                value: null
             })
         });
 
@@ -103,14 +102,7 @@ export default class FieldReducer extends InjectableReducer {
             case FieldActions.VALUE_CHANGED:
                 return Map({
                     uuid: action.uuid,
-                    valid: state.get('valid'),
                     value: action.value
-                });
-            case FieldActions.VALIDATION_CHANGED:
-                return Map({
-                    uuid: action.uuid,
-                    value: state.get('value'),
-                    valid: action.valid
                 });
         }
 

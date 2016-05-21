@@ -6,7 +6,7 @@ import { Map } from 'immutable';
 import { expect } from 'chai';
 
 import { InjectableReducer, ValidatorReducer } from '../../../src/reducers/injectable';
-import { ValidatorActions } from '../../../src/actions/validator.actions';
+import { ValidatorActions } from '../../../src/actions';
 import { Validator, ValidatorTypes } from '../../../src/metadata';
 
 const EXPECTING_ERROR = new Error('An exception was expected here');

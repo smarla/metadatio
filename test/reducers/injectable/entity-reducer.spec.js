@@ -5,7 +5,7 @@
 import { expect } from 'chai';
 import { Map } from 'immutable';
 
-import { EntityActions } from '../../../src/actions/entity.actions';
+import EntityActions from '../../../src/actions/entity.actions';
 import {Entity, Field, DataTypes} from '../../../src/metadata';
 import { InjectableReducer, EntityReducer, FieldReducer } from '../../../src/reducers/injectable';
 

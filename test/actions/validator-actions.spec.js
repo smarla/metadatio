@@ -6,7 +6,7 @@ import { expect } from 'chai';
 import configureStore from 'redux-mock-store';
 
 import { Validator, ValidatorTypes } from '../../src/metadata';
-import { ValidatorActions } from '../../src/actions/validator.actions';
+import ValidatorActions from '../../src/actions/validator.actions';
 
 const mockStore = configureStore();
 
@@ -33,7 +33,7 @@ describe('The validator actions', () => {
         expect(store.getActions()).to.deep.equal([{
             type: ValidatorActions.VALIDATION_KO,
             uuid: validator.uuid
-        }])
+        }]);
     });
 
 });

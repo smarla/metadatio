@@ -2,7 +2,7 @@
  * Created by sm on 14/05/16.
  */
 
-export class MetadatioActions {
+export default class MetadatioActions {
     static REDUX_INIT       = '@@redux/INIT';
 
     static DATA_SET         = 'metadatio_data_set';
@@ -11,18 +11,11 @@ export class MetadatioActions {
     static CONFIG_SET       = 'metadatio_config_set';
     static CONFIG_DELETE    = 'metadatio_config_delete';
 
-    constructor() {
-
+    constructor(store) {
+        this.store = store;
     }
 
     validate(uuid, value) {
 
     }
-
-    static getInstance() {
-        if(!MetadatioActions.instance) MetadatioActions.instance = new MetadatioActions();
-        return MetadatioActions.instance;
-    }
 }
-
-export default MetadatioActions.getInstance();

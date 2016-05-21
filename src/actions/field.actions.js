@@ -2,22 +2,28 @@
  * Created by sm on 14/05/16.
  */
 
-export class FieldActions {
+import Store from '../store';
+import ValidatorActions from './validator.actions';
+
+export default class FieldActions {
     static VALUE_CHANGED        = 'field_value_changed';
-    static VALIDATION_CHANGED   = 'field_validation_changed';
 
-    constructor() {
-
+    constructor(store) {
+        this.store = store;
+        this.validators = new ValidatorActions(store);
     }
 
-    validate(uuid, value) {
+    update(field, value) {
+        if(field.value === value) return;
+        if(value === undefined) value = null;
+        this.store.dispatch({
+            type: FieldActions.VALUE_CHANGED,
+            uuid: field.uuid,
+            value
+        });
 
-    }
-
-    static getInstance() {
-        if(!FieldActions.instance) FieldActions.instance = new FieldActions();
-        return FieldActions.instance;
+        for(let validatorName in field.validators) {
+            this.validators.validate(field.validators[validatorName], value);
+        }
     }
 }
-
-export default FieldActions.getInstance();

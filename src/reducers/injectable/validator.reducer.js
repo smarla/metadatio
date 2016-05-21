@@ -6,7 +6,7 @@ import { Map } from 'immutable';
 
 import { Validator } from '../../metadata';
 import InjectableReducer from './injectable.reducer';
-import { ValidatorActions } from '../../actions/validator.actions';
+import { ValidatorActions } from '../../actions';
 import { ReducerException } from '../../exceptions';
 
 /**

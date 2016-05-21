@@ -2,21 +2,15 @@
  * Created by sm on 14/05/16.
  */
 
-export class EntityActions {
+export default class EntityActions {
     static ENTITY_CHANGED = 'entity_changed';
 
-    constructor() {
+    constructor(store) {
+        this.store = store;
 
     }
 
     validate(uuid, value) {
 
     }
-
-    static getInstance() {
-        if(!EntityActions.instance) EntityActions.instance = new EntityActions();
-        return EntityActions.instance;
-    }
 }
-
-export default EntityActions.getInstance();

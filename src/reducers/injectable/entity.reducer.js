@@ -5,7 +5,7 @@
 import { Map } from 'immutable';
 import { combineReducers } from 'redux';
 
-import { EntityActions } from '../../actions/entity.actions';
+import EntityActions from '../../actions/entity.actions';
 import { Entity } from '../../metadata';
 import InjectableReducer from './injectable.reducer';
 import FieldReducer from './field.reducer';

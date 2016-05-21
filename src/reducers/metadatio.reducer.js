@@ -7,7 +7,7 @@ import { combineReducers } from 'redux';
 
 import { InjectableReducer, EntityReducer } from './injectable';
 import RawMapReducer from './injectable/raw-map.reducer.js';
-import { MetadatioActions } from '../actions';
+import MetadatioActions from '../actions/metadatio.actions';
 
 export class MetadatioReducer {
     static initialState = Map({});

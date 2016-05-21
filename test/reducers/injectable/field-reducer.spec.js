@@ -7,7 +7,7 @@ import {expect} from 'chai';
 
 import {DataTypes, Field, Validator, ValidatorTypes} from '../../../src/metadata';
 import {InjectableReducer, FieldReducer, ValidatorReducer} from '../../../src/reducers/injectable';
-import {FieldActions} from '../../../src/actions/field.actions';
+import FieldActions from '../../../src/actions/field.actions';
 
 const EXPECTING_ERROR = new Error('An exception was expected here');
 
@@ -114,18 +114,6 @@ describe('The field reducer', () => {
             const nextState = InjectableReducer.doReduce()(state, {type: FieldActions.VALUE_CHANGED, uuid: reducer.uuid, value: 'bcd'});
             expect(state).to.not.equal(nextState);
             expect(nextState.get('value')).to.equal('bcd');
-        });
-
-        it('should set validity to false when it listens to a VALIDATION_CHANGED action', () => {
-            const state = Map({
-                uuid: reducer.uuid,
-                valid: true,
-                value: 'abc'
-            });
-
-            const nextState = InjectableReducer.doReduce()(state, {type: FieldActions.VALIDATION_CHANGED, uuid: reducer.uuid, valid: false});
-            expect(state).to.not.equal(nextState);
-            expect(nextState.get('valid')).to.equal(false);
         });
     });
 });

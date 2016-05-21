@@ -141,6 +141,8 @@ export default class Field extends Element {
 
             this.addValidator(validatorName, validator);
         }
+
+        this.value = props.value !== undefined ? props.value : null;
     }
 
     /**
