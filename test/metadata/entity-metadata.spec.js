@@ -125,7 +125,7 @@ describe('Metadatio entities', () => {
     });
 
     describe('upon validation', () => {
-        it('validate the whole entity against all field validators', () => {
+        it('should validate the whole entity against all field validators', () => {
             const metadata = {
                 name: 'entity',
                 label: 'My Entity',

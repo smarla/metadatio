@@ -1,7 +1,6 @@
 /**
  * Created by sm on 01/05/16.
  */
-
 import Element from './element.metadata';
 import Validator from './validator.metadata';
 import { MetadataIntegrityException, DataValidationException } from '../exceptions';
@@ -60,6 +59,7 @@ import * as util from './util.metadata';
  * @class Field
  * @constructor
  */
+
 export default class Field extends Element {
 
     /**
@@ -71,78 +71,13 @@ export default class Field extends Element {
      */
     constructor(props) {
         super();
-
-        /**
-         * The **name** for the field. A field's name **must** be unique within each entity.
-         *
-         * @property name
-         * @type {string}
-         */
         this.name = props.name;
-
-        /**
-         * Label for the field. This defines the human-readable name for the field.
-         *
-         * @property label
-         * @type {string}
-         */
-        
         this.label = props.label || null;
-
-        /**
-         * Description for the field
-         *
-         * @property description
-         * @type {string}
-         * @default null
-         */
+        // this.shortLabel = props.shortLabel || null;
         this.description = props.description || null;
-
-        /**
-         * Define the data type of the element.
-         *
-         * Basic data types are primitive types to define basic data.
-         *
-         * @property dataType
-         * @type {string|Entity}
-         */
         this.dataType = props.dataType;
-
-        /**
-         * Define the multiplicity for the element
-         *
-         * @property multiplicity
-         * @type {string}
-         * @default 'one'
-         */
         this.multiplicity = props.multiplicity || 'one';
-
-        /**
-         * Define the validators for the field
-         *
-         * @property validators
-         * @type {Validator*}
-         * @default {}
-         */
-        this.validators = {};
-
-        // Verify basic metadata
-        if(!this.name) throw new MetadataIntegrityException('MIF001');
-        if(typeof(this.name) !== 'string') throw new MetadataIntegrityException('MIF002');
-        if(!util.NAME_PATTERN_VALIDATOR.validate(this.name)) throw new MetadataIntegrityException('MIF003');
-        if(!util.NAME_LENGTHS_VALIDATOR.validate(this.name)) throw new MetadataIntegrityException('MIF004');
-        if(!this.dataType) throw new MetadataIntegrityException('MIF005');
-        if(!DataTypes[this.dataType]) throw new MetadataIntegrityException('MIF006');
-        if(['one', 'many'].indexOf(this.multiplicity) === -1) throw new MetadataIntegrityException('MIF007');
-
-        // Add validators
-        for(let validatorName in props.validators) {
-            const validator = props.validators[validatorName];
-
-            this.addValidator(validatorName, validator);
-        }
-
-        this.value = props.value !== undefined ? props.value : null;
+        this.validators = props.validators || {};
     }
 
     /**
@@ -192,6 +127,153 @@ export default class Field extends Element {
     }
 
     /**
+     * The **name** for the field. A field's name **must** be unique within each entity.
+     *
+     * @property name
+     * @type {string}
+     */
+    get name() {
+        return this.attr('name');
+    }
+
+    /**
+     * @param name
+     * @type {string}
+     */
+    set name(name) {
+        if(!name) throw new MetadataIntegrityException('MIF001');
+        if(typeof(name) !== 'string') throw new MetadataIntegrityException('MIF002');
+        if(!util.NAME_PATTERN_VALIDATOR.validate(name)) throw new MetadataIntegrityException('MIF003');
+        if(!util.NAME_LENGTHS_VALIDATOR.validate(name)) throw new MetadataIntegrityException('MIF004');
+        this.attr('name', name);
+    }
+
+    /**
+     * Label for the field. This defines the human-readable name for the field.
+     *
+     * @property label
+     * @type {string}
+     */
+    get label() {
+        return this.attr('label');
+    }
+
+    /**
+     * @param label
+     * @type {string}
+     */
+    set label(label) {
+        this.attr('label', label);
+    }
+
+    /**
+     * Short label for the field. This defines the short version of the human-readable name for the field.
+     *
+     * @property shortLabel
+     * @type {string}
+     */
+    get shortLabel() {
+        return this.attr('shortLabel');
+    }
+
+    /**
+     * @param shortlabel
+     * @type {string}
+     */
+    set shortLabel(shortlabel) {
+        this.attr('shortLabel', shortLabel);
+    }
+
+    /**
+     * Description for the field
+     *
+     * @property description
+     * @type {string}
+     * @default null
+     */
+    get description() {
+        return this.attr('description');
+    }
+
+    /**
+     * @param description
+     * @type {string}
+     */
+    set description(description) {
+        this.attr('description', description);
+    }
+
+    /**
+     * Define the data type of the element.
+     *
+     * Basic data types are primitive types to define basic data.
+     *
+     * @property dataType
+     * @type {string|Entity}
+     */
+    get dataType() {
+        return this.attr('dataType');
+    }
+
+    /**
+     * @param dataType
+     * @type {string|Entity}
+     */
+    set dataType(dataType) {
+        if(!dataType) throw new MetadataIntegrityException('MIF005');
+        if(!DataTypes[dataType]) throw new MetadataIntegrityException('MIF006');
+
+        this.attr('dataType', dataType);
+    }
+
+    /**
+     * Define the multiplicity for the element
+     *
+     * @property multiplicity
+     * @type {string}
+     * @default 'one'
+     */
+    get multiplicity() {
+        return this.attr('multiplicity');
+    }
+
+    /**
+     * @param multiplicity
+     * @type {string}
+     */
+    set multiplicity(multiplicity) {
+        if(['one', 'many'].indexOf(multiplicity) === -1) throw new MetadataIntegrityException('MIF007');
+
+        this.attr('multiplicity', multiplicity);
+    }
+
+    /**
+     * Define the validators for the field
+     *
+     * @property validators
+     * @type {Validator*}
+     * @default {}
+     */
+    get validators() {
+        return this.attr('validators');
+    }
+
+    /**
+     * @param validators
+     * @type {Validator*}
+     */
+    set validators(validators) {
+        this.attr('validators', {});
+        
+        // Add validators
+        for(let validatorName in validators) {
+            const validator = validators[validatorName];
+
+            this.addValidator(validatorName, validator);
+        }
+    }
+
+    /**
      * Adds a new validator to the field.
      *
      * @method addValidator
@@ -209,12 +291,12 @@ export default class Field extends Element {
         if(!(validator instanceof Validator)) {
             throw new MetadataIntegrityException('MIV002');
         }
-        
+
         if(!overwrite && this.validators[name] !== undefined) {
             throw new MetadataIntegrityException('MIV003')
         }
 
-        this.validators[name] = validator;
+        this.attr('validators')[name] = validator;
 
         return this;
     }

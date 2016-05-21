@@ -5,6 +5,8 @@
 import { Element } from '../../src/metadata';
 import { expect } from 'chai';
 
+const EXPECTING_ERROR = new Error('An exception was expected here');
+
 describe('The base element', () => {
     describe('upon creation', () => {
         it('should expose a UUID', () => {
@@ -18,5 +20,28 @@ describe('The base element', () => {
 
             expect(element1.uuid).to.not.equal(element2.uuid);
         });
-    })
+    });
+
+    describe('upon data management', () => {
+        it('should store the properties set on startup', () => {
+            const element = new Element({ test: 'test-value' });
+            const ret = element.attr('test');
+
+            expect(ret).to.equal('test-value');
+        });
+
+        it('should store attributes via the \'attr\' method', () => {
+            const element = new Element();
+            const ret = element.attr('test', 'test-value');
+
+            expect(ret).to.equal('test-value');
+        });
+
+        it('should delete a value by setting null', () => {
+            const element = new Element({ test: 'test-value' });
+            const ret = element.attr('test', null);
+
+            expect(ret).to.be.null;
+        });
+    });
 });
