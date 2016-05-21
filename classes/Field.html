@@ -112,7 +112,7 @@
 
         <div id="main" class="yui3-u">
             <div class="content"><h1>Field</h1>
-<!--<span class="foundat">Class defined in: <a href=""><code>src&#x2F;metadata&#x2F;field.metadata.js:11</code></a></span>-->
+<!--<span class="foundat">Class defined in: <a href=""><code>src&#x2F;metadata&#x2F;field.metadata.js:10</code></a></span>-->
 <div class="intro"><p>The fields represent each and every property of any entity. Each field is completely sufficient - it stores configuration about the identification, typing and validation of the property - and all <a href="../classes/Entity.html" class="crosslink">entity</a> procedures depending on fields dispatch down the action, that it's interpreted isolatedly.</p>
 <h2>Usage</h2>
 <pre class="code prettyprint"><code>const field = new Field({
@@ -191,6 +191,19 @@ const field = new Field({ name: 'bar', dataType: foo });
                                 </td>
                                 <td>
                                     <p>Label for the field. This defines the human-readable name for the field.</p>
+                            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a name="property_shortLabel"></a>
+                                    <code>shortLabel</code>
+                                </td>
+                                <td>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
+                                </td>
+                                <td>
+                                    <p>Short label for the field. This defines the short version of the human-readable name for the field.</p>
                             
                                 </td>
                             </tr>

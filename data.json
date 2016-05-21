@@ -417,7 +417,7 @@
             "module": "Core",
             "namespace": "",
             "file": "src/metadata/field.metadata.js",
-            "line": 11,
+            "line": 10,
             "description": "The fields represent each and every property of any entity. Each field is completely sufficient - it stores configuration about the identification, typing and validation of the property - and all {{#crossLink \"Entity\"}}entity{{/crossLink}} procedures depending on fields dispatch down the action, that it's interpreted isolatedly.\n\n## Usage\n\n```\nconst field = new Field({\n  name: 'foo',\n  [label: 'Foo',]\n  [description: 'description...',]\n  dataType: 'string',\n  [multiplicity: 'one',]\n  [validators: {...}]\n});\n```\n\n## Identification\n\nAll fields must be defined with a {{#crossLink \"Field/name:property\"}}name{{/crossLink}}, that must be unique within each entity. In addition, you can define a field's {{#crossLink \"Field/label:property\"}}label{{/crossLink}} - useful for translatable usages.\n\n## Data typing\n\nAll fields must have an assigned data type.\n\n### Basic data types\n\nYou can make use of several basic data types, all available at the {{#crossLink \"DataTypes\"}}DataTypes{{/crossLink}} specification.\n\n```\nstring: 'Sample value',\nnumber: 123[.456],\nboolean: true|false,\ndate: new Date()|Timestamp\n```\n\n### Reference data types\n\nYou can set a reference to an entity as the data type for a field. This will build a relationship between your field's entity and the target entity, through the field you setup for that.\n\n```\nconst foo = new Entity({ name: 'foo', ... });\nconst field = new Field({ name: 'bar', dataType: foo });\n```\n\n#### Referenced validations\n\nWhen a field's data type is set as a reference, the validation procedures change for it. Values for the fields with this metadata can be filled either with the whole entity - for inner object saving - or via a `string` or `number` identifying the entity - deep linking approach. In the case you provide complete entities as values, the validation procedures of the target entity's metadata will be applied."
         },
         "Validator": {
@@ -1180,70 +1180,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 75,
-            "description": "The **name** for the field. A field's name **must** be unique within each entity.",
-            "itemtype": "property",
-            "name": "name",
-            "type": "{string}",
-            "class": "Field",
-            "module": "Core"
-        },
-        {
-            "file": "src/metadata/field.metadata.js",
             "line": 83,
-            "description": "Label for the field. This defines the human-readable name for the field.",
-            "itemtype": "property",
-            "name": "label",
-            "type": "{string}",
-            "class": "Field",
-            "module": "Core"
-        },
-        {
-            "file": "src/metadata/field.metadata.js",
-            "line": 92,
-            "description": "Description for the field",
-            "itemtype": "property",
-            "name": "description",
-            "type": "{string}",
-            "default": "null",
-            "class": "Field",
-            "module": "Core"
-        },
-        {
-            "file": "src/metadata/field.metadata.js",
-            "line": 101,
-            "description": "Define the data type of the element.\n\nBasic data types are primitive types to define basic data.",
-            "itemtype": "property",
-            "name": "dataType",
-            "type": "{string|Entity}",
-            "class": "Field",
-            "module": "Core"
-        },
-        {
-            "file": "src/metadata/field.metadata.js",
-            "line": 111,
-            "description": "Define the multiplicity for the element",
-            "itemtype": "property",
-            "name": "multiplicity",
-            "type": "{string}",
-            "default": "'one'",
-            "class": "Field",
-            "module": "Core"
-        },
-        {
-            "file": "src/metadata/field.metadata.js",
-            "line": 120,
-            "description": "Define the validators for the field",
-            "itemtype": "property",
-            "name": "validators",
-            "type": "{Validator*}",
-            "default": "{}",
-            "class": "Field",
-            "module": "Core"
-        },
-        {
-            "file": "src/metadata/field.metadata.js",
-            "line": 148,
             "description": "Determines whether the value defined for a field is valid.",
             "itemtype": "method",
             "name": "validate",
@@ -1267,7 +1204,171 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 194,
+            "line": 129,
+            "description": "The **name** for the field. A field's name **must** be unique within each entity.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "{string}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 139,
+            "params": [
+                {
+                    "name": "name",
+                    "description": ""
+                }
+            ],
+            "type": "{string}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 151,
+            "description": "Label for the field. This defines the human-readable name for the field.",
+            "itemtype": "property",
+            "name": "label",
+            "type": "{string}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 161,
+            "params": [
+                {
+                    "name": "label",
+                    "description": ""
+                }
+            ],
+            "type": "{string}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 169,
+            "description": "Short label for the field. This defines the short version of the human-readable name for the field.",
+            "itemtype": "property",
+            "name": "shortLabel",
+            "type": "{string}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 179,
+            "params": [
+                {
+                    "name": "shortlabel",
+                    "description": ""
+                }
+            ],
+            "type": "{string}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 187,
+            "description": "Description for the field",
+            "itemtype": "property",
+            "name": "description",
+            "type": "{string}",
+            "default": "null",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 198,
+            "params": [
+                {
+                    "name": "description",
+                    "description": ""
+                }
+            ],
+            "type": "{string}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 206,
+            "description": "Define the data type of the element.\n\nBasic data types are primitive types to define basic data.",
+            "itemtype": "property",
+            "name": "dataType",
+            "type": "{string|Entity}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 218,
+            "params": [
+                {
+                    "name": "dataType",
+                    "description": ""
+                }
+            ],
+            "type": "{string|Entity}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 229,
+            "description": "Define the multiplicity for the element",
+            "itemtype": "property",
+            "name": "multiplicity",
+            "type": "{string}",
+            "default": "'one'",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 240,
+            "params": [
+                {
+                    "name": "multiplicity",
+                    "description": ""
+                }
+            ],
+            "type": "{string}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 250,
+            "description": "Define the validators for the field",
+            "itemtype": "property",
+            "name": "validators",
+            "type": "{Validator*}",
+            "default": "{}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 261,
+            "params": [
+                {
+                    "name": "validators",
+                    "description": ""
+                }
+            ],
+            "type": "{Validator*}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 276,
             "description": "Adds a new validator to the field.",
             "itemtype": "method",
             "name": "addValidator",
@@ -1675,11 +1776,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/field.metadata.js:148"
+            "line": " src/metadata/field.metadata.js:83"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/field.metadata.js:194"
+            "line": " src/metadata/field.metadata.js:276"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -1768,6 +1869,34 @@
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
             "line": " src/metadata/field.metadata.js:1"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/metadata/field.metadata.js:139"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/metadata/field.metadata.js:161"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/metadata/field.metadata.js:179"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/metadata/field.metadata.js:198"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/metadata/field.metadata.js:218"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/metadata/field.metadata.js:240"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/metadata/field.metadata.js:261"
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
