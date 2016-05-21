@@ -88,8 +88,8 @@
                 <div class="bd">
                     <ul>
                             <li><a href="#methods_constructor">constructor</a></li>
-                            <li><a href="#methods_addField">addField</a></li>
                             <li><a href="#methods_validate">validate</a></li>
+                            <li><a href="#methods_addField">addField</a></li>
                     </ul>
                 </div>
             </div>
@@ -186,11 +186,28 @@ const child = new Entity({ name: 'child-entity', parent: parent });
                             </tr>
                             <tr>
                                 <td>
+                                    <a name="property_label"></a>
+                                    <code>label</code>
+                                </td>
+                                <td>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
+                                </td>
+                                <td>
+                                    <p>Optionnally, you can define a label for the entity. The label would represent a human-readable name for the entity. It's actually useful if you wish to provided translated names for the entity - as you can set a placeholder as label - but otherwise might be not that useful, and with the <a href="../classes/Entity.html#property_name" class="crosslink">name</a> it may suffice.</p>
+                            
+                                        <h5>Example</h5>
+                                        <pre class="code prettyprint"><code>new Entity({ label: 'Foo', ... }) // Plain label</code></pre>
+                            <pre class="code prettyprint"><code>new Entity({ label: 'entities.foo.label', ... }) // Translatable label</code></pre>
+                            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <a name="property_description"></a>
                                     <code>description</code>
                                 </td>
                                 <td>
-                                    <strong>Null | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
                                 </td>
                                 <td>
                                     <p>Description for the field</p>
@@ -211,28 +228,11 @@ const child = new Entity({ name: 'child-entity', parent: parent });
                             </tr>
                             <tr>
                                 <td>
-                                    <a name="property_label"></a>
-                                    <code>label</code>
-                                </td>
-                                <td>
-                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong> <br>
-                                </td>
-                                <td>
-                                    <p>Optionnally, you can define a label for the entity. The label would represent a human-readable name for the entity. It's actually useful if you wish to provided translated names for the entity - as you can set a placeholder as label - but otherwise might be not that useful, and with the <a href="../classes/Entity.html#property_name" class="crosslink">name</a> it may suffice.</p>
-                            
-                                        <h5>Example</h5>
-                                        <pre class="code prettyprint"><code>new Entity({ label: 'Foo', ... }) // Plain label</code></pre>
-                            <pre class="code prettyprint"><code>new Entity({ label: 'entities.foo.label', ... }) // Translatable label</code></pre>
-                            
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     <a name="property_parent"></a>
                                     <code>parent</code>
                                 </td>
                                 <td>
-                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a> | <a href="../classes/Entity.html" class="crosslink">Entity</a></strong> <br>
+                                    <strong><a href="../classes/Entity.html" class="crosslink">Entity</a></strong> <br>
                                 </td>
                                 <td>
                                     <p>Parent entity. If an entity is an extension of some one more basic, you can link here the parent entity.</p>
@@ -250,7 +250,7 @@ const child = new Entity({ name: 'child-entity', parent: parent });
                                     <code>fields</code>
                                 </td>
                                 <td>
-                                    <strong><a href="../classes/Field.html" class="crosslink">[Field]</a></strong> <br>
+                                    <strong><a href="../classes/Field.html" class="crosslink">Field*</a></strong> <br>
                                 </td>
                                 <td>
                                     <p>Entity fields</p>
@@ -304,6 +304,47 @@ const child = new Entity({ name: 'child-entity', parent: parent });
                      .addField(...) // Add your fields</code></pre>
                     
                     </div>
+                    <a name="method_validate"></a>
+                    <div class="method item">
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong
+                            class="name"><code>validate</code></strong>( <code>item </code> ) 
+                        <br>
+                        <p>Validates that an object parameters comply with corresponding field's validation rules.</p>
+                    
+                            <h4>Parameters:</h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                                <code>item</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong>
+                                        </td>
+                                        <td>
+                                            <p>The object with the values</p>
+                    
+                                        </td>
+                                    </tr>
+                    
+                                </tbody>
+                            </table>
+                                <br>
+                                <div class="returns">
+                                    <strong>Returns:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <p>The validation result</p>
+                    </div>
+                                <br>
+                                <div class="throws">
+                                    <strong>Throws:</strong> <p>DataValidationException</p>
+                    </div>
+                    </div>
                     <a name="method_addField"></a>
                     <div class="method item">
                         <a href="../classes/Entity.html" class="crosslink">Entity</a> <strong
@@ -351,47 +392,6 @@ const child = new Entity({ name: 'child-entity', parent: parent });
                                 <br>
                                 <div class="returns">
                                     <strong>Returns:</strong> <a href="../classes/Entity.html" class="crosslink">Entity</a> </div>
-                    </div>
-                    <a name="method_validate"></a>
-                    <div class="method item">
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong
-                            class="name"><code>validate</code></strong>( <code>item </code> ) 
-                        <br>
-                        <p>Validates that an object parameters comply with corresponding field's validation rules.</p>
-                    
-                            <h4>Parameters:</h4>
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Description</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                                <code>item</code>
-                                        </td>
-                                        <td>
-                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong>
-                                        </td>
-                                        <td>
-                                            <p>The object with the values</p>
-                    
-                                        </td>
-                                    </tr>
-                    
-                                </tbody>
-                            </table>
-                                <br>
-                                <div class="returns">
-                                    <strong>Returns:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <p>The validation result</p>
-                    </div>
-                                <br>
-                                <div class="throws">
-                                    <strong>Throws:</strong> <p>DataValidationException</p>
-                    </div>
                     </div>
             </div>
 
