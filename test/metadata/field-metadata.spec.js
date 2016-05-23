@@ -40,6 +40,28 @@ describe('Base field component', () => {
             expect(field.name).to.equal(metadata.name);
         });
 
+        it('should be configured with full metadata', () => {
+            const metadata = {
+                name: "name",
+                label: "Name of your app",
+                shortLabel: 'App name',
+                hint: 'Write some fancy name for your app',
+                description: 'The name of an app defines uniquely your app in the world',
+                dataType: DataTypes.string,
+                multiplicity: 'one',
+            };
+
+            const field = new Field(metadata);
+
+            expect(field.name).to.equal(metadata.name);
+            expect(field.label).to.equal(metadata.label);
+            expect(field.shortLabel).to.equal(metadata.shortLabel);
+            expect(field.hint).to.equal(metadata.hint);
+            expect(field.description).to.equal(metadata.description);
+            expect(field.dataType).to.equal(metadata.dataType);
+            expect(field.multiplicity).to.equal(metadata.multiplicity);
+        });
+
         it('should not allow corrupted metadata (no field name)', (done) => {
             const metadata = {
                 label: "Name of your app",

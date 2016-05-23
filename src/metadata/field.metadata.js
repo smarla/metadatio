@@ -73,7 +73,8 @@ export default class Field extends Element {
         super();
         this.name = props.name;
         this.label = props.label || null;
-        // this.shortLabel = props.shortLabel || null;
+        this.shortLabel = props.shortLabel || null;
+        this.hint = props.hint || null;
         this.description = props.description || null;
         this.dataType = props.dataType;
         this.multiplicity = props.multiplicity || 'one';
@@ -180,8 +181,25 @@ export default class Field extends Element {
      * @param shortlabel
      * @type {string}
      */
-    set shortLabel(shortlabel) {
+    set shortLabel(shortLabel) {
         this.attr('shortLabel', shortLabel);
+    }
+
+    /**
+     *
+     * @property hint
+     * @type {string}
+     */
+    get hint() {
+        return this.attr('hint');
+    }
+
+    /**
+     * @param hint
+     * @type {string}
+     */
+    set hint(hint) {
+        this.attr('hint', hint);
     }
 
     /**

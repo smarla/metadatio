@@ -23,6 +23,24 @@ describe('Metadatio entities', () => {
             expect(entity.label).to.equal(metadata.label);
         });
 
+        it('should be configured with full metadata', () => {
+            const metadata = {
+                name: 'my-entity',
+                label: 'My Entity',
+                description: 'Some description',
+                namespace: 'ns',
+                parent: 'parent'
+            };
+
+            const entity = new Entity(metadata);
+
+            expect(entity.name).to.equal(metadata.name);
+            expect(entity.label).to.equal(metadata.label);
+            expect(entity.description).to.equal(metadata.description);
+            expect(entity.namespace).to.equal(metadata.namespace);
+            expect(entity.parent).to.equal(metadata.parent);
+        });
+
         it('should not allow an entity without name', (done) => {
             const metadata = {
                 name: null,
