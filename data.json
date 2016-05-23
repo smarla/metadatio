@@ -1257,7 +1257,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 83,
+            "line": 84,
             "description": "Determines whether the value defined for a field is valid.",
             "itemtype": "method",
             "name": "validate",
@@ -1281,7 +1281,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 129,
+            "line": 130,
             "description": "The **name** for the field. A field's name **must** be unique within each entity.",
             "itemtype": "property",
             "name": "name",
@@ -1291,7 +1291,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 139,
+            "line": 140,
             "params": [
                 {
                     "name": "name",
@@ -1304,7 +1304,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 151,
+            "line": 152,
             "description": "Label for the field. This defines the human-readable name for the field.",
             "itemtype": "property",
             "name": "label",
@@ -1314,7 +1314,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 161,
+            "line": 162,
             "params": [
                 {
                     "name": "label",
@@ -1327,7 +1327,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 169,
+            "line": 170,
             "description": "Short label for the field. This defines the short version of the human-readable name for the field.",
             "itemtype": "property",
             "name": "shortLabel",
@@ -1337,7 +1337,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 179,
+            "line": 180,
             "params": [
                 {
                     "name": "shortlabel",
@@ -1350,7 +1350,29 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 187,
+            "line": 188,
+            "itemtype": "property",
+            "name": "hint",
+            "type": "{string}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 197,
+            "params": [
+                {
+                    "name": "hint",
+                    "description": ""
+                }
+            ],
+            "type": "{string}",
+            "class": "Field",
+            "module": "Core"
+        },
+        {
+            "file": "src/metadata/field.metadata.js",
+            "line": 205,
             "description": "Description for the field",
             "itemtype": "property",
             "name": "description",
@@ -1361,7 +1383,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 198,
+            "line": 216,
             "params": [
                 {
                     "name": "description",
@@ -1374,7 +1396,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 206,
+            "line": 224,
             "description": "Define the data type of the element.\n\nBasic data types are primitive types to define basic data.",
             "itemtype": "property",
             "name": "dataType",
@@ -1384,7 +1406,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 218,
+            "line": 236,
             "params": [
                 {
                     "name": "dataType",
@@ -1397,7 +1419,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 229,
+            "line": 247,
             "description": "Define the multiplicity for the element",
             "itemtype": "property",
             "name": "multiplicity",
@@ -1408,7 +1430,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 240,
+            "line": 258,
             "params": [
                 {
                     "name": "multiplicity",
@@ -1421,7 +1443,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 250,
+            "line": 268,
             "description": "Define the validators for the field",
             "itemtype": "property",
             "name": "validators",
@@ -1432,7 +1454,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 261,
+            "line": 279,
             "params": [
                 {
                     "name": "validators",
@@ -1445,7 +1467,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 276,
+            "line": 294,
             "description": "Adds a new validator to the field.",
             "itemtype": "method",
             "name": "addValidator",
@@ -1853,11 +1875,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/field.metadata.js:83"
+            "line": " src/metadata/field.metadata.js:84"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/field.metadata.js:276"
+            "line": " src/metadata/field.metadata.js:294"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -1973,31 +1995,35 @@
         },
         {
             "message": "Missing item type",
-            "line": " src/metadata/field.metadata.js:139"
+            "line": " src/metadata/field.metadata.js:140"
         },
         {
             "message": "Missing item type",
-            "line": " src/metadata/field.metadata.js:161"
+            "line": " src/metadata/field.metadata.js:162"
         },
         {
             "message": "Missing item type",
-            "line": " src/metadata/field.metadata.js:179"
+            "line": " src/metadata/field.metadata.js:180"
         },
         {
             "message": "Missing item type",
-            "line": " src/metadata/field.metadata.js:198"
+            "line": " src/metadata/field.metadata.js:197"
         },
         {
             "message": "Missing item type",
-            "line": " src/metadata/field.metadata.js:218"
+            "line": " src/metadata/field.metadata.js:216"
         },
         {
             "message": "Missing item type",
-            "line": " src/metadata/field.metadata.js:240"
+            "line": " src/metadata/field.metadata.js:236"
         },
         {
             "message": "Missing item type",
-            "line": " src/metadata/field.metadata.js:261"
+            "line": " src/metadata/field.metadata.js:258"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/metadata/field.metadata.js:279"
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
