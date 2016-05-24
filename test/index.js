@@ -26,8 +26,6 @@ if (types.indexOf('unit') === -1) {
     pattern = types.map((n) => globPatterns[n]);
 }
 
-console.log(pattern);
-
 const mocha = new Mocha({
     grep: argv.grep ? argv.grep : undefined,
 });

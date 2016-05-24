@@ -14,7 +14,6 @@ export default class Element {
     }
 
     attr(key, value) {
-        console.log(attrs[this.uuid]);
         if(value !== undefined) {
             attrs[this.uuid][key] = value;
         }

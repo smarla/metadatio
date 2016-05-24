@@ -90,23 +90,23 @@ export default class Field extends Element {
      * @returns {boolean}
      */
     validate(value, validators = this.validators) {
-        if(value === undefined) throw new DataValidationException('Field value is undefined');
+        if(value === undefined) throw new DataValidationException('DV001');
 
         if(value !== null) {
             // Validate value data type
             const valueType = typeof(value);
             switch(this.dataType) {
                 case DataTypes.string:
-                    if(valueType !== 'string') throw new DataValidationException('Values for data type \'string\' must be strings');
+                    if(valueType !== 'string') throw new DataValidationException('DV002');
                     break;
                 case DataTypes.number:
-                    if(valueType !== 'number') throw new DataValidationException('Values for data type \'number\' must be numbers');
+                    if(valueType !== 'number') throw new DataValidationException('DV003');
                     break;
                 case DataTypes.boolean:
-                    if([true, false].indexOf(value) === -1) throw new DataValidationException('Values for data type \'boolean\' must be either true or false');
+                    if([true, false].indexOf(value) === -1) throw new DataValidationException('DV004');
                     break;
                 case DataTypes.date:
-                    if(valueType !== 'number' && !(value instanceof Date)) throw new DataValidationException('Values for data type \'date\' must be either dates or timestamps');
+                    if(valueType !== 'number' && !(value instanceof Date)) throw new DataValidationException('DV005');
                     break;
             }
         }

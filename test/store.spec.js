@@ -60,8 +60,6 @@ describe('Metadatio store', () => {
         it('should change its state to \'configured\'', () => {
             Store.configure();
             expect(Store.configured).to.equal(true);
-
-            console.log(Store.getState());
         });
 
         it('should not allow a second configuration attempt', (done) => {
