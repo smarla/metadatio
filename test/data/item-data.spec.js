@@ -33,6 +33,20 @@ describe('The data item', () => {
             }
         });
 
+        it('should have a uuid', () => {
+            const entity = new Entity({
+                name: 'entity',
+                label: 'My Entity'
+            });
+
+            const item1 = new Item(entity);
+            const item2 = new Item(entity);
+
+            expect(item1.uuid).to.not.be.undefined;
+            expect(item2.uuid).to.not.be.undefined;
+            expect(item1.uuid).to.not.equal(item2.uuid);
+        });
+
         describe('and using the entity received', () => {
             let entity = null;
             let item = null;

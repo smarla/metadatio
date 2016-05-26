@@ -8,7 +8,7 @@ import { Field, DataTypes, Validator, ValidatorTypes } from '../../src';
 
 const EXPECTING_ERROR = new Error('An exception was expected here');
 
-describe('Base field component', () => {
+describe('Entity fields', () => {
 
     describe('upon construction', () => {
         it('should expose a uuid', () => {
@@ -392,7 +392,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('DataValidationException');
-                expect(e.message).to.equal('Field value is undefined');
+                expect(e.message).to.equal('DV001');
                 done();
             }
         });
@@ -435,7 +435,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('DataValidationException');
-                expect(e.message).to.equal('Values for data type \'string\' must be strings');
+                expect(e.message).to.equal('DV002');
                 done();
             }
         });
@@ -459,7 +459,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('DataValidationException');
-                expect(e.message).to.equal('Values for data type \'number\' must be numbers');
+                expect(e.message).to.equal('DV003');
                 done();
             }
         });
@@ -502,7 +502,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('DataValidationException');
-                expect(e.message).to.equal('Values for data type \'boolean\' must be either true or false');
+                expect(e.message).to.equal('DV004');
                 done();
             }
         });
@@ -545,7 +545,7 @@ describe('Base field component', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('DataValidationException');
-                expect(e.message).to.equal('Values for data type \'date\' must be either dates or timestamps');
+                expect(e.message).to.equal('DV005');
                 done();
             }
         });

@@ -10,7 +10,7 @@ import {expect} from 'chai';
 
 import {Validator, ValidatorTypes} from '../../src';
 
-describe('Any validator', () => {
+describe('Field validators', () => {
     it('should expose a UUID', () => {
         const validator = new Validator(ValidatorTypes.required);
         expect(!validator.uuid).to.equal(false);
