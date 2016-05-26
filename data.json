@@ -56,6 +56,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/exceptions/action.exception.js": {
+            "name": "src/exceptions/action.exception.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/exceptions/data-validation.exception.js": {
             "name": "src/exceptions/data-validation.exception.js",
             "modules": {
@@ -542,6 +549,12 @@
             "file": "src/data/item.data.js",
             "line": 1,
             "description": "Created by sm on 24/05/16.",
+            "class": "DataValidationException"
+        },
+        {
+            "file": "src/exceptions/action.exception.js",
+            "line": 1,
+            "description": "Created by sm on 26/05/16.",
             "class": "DataValidationException"
         },
         {
@@ -1972,6 +1985,10 @@
         {
             "message": "Missing item type\nCreated by sm on 24/05/16.",
             "line": " src/data/item.data.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 26/05/16.",
+            "line": " src/exceptions/action.exception.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
