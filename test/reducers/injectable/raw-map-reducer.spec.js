@@ -5,9 +5,7 @@
 import { expect } from 'chai';
 import { Map } from 'immutable';
 
-import { MetadatioActions } from '../../src/actions';
-import { RawMapReducer } from '../../src/reducers/injectable';
-import { MetadatioReducer } from '../../src/reducers';
+import { RawMapReducer } from '../../../src/reducers/injectable';
 
 const EXPECTING_ERROR = new Error('An exception was expected here');
 

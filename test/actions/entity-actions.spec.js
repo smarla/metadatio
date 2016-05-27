@@ -90,11 +90,11 @@ describe('The entity actions', () => {
             }
         });
 
-        it('should dispatch ENTITY_CHANGED when an entity field\'s value changes', () => {
+        it('should dispatch ITEM_CHANGED when an entity field\'s value changes', () => {
             actions.change(item, entity.fields[0], '123');
 
             expect(store.getActions()).to.deep.equal([{
-                type: EntityActions.ENTITY_CHANGED,
+                type: EntityActions.ITEM_CHANGED,
                 uuid: item.uuid,
                 field: entity.fields[0].uuid,
                 value: '123'
@@ -125,11 +125,11 @@ describe('The entity actions', () => {
             }
         });
     
-        it('should dispatch ENTITY_DESTROYED when requested', () => {
+        it('should dispatch ITEM_DESTROYED when requested', () => {
             actions.destroy(item);
     
             expect(store.getActions()).to.deep.equal([{
-                type: EntityActions.ENTITY_DESTROYED,
+                type: EntityActions.ITEM_DESTROYED,
                 uuid: item.uuid
             }]);
         });

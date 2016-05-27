@@ -56,7 +56,7 @@ export default class EntityReducer extends InjectableReducer {
 
     reduce(state = EntityReducer.initialState, action) {
         switch(action.type) {
-            case EntityActions.ENTITY_CHANGED:
+            case EntityActions.ITEM_CHANGED:
                 return Map({
                     uuid: state.get('uuid'),
                     changedAt: action.changedAt

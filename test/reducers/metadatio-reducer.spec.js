@@ -22,7 +22,7 @@ describe('The metadatio reducer', () => {
             });
 
             it('should be \'CONFIG_DELETE\' for deleting a value', () => {
-                expect(MetadatioReducer.configReducer.subreducers.delete).to.equal(MetadatioActions.CONFIG_DELETE);
+                expect(MetadatioReducer.configReducer.subreducers.delete).to.equal(MetadatioActions.CONFIG_DELETED);
             });
         });
     });
@@ -38,7 +38,7 @@ describe('The metadatio reducer', () => {
             });
 
             it('should be \'DATA_DELETE\' for deleting a value', () => {
-                expect(MetadatioReducer.dataReducer.subreducers.delete).to.equal(MetadatioActions.DATA_DELETE);
+                expect(MetadatioReducer.dataReducer.subreducers.delete).to.equal(MetadatioActions.DATA_DELETED);
             });
         });
     });

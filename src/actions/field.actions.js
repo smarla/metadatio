@@ -10,9 +10,9 @@ import { Field } from '../metadata';
 import { ActionException } from '../exceptions';
 
 export default class FieldActions {
-    static VALIDATION_CHANGED = 'field_validation_changed';
-    static VALUE_CHANGED = 'field_value_changed';
-    static VALUE_CLEARED = 'field_value_cleared';
+    static VALIDATION_CHANGED = 'field-validation-changed';
+    static VALUE_CHANGED = 'field-value-changed';
+    static VALUE_CLEARED = 'field-value-cleared';
 
     constructor(store) {
         this.store = store;

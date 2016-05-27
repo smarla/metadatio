@@ -136,15 +136,15 @@ describe('The entity reducer', () => {
         it('should return the same state for a different uuid', () => {
             const reduction = InjectableReducer.doReduce()(state, {
                 uuid: '123',
-                type: EntityActions.ENTITY_CHANGED
+                type: EntityActions.ITEM_CHANGED
             });
             expect(reduction).to.equal(state);
         });
 
-        it('should change state on a ENTITY_CHANGED action', () => {
+        it('should change state on a ITEM_CHANGED action', () => {
             const reduction = InjectableReducer.doReduce()(state, {
                 uuid: reducer.uuid,
-                type: EntityActions.ENTITY_CHANGED,
+                type: EntityActions.ITEM_CHANGED,
                 changedAt: new Date()
             });
             expect(reduction).to.not.equal(state);

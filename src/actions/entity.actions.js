@@ -4,11 +4,11 @@
 
 import { ActionException } from '../exceptions';
 import { Item } from '../data';
-import { Entity, Field } from '../metadata';
+import { Field } from '../metadata';
 
 export default class EntityActions {
-    static ENTITY_CHANGED = 'entity_changed';
-    static ENTITY_DESTROYED = 'entity_destroyed';
+    static ITEM_CHANGED = 'metadatio-items-item-changed';
+    static ITEM_DESTROYED = 'metadatio-items-item-destroyed';
 
     constructor(store) {
         this.store = store;
@@ -22,7 +22,7 @@ export default class EntityActions {
         if(value === undefined) throw new ActionException('AE005');
 
         this.store.dispatch({
-            type: EntityActions.ENTITY_CHANGED,
+            type: EntityActions.ITEM_CHANGED,
             uuid: item.uuid,
             field: field.uuid,
             value
@@ -34,7 +34,7 @@ export default class EntityActions {
         if(!(item instanceof Item)) throw new ActionException('AE007');
 
         this.store.dispatch({
-            type: EntityActions.ENTITY_DESTROYED,
+            type: EntityActions.ITEM_DESTROYED,
             uuid: item.uuid
         });
     }
