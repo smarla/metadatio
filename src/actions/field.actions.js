@@ -4,6 +4,7 @@
 
 import Store from '../store';
 import ValidatorActions from './validator.actions';
+import { Item } from '../data';
 import { Field } from '../metadata';
 
 import { ActionException } from '../exceptions';
@@ -18,23 +19,29 @@ export default class FieldActions {
         this.validators = new ValidatorActions(store);
     }
 
-    clear(field) {
-        if(!field) throw new ActionException('AF004');
-        if(!(field instanceof Field)) throw new ActionException('AF005');
+    clear(item, field) {
+        if(!item) throw new ActionException('AF006');
+        if(!(item instanceof Item)) throw new ActionException('AF007');
+        if(!field) throw new ActionException('AF008');
+        if(!(field instanceof Field)) throw new ActionException('AF009');
         this.store.dispatch({
             type: FieldActions.VALUE_CLEARED,
-            uuid: field.uuid
+            uuid: item.uuid,
+            field: field.uuid
         });
     }
 
-    update(field, value) {
-        if (!field) throw new ActionException('AF001');
-        if (!(field instanceof Field)) throw new ActionException('AF002');
-        if (value === undefined) throw new ActionException('AF003');
+    update(item, field, value) {
+        if(!item) throw new ActionException('AF001');
+        if(!(item instanceof Item)) throw new ActionException('AF002');
+        if (!field) throw new ActionException('AF003');
+        if (!(field instanceof Field)) throw new ActionException('AF004');
+        if (value === undefined) throw new ActionException('AF005');
 
         this.store.dispatch({
             type: FieldActions.VALUE_CHANGED,
-            uuid: field.uuid,
+            uuid: item.uuid,
+            field: field.uuid,
             value
         });
     }

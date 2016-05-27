@@ -15,7 +15,27 @@ export default class MetadatioActions {
         this.store = store;
     }
 
-    validate(uuid, value) {
+    createEntity(entity, data) {
+
+    }
+
+    deleteEntity(entity) {
+
+    }
+
+    setConfig(key, value) {
+
+    }
+
+    deleteConfig(key) {
+
+    }
+
+    setData(key, value) {
+
+    }
+
+    deleteData(key) {
 
     }
 }
