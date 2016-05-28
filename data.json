@@ -253,6 +253,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/reducers/items.reducer.js": {
+            "name": "src/reducers/items.reducer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/reducers/metadatio.reducer.js": {
             "name": "src/reducers/metadatio.reducer.js",
             "modules": {},
@@ -1804,6 +1811,13 @@
             "module": "Reducers"
         },
         {
+            "file": "src/reducers/items.reducer.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "Store",
+            "module": "Reducers"
+        },
+        {
             "file": "src/reducers/metadatio.reducer.js",
             "line": 1,
             "description": "Created by sm on 14/05/16.",
@@ -2141,6 +2155,10 @@
         {
             "message": "Missing item type\nCreated by sm on 14/05/16.",
             "line": " src/reducers/index.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/items.reducer.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 14/05/16.",
