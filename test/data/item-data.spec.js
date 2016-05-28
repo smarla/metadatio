@@ -94,6 +94,21 @@ describe('The data item', () => {
                 }
             });
 
+            it('should expose the Entity as __entity', () => {
+                expect(item.__entity).to.equal(entity);
+            });
+
+            it('should have a read-only __entity', (done) => {
+                try {
+                    item.__entity = 'something';
+                    done(EXPECTING_ERROR);
+                } catch(e) {
+                    expect(e.className).to.equal('ItemException');
+                    expect(e.code).to.equal('I004');
+                    done();
+                }
+            });
+
             it('should expose properties for each of the fields on the \'data\' attribute', () => {
                 expect(item.data.name).to.not.be.undefined;
                 expect(item.data.name).to.be.null;
@@ -147,7 +162,7 @@ describe('The data item', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('ItemException');
-                expect(e.code).to.equal('I004')
+                expect(e.code).to.equal('I005')
                 done();
             }
         });
@@ -158,7 +173,7 @@ describe('The data item', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('ItemException');
-                expect(e.code).to.equal('I005')
+                expect(e.code).to.equal('I006')
                 done();
             }
         });

@@ -6,6 +6,7 @@ import { Map } from 'immutable';
 import { combineReducers } from 'redux';
 
 import { InjectableReducer, EntityReducer } from './injectable';
+import ItemsReducer from './items.reducer';
 import RawMapReducer from './injectable/raw-map.reducer.js';
 import MetadatioActions from '../actions/metadatio.actions';
 
@@ -25,11 +26,12 @@ export class MetadatioReducer {
     reducers() {
         const config = InjectableReducer.doReduce();
         const data = InjectableReducer.doReduce();
-        const entities = null; // TODO
+        const items = ItemsReducer.combine();
 
         return {
             config,
-            data
+            data,
+            items
         };
     }
 

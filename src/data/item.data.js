@@ -14,6 +14,7 @@ export default class Item extends Element {
 
         super();
 
+        this.attr('__entity', entity);
         this.attr('className', entity.name);
 
         const values = {};
@@ -33,17 +34,25 @@ export default class Item extends Element {
         const that = this;
         this.data = new Proxy(values, {
             get: (target, prop) => {
-                if(that.attr(prop) === undefined) throw new ItemException('I004');
+                if(that.attr(prop) === undefined) throw new ItemException('I005');
                 return that.attr(prop);
             },
 
             set: (target, prop, value) => {
-                if(that.attr(prop) === undefined) throw new ItemException('I005');
+                if(that.attr(prop) === undefined) throw new ItemException('I006');
 
                 values[prop].field.validate(value);
                 return that.attr(prop, value);
             }
         });
+    }
+
+    get __entity() {
+        return this.attr('__entity');
+    }
+
+    set __entity(__entity) {
+        throw new ItemException('I004');
     }
 
     get className() {

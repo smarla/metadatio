@@ -14,7 +14,8 @@ export default class ItemException extends Error {
         'I001': 'Every item needs an entity to be configured',
         'I002': 'The Item needs an instance of Entity',
         'I003': 'You cannot override an Item\'s className',
-        'I004': 'The item {{item}} does not contain a field {{field}}',
-        'I005': 'Cannot edit the non existing field {{field}}'
+        'I004': 'You cannot override an Item\'s entity',
+        'I005': 'The item {{item}} does not contain a field {{field}}',
+        'I006': 'Cannot edit the non existing field {{field}}'
     }
 }
