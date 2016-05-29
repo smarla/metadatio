@@ -445,7 +445,7 @@
             "module": "Core",
             "namespace": "",
             "file": "src/metadata/entity.metadata.js",
-            "line": 11,
+            "line": 12,
             "description": "Entities represent real-world elements, that you need to manage within your app.\nExample entities are _Person_, _Car_, and whatever else you can imagine.\n\nEntities by itself don't contain any particular feature - apart from identification, and grouping -. Whilst some Metadatio modules will extend this objects to enrich its features, at it's core an Entity is basically a container for fields.\n\n## Usage\n\n```\nconst entity = new Entity({\n  name: 'Friend',\n  [label: 'Friend',]\n  [namespace: 'people',]\n  [description: 'description...',]\n  [fields: [...]]\n});\n```\n\n## Entity hierarchy\n\nYou can easily define hierarchy between your entities, by leveraging the {{#crossLink \"Entity/parent:property\"}}parent{{/crossLink}} property.\n\n```\nconst parent = new Entity({ name: 'parent-entity', ... });\nconst child = new Entity({ name: 'child-entity', parent: parent });\n```\n\n## Namespaces\n\nEntities are grouped together via `namespaces`, that shall contain entities dedicated to the same purpose, or that are related among each others.\n\nThe `namespace` is a String set directly to the entity upon creation. If you don't set a namespace, the value `'default'` is used. So if you're only planning to use one namespace you can skip this.\n\n\n## Fields\n\nFields are instances of {{#crossLink \"Field\"}}Field{{/crossLink}}, that you can attach upon entity creation, or at any time, by using the built-in {{#crossLink \"Entity/addField:method\"}}addField{{/crossLink}} method.\n\n## Validation\n\nEntities are provided with a native validation system, to determine whether the values set within an object that should comply with entity specification are valid. Basically, entity validation targets the value for each {{#crossLink \"Field\"}}field{{/crossLink}} within the entity, and launches the {{#crossLink \"Field/validate:method\"}}field's validation system{{/crossLink}}."
         },
         "Field": {
@@ -1069,7 +1069,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 61,
+            "line": 62,
             "description": "Constructor for the class",
             "itemtype": "method",
             "name": "constructor",
@@ -1088,7 +1088,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 81,
+            "line": 82,
             "description": "Validates that an object parameters comply with corresponding field's validation rules.",
             "itemtype": "method",
             "name": "validate",
@@ -1111,7 +1111,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 104,
+            "line": 108,
             "description": "Stores the name of the entity. This name must be unique across the same {{#crossLink \"Entity/namespace:property\"}}namespace{{/crossLink}}. It is the only required value upon construction.\n\nEntity name **must** be a String, with length from 2 to 64 characters. It can only contain `a-z, A-Z` characters, digits, hyphens and underscores. All names **must** start with an `a-z, A-Z` or underscore character.",
             "example": [
                 "\n    new Entity({ name: 'foo-bar_123', ... }) // OK",
@@ -1128,7 +1128,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 127,
+            "line": 131,
             "params": [
                 {
                     "name": "name",
@@ -1141,7 +1141,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 140,
+            "line": 144,
             "description": "Optionnally, you can define a label for the entity. The label would represent a human-readable name for the entity. It's actually useful if you wish to provided translated names for the entity - as you can set a placeholder as label - but otherwise might be not that useful, and with the {{#crossLink \"Entity/name:property\"}}name{{/crossLink}} it may suffice.",
             "example": [
                 "\n    new Entity({ label: 'Foo', ... }) // Plain label",
@@ -1155,7 +1155,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 155,
+            "line": 159,
             "params": [
                 {
                     "name": "label",
@@ -1168,7 +1168,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 163,
+            "line": 167,
             "description": "Description for the field",
             "itemtype": "property",
             "name": "description",
@@ -1178,7 +1178,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 173,
+            "line": 177,
             "params": [
                 {
                     "name": "description",
@@ -1191,7 +1191,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 181,
+            "line": 185,
             "itemtype": "property",
             "name": "namespace",
             "type": "{string}",
@@ -1201,7 +1201,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 190,
+            "line": 194,
             "params": [
                 {
                     "name": "namespace",
@@ -1214,7 +1214,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 198,
+            "line": 202,
             "description": "Parent entity. If an entity is an extension of some one more basic, you can link here the parent entity.\n\n\nIf your entity extends from another, **it will inherit parent's validation rules** too. The fields you extended on the child class will be validated with your defined validators, but those defined at parent's level will be validated with theirs. If you wish to override a field's validation for a parent within a child, simply include such field in the child's {{#crossLink \"Entity/fields:property\"}}fields{{/crossLink}} array.",
             "itemtype": "property",
             "name": "parent",
@@ -1229,7 +1229,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 216,
+            "line": 220,
             "params": [
                 {
                     "name": "parent",
@@ -1242,7 +1242,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 224,
+            "line": 228,
             "description": "Entity fields",
             "itemtype": "property",
             "name": "fields",
@@ -1256,7 +1256,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 237,
+            "line": 241,
             "params": [
                 {
                     "name": "fields",
@@ -1269,7 +1269,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 250,
+            "line": 254,
             "description": "Adds a field to the entity",
             "itemtype": "method",
             "name": "addField",
@@ -1948,11 +1948,11 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/entity.metadata.js:81"
+            "line": " src/metadata/entity.metadata.js:82"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/entity.metadata.js:250"
+            "line": " src/metadata/entity.metadata.js:254"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -2064,27 +2064,27 @@
         },
         {
             "message": "Missing item type",
-            "line": " src/metadata/entity.metadata.js:127"
+            "line": " src/metadata/entity.metadata.js:131"
         },
         {
             "message": "Missing item type",
-            "line": " src/metadata/entity.metadata.js:155"
+            "line": " src/metadata/entity.metadata.js:159"
         },
         {
             "message": "Missing item type",
-            "line": " src/metadata/entity.metadata.js:173"
+            "line": " src/metadata/entity.metadata.js:177"
         },
         {
             "message": "Missing item type",
-            "line": " src/metadata/entity.metadata.js:190"
+            "line": " src/metadata/entity.metadata.js:194"
         },
         {
             "message": "Missing item type",
-            "line": " src/metadata/entity.metadata.js:216"
+            "line": " src/metadata/entity.metadata.js:220"
         },
         {
             "message": "Missing item type",
-            "line": " src/metadata/entity.metadata.js:237"
+            "line": " src/metadata/entity.metadata.js:241"
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
