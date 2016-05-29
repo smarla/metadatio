@@ -4,8 +4,9 @@
 
 import Element from './element.metadata';
 import Field from './field.metadata';
+import Item from '../data/item.data';
 
-import { MetadataIntegrityException } from '../exceptions';
+import { DataValidationException, MetadataIntegrityException } from '../exceptions';
 import * as util from './util.metadata';
 
 /**
@@ -87,11 +88,14 @@ export default class Entity extends Element {
      * @throws DataValidationException
      */
     validate(item) {
+        if(!item) throw new DataValidationException('DVI001');
+        if(!(item instanceof Item)) throw new DataValidationException('DVI002');
+
         for(let i = 0; i < this.fields.length; i++) {
             const field = this.fields[i];
             const fieldName = field.name;
 
-            const value = item[fieldName];
+            const value = item.attr(fieldName);
 
             const result = field.validate(value);
 

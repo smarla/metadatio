@@ -16,6 +16,7 @@ export default class ItemException extends Error {
         'I003': 'You cannot override an Item\'s className',
         'I004': 'You cannot override an Item\'s entity',
         'I005': 'The item {{item}} does not contain a field {{field}}',
-        'I006': 'Cannot edit the non existing field {{field}}'
+        'I006': 'Cannot edit the non existing field {{field}}',
+        'I007': 'The data object sent to an Item must be an object'
     }
 }

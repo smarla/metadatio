@@ -115,6 +115,33 @@ describe('The data item', () => {
                 expect(item.data.age).to.not.be.undefined;
                 expect(item.data.age).to.be.null;
             });
+
+            it('should expose field information on the \'fields\' attribute', () => {
+                expect(item.fields.name.valid).to.equal(false);
+                expect(item.fields.name.validators.pattern).to.equal(false);
+            });
+
+            describe('when data is also sent', () => {
+                it('should verify that the item is an object', (done) => {
+                    try {
+                        new Item(entity, 'wrong');
+                    } catch(e) {
+                        expect(e.className).to.equal('ItemException');
+                        expect(e.code).to.equal('I007');
+                        done();
+                    }
+                });
+
+                it('should save the data as values', () => {
+                    const myItem = new Item(entity, {
+                        name: 'abc',
+                        age: 21
+                    });
+
+                    expect(myItem.data.name).to.equal('abc');
+                    expect(myItem.data.age).to.equal(21);
+                })
+            })
         });
     });
 
@@ -141,7 +168,7 @@ describe('The data item', () => {
                         hint: null,
                         dataType: DataTypes.number,
                         validators: {
-                            pattern: new Validator(ValidatorTypes.range, { min: 18, max: 64 })
+                            range: new Validator(ValidatorTypes.range, { min: 18, max: 64 })
                         }
                     })
                 ]
@@ -187,6 +214,32 @@ describe('The data item', () => {
                 expect(e.code).to.equal('DV002');
                 done();
             }
+        });
+
+        describe('for having full information about the status of the item', () => {
+            
+            it('should have validation status of the whole item', () => {
+                expect(item.valid).to.equal(null);
+                item.data.name = 'abc';
+                item.data.age = 21;
+                expect(item.valid).to.equal(true);
+                item.data.name = 'ab';
+                expect(item.valid).to.equal(false);
+            });
+
+            it('should have local overall validation of the field', () => {
+                item.data.name = 'abc';
+                expect(item.fields.name.valid).to.equal(true);
+                item.data.name = 'ab';
+                expect(item.fields.name.valid).to.equal(false);
+            });
+
+            it('should have access to each of the validators of the field', () => {
+                item.data.name = 'abc';
+                expect(item.fields.name.validators.pattern).to.equal(true);
+                item.data.name = 'ab';
+                expect(item.fields.name.validators.pattern).to.equal(false);
+            });
         });
     });
 });

@@ -38,6 +38,12 @@ describe('Field validators', () => {
         }
     });
 
+    it('should return false when validating a null value', () => {
+        const validator = new Validator(ValidatorTypes.required);
+        const result = validator.validate(null);
+        expect(result).to.equal(false);
+    });
+
     describe('with \'required\' type', () => {
         it('should not have a validator match', (done) => {
             try {

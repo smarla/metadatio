@@ -4,6 +4,7 @@
 
 import {expect} from 'chai';
 
+import { Item } from '../../src/data';
 import { Entity, Field, DataTypes, Validator, ValidatorTypes } from '../../src/metadata';
 
 const EXPECTING_ERROR = new Error('An exception was expected here');
@@ -143,8 +144,9 @@ describe('Metadatio entities', () => {
     });
 
     describe('upon validation', () => {
-        it('should validate the whole entity against all field validators', () => {
-            const metadata = {
+        let entity, metadata, item;
+        beforeEach(() => {
+            metadata = {
                 name: 'entity',
                 label: 'My Entity',
                 fields: [
@@ -169,26 +171,52 @@ describe('Metadatio entities', () => {
                 ]
             };
 
-            const entity = new Entity(metadata);
+            entity = new Entity(metadata);
 
-            const item1 = {
+            item = new Item(entity);
+        });
+
+        it('should verify that an item is sent', (done) => {
+            try {
+                entity.validate();
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('DataValidationException');
+                expect(e.code).to.equal('DVI001');
+                done();
+            }
+        });
+
+        it('should verify that the item is an instance of Item', (done) => {
+            try {
+                entity.validate('wrong');
+                done(EXPECTING_ERROR);
+            } catch(e) {
+                expect(e.className).to.equal('DataValidationException');
+                expect(e.code).to.equal('DVI002');
+                done();
+            }
+        });
+
+        it('should validate the whole entity against all field validators', () => {
+            const item1 = new Item(entity, {
                 name: 'abc',
                 age: 20
-            };
+            });
 
             expect(entity.validate(item1)).to.equal(true);
 
-            const item2 = {
+            const item2 = new Item(entity, {
                 name: '123',
                 age: 20
-            };
+            });
 
             expect(entity.validate(item2)).to.equal(false);
 
-            const item3 = {
+            const item3 = new Item(entity, {
                 name: 'abc',
                 age: 12
-            };
+            });
 
             expect(entity.validate(item3)).to.equal(false);
         });

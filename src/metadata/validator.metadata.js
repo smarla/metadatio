@@ -58,6 +58,8 @@ export default class Validator extends Element {
      * @returns {boolean}
      */
     validate(value) {
+        if(value === null) return false;
+        
         switch(this.type) {
             case ValidatorTypes.required:
                 return value !== null && value !== undefined && value !== '';

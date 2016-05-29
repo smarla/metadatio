@@ -8,16 +8,46 @@ import { ItemException } from '../exceptions';
 
 export default class Item extends Element {
 
+    configureField(field) {
+        this.fields[field.name] = new Proxy(field, {
+            get: (target, prop) => {
+                switch(prop) {
+                    case 'valid':
+                        return field.validate(this.attr(field.name));
+                    case 'validators':
+                        const ret = {};
+                        for(let validatorName in field.validators) {
+                            const validator = field.validators[validatorName];
+                            ret[validatorName] = validator.validate(this.attr(field.name));
+                        }
+
+                        return ret;
+                }
+
+                if(prop === 'valid') {
+                }
+
+            },
+
+            set: (target, prop, value) => {
+                // TODO Throw
+            }
+        });
+    }
+
     constructor(entity, data = undefined) {
         if(!entity) throw new ItemException('I001');
         if(!(entity instanceof Entity)) throw new ItemException('I002');
+        if(data !== undefined && typeof(data) !== 'object') throw new ItemException('I007');
 
         super();
 
+        this.attr('valid', null);
         this.attr('__entity', entity);
         this.attr('className', entity.name);
 
         const values = {};
+        this.fields = {};
         for(let i = 0; i < entity.fields.length; i++) {
             const field = entity.fields[i];
             const fieldName = field.name;
@@ -29,22 +59,39 @@ export default class Item extends Element {
                 value: this.attr(fieldName, value)
             };
 
+            this.configureField(field);
         }
 
         const that = this;
         this.data = new Proxy(values, {
             get: (target, prop) => {
                 if(that.attr(prop) === undefined) throw new ItemException('I005');
-                return that.attr(prop);
+
+                const value = that.attr(prop);
+                return value;
             },
 
             set: (target, prop, value) => {
                 if(that.attr(prop) === undefined) throw new ItemException('I006');
+                const newValue = that.attr(prop, value);
 
                 values[prop].field.validate(value);
-                return that.attr(prop, value);
+                that.attr('valid', that.__entity.validate(that));
+
+                return newValue;
             }
         });
+
+        if(data) {
+            for(let param in data) {
+                const value = data[param];
+                this.data[param] = value;
+            }
+        }
+    }
+
+    get valid() {
+        return this.attr('valid');
     }
 
     get __entity() {
