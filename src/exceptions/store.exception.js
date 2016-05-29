@@ -12,6 +12,7 @@ export default class StoreException extends Error {
     static codes = {
         'ST001': 'The store cannot dispatch actions until it\'s configured',
         'ST002': 'The store cannot inject reducers until it\'s configured',
+        'ST003': 'The store does not have a state until it\'s configured',
 
         'STC001': 'The store can only be configured once',
 

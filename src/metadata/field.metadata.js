@@ -2,6 +2,7 @@
  * Created by sm on 01/05/16.
  */
 import Element from './element.metadata';
+import Entity from './entity.metadata';
 import Validator from './validator.metadata';
 import { MetadataIntegrityException, DataValidationException } from '../exceptions';
 import DataTypes from './data-types.metadata';
@@ -239,7 +240,7 @@ export default class Field extends Element {
      */
     set dataType(dataType) {
         if(!dataType) throw new MetadataIntegrityException('MIF005');
-        if(!DataTypes[dataType]) throw new MetadataIntegrityException('MIF006');
+        if(!DataTypes[dataType] && !(dataType instanceof Entity)) throw new MetadataIntegrityException('MIF006');
 
         this.attr('dataType', dataType);
     }

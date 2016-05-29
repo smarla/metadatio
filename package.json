@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --bail --config config/webpack.build.js",
     "test:coverage": "babel-node ./node_modules/istanbul/lib/cli.js cover test/index.js",
+    "test:integration": "babel-node ./node_modules/.bin/_mocha demo/spec",
     "test": "babel-node test/index.js",
     "doc": "babel-node ./node_modules/.bin/yuidoc -N -C --no-sort src"
   },

@@ -8,7 +8,7 @@
 
 import {expect} from 'chai';
 
-import {Validator, ValidatorTypes} from '../../src';
+import {Validator, ValidatorTypes} from '../../src/metadata';
 
 describe('Field validators', () => {
     it('should expose a UUID', () => {

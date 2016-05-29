@@ -6,6 +6,7 @@ import ActionException from './action.exception';
 import ItemException from './item.exception';
 import DataValidationException from './data-validation.exception';
 import MetadataIntegrityException from './metadata-integrity.exception';
+import MetadatioException from './metadatio.exception';
 import ValidatorException from './validator.exception';
 
 import ReducerException from './reducer.exception';
@@ -16,6 +17,7 @@ module.exports = {
     ItemException,
     DataValidationException,
     MetadataIntegrityException,
+    MetadatioException,
     ValidatorException,
 
     ReducerException,
