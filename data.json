@@ -63,6 +63,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/exceptions/base.exception.js": {
+            "name": "src/exceptions/base.exception.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/exceptions/data-validation.exception.js": {
             "name": "src/exceptions/data-validation.exception.js",
             "modules": {
@@ -334,7 +341,7 @@
             "module": "Core",
             "namespace": "",
             "file": "src/exceptions/validator.exception.js",
-            "line": 5,
+            "line": 7,
             "description": "This exception is thrown whenever there is an error while validating your data.",
             "extends": "Error",
             "is_constructor": 1
@@ -387,7 +394,7 @@
             "submodule": "exceptions",
             "namespace": "",
             "file": "src/exceptions/data-validation.exception.js",
-            "line": 5,
+            "line": 7,
             "description": "This exception is thrown whenever there is an error while validating your data."
         },
         "MetadataIntegrityException": {
@@ -402,7 +409,7 @@
             "submodule": "exceptions",
             "namespace": "",
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 5,
+            "line": 7,
             "description": "When you instance Metadatio entities and fields, some data health checks are performed. If in the data you declared to configure your element is corrupt in any way, this exception will be thrown."
         },
         "ReducerException": {
@@ -417,7 +424,7 @@
             "submodule": "exceptions",
             "namespace": "",
             "file": "src/exceptions/reducer.exception.js",
-            "line": 5,
+            "line": 7,
             "description": "Defines an exception thrown within the Reducer system. Whenever some reduction process fails, you will get this exception. There are several reasons for which you could get a `ReducerException`."
         },
         "ValidatorException": {
@@ -432,7 +439,7 @@
             "submodule": "exceptions",
             "namespace": "",
             "file": "src/exceptions/validator.exception.js",
-            "line": 5
+            "line": 7
         },
         "Entity": {
             "name": "Entity",
@@ -572,6 +579,12 @@
             "class": "DataValidationException"
         },
         {
+            "file": "src/exceptions/base.exception.js",
+            "line": 1,
+            "description": "Created by sm on 29/05/16.",
+            "class": "DataValidationException"
+        },
+        {
             "file": "src/exceptions/data-validation.exception.js",
             "line": 1,
             "description": "Created by sm on 01/05/16.",
@@ -600,7 +613,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 21,
+            "line": 20,
             "description": "### Entity name is required.\n\nThis error is thrown when you try to create an entity, and the description object you used does not contain a `name` param.",
             "example": [
                 "\n    new Entity({});"
@@ -613,7 +626,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 32,
+            "line": 31,
             "description": "### Entity name must be a String.\n\nThrown when you try to set a non-string value as entity name.",
             "example": [
                 "\n    new Entity({ name: 123 });"
@@ -626,7 +639,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 44,
+            "line": 43,
             "description": "### Entity name must comply with the specification.\n\nAll entity names must comply with a specification: They must start by an A-Z or an underscore, and contain only letters, numbers, hyphens and underscores.",
             "example": [
                 "\n    new Entity({ name: '1abc' })",
@@ -641,7 +654,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 59,
+            "line": 58,
             "description": "### Entity name must have between 2 a 64 characters.\n\nAll Metadatio entities must comply with these length requirements to be valid.",
             "example": [
                 "\n    new Entity({ name: 'a' })",
@@ -655,7 +668,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 72,
+            "line": 71,
             "description": "### Entity fields must be instances of field.\n\nThis error occurs when you try to append a non-Field object as entity's field.",
             "example": [
                 "\n    new Entity({ ... fields: [{...}] })",
@@ -669,7 +682,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 85,
+            "line": 84,
             "description": "### A field already exist with name {{name}}, and 'overwrite' flag has not been set.\n\nWhen you append a field to an entity, an existence verification is done on the field name. The {{#crossLink Entity/addField:method}}addField{{/crossLink}} method contains an optional `overwrite` flag - that bypasses this verification process. If you don't set the flag, you will get this error.",
             "example": [
                 "\n    const entity = new Entity({ ... fields: [new Field({ name: 'foo'})] })",
@@ -683,7 +696,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 98,
+            "line": 97,
             "description": "### Field name is required.\n\nThis error is thrown when you try to create an field, and the description object you used does not contain a `name` param.",
             "example": [
                 "\n    new Field({})"
@@ -696,7 +709,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 109,
+            "line": 108,
             "description": "### Field name must be a string.\n\nThis error is thrown when you set a non-string value as field name",
             "example": [
                 "\n    new Field({ name: 123, ... })"
@@ -709,7 +722,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 120,
+            "line": 119,
             "description": "### Field name must comply with the specification.\n\nAs entities, all field names must comply with the specification -i.e.   must start by an A-Z or an underscore, and contain only letters, numbers, hyphens and underscores.",
             "example": [
                 "\n    new Field({ name: '1abc', ... })",
@@ -724,7 +737,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 135,
+            "line": 134,
             "description": "### Field name must have between 2 and 64 characters.\n\nAll field names lengths must be between defined bounds",
             "example": [
                 "\n    new Field({ name: 'a', ... })",
@@ -738,7 +751,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 148,
+            "line": 147,
             "description": "### Data type is not defined.\n\nThis exception is thrown when you define a field without a data type. Data typing your fields is essential for proper working, and thus not assigning it will result in this error.",
             "example": [
                 "\n    new Field({ name: 'foo' })"
@@ -751,7 +764,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 159,
+            "line": 158,
             "description": "### Data type is invalid.\n\nThis exception occurs when you set an invalid data type to a field. Data types can only be String, Number, Boolean, Date, and references to other entities",
             "example": [
                 "\n    new Field({ name: 'foo', dataType: 'wrong' })"
@@ -764,7 +777,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 170,
+            "line": 169,
             "description": "### Multiplicity is neither \\'one\\' nor \\'many\\'.\n\nYou will get this error if you setup a multiplicity for an entity that is neither 'one' nor 'many'. The {{#crossLink Field/multiplicity:property}}multiplicity{{/crossLink}} is optional, and by default is set to 'one'.",
             "example": [
                 "\n    new Field({ ... multiplicity: 'wrong' })"
@@ -777,7 +790,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 181,
+            "line": 180,
             "description": "### Validator name must be given, and be a string.\n\nWhen you attach validators to a field, you must define a *string* name for the validator - for logging purposes. When you associate a validator to a field without a name set - or with a name that is not a string -, you will get this error.",
             "example": [
                 "\n    someField.addValidator(null, new Validator(...))",
@@ -791,7 +804,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 194,
+            "line": 193,
             "description": "### Validators must be instances of \\'Validator\\'.\n\nEvery time you include a validator to a field, the value you set as validator is checked, to verify that it is an instance of {{#crossLink Validator}}Validator{{/crossLink}}. If that's not the case, this exception is thrown.",
             "example": [
                 "\n    new Field({ ... validators: { 'pattern': {} } })",
@@ -805,7 +818,7 @@
         },
         {
             "file": "src/exceptions/metadata-integrity.exception.js",
-            "line": 207,
+            "line": 206,
             "description": "### A validator already exists with name {{name}} and 'overwrite' flag has not been set.\n\nWhen you include a validator to a field at runtime, a name verification is launched. If the validator name you set already exists, and you haven't set the `overwrite` flag, this error will occur.",
             "example": [
                 "\n    const someField = new Field({ ... validators: { 'pattern': ... } } });",
@@ -1032,7 +1045,7 @@
         },
         {
             "file": "src/exceptions/validator.exception.js",
-            "line": 15,
+            "line": 17,
             "description": "Constructs a new exception",
             "itemtype": "method",
             "name": "constructor",
@@ -2017,6 +2030,10 @@
         {
             "message": "Missing item type\nCreated by sm on 26/05/16.",
             "line": " src/exceptions/action.exception.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 29/05/16.",
+            "line": " src/exceptions/base.exception.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
