@@ -2,12 +2,11 @@
  * Created by sm on 24/05/16.
  */
 
-export default class ItemException extends Error {
-    constructor(code) {
-        super(code);
+import BaseException from './base.exception';
 
-        this.className = 'ItemException';
-        this.code = code;
+export default class ItemException extends BaseException {
+    constructor(code) {
+        super(code, ItemException.codes[code], { className: 'ItemException' });
     }
 
     static codes = {
@@ -17,6 +16,11 @@ export default class ItemException extends Error {
         'I004': 'You cannot override an Item\'s entity',
         'I005': 'The item {{item}} does not contain a field {{field}}',
         'I006': 'Cannot edit the non existing field {{field}}',
-        'I007': 'The data object sent to an Item must be an object'
+        'I007': 'The data object sent to an Item must be an object',
+
+        'II001': 'Cannot fetch information about a non existing field',
+        'II002': 'You cannot modify read-only field information.',
+        'II003': 'You cannot change the item information like that!',
+        'II004': 'Cannot read an undefined parameter of field info'
     }
 }

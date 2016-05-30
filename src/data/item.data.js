@@ -9,7 +9,7 @@ import { ItemException } from '../exceptions';
 export default class Item extends Element {
 
     configureField(field) {
-        this.fields[field.name] = new Proxy(field, {
+        return new Proxy(field, {
             get: (target, prop) => {
                 switch(prop) {
                     case 'valid':
@@ -24,13 +24,11 @@ export default class Item extends Element {
                         return ret;
                 }
 
-                if(prop === 'valid') {
-                }
-
+                throw new ItemException('II004');
             },
 
             set: (target, prop, value) => {
-                // TODO Throw
+                throw new ItemException('II003');
             }
         });
     }
@@ -59,7 +57,7 @@ export default class Item extends Element {
                 value: this.attr(fieldName, value)
             };
 
-            this.configureField(field);
+            this.attr(fieldName + '-proxy', this.configureField(field))
         }
 
         const that = this;
@@ -79,6 +77,18 @@ export default class Item extends Element {
                 that.attr('valid', that.__entity.validate(that));
 
                 return newValue;
+            }
+        });
+
+        this.fields = new Proxy(values, {
+            get: (target, prop) => {
+                if(that.attr(prop) === undefined) throw new ItemException('II001');
+
+                return that.attr(prop + '-proxy');
+            },
+
+            set: (target, prop, value) => {
+                throw new ItemException('II002');
             }
         });
 

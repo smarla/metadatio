@@ -2,6 +2,7 @@
  * Created by sm on 01/05/16.
  */
 
+import BaseException from './base.exception';
 import ActionException from './action.exception';
 import ItemException from './item.exception';
 import DataValidationException from './data-validation.exception';

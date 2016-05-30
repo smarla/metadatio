@@ -2,12 +2,11 @@
  * Created by sm on 26/05/16.
  */
 
+import BaseException from './base.exception';
 
-export default class ActionException extends Error {
+export default class ActionException extends BaseException {
     constructor(code) {
-        super(code);
-        this.className = 'ActionException';
-        this.code = code;
+        super(code, ActionException.codes[code], { className: 'ActionException' });
     }
 
     static codes = {

@@ -2,6 +2,8 @@
  * Created by sm on 01/05/16.
  */
 
+import BaseException from './base.exception';
+
 /**
  * When you instance Metadatio entities and fields, some data health checks are performed. If in the data you declared to configure your element is corrupt in any way, this exception will be thrown.
  *
@@ -9,12 +11,9 @@
  * @submodule exceptions
  * @class MetadataIntegrityException
  */
-export default class MetadataIntegrityException extends Error {
+export default class MetadataIntegrityException extends BaseException {
     constructor(code, config) {
-        super(code);
-
-        this.code = code;
-        this.className = 'MetadataIntegrityException';
+        super(code, MetadataIntegrityException.codes[code], { className: 'MetadataIntegrityException' });
     }
 
     static codes = {

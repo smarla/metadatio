@@ -93,10 +93,28 @@ describe('The metadatio core', () => {
                     }
                 });
 
+                it('should verify that the data - if given - is an object', (done) => {
+                    try {
+                        core.scaffold(entity, 'wrong');
+                    } catch(e) {
+                        expect(e.className).to.equal('MetadatioException');
+                        expect(e.code).to.equal('MS003');
+                        done();
+                    }
+                });
+
                 it('should return a fresh empty item', () => {
                     const item = core.scaffold(entity);
                     expect(!item).to.equal(false);
                     expect(item.data.name).to.equal(null);
+                });
+
+                it('should create an item with data set', () => {
+                    const item = core.scaffold(entity, {
+                        name: 'abc'
+                    });
+
+                    expect(item.data.name).to.equal('abc');
                 });
 
                 it('should allow modifying the fields', () => {

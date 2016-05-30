@@ -392,7 +392,7 @@ describe('Entity fields', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('DataValidationException');
-                expect(e.message).to.equal('DV001');
+                expect(e.code).to.equal('DV001');
                 done();
             }
         });
@@ -435,7 +435,7 @@ describe('Entity fields', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('DataValidationException');
-                expect(e.message).to.equal('DV002');
+                expect(e.code).to.equal('DV002');
                 done();
             }
         });
@@ -459,7 +459,7 @@ describe('Entity fields', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('DataValidationException');
-                expect(e.message).to.equal('DV003');
+                expect(e.code).to.equal('DV003');
                 done();
             }
         });
@@ -502,7 +502,7 @@ describe('Entity fields', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('DataValidationException');
-                expect(e.message).to.equal('DV004');
+                expect(e.code).to.equal('DV004');
                 done();
             }
         });
@@ -545,7 +545,7 @@ describe('Entity fields', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('DataValidationException');
-                expect(e.message).to.equal('DV005');
+                expect(e.code).to.equal('DV005');
                 done();
             }
         });

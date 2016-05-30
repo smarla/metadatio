@@ -22,7 +22,7 @@ describe('Field validators', () => {
             done(new Error('An exception was expected here'));
         } catch (e) {
             expect(e.className).to.equal('ValidatorException');
-            expect(e.message).to.equal('Validator type is wrong');
+            expect(e.code).to.equal('V001');
             done();
         }
     });
@@ -33,7 +33,7 @@ describe('Field validators', () => {
             done(new Error('An exception was expected here'));
         } catch (e) {
             expect(e.className).to.equal('ValidatorException');
-            expect(e.message).to.equal('Validator does not have a match to check');
+            expect(e.code).to.equal('V002');
             done();
         }
     });
@@ -51,7 +51,7 @@ describe('Field validators', () => {
                 done(new Error('An exception was expected here'));
             } catch (e) {
                 expect(e.className).to.equal('ValidatorException');
-                expect(e.message).to.equal('Validator of type \'required\' do not need a validator match');
+                expect(e.code).to.equal('V003');
                 done();
             }
         });
@@ -105,7 +105,7 @@ describe('Field validators', () => {
                 done(new Error('An exception was expected here'));
             } catch (e) {
                 expect(e.className).to.equal('ValidatorException');
-                expect(e.message).to.equal('Validator for type \'exact\' must not be an object');
+                expect(e.code).to.equal('V004');
                 done();
             }
         });
@@ -117,7 +117,7 @@ describe('Field validators', () => {
                 done(new Error('An exception was expected here'));
             } catch (e) {
                 expect(e.className).to.equal('ValidatorException');
-                expect(e.message).to.equal('Value provided for validator type \'exact\' must not be an object');
+                expect(e.code).to.equal('V005');
                 done();
             }
         });
@@ -139,7 +139,7 @@ describe('Field validators', () => {
                 done(new Error('An exception was expected here'));
             } catch (e) {
                 expect(e.className).to.equal('ValidatorException');
-                expect(e.message).to.equal('Validator for type \'regex\' must be a regular expression');
+                expect(e.code).to.equal('V006');
                 done();
             }
         });
@@ -151,7 +151,7 @@ describe('Field validators', () => {
                 done(new Error('An exception was expected here'));
             } catch (e) {
                 expect(e.className).to.equal('ValidatorException');
-                expect(e.message).to.equal('Value provided for validator type \'regex\' must be a string');
+                expect(e.code).to.equal('V007');
                 done();
             }
         });
@@ -173,7 +173,7 @@ describe('Field validators', () => {
                 done(new Error('An exception was expected here'));
             } catch (e) {
                 expect(e.className).to.equal('ValidatorException');
-                expect(e.message).to.equal('Validator for type \'range\' must specify at least one of \'min\' and \'max\'');
+                expect(e.code).to.equal('V008');
                 done();
             }
         });
@@ -184,7 +184,7 @@ describe('Field validators', () => {
                 done(new Error('An exception was expected here'));
             } catch (e) {
                 expect(e.className).to.equal('ValidatorException');
-                expect(e.message).to.equal('Options (min, max) for \'range\' validators must be numbers');
+                expect(e.code).to.equal('V009');
                 done();
             }
         });
@@ -196,7 +196,7 @@ describe('Field validators', () => {
                 done(new Error('An exception was expected here'));
             } catch (e) {
                 expect(e.className).to.equal('ValidatorException');
-                expect(e.message).to.equal('Value provided for validator type \'range\' must be a number');
+                expect(e.code).to.equal('V010');
                 done();
             }
         });
@@ -218,7 +218,7 @@ describe('Field validators', () => {
                 done(new Error('An exception was expected here'));
             } catch (e) {
                 expect(e.className).to.equal('ValidatorException');
-                expect(e.message).to.equal('Validator for type \'length\' must specify at least one of \'min\' and \'max\'');
+                expect(e.code).to.equal('V011');
                 done();
             }
         });
@@ -229,7 +229,7 @@ describe('Field validators', () => {
                 done(new Error('An exception was expected here'));
             } catch (e) {
                 expect(e.className).to.equal('ValidatorException');
-                expect(e.message).to.equal('Options (min, max) for \'length\' validators must be numbers');
+                expect(e.code).to.equal('V012');
                 done();
             }
         });
@@ -241,7 +241,7 @@ describe('Field validators', () => {
                 done(new Error('An exception was expected here'));
             } catch (e) {
                 expect(e.className).to.equal('ValidatorException');
-                expect(e.message).to.equal('Value provided for validator type \'length\' must be either a string or an array');
+                expect(e.code).to.equal('V013');
                 done();
             }
         });
@@ -265,7 +265,7 @@ describe('Field validators', () => {
                 done(new Error('An exception was expected here'));
             } catch (e) {
                 expect(e.className).to.equal('ValidatorException');
-                expect(e.message).to.equal('Validators of type \'fn\' must receive a function to validate against');
+                expect(e.code).to.equal('V014');
                 done();
             }
         });
@@ -279,7 +279,7 @@ describe('Field validators', () => {
                 done(new Error('An exception was expected here'));
             } catch (e) {
                 expect(e.className).to.equal('ValidatorException');
-                expect(e.message).to.equal('Validator functions must return either \'true\' or \'false\'');
+                expect(e.code).to.equal('V015');
                 done();
             }
         });

@@ -2,6 +2,8 @@
  * Created by sm on 14/05/16.
  */
 
+import BaseException from './base.exception';
+
 /**
  * Defines an exception thrown within the Reducer system. Whenever some reduction process fails, you will get this exception. There are several reasons for which you could get a `ReducerException`.
  *
@@ -10,11 +12,9 @@
  * @class ReducerException
  * @extends Error
  */
-export default class ReducerException extends Error {
+export default class ReducerException extends BaseException {
     constructor(code) {
-        super(code);
-        this.code = code;
-        this.className = 'ReducerException';
+        super(code, ReducerException.codes[code], { className: 'ReducerException' });
     }
 
     static codes = {

@@ -2,6 +2,8 @@
  * Created by sm on 01/05/16.
  */
 
+import BaseException from './base.exception';
+
 /**
  * This exception is thrown whenever there is an error while validating your data.
  *
@@ -10,11 +12,9 @@
  * @class DataValidationException
  * @extends Error
  */
-export default class DataValidationException extends Error {
-    constructor(e) {
-        super(e);
-        this.className = 'DataValidationException';
-        this.code = e;
+export default class DataValidationException extends BaseException {
+    constructor(code) {
+        super(code, DataValidationException.codes[code], { className: 'DataValidationException' });
     }
 
     static codes = {

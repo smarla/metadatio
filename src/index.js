@@ -15,20 +15,25 @@ export class Core {
         if(!(store instanceof Store)) throw new MetadatioException('MC002');
         this.store = store;
     }
+
+    import(json) {
+
+    }
+
+    info() {
+        
+    }
     
     init() {
         this.store.configure();
     }
 
-    itemCount() {
-        
-    }
-
-    scaffold(entity) {
+    scaffold(entity, data = undefined) {
         if(!entity) throw new MetadatioException('MS001');
         if(!(entity instanceof Entity)) throw new MetadatioException('MS002');
+        if(data !== undefined && typeof(data) !== 'object') throw new MetadatioException('MS003');
 
-        const item = new Item(entity);
+        const item = new Item(entity, data);
         return item;
     }
 

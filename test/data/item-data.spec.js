@@ -240,6 +240,50 @@ describe('The data item', () => {
                 item.data.name = 'ab';
                 expect(item.fields.name.validators.pattern).to.equal(false);
             });
+
+            it('should not allow accessing an unexisting field\'s info', (done) => {
+                try {
+                    item.fields.wrong.valid;
+                    done(EXPECTING_ERROR);
+                } catch(e) {
+                    expect(e.className).to.equal('ItemException');
+                    expect(e.code).to.equal('II001');
+                    done();
+                }
+            });
+
+            it('should not allow modifying any parameter on field info', (done) => {
+                try {
+                    item.fields.name = 'wrong';
+                    done(EXPECTING_ERROR);
+                } catch(e) {
+                    expect(e.className).to.equal('ItemException');
+                    expect(e.code).to.equal('II002');
+                    done();
+                }
+            });
+
+            it('should not allow editing any property in the field information', (done) => {
+                try {
+                    item.fields.name.valid = false;
+                    done(EXPECTING_ERROR);
+                } catch(e) {
+                    expect(e.className).to.equal('ItemException');
+                    expect(e.code).to.equal('II003');
+                    done();
+                }
+            });
+
+            it('should not allow fetching any undefined property on field info', (done) => {
+                try {
+                    item.fields.name.wrong;
+                    done(EXPECTING_ERROR);
+                } catch(e) {
+                    expect(e.className).to.equal('ItemException');
+                    expect(e.code).to.equal('II004');
+                    done();
+                }
+            });
         });
     });
 });
