@@ -122,24 +122,47 @@ describe('Metadatio entities', () => {
             }
         });
         
-        it('should allow field inclusion', () => {
-            const metadata = {
-                name: 'entity',
-                label: 'My Entity',
-                fields: [
-                    new Field({
-                        name: 'name',
-                        label: "Name of your app",
-                        shortLabel: null,
-                        hint: null,
-                        dataType: DataTypes.string
-                    })
-                ]
-            };
+        describe('for allowing field inclusion', () => {
+            it('should allow direct field inclusion', () => {
+                const metadata = {
+                    name: 'entity',
+                    label: 'My Entity',
+                    fields: [
+                        new Field({
+                            name: 'name',
+                            label: "Name of your app",
+                            shortLabel: null,
+                            hint: null,
+                            dataType: DataTypes.string
+                        })
+                    ]
+                };
 
-            const entity = new Entity(metadata);
+                const entity = new Entity(metadata);
 
-            expect(entity.fields[0]).to.deep.equal(metadata.fields[0]);
+                expect(entity.fields[0]).to.deep.equal(metadata.fields[0]);
+            });
+
+            it('should allow field inclusion with objects', () => {
+                const metadata = {
+                    name: 'entity',
+                    label: 'My Entity',
+                    fields: [
+                        {
+                            name: 'name',
+                            label: "Name of your app",
+                            shortLabel: null,
+                            hint: null,
+                            dataType: DataTypes.string
+                        }
+                    ]
+                };
+
+                const entity = new Entity(metadata);
+
+                expect(entity.fields.length).to.equal(1);
+                expect(entity.fields[0].name).to.equal('name');
+            });
         });
     });
 

@@ -218,7 +218,7 @@ describe('Entity fields', () => {
         });
 
         describe('with validations included', () => {
-            it('should successfully include validators to the field', () => {
+            it('should successfully include validators to the field with validator instances', () => {
                 const metadata = {
                     name: "name",
                     label: "Name of your app",
@@ -236,7 +236,7 @@ describe('Entity fields', () => {
                 expect(field.validators).to.deep.equal(metadata.validators);
             });
 
-            it('should not allow non-Validator instances to be included', (done) => {
+            it('should successfully include validators to the field with validator instances', () => {
                 const metadata = {
                     name: "name",
                     label: "Name of your app",
@@ -245,18 +245,17 @@ describe('Entity fields', () => {
                     dataType: DataTypes.string,
                     multiplicity: 'one',
                     validators: {
-                        'valid-characters': 'wrong'
+                        'valid-characters': {
+                            type: 'regex',
+                            validator: /123/
+                        }
                     }
                 };
 
-                try {
-                    new Field(metadata);
-                    done(EXPECTING_ERROR);
-                } catch(e) {
-                    expect(e.className).to.equal('MetadataIntegrityException');
-                    expect(e.code).to.equal('MIV002');
-                    done();
-                }
+                const field = new Field(metadata);
+
+                expect(field.validators['valid-characters'].type).to.equal('regex');
+                expect(field.validators['valid-characters'].validator).to.deep.equal(/123/);
             });
         })
     });

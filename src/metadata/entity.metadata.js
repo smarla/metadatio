@@ -247,7 +247,13 @@ export default class Entity extends Element {
 
         for(let i = 0; i < fields.length; i++) {
             const field = fields[i];
-            this.addField(field);
+            let realField = field;
+
+            if(!(field instanceof Field)) {
+                realField = new Field(field);
+            }
+
+            this.addField(realField);
         }
     }
 

@@ -287,8 +287,13 @@ export default class Field extends Element {
         // Add validators
         for(let validatorName in validators) {
             const validator = validators[validatorName];
+            let realValidator = validator;
 
-            this.addValidator(validatorName, validator);
+            if(!(validator instanceof Validator)) {
+                realValidator = new Validator(validator.type, validator.validator);
+            }
+
+            this.addValidator(validatorName, realValidator);
         }
     }
 

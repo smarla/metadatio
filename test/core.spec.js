@@ -133,6 +133,66 @@ describe('The metadatio core', () => {
                     }
                 });
             });
+
+            describe('when importing', () => {
+                it('should verfiy that an object is received', (done) => {
+                    try {
+                        core.import();
+                        done(EXPECTING_ERROR);
+                    } catch(e) {
+                        expect(e.className).to.equal('MetadatioException');
+                        expect(e.code).to.equal('MI001');
+                        done();
+                    }
+                });
+
+                it('should verify that the input receive is an object', (done) => {
+                    try {
+                        core.import('wrong');
+                        done(EXPECTING_ERROR);
+                    } catch(e) {
+                        expect(e.className).to.equal('MetadatioException');
+                        expect(e.code).to.equal('MI002');
+                        done();
+                    }
+                });
+
+                it('should create an Entity with the information given', () => {
+                    const entity = core.import({
+                        name: 'entity',
+                        label: 'Entity',
+                        namespace: 'ns',
+                        fields: [
+                            {
+                                name: 'field1',
+                                label: 'Field 1',
+                                dataType: DataTypes.string,
+                                validators: {
+                                    pattern: {
+                                        type: 'regex',
+                                        validator: /123/
+                                    }
+                                }
+                            }
+                        ]
+                    });
+
+                    expect(entity).to.be.an.instanceof(Entity);
+                    expect(entity.name).to.equal('entity');
+                    expect(entity.label).to.equal('Entity');
+                    expect(entity.namespace).to.equal('ns');
+
+                    expect(entity.fields.length).to.equal(1);
+                    expect(entity.fields[0]).to.be.an.instanceof(Field);
+                    expect(entity.fields[0].name).to.equal('field1');
+                    expect(entity.fields[0].label).to.equal('Field 1');
+                    expect(entity.fields[0].dataType).to.equal(DataTypes.string);
+                    
+                    expect(entity.fields[0].validators.pattern).to.not.equal(undefined);
+                    expect(entity.fields[0].validators.pattern.type).to.equal('regex');
+                    expect(entity.fields[0].validators.pattern.validator).to.deep.equal(/123/);
+                });
+            });
         });
     });
 });

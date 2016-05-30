@@ -17,11 +17,14 @@ export class Core {
     }
 
     import(json) {
+        if(!json) throw new MetadatioException('MI001');
+        if(typeof(json) !== 'object') throw new MetadatioException('MI002');
 
+        return new Entity(json);
     }
 
     info() {
-        
+
     }
     
     init() {
