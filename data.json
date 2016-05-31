@@ -533,7 +533,7 @@
         {
             "file": "src/actions/entity.actions.js",
             "line": 1,
-            "description": "Created by sm on 14/05/16.",
+            "description": "Created by sm on 30/05/16.",
             "class": "DataValidationException"
         },
         {
@@ -991,7 +991,7 @@
         },
         {
             "file": "src/exceptions/reducer.exception.js",
-            "line": 156,
+            "line": 157,
             "description": "### Field reducer needs a field as input",
             "itemtype": "attribute",
             "name": "RIF001",
@@ -1001,7 +1001,7 @@
         },
         {
             "file": "src/exceptions/reducer.exception.js",
-            "line": 163,
+            "line": 164,
             "description": "### Field reducer needs an instance of Field",
             "itemtype": "attribute",
             "name": "RIF002",
@@ -1011,7 +1011,7 @@
         },
         {
             "file": "src/exceptions/reducer.exception.js",
-            "line": 170,
+            "line": 171,
             "description": "### Validator reducer needs a validator as input",
             "itemtype": "attribute",
             "name": "RIV001",
@@ -1021,7 +1021,7 @@
         },
         {
             "file": "src/exceptions/reducer.exception.js",
-            "line": 177,
+            "line": 178,
             "description": "### Validator reducer needs an instance of Validator",
             "itemtype": "attribute",
             "name": "RIV002",
@@ -1282,7 +1282,7 @@
         },
         {
             "file": "src/metadata/entity.metadata.js",
-            "line": 254,
+            "line": 260,
             "description": "Adds a field to the entity",
             "itemtype": "method",
             "name": "addField",
@@ -1554,7 +1554,7 @@
         },
         {
             "file": "src/metadata/field.metadata.js",
-            "line": 295,
+            "line": 300,
             "description": "Adds a new validator to the field.",
             "itemtype": "method",
             "name": "addValidator",
@@ -1720,7 +1720,7 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 92,
+            "line": 99,
             "description": "Performs a reduction on a validator state, upon a validation change action.",
             "itemtype": "method",
             "name": "reduce",
@@ -1808,7 +1808,7 @@
         },
         {
             "file": "src/reducers/injectable/validator.reducer.js",
-            "line": 64,
+            "line": 68,
             "description": "Performs a reduction on a validator state, upon a validation change action.",
             "itemtype": "method",
             "name": "reduce",
@@ -1867,7 +1867,7 @@
         },
         {
             "file": "src/store.js",
-            "line": 21,
+            "line": 22,
             "description": "Determines whether the store has been configured. Upon configuration, the store is created and engaged with the defined reducers. But until this phase passes the store would not be set, and thus it's usage will result in errors. This flag is useful to avoid unexpected errors when using the store.",
             "itemtype": "property",
             "name": "configured",
@@ -1877,7 +1877,7 @@
         },
         {
             "file": "src/store.js",
-            "line": 31,
+            "line": 32,
             "description": "Contains all the element-specific reducers (relative to each element of your app) that are injected to the store asynchronously once you declare your elements - i.e. entities, fields and validators.",
             "itemtype": "property",
             "name": "asyncReducers",
@@ -1887,7 +1887,7 @@
         },
         {
             "file": "src/store.js",
-            "line": 40,
+            "line": 41,
             "description": "Configures the store. It receives the initial state for the store, and it engages the reducers",
             "itemtype": "method",
             "name": "configure",
@@ -1904,7 +1904,7 @@
         },
         {
             "file": "src/store.js",
-            "line": 56,
+            "line": 57,
             "description": "Injects a new reducer within the store. This is called whenever you add a new element to the metadata object, as every element within Metadatio has its own, specific reducer for performing and monitoring their actions. By adding such reducer via this method is directly engaged through the store, and the reducers are recombined.",
             "itemtype": "method",
             "name": "injectAsync",
@@ -1929,7 +1929,7 @@
         },
         {
             "file": "src/store.js",
-            "line": 78,
+            "line": 79,
             "description": "Dispatches an action through the store. This is just a gateway to call the Redux action dispatcher.",
             "itemtype": "method",
             "name": "dispatch",
@@ -1946,7 +1946,7 @@
         },
         {
             "file": "src/store.js",
-            "line": 95,
+            "line": 100,
             "description": "Returns the current state",
             "itemtype": "method",
             "name": "getState",
@@ -1965,7 +1965,7 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/entity.metadata.js:254"
+            "line": " src/metadata/entity.metadata.js:260"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -1973,7 +1973,7 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/metadata/field.metadata.js:295"
+            "line": " src/metadata/field.metadata.js:300"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -1985,22 +1985,22 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/field.reducer.js:92"
+            "line": " src/reducers/injectable/field.reducer.js:99"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/validator.reducer.js:64"
+            "line": " src/reducers/injectable/validator.reducer.js:68"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/store.js:56"
+            "line": " src/store.js:57"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/store.js:95"
+            "line": " src/store.js:100"
         },
         {
-            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "message": "Missing item type\nCreated by sm on 30/05/16.",
             "line": " src/actions/entity.actions.js:1"
         },
         {
