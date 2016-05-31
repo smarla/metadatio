@@ -80,19 +80,13 @@ describe('The Metadatio actions', () => {
                 }
             });
 
-            it.skip('should dispatch ITEM_CREATED when requested', () => {
+            it('should dispatch ITEM_CREATED when requested', () => {
                 actions.scaffold(item, entity);
 
-                expect(store.getActions()[1]).to.deep.equal({
-                    type: MetadatioActions.ITEM_CREATED,
-                    entity: entity,
-                    item: {
-                        uuid: item.uuid,
-                        data: {
-                            field: null
-                        }
-                    }
-                });
+                const action = store.getActions()[1];
+                expect(action.type).to.equal(MetadatioActions.ITEM_CREATED);
+                expect(action.entity).to.equal(entity);
+                expect(action.item).to.equal(item);
             });
         });
 
