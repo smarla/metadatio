@@ -5,13 +5,20 @@
 import {Map} from 'immutable';
 import {expect} from 'chai';
 
-import {DataTypes, Field, Validator, ValidatorTypes} from '../../../src/metadata';
+import { Item } from '../../../src/data';
+import { Entity, DataTypes, Field, Validator, ValidatorTypes} from '../../../src/metadata';
 import {InjectableReducer, FieldReducer, ValidatorReducer} from '../../../src/reducers/injectable';
 import FieldActions from '../../../src/actions/field.actions';
 
 const EXPECTING_ERROR = new Error('An exception was expected here');
 
 describe('The field reducer', () => {
+    let entity = null;
+    let item = null;
+    beforeEach(() => {
+        entity = new Entity({ name: 'my-entity' });
+        item = new Item(entity);
+    });
 
     describe('for engaging validation', () => {
 
@@ -28,7 +35,7 @@ describe('The field reducer', () => {
                 }
             });
 
-            const reducer = new FieldReducer(field);
+            const reducer = new FieldReducer(item, field);
             expect(reducer.validators.pattern).to.be.an.instanceof(ValidatorReducer);
         });
 
@@ -46,7 +53,7 @@ describe('The field reducer', () => {
                 }
             });
 
-            const reducer = new FieldReducer(field);
+            const reducer = new FieldReducer(item, field);
             expect(reducer.validators.pattern).to.be.an.instanceof(ValidatorReducer);
             expect(reducer.validators.lengths).to.be.an.instanceof(ValidatorReducer);
         });
@@ -69,7 +76,7 @@ describe('The field reducer', () => {
                 }
             });
 
-            reducer = new FieldReducer(field);
+            reducer = new FieldReducer(item, field);
         });
 
         describe('to combine reducer with validators\'', () => {

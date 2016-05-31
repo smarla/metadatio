@@ -35,10 +35,12 @@ export default class FieldActions {
         if (!(field instanceof Field)) throw new ActionException('AF004');
         if (value === undefined) throw new ActionException('AF005');
 
+        console.log('about to dispatch', item.uuid)
+
         this.store.dispatch({
             type: FieldActions.VALUE_CHANGED,
             uuid: item.uuid,
-            field: field.uuid,
+            field: field.name,
             value
         });
     }

@@ -51,11 +51,13 @@ export default class FieldReducer extends InjectableReducer {
      * @method constructor
      * @param field {Field} The field to associate with the reducer
      */
-    constructor(field) {
+    constructor(item, field) {
+        // TODO Exception management
+
         super({
-            uuid: field.uuid,
+            uuid: item.uuid,
             initialState: Map({
-                uuid: field.uuid,
+                uuid: item.uuid,
                 value: null
             })
         });
@@ -107,7 +109,6 @@ export default class FieldReducer extends InjectableReducer {
     reduce(state = FieldReducer.initialState, action) {
         switch(action.type) {
             case FieldActions.VALUE_CHANGED:
-                console.log('changing field');
                 return Map({
                     uuid: action.uuid,
                     value: action.value

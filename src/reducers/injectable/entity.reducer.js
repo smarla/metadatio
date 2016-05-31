@@ -38,7 +38,7 @@ export default class EntityReducer extends InjectableReducer {
             const field = entity.fields[i];
             const fieldName = field.name;
             const uuid = field.uuid;
-            const reducer = new FieldReducer(field);
+            const reducer = new FieldReducer(item, field);
             this.fields[fieldName] = reducer;
         }
     }

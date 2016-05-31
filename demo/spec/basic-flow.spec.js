@@ -19,19 +19,6 @@ describe.only('Metadatio system', () => {
     beforeEach(() => {
     });
 
-    it.skip('should have an initial application state', () => {
-        const state = Metadatio.store.getState();
-        expect(state).to.deep.equal({
-            config: Map({}),
-            data: Map({}),
-            items: {
-                __info: Map({
-                    itemCount: 0
-                })
-            }
-        });
-    });
-
     it('should allow to add items to the system', () => {
         item1 = Metadatio.scaffold(List);
         expect(item1.data.name).to.not.be.undefined;
@@ -51,6 +38,8 @@ describe.only('Metadatio system', () => {
         expect(nextState).to.not.deep.equal(state);
         expect(nextState.items.__info.get('itemCount')).to.equal(2);
         expect(nextState.items[item2.uuid]).to.not.be.undefined;
-        // expect(nextState.items[item2.uuid].fields.name.info.get('value')).to.equal(item2.data.name);
+        expect(nextState.items[item2.uuid].info.get('uuid')).to.equal(item2.uuid);
+        expect(nextState.items[item2.uuid].fields.name.info.get('uuid')).to.equal(item2.uuid);
+        expect(nextState.items[item2.uuid].fields.name.info.get('value')).to.equal(item2.data.name);
     });
 });

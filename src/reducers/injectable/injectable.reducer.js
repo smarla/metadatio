@@ -56,8 +56,13 @@ export default class InjectableReducer {
         }
 
         return (state = injectable.initialState, action) => {
+            if(action.type === 'field-value-changed') {
+                console.log(action.uuid, state.get('uuid'));
+                console.log('value', state.get('value'));
+            }
             if(!action.uuid) return state;
             if(action.uuid !== state.get('uuid')) return state;
+
 
             console.log('injectable verified');
 
