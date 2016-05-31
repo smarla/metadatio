@@ -56,9 +56,6 @@ export default class InjectableReducer {
         }
 
         return (state = injectable.initialState, action) => {
-            if(action.type.indexOf('@@redux') === -1)
-                console.log('injectable running', action.type, action.uuid, state.get('uuid'));
-
             if(!action.uuid) return state;
             if(action.uuid !== state.get('uuid')) return state;
 
