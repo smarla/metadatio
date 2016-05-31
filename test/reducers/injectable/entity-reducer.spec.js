@@ -6,6 +6,7 @@ import { expect } from 'chai';
 import { Map } from 'immutable';
 
 import EntityActions from '../../../src/actions/entity.actions';
+import { Item } from '../../../src/data';
 import {Entity, Field, DataTypes} from '../../../src/metadata';
 import { InjectableReducer, EntityReducer, FieldReducer } from '../../../src/reducers/injectable';
 
@@ -24,7 +25,7 @@ describe('The entity reducer', () => {
             }
         });
 
-        it('should receive an instance of entity', (done) => {
+        it('should receive an instance of item', (done) => {
             try {
                 new EntityReducer('wrong');
                 done(EXPECTING_ERROR);
@@ -50,7 +51,9 @@ describe('The entity reducer', () => {
                     ]
                 });
 
-                const reducer = new EntityReducer(entity);
+                const item = new Item(entity);
+
+                const reducer = new EntityReducer(item);
                 expect(reducer.fields.name).to.be.an.instanceof(FieldReducer);
                 expect(reducer.fields.age).to.equal(undefined);
             });
@@ -75,7 +78,9 @@ describe('The entity reducer', () => {
                     ]
                 });
 
-                const reducer = new EntityReducer(entity);
+                const item = new Item(entity);
+
+                const reducer = new EntityReducer(item);
                 expect(reducer.fields.name).to.be.an.instanceof(FieldReducer);
                 expect(reducer.fields.age).to.be.an.instanceof(FieldReducer);
             });
@@ -86,6 +91,7 @@ describe('The entity reducer', () => {
         let entity = null;
         let reducer = null;
         let state = null;
+        let item = null;
 
         beforeEach(() => {
             entity = new Entity({
@@ -107,7 +113,9 @@ describe('The entity reducer', () => {
                 ]
             });
 
-            reducer = new EntityReducer(entity);
+            item = new Item(entity);
+
+            reducer = new EntityReducer(item);
 
             state = Map({
                 uuid: reducer.uuid,
@@ -126,7 +134,7 @@ describe('The entity reducer', () => {
         });
 
         it('should return the same state for a non interesting action', () => {
-            const reduction = InjectableReducer.doReduce()(state, {
+            const reduction = InjectableReducer.doReduce(reducer)(state, {
                 uuid: reducer.uuid,
                 type: 'SOME_UNWANTED_ACTION'
             });
@@ -134,7 +142,7 @@ describe('The entity reducer', () => {
         });
 
         it('should return the same state for a different uuid', () => {
-            const reduction = InjectableReducer.doReduce()(state, {
+            const reduction = InjectableReducer.doReduce(reducer)(state, {
                 uuid: '123',
                 type: EntityActions.ITEM_CHANGED
             });
@@ -142,7 +150,7 @@ describe('The entity reducer', () => {
         });
 
         it('should change state on a ITEM_CHANGED action', () => {
-            const reduction = InjectableReducer.doReduce()(state, {
+            const reduction = InjectableReducer.doReduce(reducer)(state, {
                 uuid: reducer.uuid,
                 type: EntityActions.ITEM_CHANGED,
                 changedAt: new Date()

@@ -5,11 +5,12 @@
 import EntityActions from './entity.actions';
 import FieldActions from './field.actions';
 import ValidatorActions from './validator.actions';
-import MetadatioActions from './metadatio.actions';
+import CoreActions from './metadatio.actions';
 
 module.exports = {
-    EntityActions,
     FieldActions,
+    EntityActions,
     ValidatorActions,
-    MetadatioActions
+    CoreActions,
+    MetadatioActions: CoreActions
 };

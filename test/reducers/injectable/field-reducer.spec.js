@@ -89,7 +89,7 @@ describe('The field reducer', () => {
                 value: 'abc'
             });
 
-            const nextState = InjectableReducer.doReduce()(state, {type: 'SOME_UNWANTED_ACTION', uuid: reducer.uuid});
+            const nextState = InjectableReducer.doReduce(reducer)(state, {type: 'SOME_UNWANTED_ACTION', uuid: reducer.uuid});
             expect(state).to.equal(nextState);
         });
 
@@ -100,7 +100,7 @@ describe('The field reducer', () => {
                 value: 'abc'
             });
 
-            const nextState = InjectableReducer.doReduce()(state, {type: FieldActions.VALUE_CHANGED, uuid: 'abc'});
+            const nextState = InjectableReducer.doReduce(reducer)(state, {type: FieldActions.VALUE_CHANGED, uuid: 'abc'});
             expect(state).to.equal(nextState);
         });
 
@@ -111,7 +111,7 @@ describe('The field reducer', () => {
                 value: 'abc'
             });
 
-            const nextState = InjectableReducer.doReduce()(state, {type: FieldActions.VALUE_CHANGED, uuid: reducer.uuid, value: 'bcd'});
+            const nextState = InjectableReducer.doReduce(reducer)(state, {type: FieldActions.VALUE_CHANGED, uuid: reducer.uuid, value: 'bcd'});
             expect(state).to.not.equal(nextState);
             expect(nextState.get('value')).to.equal('bcd');
         });

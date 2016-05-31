@@ -144,14 +144,15 @@ export default class ReducerException extends BaseException {
          *
          * @attribute RIE001
          */
-        'RIE001': 'Entity reducer needs an entity as input',
+        'RIE001': 'Entity reducer needs an item as input',
 
         /**
          * ### Entity reducer needs an instance of Entity
          *
          * @attribute RIE002
          */
-        'RIE002': 'Entity reducer needs an instance of Entity',
+        'RIE002': 'Entity reducer needs an instance of Item',
+
 
         /**
          * ### Field reducer needs a field as input

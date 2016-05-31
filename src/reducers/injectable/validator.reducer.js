@@ -61,6 +61,10 @@ export default class ValidatorReducer extends InjectableReducer {
         });
     }
 
+    combine() {
+        return InjectableReducer.doReduce(this);
+    }
+
     /**
      * Performs a reduction on a validator state, upon a validation change action.
      *

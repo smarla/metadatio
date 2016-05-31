@@ -169,7 +169,7 @@ describe('The injectable reducer', () => {
             const initialState = Map({});
             const reducer = new InjectableReducer({ uuid: '1234-abcd', initialState });
 
-            expect(typeof(InjectableReducer.doReduce())).to.equal('function');
+            expect(typeof(InjectableReducer.doReduce(reducer))).to.equal('function');
         });
 
         it('should return the state when comes an action without uuid', () => {
@@ -177,7 +177,7 @@ describe('The injectable reducer', () => {
             const reducer = new InjectableReducer({ uuid: '1234-abcd', initialState });
 
             const state = Map({});
-            const result = InjectableReducer.doReduce()(state, { type: 'TEST' });
+            const result = InjectableReducer.doReduce(reducer)(state, { type: 'TEST' });
             expect(result).to.equal(state);
         });
 
@@ -185,11 +185,9 @@ describe('The injectable reducer', () => {
             const initialState = Map({
                 uuid: '1234-abcd'
             });
-            const reducer = new InjectableReducer({ uuid: '1234-abcd', initialState });
-
-            delete InjectableReducer.storage[reducer.uuid];
+            
             try {
-                InjectableReducer.doReduce()(initialState, { type: 'TEST', uuid: reducer.uuid });
+                InjectableReducer.doReduce();
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('ReducerException');

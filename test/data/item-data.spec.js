@@ -284,6 +284,18 @@ describe('The data item', () => {
                     done();
                 }
             });
+
+            it('should serialize the item into a plain object', () => {
+                item.data.name = 'test';
+                item.data.age = 21;
+
+                const obj = item.serialize();
+
+                expect(obj).to.not.be.undefined;
+                expect(obj.uuid).to.equal(item.uuid);
+                expect(obj.data.name).to.equal(item.data.name);
+                expect(obj.data.age).to.equal(item.data.age);
+            })
         });
     });
 });

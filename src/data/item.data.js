@@ -2,9 +2,9 @@
  * Created by sm on 24/05/16.
  */
 
+import Metadatio from '../';
 import { Element, Entity } from '../metadata';
 import { ItemException } from '../exceptions';
-
 
 export default class Item extends Element {
 
@@ -73,6 +73,9 @@ export default class Item extends Element {
                 if(that.attr(prop) === undefined) throw new ItemException('I006');
                 const newValue = that.attr(prop, value);
 
+                Metadatio.entityActions.change(that, values[prop].field, value);
+                Metadatio.fieldActions.update(that, values[prop].field, value);
+
                 values[prop].field.validate(value);
                 that.attr('valid', that.__entity.validate(that));
 
@@ -98,6 +101,8 @@ export default class Item extends Element {
                 this.data[param] = value;
             }
         }
+
+        Metadatio.coreActions.scaffold(this, entity);
     }
 
     get valid() {
@@ -118,5 +123,23 @@ export default class Item extends Element {
 
     set className(attr) {
         throw new ItemException('I003');
+    }
+
+    serialize() {
+        const ret = {
+            uuid: this.uuid,
+            data: {
+
+            }
+        };
+
+        for(let i = 0; i < this.__entity.fields.length; i++) {
+            const field = this.__entity.fields[i];
+            const fieldName = field.name;
+
+            ret.data[fieldName] = this.data[fieldName];
+        }
+
+        return ret;
     }
 }

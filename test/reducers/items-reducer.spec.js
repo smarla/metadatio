@@ -10,7 +10,7 @@ import { Item } from '../../src/data';
 import { Entity, Field, DataTypes } from '../../src/metadata';
 import ItemsReducer from '../../src/reducers/items.reducer';
 
-describe('The entities reducer', () => {
+describe('The items reducer', () => {
 
     describe('for managing item information', () => {
         it('should expose a \'reduce\' procedure', () => {
@@ -50,7 +50,7 @@ describe('The entities reducer', () => {
 
 
             it('should increase the item count', () => {
-                const nextState = ItemsReducer.reduce(state, { type: MetadatioActions.ITEM_CREATED, item });
+                const nextState = ItemsReducer.reduce(state, { type: MetadatioActions.ITEM_CREATED, entity, item });
 
                 expect(nextState).to.not.equal(state);
                 expect(nextState.get('itemCount')).to.equal(1);
@@ -58,13 +58,13 @@ describe('The entities reducer', () => {
             });
 
             it('should create a new EntityReducer to deal with the new item', () => {
-                const nextState = ItemsReducer.reduce(state, { type: MetadatioActions.ITEM_CREATED, item });
+                const nextState = ItemsReducer.reduce(state, { type: MetadatioActions.ITEM_CREATED, entity, item });
 
                 expect(ItemsReducer.entities[item.uuid]).to.not.be.undefined;
             });
 
             it('should recombine reducers whenever a new item is created', () => {
-                const nextState = ItemsReducer.reduce(state, { type: MetadatioActions.ITEM_CREATED, item });
+                const nextState = ItemsReducer.reduce(state, { type: MetadatioActions.ITEM_CREATED, entity, item });
 
                 expect(ItemsReducer.entities[item.uuid]).to.not.be.undefined;
             });

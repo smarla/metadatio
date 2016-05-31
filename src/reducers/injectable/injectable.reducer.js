@@ -48,20 +48,27 @@ export default class InjectableReducer {
         return InjectableReducer.storage[uuid];
     }
 
-    static doReduce() {
-        return (state = Map({}), action) => {
+    static doReduce(injectable = null) {
+        if(!injectable) throw new ReducerException('RIS001');
+
+        if(!injectable) {
+            return state => state;
+        }
+
+        return (state = injectable.initialState, action) => {
+            if(action.type.indexOf('@@redux') === -1)
+                console.log('injectable running', action.type, action.uuid, state.get('uuid'));
+
             if(!action.uuid) return state;
             if(action.uuid !== state.get('uuid')) return state;
 
+            console.log('injectable verified');
+
             InjectableReducer.verify(state, action);
 
-            const instance = InjectableReducer.instanceStore(action.uuid);
-            if(!instance) {
-                throw new ReducerException('RIS001');
-            }
 
-
-            return instance.reduce(state, action);
+            console.log('Reducing ' + action.type + ' with uuid ' + action.uuid);
+            return injectable.reduce(state, action);
         };
     }
 }

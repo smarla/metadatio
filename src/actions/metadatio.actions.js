@@ -31,8 +31,10 @@ export default class MetadatioActions {
         this.store.dispatch({
             type: MetadatioActions.ITEM_CREATED,
             entity: entity,
-            uuid: item.uuid
+            item: item
         });
+
+        this.store.refresh();
     }
 
     removeItem(item) {
@@ -43,6 +45,8 @@ export default class MetadatioActions {
             type: MetadatioActions.ITEM_REMOVED,
             uuid: item.uuid
         });
+
+        this.store.refresh();
     }
 
     setConfig(key, value) {

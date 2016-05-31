@@ -3,13 +3,12 @@
  */
 
 import { expect } from 'chai';
-import configureStore from 'redux-mock-store';
 
+import Metadatio from '../../src';
 import { Item } from '../../src/data';
 import { Entity, Field, DataTypes, Validator, ValidatorTypes } from '../../src/metadata';
 import ValidatorActions from '../../src/actions/validator.actions';
 
-const mockStore = configureStore();
 const EXPECTING_ERROR = new Error('An exception was expected here');
 
 describe('The validator actions', () => {
@@ -21,7 +20,9 @@ describe('The validator actions', () => {
     let item = null;
 
     beforeEach(() => {
-        store = mockStore({});
+        Metadatio.mock();
+
+        store = Metadatio.store;
         validator = new Validator(ValidatorTypes.regex, /^123$/);
         actions = new ValidatorActions(store);
 
@@ -134,22 +135,22 @@ describe('The validator actions', () => {
 
     it('should dispatch VALIDATION_OK action if validation is true', () => {
         actions.validate(item, field, validator, true);
-        expect(store.getActions()).to.deep.equal([{
+        expect(store.getActions()[1]).to.deep.equal({
             type: ValidatorActions.VALIDATION_OK,
             uuid: item.uuid,
             field: field.uuid,
             validator: validator.uuid
-        }])
+        })
     });
 
     it('should dispatch VALIDATION_KO action if validation is false', () => {
         actions.validate(item, field, validator, false);
-        expect(store.getActions()).to.deep.equal([{
+        expect(store.getActions()[1]).to.deep.equal({
             type: ValidatorActions.VALIDATION_KO,
             uuid: item.uuid,
             field: field.uuid,
             validator: validator.uuid
-        }]);
+        });
     });
 
 });

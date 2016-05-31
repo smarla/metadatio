@@ -6,6 +6,7 @@ import { Map } from 'immutable';
 import { combineReducers } from 'redux';
 
 import EntityActions from '../../actions/entity.actions';
+import { Item } from '../../data';
 import { Entity } from '../../metadata';
 import InjectableReducer from './injectable.reducer';
 import FieldReducer from './field.reducer';
@@ -18,14 +19,16 @@ export default class EntityReducer extends InjectableReducer {
         changedAt: null
     });
 
-    constructor(entity) {
-        if(!entity) throw new ReducerException('RIE001');
-        if(!(entity instanceof Entity)) throw new ReducerException('RIE002');
+    constructor(item) {
+        if(!item) throw new ReducerException('RIE001');
+        if(!(item instanceof Item)) throw new ReducerException('RIE002');
+
+        const entity = item.__entity;
 
         super({
-            uuid: entity.uuid,
+            uuid: item.uuid,
             initialState: Map({
-                uuid: entity.uuid,
+                uuid: item.uuid,
                 changedAt: null
             })
         });
@@ -44,12 +47,12 @@ export default class EntityReducer extends InjectableReducer {
         const objFields = {};
         for(let fieldName in this.fields) {
             const field = this.fields[fieldName];
-            objFields[fieldName] = InjectableReducer.doReduce();
+            objFields[fieldName] = field.combine();
         }
 
         const fields = combineReducers(objFields);
         return combineReducers({
-            info: InjectableReducer.doReduce(),
+            info: InjectableReducer.doReduce(this),
             fields
         });
     }

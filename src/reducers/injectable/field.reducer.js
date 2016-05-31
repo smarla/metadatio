@@ -77,16 +77,23 @@ export default class FieldReducer extends InjectableReducer {
      */
     combine() {
         const objValidators = {};
+        let hasValidators = false;
         for(let validatorName in this.validators) {
             const validator = this.validators[validatorName];
-            objValidators[validatorName] = InjectableReducer.doReduce();
+            objValidators[validatorName] = validator.combine();
+            hasValidators = true;
         }
 
-        const validators = combineReducers(objValidators);
-        return combineReducers({
-            info: InjectableReducer.doReduce(),
-            validators
-        });
+        const combined = {
+            info: InjectableReducer.doReduce(this)
+        };
+
+        if(hasValidators) {
+            combined.validators = combineReducers(objValidators);
+        }
+
+
+        return combineReducers(combined);
     }
 
     /**
@@ -100,6 +107,7 @@ export default class FieldReducer extends InjectableReducer {
     reduce(state = FieldReducer.initialState, action) {
         switch(action.type) {
             case FieldActions.VALUE_CHANGED:
+                console.log('changing field');
                 return Map({
                     uuid: action.uuid,
                     value: action.value

@@ -3,15 +3,12 @@
  */
 
 import {expect} from 'chai';
-import configureStore from 'redux-mock-store';
 
+import Metadatio from '../../src';
 import { Item } from '../../src/data';
 import {Entity, Field, DataTypes, Validator, ValidatorTypes} from '../../src/metadata';
 import FieldActions from '../../src/actions/field.actions';
-import ValidatorActions from '../../src/actions/validator.actions';
 
-
-const mockStore = configureStore();
 const EXPECTING_ERROR = new Error('An exception was expected here');
 
 describe('The field actions', () => {
@@ -21,7 +18,9 @@ describe('The field actions', () => {
     let field = null;
 
     beforeEach(() => {
-        store = mockStore({});
+        Metadatio.mock();
+
+        store = Metadatio.store;
         actions = new FieldActions(store);
 
         field = new Field({
@@ -91,12 +90,12 @@ describe('The field actions', () => {
 
         it('should dispatch VALUE_CHANGED action when value is first set', () => {
             actions.update(item, field, '123');
-            expect(store.getActions()).to.deep.equal([{
+            expect(store.getActions()[1]).to.deep.equal({
                 type: FieldActions.VALUE_CHANGED,
                 uuid: item.uuid,
                 field: field.uuid,
                 value: '123'
-            }])
+            });
         });
     });
 
@@ -147,11 +146,11 @@ describe('The field actions', () => {
 
         it('should dispatch VALUE_CLEARED for a field', () => {
             actions.clear(item, field);
-            expect(store.getActions()).to.deep.equal([{
+            expect(store.getActions()[1]).to.deep.equal({
                 type: FieldActions.VALUE_CLEARED,
                 uuid: item.uuid,
                 field: field.uuid
-            }]);
+            });
         });
     });
 });

@@ -16,7 +16,8 @@ import { Map } from 'immutable';
  * @class Store
  */
 export class Store {
-    constructor() {
+
+    constructor(store) {
 
         /**
          * Determines whether the store has been configured. Upon configuration, the store is created and engaged with the defined reducers. But until this phase passes the store would not be set, and thus it's usage will result in errors. This flag is useful to avoid unexpected errors when using the store.
@@ -71,7 +72,7 @@ export class Store {
 
         this.asyncReducers[name] = reducer;
 
-        this.store.replaceReducer(CombinedReducer(this.asyncReducers));
+        this.refresh();
         return this;
     }
 
@@ -90,6 +91,10 @@ export class Store {
 
         this.store.dispatch(action);
         return this;
+    }
+
+    refresh() {
+        this.store.replaceReducer(CombinedReducer(this.asyncReducers));
     }
 
     /**

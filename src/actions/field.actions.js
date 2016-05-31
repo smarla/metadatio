@@ -2,8 +2,6 @@
  * Created by sm on 14/05/16.
  */
 
-import Store from '../store';
-import ValidatorActions from './validator.actions';
 import { Item } from '../data';
 import { Field } from '../metadata';
 
@@ -16,7 +14,6 @@ export default class FieldActions {
 
     constructor(store) {
         this.store = store;
-        this.validators = new ValidatorActions(store);
     }
 
     clear(item, field) {

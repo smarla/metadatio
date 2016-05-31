@@ -24,8 +24,8 @@ export class MetadatioReducer {
     }
 
     reducers() {
-        const config = InjectableReducer.doReduce();
-        const data = InjectableReducer.doReduce();
+        const config = InjectableReducer.doReduce(this.configReducer);
+        const data = InjectableReducer.doReduce(this.dataReducer);
         const items = ItemsReducer.combine();
 
         return {

@@ -51,7 +51,7 @@ describe('The validator reducer', () => {
                 valid: true
             });
 
-            const nextState = InjectableReducer.doReduce()(state, { type: 'SOME_UNWANTED_ACTION', uuid: reducer.uuid });
+            const nextState = InjectableReducer.doReduce(reducer)(state, { type: 'SOME_UNWANTED_ACTION', uuid: reducer.uuid });
             expect(state).to.equal(nextState);
         });
 
@@ -61,7 +61,7 @@ describe('The validator reducer', () => {
                 valid: true
             });
 
-            const nextState = InjectableReducer.doReduce()(state, { type: ValidatorActions.VALIDATION_OK, uuid: 'abc' });
+            const nextState = InjectableReducer.doReduce(reducer)(state, { type: ValidatorActions.VALIDATION_OK, uuid: 'abc' });
             expect(state).to.equal(nextState);
         });
 
@@ -71,7 +71,7 @@ describe('The validator reducer', () => {
                 valid: true
             });
 
-            const nextState = InjectableReducer.doReduce()(state, { type: ValidatorActions.VALIDATION_OK, uuid: reducer.uuid });
+            const nextState = InjectableReducer.doReduce(reducer)(state, { type: ValidatorActions.VALIDATION_OK, uuid: reducer.uuid });
             expect(state).to.not.equal(nextState);
             expect(nextState.get('valid')).to.equal(true);
         });
@@ -82,7 +82,7 @@ describe('The validator reducer', () => {
                 valid: true
             });
 
-            const nextState = InjectableReducer.doReduce()(state, { type: ValidatorActions.VALIDATION_KO, uuid: reducer.uuid });
+            const nextState = InjectableReducer.doReduce(reducer)(state, { type: ValidatorActions.VALIDATION_KO, uuid: reducer.uuid });
             expect(state).to.not.equal(nextState);
             expect(nextState.get('valid')).to.equal(false);
         });

@@ -3,13 +3,12 @@
  */
 
 import { expect } from 'chai';
-import configureStore from 'redux-mock-store';
 
+import Metadatio from '../../';
 import EntityActions from '../../src/actions/entity.actions';
 import { Item } from '../../src/data';
 import { Entity, Field, DataTypes } from '../../src/metadata';
 
-const mockStore = configureStore();
 const EXPECTING_ERROR = new Error('An exception was expected here');
 
 describe('The entity actions', () => {
@@ -19,6 +18,8 @@ describe('The entity actions', () => {
     let item = null;
 
     beforeEach(() => {
+        Metadatio.mock();
+
         entity = new Entity({
             name: 'entity',
             fields: [
@@ -28,7 +29,7 @@ describe('The entity actions', () => {
                 })
             ]
         });
-        store = mockStore({});
+        store = Metadatio.store;
         actions = new EntityActions(store);
 
         item = new Item(entity);
@@ -93,12 +94,12 @@ describe('The entity actions', () => {
         it('should dispatch ITEM_CHANGED when an entity field\'s value changes', () => {
             actions.change(item, entity.fields[0], '123');
 
-            expect(store.getActions()).to.deep.equal([{
+            expect(store.getActions()[1]).to.deep.equal({
                 type: EntityActions.ITEM_CHANGED,
                 uuid: item.uuid,
                 field: entity.fields[0].uuid,
                 value: '123'
-            }]);
+            });
         });
     });
 
@@ -128,10 +129,10 @@ describe('The entity actions', () => {
         it('should dispatch ITEM_DESTROYED when requested', () => {
             actions.destroy(item);
     
-            expect(store.getActions()).to.deep.equal([{
+            expect(store.getActions()[1]).to.deep.equal({
                 type: EntityActions.ITEM_DESTROYED,
                 uuid: item.uuid
-            }]);
+            });
         });
     });
 });

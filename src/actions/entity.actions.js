@@ -1,6 +1,7 @@
 /**
- * Created by sm on 14/05/16.
+ * Created by sm on 30/05/16.
  */
+
 
 import { ActionException } from '../exceptions';
 import { Item } from '../data';
@@ -13,7 +14,7 @@ export default class EntityActions {
     constructor(store) {
         this.store = store;
     }
-    
+
     change(item, field, value) {
         if(!item) throw new ActionException('AE001');
         if(!(item instanceof Item)) throw new ActionException('AE002');

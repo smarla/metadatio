@@ -5,12 +5,14 @@
 import { Map } from 'immutable';
 import { combineReducers } from 'redux';
 
-import { MetadatioActions } from '../actions';
+import { CoreActions } from '../actions';
 import { InjectableReducer, EntityReducer } from './injectable';
 import RawMapReducer from './injectable/raw-map.reducer.js';
 
 export class ItemsReducer {
-    static initialState = Map({});
+    static initialState = Map({
+        itemCount: 0
+    });
 
     constructor() {
         this.entities = {};
@@ -18,14 +20,12 @@ export class ItemsReducer {
 
     reduce(state = ItemsReducer.initialState, action) {
         switch(action.type) {
-            case MetadatioActions.ITEM_CREATED:
+            case CoreActions.ITEM_CREATED:
                 const items = state.get('items');
-                this.entities[action.item.uuid] = new EntityReducer(action.item.__entity);
-                
+                this.entities[action.item.uuid] = new EntityReducer(action.item);
 
                 return Map({
                     itemCount: state.get('itemCount') + 1
-                    // items
                 });
         }
 
