@@ -1706,7 +1706,7 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 74,
+            "line": 76,
             "description": "Combines the field information reducer - that handles the data within this reducer - and the inner validation and history reducers.",
             "itemtype": "method",
             "name": "combine",
@@ -1720,7 +1720,7 @@
         },
         {
             "file": "src/reducers/injectable/field.reducer.js",
-            "line": 101,
+            "line": 103,
             "description": "Performs a reduction on a validator state, upon a validation change action.",
             "itemtype": "method",
             "name": "reduce",
@@ -1981,11 +1981,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/field.reducer.js:74"
+            "line": " src/reducers/injectable/field.reducer.js:76"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/reducers/injectable/field.reducer.js:101"
+            "line": " src/reducers/injectable/field.reducer.js:103"
         },
         {
             "message": "replacing incorrect tag: returns with return",
