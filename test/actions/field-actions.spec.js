@@ -92,8 +92,8 @@ describe('The field actions', () => {
             actions.update(item, field, '123');
             expect(store.getActions()[1]).to.deep.equal({
                 type: FieldActions.VALUE_CHANGED,
-                uuid: item.uuid,
-                field: field.uuid,
+                uuid: item.uuid + '-' + field.uuid,
+                field: field.name,
                 value: '123'
             });
         });

@@ -49,6 +49,7 @@ export default class InjectableReducer {
     }
 
     static doReduce(injectable = null) {
+
         if(!injectable) throw new ReducerException('RIS001');
 
         if(!injectable) {
@@ -56,20 +57,12 @@ export default class InjectableReducer {
         }
 
         return (state = injectable.initialState, action) => {
-            if(action.type === 'field-value-changed') {
-                console.log(action.uuid, state.get('uuid'));
-                console.log('value', state.get('value'));
-            }
             if(!action.uuid) return state;
+
             if(action.uuid !== state.get('uuid')) return state;
-
-
-            console.log('injectable verified');
 
             InjectableReducer.verify(state, action);
 
-
-            console.log('Reducing ' + action.type + ' with uuid ' + action.uuid);
             return injectable.reduce(state, action);
         };
     }

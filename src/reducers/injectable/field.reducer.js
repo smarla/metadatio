@@ -54,10 +54,12 @@ export default class FieldReducer extends InjectableReducer {
     constructor(item, field) {
         // TODO Exception management
 
+        const uuid = item.uuid+ '-' + field.uuid;
+
         super({
-            uuid: item.uuid,
+            uuid,
             initialState: Map({
-                uuid: item.uuid,
+                uuid,
                 value: null
             })
         });

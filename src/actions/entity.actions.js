@@ -15,6 +15,10 @@ export default class EntityActions {
         this.store = store;
     }
 
+    create(item, initialValue) {
+
+    }
+
     change(item, field, value) {
         if(!item) throw new ActionException('AE001');
         if(!(item instanceof Item)) throw new ActionException('AE002');

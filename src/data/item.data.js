@@ -44,6 +44,9 @@ export default class Item extends Element {
         this.attr('__entity', entity);
         this.attr('className', entity.name);
 
+        Metadatio.coreActions.scaffold(this, entity);
+        Metadatio.store.refresh();
+
         const values = {};
         this.fields = {};
         for(let i = 0; i < entity.fields.length; i++) {
@@ -101,8 +104,6 @@ export default class Item extends Element {
                 this.data[param] = value;
             }
         }
-
-        Metadatio.coreActions.scaffold(this, entity);
     }
 
     get valid() {

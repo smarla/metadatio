@@ -30,11 +30,9 @@ export default class MetadatioActions {
 
         this.store.dispatch({
             type: MetadatioActions.ITEM_CREATED,
-            entity: entity,
-            item: item
+            entity,
+            item
         });
-
-        this.store.refresh();
     }
 
     removeItem(item) {

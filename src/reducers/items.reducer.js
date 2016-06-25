@@ -2,6 +2,8 @@
  * Created by sm on 14/05/16.
  */
 
+import Metadatio from '../';
+
 import { Map } from 'immutable';
 import { combineReducers } from 'redux';
 
@@ -18,11 +20,15 @@ export class ItemsReducer {
         this.entities = {};
     }
 
+    addEntity(action) {
+        this.entities[action.item.uuid] = new EntityReducer(action.item);
+    }
+
     reduce(state = ItemsReducer.initialState, action) {
         switch(action.type) {
             case CoreActions.ITEM_CREATED:
-                const items = state.get('items');
-                this.entities[action.item.uuid] = new EntityReducer(action.item);
+
+                this.addEntity(action);
 
                 return Map({
                     itemCount: state.get('itemCount') + 1

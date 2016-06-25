@@ -34,12 +34,16 @@ describe.only('Metadatio system', () => {
 
         item2 = Metadatio.scaffold(List, { name: 'Test list' });
 
+        console.log(item2.uuid);
+        console.log(List.uuid);
+        console.log(List.fields[0].uuid);
+
         const nextState = Metadatio.store.getState();
         expect(nextState).to.not.deep.equal(state);
         expect(nextState.items.__info.get('itemCount')).to.equal(2);
         expect(nextState.items[item2.uuid]).to.not.be.undefined;
         expect(nextState.items[item2.uuid].info.get('uuid')).to.equal(item2.uuid);
-        expect(nextState.items[item2.uuid].fields.name.info.get('uuid')).to.equal(item2.uuid);
+        expect(nextState.items[item2.uuid].fields.name.info.get('uuid')).to.equal(item2.uuid + '-' + List.fields[0].uuid);
         expect(nextState.items[item2.uuid].fields.name.info.get('value')).to.equal(item2.data.name);
     });
 });
