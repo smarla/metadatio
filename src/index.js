@@ -12,6 +12,9 @@ import configureStore from 'redux-mock-store';
 
 export class Core {
 
+    static CONFIG_ACTION_HOOKS = 'metadatio-action-hooks';
+    static CONFIG_SUBSCRIPTIONS = 'metadatio-subscriptions';
+
     constructor(store) {
         if(!store) throw new MetadatioException('MC001');
         if(!(store instanceof Store)) throw new MetadatioException('MC002');
@@ -31,7 +34,13 @@ export class Core {
     }
     
     init() {
+        this.actionHooks = {};
+        this.subscriptions = {};
+        
         this.store.configure();
+
+        this.coreActions.setConfig(Core.CONFIG_ACTION_HOOKS, this.actionHooks);
+        this.coreActions.setConfig(Core.CONFIG_SUBSCRIPTIONS, this.subscriptions);
     }
 
     mock() {
@@ -52,8 +61,17 @@ export class Core {
         this.__mocked = true;
     }
 
-    on(action_type, action_to_trigger) {
-        // TODO
+    on(action, action_to_trigger) {
+        if(!action) throw new MetadatioException('MO001');
+        if(typeof(action) !== 'object') throw new MetadatioException('MO002');
+        if(!action_to_trigger) throw new MetadatioException('MO003');
+        if(typeof(action_to_trigger) !== 'function') throw new MetadatioException('MO004');
+
+        if(!this.actionHooks[action]) {
+            this.actionHooks[action] = [];
+        }
+
+        this.actionHooks[action].push(action_to_trigger);
     }
 
     scaffold(entity, data = undefined) {
@@ -67,7 +85,7 @@ export class Core {
     }
 
     subscribe(action, callback) {
-        // TODO 
+        // TODO
     }
 
     static getInstance() {

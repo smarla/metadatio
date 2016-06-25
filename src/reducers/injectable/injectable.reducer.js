@@ -52,10 +52,6 @@ export default class InjectableReducer {
 
         if(!injectable) throw new ReducerException('RIS001');
 
-        if(!injectable) {
-            return state => state;
-        }
-
         return (state = injectable.initialState, action) => {
             if(!action.uuid) return state;
 

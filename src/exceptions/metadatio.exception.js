@@ -18,6 +18,11 @@ export default class MetadatioException extends BaseException {
         'MS003': 'For scaffolding with a data object, you need an Object',
 
         'MI001': 'Metadatio importing needs to receive an object',
-        'MI002': 'Metadatio importing input needs to be an Object'
+        'MI002': 'Metadatio importing input needs to be an Object',
+
+        'MO001': 'Metadatio action injection needs an action object to match',
+        'MO002': 'Action describers for Metadatio action injection need to be objects',
+        'MO003': 'Metadatio action injection needs an action to trigger',
+        'MO004': 'Action to trigger on action injection needs to be a function'
     }
 }

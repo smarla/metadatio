@@ -36,6 +36,9 @@ export class Store {
          * @type {Object}
          */
         this.asyncReducers = {};
+
+        this.hooks = null;
+        this.subscriptions = null;
     }
 
     /**
@@ -45,12 +48,16 @@ export class Store {
      * @param initialState {Object} The initial state for the store
      * @chainable
      */
-    configure(initialState) {
+    configure(hooks, subscriptions) {
         if(this.configured) throw new StoreException('STC001');
-        if(initialState !== undefined && !(initialState instanceof Map)) throw new StoreException('STS001');
+        // TODO Test parameters
 
-        this.store = createStore(CombinedReducer(), initialState);
+        this.store = createStore(CombinedReducer());
         this.configured = true;
+
+        this.hooks = hooks;
+        this.subscriptions = subscriptions;
+
         return this;
     }
 
@@ -90,7 +97,30 @@ export class Store {
         if(typeof(action.type) !== 'string') throw new StoreException('STD003');
 
         this.store.dispatch(action);
+        this.dispatchHooks(action);
+
         return this;
+    }
+
+    dispatchHooks(action) {
+        // TODO Verify parameter
+
+        if(!this.hooks) return;
+        for(let match in this.hooks && matches) {
+            const hook = this.hooks[match];
+            let matches = true;
+
+            for(let param in match) {
+                if(action[param] !== match[param]) {
+                    matches = false;
+                    break;
+                }
+            }
+
+            if(matches) {
+                hook.call(this, action);
+            }
+        }
     }
 
     refresh() {

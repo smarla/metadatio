@@ -193,6 +193,60 @@ describe('The metadatio core', () => {
                     expect(entity.fields[0].validators.pattern.validator).to.deep.equal(/123/);
                 });
             });
+
+            describe('when hooking up into actions', () => {
+                it('should verify that an action object is sent', (done) => {
+                    try {
+                        core.on();
+                        done(EXPECTING_ERROR);
+                    } catch(e) {
+                        expect(e.className).to.equal('MetadatioException');
+                        expect(e.code).to.equal('MO001');
+                        done();
+                    }
+                });
+
+                it('should verify that the action object is an object', (done) => {
+                    try {
+                        core.on('wrong');
+                        done(EXPECTING_ERROR);
+                    } catch(e) {
+                        expect(e.className).to.equal('MetadatioException');
+                        expect(e.code).to.equal('MO002');
+                        done();
+                    }
+                });
+
+                it('should verify that the action to trigger is sent', (done) => {
+                    try {
+                        core.on({});
+                        done(EXPECTING_ERROR);
+                    } catch(e) {
+                        expect(e.className).to.equal('MetadatioException');
+                        expect(e.code).to.equal('MO003');
+                        done();
+                    }
+                });
+
+                it('should verify that the action to trigger is a function', (done) => {
+                    try {
+                        core.on({}, 'wrong');
+                        done(EXPECTING_ERROR);
+                    } catch(e) {
+                        expect(e.className).to.equal('MetadatioException');
+                        expect(e.code).to.equal('MO004');
+                        done();
+                    }
+                });
+
+                it('should store a hook in the actionHooks config', () => {
+                    const match = {};
+                    const callback = () => void(0);
+                    core.on(match, callback);
+
+                    expect(core.actionHooks[match][0]).to.equal(callback);
+                });
+            });
         });
     });
 });

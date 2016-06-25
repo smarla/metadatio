@@ -75,17 +75,6 @@ describe('Metadatio store', () => {
         });
 
         describe('the initial state', () => {
-            it('should not be a non-Map instance', (done) => {
-                try {
-                    Store.configure({});
-                    done(EXPECTING_ERROR);
-                } catch(e) {
-                    expect(e.className).to.equal('StoreException');
-                    expect(e.code).to.equal('STS001');
-                    done();
-                }
-            });
-
             it('should be fetchable', () => {
                 Store.configure();
                 expect(Store.getState()).to.not.equal();
