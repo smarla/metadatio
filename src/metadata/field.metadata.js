@@ -79,7 +79,7 @@ export default class Field extends Element {
         this.description = props.description || null;
         this.dataType = props.dataType;
         this.multiplicity = props.multiplicity || 'one';
-        // this.validators = props.validators || {};
+        this.validators = props.validators || {};
     }
 
     /**
