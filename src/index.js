@@ -52,6 +52,10 @@ export class Core {
         this.__mocked = true;
     }
 
+    on(action_type, action_to_trigger) {
+        // TODO
+    }
+
     scaffold(entity, data = undefined) {
         if(!entity) throw new MetadatioException('MS001');
         if(!(entity instanceof Entity)) throw new MetadatioException('MS002');
@@ -60,6 +64,10 @@ export class Core {
         const item = new Item(entity, data);
 
         return item;
+    }
+
+    subscribe(action, callback) {
+        // TODO 
     }
 
     static getInstance() {
