@@ -1887,7 +1887,7 @@
         },
         {
             "file": "src/store.js",
-            "line": 41,
+            "line": 44,
             "description": "Configures the store. It receives the initial state for the store, and it engages the reducers",
             "itemtype": "method",
             "name": "configure",
@@ -1904,7 +1904,7 @@
         },
         {
             "file": "src/store.js",
-            "line": 57,
+            "line": 64,
             "description": "Injects a new reducer within the store. This is called whenever you add a new element to the metadata object, as every element within Metadatio has its own, specific reducer for performing and monitoring their actions. By adding such reducer via this method is directly engaged through the store, and the reducers are recombined.",
             "itemtype": "method",
             "name": "injectAsync",
@@ -1929,7 +1929,7 @@
         },
         {
             "file": "src/store.js",
-            "line": 79,
+            "line": 86,
             "description": "Dispatches an action through the store. This is just a gateway to call the Redux action dispatcher.",
             "itemtype": "method",
             "name": "dispatch",
@@ -1946,7 +1946,7 @@
         },
         {
             "file": "src/store.js",
-            "line": 100,
+            "line": 130,
             "description": "Returns the current state",
             "itemtype": "method",
             "name": "getState",
@@ -1993,11 +1993,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/store.js:57"
+            "line": " src/store.js:64"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/store.js:100"
+            "line": " src/store.js:130"
         },
         {
             "message": "Missing item type\nCreated by sm on 30/05/16.",
