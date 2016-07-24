@@ -10,6 +10,9 @@ import { Item } from '../../src/data';
 
 import { List, Todo } from '../model';
 
+import { CoreActions } from '../../src/actions'
+
+const EXPECTING_ERROR = new Error('An exception was expected here');
 
 Metadatio.init();
 describe.only('Metadatio system', () => {
@@ -34,10 +37,6 @@ describe.only('Metadatio system', () => {
 
         item2 = Metadatio.scaffold(List, { name: 'Test list' });
 
-        console.log(item2.uuid);
-        console.log(List.uuid);
-        console.log(List.fields[0].uuid);
-
         const nextState = Metadatio.store.getState();
         expect(nextState).to.not.deep.equal(state);
         expect(nextState.items.__info.get('itemCount')).to.equal(2);
@@ -46,4 +45,24 @@ describe.only('Metadatio system', () => {
         expect(nextState.items[item2.uuid].fields.name.info.get('uuid')).to.equal(item2.uuid + '-' + List.fields[0].uuid);
         expect(nextState.items[item2.uuid].fields.name.info.get('value')).to.equal(item2.data.name);
     });
+    
+    describe('when hooking up actions', () => {
+        it('should trigger the hooks when the action matches', (done) => {
+            const callback = () => {
+
+            };
+
+            Metadatio.on({ type: CoreActions.ITEM_CREATED }, callback);
+            Metadatio.scaffold(List, { name: 'Testing hooks' });
+        });
+
+        it('should not trigger the hooks when param does not match', () => {
+            const callback = () => {
+                throw new Error('You shouldn\'t have had this action triggered');
+            };
+
+            Metadatio.on({ type: CoreActions.ITEM_DESTROYED }, callback);
+            Metadatio.scaffold(List, { name: 'Testing matches' });
+        });
+    })
 });

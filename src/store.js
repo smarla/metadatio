@@ -38,6 +38,7 @@ export class Store {
         this.asyncReducers = {};
 
         this.hooks = null;
+        this.matches = null;
         this.subscriptions = null;
     }
 
@@ -48,7 +49,7 @@ export class Store {
      * @param initialState {Object} The initial state for the store
      * @chainable
      */
-    configure(hooks, subscriptions) {
+    configure(hooks, matches, subscriptions) {
         if(this.configured) throw new StoreException('STC001');
         // TODO Test parameters
 
@@ -56,6 +57,7 @@ export class Store {
         this.configured = true;
 
         this.hooks = hooks;
+        this.matches = matches;
         this.subscriptions = subscriptions;
 
         return this;
@@ -106,20 +108,28 @@ export class Store {
         // TODO Verify parameter
 
         if(!this.hooks) return;
-        for(let match in this.hooks && matches) {
-            const hook = this.hooks[match];
-            let matches = true;
+        let matches = true;
+
+        for(let matchId in this.hooks) {
+            const match = this.matches[matchId];
 
             for(let param in match) {
-                if(action[param] !== match[param]) {
+                if (action[param] !== match[param]) {
                     matches = false;
                     break;
                 }
             }
 
             if(matches) {
-                hook.call(this, action);
+                const hooks = this.hooks[matchId];
+
+                for(let i = 0; i < hooks.length; i++) {
+                    const hook = hooks[i];
+                    hook(action);
+                }
             }
+
+            matches = true;
         }
     }
 

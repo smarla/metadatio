@@ -53,8 +53,13 @@ then
 
     echo 'Starting NPM publishing'
 
-    git pull origin HEAD:master
-    git log -p -1
+    pkgjson=$(cat package.json)
+    git stash --all
+    git pull origin HEAD:builds
+    echo $pkgjson > package.json
+    echo "*" > .gitignore
+    echo "!metadatio.js" >> .gitignore
+    echo "!package.json" >> .gitignore
 
     touch ~/.npmrc
 

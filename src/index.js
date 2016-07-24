@@ -2,6 +2,8 @@
  * Created by sm on 01/05/16.
  */
 
+import shortid from 'shortid';
+
 import { EntityActions, FieldActions, ValidatorActions, CoreActions } from './actions';
 import MainStore from './store';
 import { Store } from './store';
@@ -13,6 +15,7 @@ import configureStore from 'redux-mock-store';
 export class Core {
 
     static CONFIG_ACTION_HOOKS = 'metadatio-action-hooks';
+    static CONFIG_ACTION_MATCHES = 'metadatio-action-matches';
     static CONFIG_SUBSCRIPTIONS = 'metadatio-subscriptions';
 
     constructor(store) {
@@ -35,11 +38,13 @@ export class Core {
     
     init() {
         this.actionHooks = {};
+        this.actionMatches = {};
         this.subscriptions = {};
         
-        this.store.configure();
+        this.store.configure(this.actionHooks, this.actionMatches, this.subscriptions);
 
         this.coreActions.setConfig(Core.CONFIG_ACTION_HOOKS, this.actionHooks);
+        this.coreActions.setConfig(Core.CONFIG_ACTION_MATCHES, this.actionHooks);
         this.coreActions.setConfig(Core.CONFIG_SUBSCRIPTIONS, this.subscriptions);
     }
 
@@ -67,11 +72,15 @@ export class Core {
         if(!action_to_trigger) throw new MetadatioException('MO003');
         if(typeof(action_to_trigger) !== 'function') throw new MetadatioException('MO004');
 
-        if(!this.actionHooks[action]) {
-            this.actionHooks[action] = [];
+        // TODO Verify action match existence
+        const actionId = shortid.generate();
+        this.actionMatches[actionId] = action
+
+        if(!this.actionHooks[actionId]) {
+            this.actionHooks[actionId] = [];
         }
 
-        this.actionHooks[action].push(action_to_trigger);
+        this.actionHooks[actionId].push(action_to_trigger);
     }
 
     scaffold(entity, data = undefined) {

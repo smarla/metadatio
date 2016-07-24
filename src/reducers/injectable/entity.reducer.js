@@ -25,8 +25,6 @@ export default class EntityReducer extends InjectableReducer {
 
         const entity = item.__entity;
 
-        console.log('Reducer', item.uuid);
-
         super({
             uuid: item.uuid,
             initialState: Map({
@@ -34,8 +32,6 @@ export default class EntityReducer extends InjectableReducer {
                 changedAt: null
             })
         });
-
-        console.log('Entity reducer', item.uuid);
 
         this.fields = {};
         for(let i = 0; i < entity.fields.length; i++) {
