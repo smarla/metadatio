@@ -4,24 +4,39 @@ YUI.add("yuidoc-meta", function(Y) {
         "DataValidationException",
         "Entity",
         "Field",
+        "FieldReducer",
         "MetadataIntegrityException",
+        "ReducerException",
+        "Store",
         "Validator",
-        "ValidatorException"
+        "ValidatorException",
+        "ValidatorReducer"
     ],
     "modules": [
         "Core",
-        "exceptions"
+        "Reducers",
+        "exceptions",
+        "injectable"
     ],
     "allModules": [
         {
             "displayName": "Core",
             "name": "Core",
-            "description": "Entities represent real-world elements, that you need to manage within your app.\nExample entities are _Person_, _Car_, and whatever else you can imagine.\n\nEntities by itself don't contain any particular feature - apart from identification, and grouping -. Whilst some Metadatio modules will extend this objects to enrich its features, at it's core an Entity is basically a container for fields.\n\n## Usage\n\n```\nconst entity = new Entity({\n  name: 'Friend',\n  [label: 'Friend',]\n  [namespace: 'people',]\n  [description: 'description...',]\n  [fields: [...]]\n});\n```\n\n## Entity hierarchy\n\nYou can easily define hierarchy between your entities, by leveraging the {{#crossLink \"Entity/parent:property\"}}parent{{/crossLink}} property.\n\n```\nconst parent = new Entity({ name: 'parent-entity', ... });\nconst child = new Entity({ name: 'child-entity', parent: parent });\n```\n\n## Namespaces\n\nEntities are grouped together via `namespaces`, that shall contain entities dedicated to the same purpose, or that are related among each others.\n\nThe `namespace` is a String set directly to the entity upon creation. If you don't set a namespace, the value `'default'` is used. So if you're only planning to use one namespace you can skip this.\n\n\n## Fields\n\nFields are instances of {{#crossLink \"Field\"}}Field{{/crossLink}}, that you can attach upon entity creation, or at any time, by using the built-in {{#crossLink \"Entity/addField:method\"}}addField{{/crossLink}} method.\n\n## Validation\n\nEntities are provided with a native validation system, to determine whether the values set within an object that should comply with entity specification are valid. Basically, entity validation targets the value for each {{#crossLink \"Field\"}}field{{/crossLink}} within the entity, and launches the {{#crossLink \"Field/validate:method\"}}field's validation system{{/crossLink}}."
+            "description": "Metadatio store."
         },
         {
             "displayName": "exceptions",
             "name": "exceptions",
             "description": "This exception is thrown whenever there is an error while validating your data."
+        },
+        {
+            "displayName": "injectable",
+            "name": "injectable",
+            "description": "This reducer is in charge of controlling all actions dispatched to change the validation status for a field."
+        },
+        {
+            "displayName": "Reducers",
+            "name": "Reducers"
         }
     ],
     "elements": []

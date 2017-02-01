@@ -3,10 +3,45 @@
         "name": "Metadatio",
         "description": "Use metadata to build things",
         "logo": "../graphic/logo_400.png",
-        "version": "1.0.0",
+        "version": "2.0.0",
         "url": "http://metadat.io/"
     },
     "files": {
+        "src/actions/entity.actions.js": {
+            "name": "src/actions/entity.actions.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/actions/field.actions.js": {
+            "name": "src/actions/field.actions.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/actions/index.js": {
+            "name": "src/actions/index.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/actions/metadatio.actions.js": {
+            "name": "src/actions/metadatio.actions.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/actions/validator.actions.js": {
+            "name": "src/actions/validator.actions.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/data/index.js": {
             "name": "src/data/index.js",
             "modules": {},
@@ -16,6 +51,13 @@
         },
         "src/data/item.data.js": {
             "name": "src/data/item.data.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/exceptions/action.exception.js": {
+            "name": "src/exceptions/action.exception.js",
             "modules": {},
             "classes": {},
             "fors": {},
@@ -69,6 +111,22 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/exceptions/reducer.exception.js": {
+            "name": "src/exceptions/reducer.exception.js",
+            "modules": {},
+            "classes": {
+                "ReducerException": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/exceptions/store.exception.js": {
+            "name": "src/exceptions/store.exception.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/exceptions/validator.exception.js": {
             "name": "src/exceptions/validator.exception.js",
             "modules": {},
@@ -94,9 +152,7 @@
         },
         "src/metadata/entity.metadata.js": {
             "name": "src/metadata/entity.metadata.js",
-            "modules": {
-                "Core": 1
-            },
+            "modules": {},
             "classes": {
                 "Entity": 1
             },
@@ -149,10 +205,90 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/reducers/injectable/entity.reducer.js": {
+            "name": "src/reducers/injectable/entity.reducer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/reducers/injectable/field.reducer.js": {
+            "name": "src/reducers/injectable/field.reducer.js",
+            "modules": {
+                "injectable": 1
+            },
+            "classes": {
+                "FieldReducer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/reducers/injectable/index.js": {
+            "name": "src/reducers/injectable/index.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/reducers/injectable/injectable.reducer.js": {
+            "name": "src/reducers/injectable/injectable.reducer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/reducers/injectable/raw-map.reducer.js": {
+            "name": "src/reducers/injectable/raw-map.reducer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/reducers/injectable/validator.reducer.js": {
+            "name": "src/reducers/injectable/validator.reducer.js",
+            "modules": {},
+            "classes": {
+                "ValidatorReducer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/reducers/index.js": {
+            "name": "src/reducers/index.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/reducers/items.reducer.js": {
+            "name": "src/reducers/items.reducer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/reducers/metadatio.reducer.js": {
+            "name": "src/reducers/metadatio.reducer.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/index.js": {
             "name": "src/index.js",
             "modules": {},
             "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/store.js": {
+            "name": "src/store.js",
+            "modules": {
+                "Core": 1
+            },
+            "classes": {
+                "Store": 1
+            },
             "fors": {},
             "namespaces": {}
         }
@@ -167,17 +303,19 @@
             "classes": {
                 "DataValidationException": 1,
                 "MetadataIntegrityException": 1,
+                "ReducerException": 1,
                 "ValidatorException": 1,
                 "Entity": 1,
                 "Field": 1,
-                "Validator": 1
+                "Validator": 1,
+                "Store": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src/metadata/validator.metadata.js",
-            "line": 10,
-            "description": "Entities represent real-world elements, that you need to manage within your app.\nExample entities are _Person_, _Car_, and whatever else you can imagine.\n\nEntities by itself don't contain any particular feature - apart from identification, and grouping -. Whilst some Metadatio modules will extend this objects to enrich its features, at it's core an Entity is basically a container for fields.\n\n## Usage\n\n```\nconst entity = new Entity({\n  name: 'Friend',\n  [label: 'Friend',]\n  [namespace: 'people',]\n  [description: 'description...',]\n  [fields: [...]]\n});\n```\n\n## Entity hierarchy\n\nYou can easily define hierarchy between your entities, by leveraging the {{#crossLink \"Entity/parent:property\"}}parent{{/crossLink}} property.\n\n```\nconst parent = new Entity({ name: 'parent-entity', ... });\nconst child = new Entity({ name: 'child-entity', parent: parent });\n```\n\n## Namespaces\n\nEntities are grouped together via `namespaces`, that shall contain entities dedicated to the same purpose, or that are related among each others.\n\nThe `namespace` is a String set directly to the entity upon creation. If you don't set a namespace, the value `'default'` is used. So if you're only planning to use one namespace you can skip this.\n\n\n## Fields\n\nFields are instances of {{#crossLink \"Field\"}}Field{{/crossLink}}, that you can attach upon entity creation, or at any time, by using the built-in {{#crossLink \"Entity/addField:method\"}}addField{{/crossLink}} method.\n\n## Validation\n\nEntities are provided with a native validation system, to determine whether the values set within an object that should comply with entity specification are valid. Basically, entity validation targets the value for each {{#crossLink \"Field\"}}field{{/crossLink}} within the entity, and launches the {{#crossLink \"Field/validate:method\"}}field's validation system{{/crossLink}}.",
+            "file": "src/store.js",
+            "line": 12,
+            "description": "Metadatio store.",
             "is_constructor": 1
         },
         "exceptions": {
@@ -187,6 +325,7 @@
             "classes": {
                 "DataValidationException": 1,
                 "MetadataIntegrityException": 1,
+                "ReducerException": 1,
                 "ValidatorException": 1
             },
             "fors": {},
@@ -198,6 +337,40 @@
             "line": 7,
             "description": "This exception is thrown whenever there is an error while validating your data.",
             "extends": "Error",
+            "is_constructor": 1
+        },
+        "Reducers": {
+            "name": "Reducers",
+            "submodules": {
+                "injectable": 1
+            },
+            "elements": {},
+            "classes": {
+                "FieldReducer": 1,
+                "ValidatorReducer": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "file": "src/reducers/injectable/validator.reducer.js",
+            "line": 12
+        },
+        "injectable": {
+            "name": "injectable",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "FieldReducer": 1,
+                "ValidatorReducer": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "Reducers",
+            "namespace": "",
+            "file": "src/reducers/injectable/validator.reducer.js",
+            "line": 12,
+            "description": "This reducer is in charge of controlling all actions dispatched to change the validation status for a field.",
+            "extends": "InjectableReducer",
             "is_constructor": 1
         }
     },
@@ -231,6 +404,21 @@
             "file": "src/exceptions/metadata-integrity.exception.js",
             "line": 7,
             "description": "When you instance Metadatio entities and fields, some data health checks are performed. If in the data you declared to configure your element is corrupt in any way, this exception will be thrown."
+        },
+        "ReducerException": {
+            "name": "ReducerException",
+            "shortname": "ReducerException",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "submodule": "exceptions",
+            "namespace": "",
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 7,
+            "description": "Defines an exception thrown within the Reducer system. Whenever some reduction process fails, you will get this exception. There are several reasons for which you could get a `ReducerException`."
         },
         "ValidatorException": {
             "name": "ValidatorException",
@@ -287,10 +475,84 @@
             "file": "src/metadata/validator.metadata.js",
             "line": 10,
             "description": "Validators help you define rules with which you will consider the value given for a field as **valid**."
+        },
+        "FieldReducer": {
+            "name": "FieldReducer",
+            "shortname": "FieldReducer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Reducers",
+            "submodule": "injectable",
+            "namespace": "",
+            "file": "src/reducers/injectable/field.reducer.js",
+            "line": 14,
+            "description": "This reducer is in charge of controlling all actions dispatched to change the validation status for a field."
+        },
+        "ValidatorReducer": {
+            "name": "ValidatorReducer",
+            "shortname": "ValidatorReducer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Reducers",
+            "submodule": "injectable",
+            "namespace": "",
+            "file": "src/reducers/injectable/validator.reducer.js",
+            "line": 12,
+            "description": "This reducer is in charge of controlling all actions dispatched to change the validation status for a field."
+        },
+        "Store": {
+            "name": "Store",
+            "shortname": "Store",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "src/store.js",
+            "line": 12,
+            "description": "Metadatio store."
         }
     },
     "elements": {},
     "classitems": [
+        {
+            "file": "src/actions/entity.actions.js",
+            "line": 1,
+            "description": "Created by sm on 30/05/16.",
+            "class": "DataValidationException"
+        },
+        {
+            "file": "src/actions/field.actions.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "DataValidationException"
+        },
+        {
+            "file": "src/actions/index.js",
+            "line": 1,
+            "description": "Created by sm on 17/05/16.",
+            "class": "DataValidationException"
+        },
+        {
+            "file": "src/actions/metadatio.actions.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "DataValidationException"
+        },
+        {
+            "file": "src/actions/validator.actions.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "DataValidationException"
+        },
         {
             "file": "src/data/index.js",
             "line": 1,
@@ -301,6 +563,12 @@
             "file": "src/data/item.data.js",
             "line": 1,
             "description": "Created by sm on 24/05/16.",
+            "class": "DataValidationException"
+        },
+        {
+            "file": "src/exceptions/action.exception.js",
+            "line": 1,
+            "description": "Created by sm on 26/05/16.",
             "class": "DataValidationException"
         },
         {
@@ -559,6 +827,205 @@
             "file": "src/exceptions/metadatio.exception.js",
             "line": 1,
             "description": "Created by sm on 28/05/16.",
+            "class": "ReducerException",
+            "module": "Core"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "ReducerException",
+            "module": "Core"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 22,
+            "description": "### Base Injectable reducer needs an object to be configured\n\nIn order to create an {{#crossLink InjectableReducer}}Injectable reducer{{/crossLink}}, you need to provide an object defining the injectable",
+            "example": [
+                "\n    new InjectableReducer()"
+            ],
+            "itemtype": "attribute",
+            "name": "RBI001",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 34,
+            "description": "### Base Injectable reducer cannot be configured with a non-object\n\n{{#crossLink InjectableReducer}}Injectable reducers{{/crossLink}} must receive an instance of object",
+            "example": [
+                "\n    new InjectableReducer('wrong')"
+            ],
+            "itemtype": "attribute",
+            "name": "RBI002",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 46,
+            "description": "### You need to provide a UUID to create an injectable resource\n\nThere could be many reducers for the same purpose, so an **uuid** is needed to identify the target of our actions - all actions targeted to an {{#crossLink InjectableReducer}}injectable{{/crossLink}} **must** have an uuid present too.\n\nMetadatio uses {{#crossLink https://www.npmjs.com/package/shortid}}shortid{{/crossLink}} library for generating short ids.",
+            "example": [
+                "\n    new InjectableResource({});"
+            ],
+            "itemtype": "attribute",
+            "name": "RBI003",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 60,
+            "description": "### All injectable reducers must have an initial state\n\nYou need to provide an initial state for the injectable reducer upon creation",
+            "example": [
+                "\n    new InjectableResource({ uuid: 'xyz' });"
+            ],
+            "itemtype": "attribute",
+            "name": "RBI004",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 72,
+            "description": "### Every reducer needs a state object when reducing\n\nThis exception occurs upon reduction, whenever a reducer is called without a given state. If you've configured {{#crossLink http://redux.js.org/}}Redux{{/crossLink}} you shouldn't get this error - as it will be Redux the one who calls your reducer, and it will **always** send a `state`.",
+            "itemtype": "attribute",
+            "name": "RI003",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 81,
+            "description": "### All states must be instances of Map\n\nAll native reducers within Metadatio work specifically with {{#crossLink https://www.npmjs.com/package/immutable}}Immutable{{/crossLink}} maps. If you try to set a state as a non-map instance, you will get this error.",
+            "itemtype": "attribute",
+            "name": "RI004",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 90,
+            "description": "### Every reducer needs an action to reduce\n\nThis error occurs when a reducer is called without an action.",
+            "itemtype": "attribute",
+            "name": "RI005",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 99,
+            "description": "### The action to reduce must be an object\n\nAll actions sent to the reducer must be objects",
+            "itemtype": "attribute",
+            "name": "RI006",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 108,
+            "description": "### All actions must contain a 'type' attribute\n\nActions are defined via a `type` attribute. So this parameter is needed, as otherwise the action will not have any identity for the reducer.",
+            "itemtype": "attribute",
+            "name": "RI007",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 117,
+            "description": "### Action type sent to reducer must be a string\n\nThe `type` attribute must be a String",
+            "example": [
+                "\n    reducer.reduce(state, { type: 123 })"
+            ],
+            "itemtype": "attribute",
+            "name": "RI008",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 129,
+            "description": "### All actions must contain a \\'uuid\\' attribute\n\nEvery action that arrives at an injectable reducer needs to be targeted with a uuid. As these reducers are not unique, otherwise your action could trigger an unwanted behavior.",
+            "itemtype": "attribute",
+            "name": "RI009",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 140,
+            "description": "### Entity reducer needs an entity as input",
+            "itemtype": "attribute",
+            "name": "RIE001",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 149,
+            "description": "### Entity reducer needs an instance of Entity",
+            "itemtype": "attribute",
+            "name": "RIE002",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 157,
+            "description": "### Field reducer needs a field as input",
+            "itemtype": "attribute",
+            "name": "RIF001",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 164,
+            "description": "### Field reducer needs an instance of Field",
+            "itemtype": "attribute",
+            "name": "RIF002",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 171,
+            "description": "### Validator reducer needs a validator as input",
+            "itemtype": "attribute",
+            "name": "RIV001",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/reducer.exception.js",
+            "line": 178,
+            "description": "### Validator reducer needs an instance of Validator",
+            "itemtype": "attribute",
+            "name": "RIV002",
+            "class": "ReducerException",
+            "module": "Core",
+            "submodule": "exceptions"
+        },
+        {
+            "file": "src/exceptions/store.exception.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
             "class": "ValidatorException",
             "module": "Core"
         },
@@ -1181,10 +1648,299 @@
             "module": "Core"
         },
         {
+            "file": "src/reducers/injectable/entity.reducer.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "FieldReducer",
+            "module": "Core"
+        },
+        {
+            "file": "src/reducers/injectable/field.reducer.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "FieldReducer",
+            "module": "Core"
+        },
+        {
+            "file": "src/reducers/injectable/field.reducer.js",
+            "line": 25,
+            "description": "Contains the initial state for any Field. Upon construction, this property is filled with the Field data for further control.\n\nThe basic structure of the `initialState` is:\n\n```\n{\n  uuid: 'Unique ID of the validator',\n  valid: true, // Whether the validation succeeded\n  validator: Field // The actual validator to match against\n}\n```",
+            "itemtype": "property",
+            "name": "initialState",
+            "static": 1,
+            "type": "{Map}",
+            "class": "FieldReducer",
+            "module": "Reducers",
+            "submodule": "injectable"
+        },
+        {
+            "file": "src/reducers/injectable/field.reducer.js",
+            "line": 48,
+            "description": "Constructor for the validator reducer",
+            "itemtype": "method",
+            "name": "constructor",
+            "params": [
+                {
+                    "name": "field",
+                    "description": "The field to associate with the reducer",
+                    "type": "Field"
+                }
+            ],
+            "class": "FieldReducer",
+            "module": "Reducers",
+            "submodule": "injectable"
+        },
+        {
+            "file": "src/reducers/injectable/field.reducer.js",
+            "line": 76,
+            "description": "Combines the field information reducer - that handles the data within this reducer - and the inner validation and history reducers.",
+            "itemtype": "method",
+            "name": "combine",
+            "return": {
+                "description": "",
+                "type": "Reducer"
+            },
+            "class": "FieldReducer",
+            "module": "Reducers",
+            "submodule": "injectable"
+        },
+        {
+            "file": "src/reducers/injectable/field.reducer.js",
+            "line": 103,
+            "description": "Performs a reduction on a validator state, upon a validation change action.",
+            "itemtype": "method",
+            "name": "reduce",
+            "params": [
+                {
+                    "name": "state",
+                    "description": ""
+                },
+                {
+                    "name": "action",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Map"
+            },
+            "class": "FieldReducer",
+            "module": "Reducers",
+            "submodule": "injectable"
+        },
+        {
+            "file": "src/reducers/injectable/index.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "ValidatorReducer",
+            "module": "Reducers"
+        },
+        {
+            "file": "src/reducers/injectable/injectable.reducer.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "ValidatorReducer",
+            "module": "Reducers"
+        },
+        {
+            "file": "src/reducers/injectable/raw-map.reducer.js",
+            "line": 1,
+            "description": "Created by sm on 20/05/16.",
+            "class": "ValidatorReducer",
+            "module": "Reducers"
+        },
+        {
+            "file": "src/reducers/injectable/validator.reducer.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "ValidatorReducer",
+            "module": "Reducers"
+        },
+        {
+            "file": "src/reducers/injectable/validator.reducer.js",
+            "line": 23,
+            "description": "Contains the initial state for any Validator. Upon construction, this property is filled with the Validator data for further control.\n\nThe basic structure of the `initialState` is:\n\n```\n{\n  uuid: 'Unique ID of the validator',\n  valid: true, // Whether the validation succeeded\n}\n```",
+            "itemtype": "property",
+            "name": "initialState",
+            "static": 1,
+            "type": "{immutable.Map}",
+            "class": "ValidatorReducer",
+            "module": "Reducers",
+            "submodule": "injectable"
+        },
+        {
+            "file": "src/reducers/injectable/validator.reducer.js",
+            "line": 44,
+            "description": "Constructor for the validator reducer",
+            "itemtype": "method",
+            "name": "constructor",
+            "params": [
+                {
+                    "name": "validator",
+                    "description": "The validator that will perform changes on this state",
+                    "type": "Validator"
+                },
+                {
+                    "name": "valid",
+                    "description": "If you want to provide an initial validity for the validator",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "null"
+                }
+            ],
+            "class": "ValidatorReducer",
+            "module": "Reducers",
+            "submodule": "injectable"
+        },
+        {
+            "file": "src/reducers/injectable/validator.reducer.js",
+            "line": 68,
+            "description": "Performs a reduction on a validator state, upon a validation change action.",
+            "itemtype": "method",
+            "name": "reduce",
+            "params": [
+                {
+                    "name": "state",
+                    "description": ""
+                },
+                {
+                    "name": "action",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "immutable.Map"
+            },
+            "class": "ValidatorReducer",
+            "module": "Reducers",
+            "submodule": "injectable"
+        },
+        {
+            "file": "src/reducers/index.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "Store",
+            "module": "Reducers"
+        },
+        {
+            "file": "src/reducers/items.reducer.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "Store",
+            "module": "Reducers"
+        },
+        {
+            "file": "src/reducers/metadatio.reducer.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "Store",
+            "module": "Reducers"
+        },
+        {
             "file": "src/index.js",
             "line": 1,
             "description": "Created by sm on 01/05/16.",
-            "class": "",
+            "class": "Store",
+            "module": "Reducers"
+        },
+        {
+            "file": "src/store.js",
+            "line": 1,
+            "description": "Created by sm on 14/05/16.",
+            "class": "Store",
+            "module": "Reducers"
+        },
+        {
+            "file": "src/store.js",
+            "line": 22,
+            "description": "Determines whether the store has been configured. Upon configuration, the store is created and engaged with the defined reducers. But until this phase passes the store would not be set, and thus it's usage will result in errors. This flag is useful to avoid unexpected errors when using the store.",
+            "itemtype": "property",
+            "name": "configured",
+            "type": "{boolean}",
+            "class": "Store",
+            "module": "Core"
+        },
+        {
+            "file": "src/store.js",
+            "line": 32,
+            "description": "Contains all the element-specific reducers (relative to each element of your app) that are injected to the store asynchronously once you declare your elements - i.e. entities, fields and validators.",
+            "itemtype": "property",
+            "name": "asyncReducers",
+            "type": "{Object}",
+            "class": "Store",
+            "module": "Core"
+        },
+        {
+            "file": "src/store.js",
+            "line": 45,
+            "description": "Configures the store. It receives the initial state for the store, and it engages the reducers",
+            "itemtype": "method",
+            "name": "configure",
+            "params": [
+                {
+                    "name": "initialState",
+                    "description": "The initial state for the store",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "Store",
+            "module": "Core"
+        },
+        {
+            "file": "src/store.js",
+            "line": 66,
+            "description": "Injects a new reducer within the store. This is called whenever you add a new element to the metadata object, as every element within Metadatio has its own, specific reducer for performing and monitoring their actions. By adding such reducer via this method is directly engaged through the store, and the reducers are recombined.",
+            "itemtype": "method",
+            "name": "injectAsync",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the reducer to inject",
+                    "type": "String"
+                },
+                {
+                    "name": "reducer",
+                    "description": "The reducer to inject",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Store"
+            },
+            "class": "Store",
+            "module": "Core"
+        },
+        {
+            "file": "src/store.js",
+            "line": 88,
+            "description": "Dispatches an action through the store. This is just a gateway to call the Redux action dispatcher.",
+            "itemtype": "method",
+            "name": "dispatch",
+            "params": [
+                {
+                    "name": "action",
+                    "description": "The object that describes what happened",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "Store",
+            "module": "Core"
+        },
+        {
+            "file": "src/store.js",
+            "line": 140,
+            "description": "Returns the current state",
+            "itemtype": "method",
+            "name": "getState",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Store",
             "module": "Core"
         }
     ],
@@ -1210,12 +1966,56 @@
             "line": " src/metadata/validator.metadata.js:53"
         },
         {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/reducers/injectable/field.reducer.js:76"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/reducers/injectable/field.reducer.js:103"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/reducers/injectable/validator.reducer.js:68"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/store.js:66"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/store.js:140"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 30/05/16.",
+            "line": " src/actions/entity.actions.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/actions/field.actions.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 17/05/16.",
+            "line": " src/actions/index.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/actions/metadatio.actions.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/actions/validator.actions.js:1"
+        },
+        {
             "message": "Missing item type\nCreated by sm on 24/05/16.",
             "line": " src/data/index.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 24/05/16.",
             "line": " src/data/item.data.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 26/05/16.",
+            "line": " src/exceptions/action.exception.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 29/05/16.",
@@ -1240,6 +2040,14 @@
         {
             "message": "Missing item type\nCreated by sm on 28/05/16.",
             "line": " src/exceptions/metadatio.exception.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/exceptions/reducer.exception.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/exceptions/store.exception.js:1"
         },
         {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
@@ -1338,8 +2146,48 @@
             "line": " src/metadata/validator.metadata.js:1"
         },
         {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/injectable/entity.reducer.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/injectable/field.reducer.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/injectable/index.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/injectable/injectable.reducer.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 20/05/16.",
+            "line": " src/reducers/injectable/raw-map.reducer.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/injectable/validator.reducer.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/index.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/items.reducer.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/reducers/metadatio.reducer.js:1"
+        },
+        {
             "message": "Missing item type\nCreated by sm on 01/05/16.",
             "line": " src/index.js:1"
+        },
+        {
+            "message": "Missing item type\nCreated by sm on 14/05/16.",
+            "line": " src/store.js:1"
         }
     ]
 }

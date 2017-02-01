@@ -87,7 +87,10 @@
                 </div>
                 <div class="bd">
                     <ul>
-                            <li><a href="#methods_constructor">constructor</a></li>
+                            <li><a href="#methods_configure">configure</a></li>
+                            <li><a href="#methods_injectAsync">injectAsync</a></li>
+                            <li><a href="#methods_dispatch">dispatch</a></li>
+                            <li><a href="#methods_getState">getState</a></li>
                     </ul>
                 </div>
             </div>
@@ -109,9 +112,10 @@
         </div>
 
         <div id="main" class="yui3-u">
-            <div class="content"><h1>ValidatorException</h1>
-<!--<span class="foundat">Class defined in: <a href=""><code>src&#x2F;exceptions&#x2F;validator.exception.js:7</code></a></span>-->
-<div class="intro"></div>
+            <div class="content"><h1>Store</h1>
+<!--<span class="foundat">Class defined in: <a href=""><code>src&#x2F;store.js:12</code></a></span>-->
+<div class="intro"><p>Metadatio store.</p>
+</div>
 
 
 <div id="classdocs">
@@ -120,19 +124,61 @@
             <!--<li><a href="#methods">Methods</a></li>-->
         <!---->
         <!---->
+            <!--<li><a href="#props">Properties</a></li>-->
+        <!---->
         <!---->
         <!---->
     <!--</ul>-->
     <div>
+            <h2>Properties</h2>
+            <div id="props">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td>
+                                    <a name="property_configured"></a>
+                                    <code>configured</code>
+                                </td>
+                                <td>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong> <br>
+                                </td>
+                                <td>
+                                    <p>Determines whether the store has been configured. Upon configuration, the store is created and engaged with the defined reducers. But until this phase passes the store would not be set, and thus it's usage will result in errors. This flag is useful to avoid unexpected errors when using the store.</p>
+                            
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a name="property_asyncReducers"></a>
+                                    <code>asyncReducers</code>
+                                </td>
+                                <td>
+                                    <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong> <br>
+                                </td>
+                                <td>
+                                    <p>Contains all the element-specific reducers (relative to each element of your app) that are injected to the store asynchronously once you declare your elements - i.e. entities, fields and validators.</p>
+                            
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h2>Methods</h2>
             <div id="methods">
-                    <a name="method_constructor"></a>
+                    <a name="method_configure"></a>
                     <div class="method item">
                          <strong
-                            class="name"><code>constructor</code></strong>( <code>e </code> ) 
+                            class="name"><code>configure</code></strong>( <code>initialState </code> ) 
                         <br>
-                        <p>Constructs a new exception</p>
+                        <p>Configures the store. It receives the initial state for the store, and it engages the reducers</p>
                     
                             <h4>Parameters:</h4>
                             <table>
@@ -146,18 +192,111 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                                <code>e</code>
+                                                <code>initialState</code>
                                         </td>
                                         <td>
                                             <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong>
                                         </td>
                                         <td>
-                                             
+                                            <p>The initial state for the store</p>
+                    
                                         </td>
                                     </tr>
                     
                                 </tbody>
                             </table>
+                    </div>
+                    <a name="method_injectAsync"></a>
+                    <div class="method item">
+                        <a href="../classes/Store.html" class="crosslink">Store</a> <strong
+                            class="name"><code>injectAsync</code></strong>( <code>name, reducer </code> ) 
+                        <br>
+                        <p>Injects a new reducer within the store. This is called whenever you add a new element to the metadata object, as every element within Metadatio has its own, specific reducer for performing and monitoring their actions. By adding such reducer via this method is directly engaged through the store, and the reducers are recombined.</p>
+                    
+                            <h4>Parameters:</h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                                <code>name</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong>
+                                        </td>
+                                        <td>
+                                            <p>The name of the reducer to inject</p>
+                    
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                                <code>reducer</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></strong>
+                                        </td>
+                                        <td>
+                                            <p>The reducer to inject</p>
+                    
+                                        </td>
+                                    </tr>
+                    
+                                </tbody>
+                            </table>
+                                <br>
+                                <div class="returns">
+                                    <strong>Returns:</strong> <a href="../classes/Store.html" class="crosslink">Store</a> </div>
+                    </div>
+                    <a name="method_dispatch"></a>
+                    <div class="method item">
+                         <strong
+                            class="name"><code>dispatch</code></strong>( <code>action </code> ) 
+                        <br>
+                        <p>Dispatches an action through the store. This is just a gateway to call the Redux action dispatcher.</p>
+                    
+                            <h4>Parameters:</h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                                <code>action</code>
+                                        </td>
+                                        <td>
+                                            <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong>
+                                        </td>
+                                        <td>
+                                            <p>The object that describes what happened</p>
+                    
+                                        </td>
+                                    </tr>
+                    
+                                </tbody>
+                            </table>
+                    </div>
+                    <a name="method_getState"></a>
+                    <div class="method item">
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a> <strong
+                            class="name"><code>getState</code></strong>( <code>  </code> ) 
+                        <br>
+                        <p>Returns the current state</p>
+                    
+                                <br>
+                                <div class="returns">
+                                    <strong>Returns:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a> </div>
                     </div>
             </div>
 
