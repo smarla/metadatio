@@ -1,6 +1,6 @@
 {
   "name": "metadatio",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Metadatio handles data objects using metadata",
   "main": "src/index.js",
   "scripts": {
