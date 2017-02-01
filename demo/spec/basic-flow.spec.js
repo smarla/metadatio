@@ -48,7 +48,12 @@ describe.only('Metadatio system', () => {
     
     describe('when hooking up actions', () => {
         it('should trigger the hooks when the action matches', (done) => {
+            let ok = false;
             const callback = () => {
+                if(!ok) {
+                    ok = true;
+                    done();
+                }
 
             };
 
