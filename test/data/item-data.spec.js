@@ -189,7 +189,7 @@ describe('The data item', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('ItemException');
-                expect(e.code).to.equal('I005')
+                expect(e.code).to.equal('I005');
                 done();
             }
         });
@@ -200,7 +200,7 @@ describe('The data item', () => {
                 done(EXPECTING_ERROR);
             } catch(e) {
                 expect(e.className).to.equal('ItemException');
-                expect(e.code).to.equal('I006')
+                expect(e.code).to.equal('I006');
                 done();
             }
         });

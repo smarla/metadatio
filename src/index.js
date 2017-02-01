@@ -4,13 +4,9 @@
 
 import shortid from 'shortid';
 
-import { EntityActions, FieldActions, ValidatorActions, CoreActions } from './actions';
-import MainStore from './store';
-import { Store } from './store';
 import { MetadatioException } from './exceptions';
 import { Item } from './data';
 import { Entity } from './metadata';
-import configureStore from 'redux-mock-store';
 
 export class Core {
 
@@ -18,15 +14,10 @@ export class Core {
     static CONFIG_ACTION_MATCHES = 'metadatio-action-matches';
     static CONFIG_SUBSCRIPTIONS = 'metadatio-subscriptions';
 
-    constructor(store) {
-        if(!store) throw new MetadatioException('MC001');
-        if(!(store instanceof Store)) throw new MetadatioException('MC002');
-        this.store = store;
-
-        this.entityActions = new EntityActions(store);
-        this.fieldActions = new FieldActions(store);
-        this.validatorActions = new ValidatorActions(store);
-        this.coreActions = new CoreActions(store);
+    constructor() {
+        this.actionHooks = {};
+        this.actionMatches = {};
+        this.subscriptions = {};
     }
 
     import(json) {
@@ -34,36 +25,6 @@ export class Core {
         if(typeof(json) !== 'object') throw new MetadatioException('MI002');
 
         return new Entity(json);
-    }
-    
-    init() {
-        this.actionHooks = {};
-        this.actionMatches = {};
-        this.subscriptions = {};
-        
-        this.store.configure(this.actionHooks, this.actionMatches, this.subscriptions);
-
-        this.coreActions.setConfig(Core.CONFIG_ACTION_HOOKS, this.actionHooks);
-        this.coreActions.setConfig(Core.CONFIG_ACTION_MATCHES, this.actionHooks);
-        this.coreActions.setConfig(Core.CONFIG_SUBSCRIPTIONS, this.subscriptions);
-    }
-
-    mock() {
-        const store = configureStore();
-        const mockStore = store({});
-
-        this.store = {
-            dispatch: (action) => mockStore.dispatch(action),
-            getActions: () => mockStore.getActions(),
-            refresh: () => void(0)
-        };
-
-        this.entityActions = new EntityActions(this.store);
-        this.fieldActions = new FieldActions(this.store);
-        this.validatorActions = new ValidatorActions(this.store);
-        this.coreActions = new CoreActions(this.store);
-
-        this.__mocked = true;
     }
 
     on(action, action_to_trigger) {
@@ -74,13 +35,15 @@ export class Core {
 
         // TODO Verify action match existence
         const actionId = shortid.generate();
-        this.actionMatches[actionId] = action
+        this.actionMatches[actionId] = action;
 
         if(!this.actionHooks[actionId]) {
             this.actionHooks[actionId] = [];
         }
 
         this.actionHooks[actionId].push(action_to_trigger);
+
+        return actionId;
     }
 
     scaffold(entity, data = undefined) {
@@ -98,7 +61,7 @@ export class Core {
     }
 
     static getInstance() {
-        if(!Core.instance) Core.instance = new Core(MainStore);
+        if(!Core.instance) Core.instance = new Core();
         return Core.instance;
     }
 }

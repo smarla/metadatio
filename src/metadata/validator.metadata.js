@@ -58,8 +58,8 @@ export default class Validator extends Element {
      * @returns {boolean}
      */
     validate(value) {
-        if(value === null) return false;
-        
+        if(value === undefined || value === null) return false;
+
         switch(this.type) {
             case ValidatorTypes.required:
                 return value !== null && value !== undefined && value !== '';
@@ -69,7 +69,9 @@ export default class Validator extends Element {
                 return value === this.validator;
 
             case ValidatorTypes.regex:
-                if(typeof(value) !== 'string') throw new ValidatorException('V007');
+                if(typeof(value) !== 'string') {
+                    throw new ValidatorException('V007');
+                }
 
                 return !!value.match(this.validator);
 
@@ -88,10 +90,10 @@ export default class Validator extends Element {
                 return lengthMin && lengthMax;
 
             case ValidatorTypes.fn:
-                const value = this.validator.call(this, value);
-                if(value !== true && value !== false) throw new ValidatorException('V015');
+                const fnValue = this.validator.call(this, value);
+                if(fnValue !== true && fnValue !== false) throw new ValidatorException('V015');
                 
-                return value;
+                return fnValue;
 
         }
     }
