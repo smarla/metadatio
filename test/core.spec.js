@@ -137,6 +137,7 @@ describe('The metadatio core', () => {
             expect(entity.label).to.equal('Entity');
             expect(entity.namespace).to.equal('ns');
 
+<<<<<<< HEAD
             expect(entity.fields.length).to.equal(1);
             expect(entity.fields[0]).to.be.an.instanceof(Field);
             expect(entity.fields[0].name).to.equal('field1');

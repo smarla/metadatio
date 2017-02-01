@@ -92,7 +92,6 @@ export default class Validator extends Element {
             case ValidatorTypes.fn:
                 const fnValue = this.validator.call(this, value);
                 if(fnValue !== true && fnValue !== false) throw new ValidatorException('V015');
-                
                 return fnValue;
 
         }
