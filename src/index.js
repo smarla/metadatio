@@ -81,6 +81,8 @@ export class Core {
         }
 
         this.actionHooks[actionId].push(action_to_trigger);
+
+        return actionId;
     }
 
     scaffold(entity, data = undefined) {

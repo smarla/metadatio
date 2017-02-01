@@ -242,9 +242,9 @@ describe('The metadatio core', () => {
                 it('should store a hook in the actionHooks config', () => {
                     const match = {};
                     const callback = () => void(0);
-                    core.on(match, callback);
+                    const actionId = core.on(match, callback);
 
-                    expect(core.actionHooks[match][0]).to.equal(callback);
+                    expect(core.actionHooks[actionId][0]).to.equal(callback);
                 });
             });
         });
