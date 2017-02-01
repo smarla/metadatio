@@ -44,6 +44,9 @@ export default class Item extends Element {
         this.attr('__entity', entity);
         this.attr('className', entity.name);
 
+        Metadatio.coreActions.scaffold(this, entity);
+        Metadatio.store.refresh();
+
         const values = {};
         this.fields = {};
         for(let i = 0; i < entity.fields.length; i++) {
@@ -72,6 +75,9 @@ export default class Item extends Element {
             set: (target, prop, value) => {
                 if(that.attr(prop) === undefined) throw new ItemException('I006');
                 const newValue = that.attr(prop, value);
+
+                Metadatio.entityActions.change(that, values[prop].field, value);
+                Metadatio.fieldActions.update(that, values[prop].field, value);
 
                 values[prop].field.validate(value);
                 that.attr('valid', that.__entity.validate(that));

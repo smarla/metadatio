@@ -92,11 +92,7 @@ export default class Validator extends Element {
             case ValidatorTypes.fn:
                 const fnValue = this.validator.call(this, value);
                 if(fnValue !== true && fnValue !== false) throw new ValidatorException('V015');
-<<<<<<< 7d6568321d52d180a8f628ac10418b20288ce3ce
 
-=======
-                
->>>>>>> Removing React and Redux from the picture.
                 return fnValue;
 
         }
