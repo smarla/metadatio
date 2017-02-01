@@ -187,7 +187,7 @@ describe('The metadatio core', () => {
                     expect(entity.fields[0].name).to.equal('field1');
                     expect(entity.fields[0].label).to.equal('Field 1');
                     expect(entity.fields[0].dataType).to.equal(DataTypes.string);
-                    
+
                     expect(entity.fields[0].validators.pattern).to.not.equal(undefined);
                     expect(entity.fields[0].validators.pattern.type).to.equal('regex');
                     expect(entity.fields[0].validators.pattern.validator).to.deep.equal(/123/);
