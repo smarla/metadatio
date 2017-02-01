@@ -54,7 +54,6 @@ describe.only('Metadatio system', () => {
                     ok = true;
                     done();
                 }
-
             };
 
             Metadatio.on({ type: CoreActions.ITEM_CREATED }, callback);
