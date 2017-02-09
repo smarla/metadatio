@@ -57,9 +57,9 @@ then
     git stash --all
     git pull origin HEAD:builds
     echo $pkgjson > package.json
-    echo "*" > .gitignore
-    echo "!metadatio.js" >> .gitignore
-    echo "!package.json" >> .gitignore
+#    echo "*" > .gitignore
+#    echo "!metadatio.js" >> .gitignore
+#    echo "!package.json" >> .gitignore
 
     touch ~/.npmrc
 
