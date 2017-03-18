@@ -2,8 +2,7 @@
  * Created by sm on 24/05/16.
  */
 
-import Metadatio from '../';
-import { Element, Entity } from '../metadata';
+import { Element, Entity, Field } from '../metadata';
 import { ItemException } from '../exceptions';
 
 export default class Item extends Element {
@@ -34,6 +33,7 @@ export default class Item extends Element {
     }
 
     constructor(entity, data = undefined) {
+
         if(!entity) throw new ItemException('I001');
         if(!(entity instanceof Entity)) throw new ItemException('I002');
         if(data !== undefined && typeof(data) !== 'object') throw new ItemException('I007');
@@ -43,6 +43,7 @@ export default class Item extends Element {
         this.attr('valid', null);
         this.attr('__entity', entity);
         this.attr('className', entity.name);
+        this.attr('namespace', entity.namespace);
 
         const values = {};
         this.fields = {};
@@ -57,15 +58,30 @@ export default class Item extends Element {
                 value: this.attr(fieldName, value)
             };
 
-            this.attr(fieldName + '-proxy', this.configureField(field))
+            this.attr(fieldName + '-proxy', this.configureField(field));
         }
 
         const that = this;
         this.data = new Proxy(values, {
             get: (target, prop) => {
-                if(that.attr(prop) === undefined) throw new ItemException('I005');
+                if(typeof(prop) === 'symbol') {
+                    return null;
+                }
 
-                const value = that.attr(prop);
+                if(['inspect', 'valueOf'].indexOf(prop) === -1 && that.attr(prop) === undefined) throw new ItemException('I005');
+
+                let value = that.attr(prop);
+                if(value instanceof Item) value = value.data;
+                if(value instanceof Array) {
+                    let parsedValue = [];
+                    for(let valueIndex = 0; valueIndex < value.length; valueIndex++) {
+                        let valueItem = value[valueIndex];
+                        if(valueItem instanceof Item) valueItem = valueItem.data;
+                        parsedValue.push(valueItem);
+                    }
+                    value = parsedValue;
+                }
+
                 return value;
             },
 
@@ -74,15 +90,18 @@ export default class Item extends Element {
                 const newValue = that.attr(prop, value);
 
                 values[prop].field.validate(value);
-                that.attr('valid', that.__entity.validate(that));
 
-                return newValue;
+                return true;
             }
         });
 
         this.fields = new Proxy(values, {
             get: (target, prop) => {
-                if(that.attr(prop) === undefined) throw new ItemException('II001');
+                if(typeof(prop) === 'symbol') {
+                    return null;
+                }
+
+                if(['inspect', 'valueOf'].indexOf(prop) === -1 && that.attr(prop) === undefined) throw new ItemException('II001');
 
                 return that.attr(prop + '-proxy');
             },
@@ -95,13 +114,38 @@ export default class Item extends Element {
         if(data) {
             for(let param in data) {
                 const value = data[param];
-                this.data[param] = value;
+
+                const paramName = param;
+
+                const field = values[paramName].field;
+                const fieldType = field.dataType;
+                const fieldMultiplicity = field.multiplicity;
+
+                if(fieldType instanceof Entity) {
+                    if('many' === fieldMultiplicity) {
+                        if(value && !(value instanceof Array)) {
+                            // TODO Something here
+                        }
+
+                        const parsedData = [];
+                        for(let multiItemIndex = 0; multiItemIndex < value.length; multiItemIndex++) {
+                            parsedData.push(new Item(fieldType, value[multiItemIndex]));
+                        }
+                        this.data[param] = parsedData;
+                    }
+                    else {
+                        this.data[param] = new Item(fieldType, value);
+                    }
+                }
+                else {
+                    this.data[param] = value;
+                }
             }
         }
     }
 
     get valid() {
-        return this.attr('valid');
+        return this.__entity.validate(this);
     }
 
     get __entity() {
@@ -120,9 +164,18 @@ export default class Item extends Element {
         throw new ItemException('I003');
     }
 
+    get namespace() {
+        return this.attr('namespace');
+    }
+
+    set namespace(attr) {
+        throw new ItemException('I008');
+    }
+
     serialize() {
         const ret = {
             uuid: this.uuid,
+            className: this.namespace !== 'default' ? [this.namespace, this.className].join('::') : this.className,
             data: {
 
             }

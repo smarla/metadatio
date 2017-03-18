@@ -4,6 +4,6 @@
 
 import Item from './item.data';
 
-module.exports = {
+export {
     Item
 };

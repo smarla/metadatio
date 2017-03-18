@@ -10,7 +10,7 @@ import FieldTypes from './field-types.metadata';
 import Validator from './validator.metadata';
 import ValidatorTypes from './validator-types.metadata';
 
-module.exports = {
+export {
     DataTypes,
     Element,
     Entity,

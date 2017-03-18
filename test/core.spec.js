@@ -4,7 +4,7 @@
 
 import { expect } from 'chai';
 
-import { Core } from '../src';
+import { Core } from '../src/core';
 import { Entity, Field, DataTypes } from '../src/metadata';
 
 const EXPECTING_ERROR = new Error('An exception was expected here');
@@ -137,16 +137,6 @@ describe('The metadatio core', () => {
             expect(entity.label).to.equal('Entity');
             expect(entity.namespace).to.equal('ns');
 
-<<<<<<< 7d6568321d52d180a8f628ac10418b20288ce3ce
-                it('should store a hook in the actionHooks config', () => {
-                    const match = {};
-                    const callback = () => void(0);
-                    const actionId = core.on(match, callback);
-
-                    expect(core.actionHooks[actionId][0]).to.equal(callback);
-                });
-            });
-=======
             expect(entity.fields.length).to.equal(1);
             expect(entity.fields[0]).to.be.an.instanceof(Field);
             expect(entity.fields[0].name).to.equal('field1');
@@ -210,7 +200,6 @@ describe('The metadatio core', () => {
             const actionId = core.on(match, callback);
 
             expect(core.actionHooks[actionId][0]).to.equal(callback);
->>>>>>> Removing React and Redux from the picture.
         });
     });
 });

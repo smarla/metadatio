@@ -9,6 +9,8 @@ import { Entity, Field, DataTypes, Validator, ValidatorTypes } from '../../src/m
 
 const EXPECTING_ERROR = new Error('An exception was expected here');
 
+let entity = null;
+let item = null;
 describe('The data item', () => {
     describe('upon creation', () => {
         it('should verify that an entity is received', (done) => {
@@ -48,8 +50,6 @@ describe('The data item', () => {
         });
 
         describe('and using the entity received', () => {
-            let entity = null;
-            let item = null;
             beforeEach(() => {
                 entity = new Entity({
                     name: 'entity',
@@ -117,6 +117,7 @@ describe('The data item', () => {
             });
 
             it('should expose field information on the \'fields\' attribute', () => {
+                item.data.name = 'cde';
                 expect(item.fields.name.valid).to.equal(false);
                 expect(item.fields.name.validators.pattern).to.equal(false);
             });
@@ -219,11 +220,10 @@ describe('The data item', () => {
         describe('for having full information about the status of the item', () => {
             
             it('should have validation status of the whole item', () => {
-                expect(item.valid).to.equal(null);
                 item.data.name = 'abc';
                 item.data.age = 21;
                 expect(item.valid).to.equal(true);
-                item.data.name = 'ab';
+                item.data.name = 'cde';
                 expect(item.valid).to.equal(false);
             });
 

@@ -17,6 +17,7 @@ export default class ItemException extends BaseException {
         'I005': 'The item {{item}} does not contain a field {{field}}',
         'I006': 'Cannot edit the non existing field {{field}}',
         'I007': 'The data object sent to an Item must be an object',
+        'I008': 'You cannot override an Item\'s namespace',
 
         'II001': 'Cannot fetch information about a non existing field',
         'II002': 'You cannot modify read-only field information.',

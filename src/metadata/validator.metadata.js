@@ -26,12 +26,15 @@ export default class Validator extends Element {
      * @param type {string} Define the type of validation to use. Type must be one TODO: Link ValidatorTypes defined.
      * @param validator {string|RegExp|Object|function} The validator to match values against
      */
-    constructor(type, validator) {
+    // TODO Document. Target can be group or unit. Default group
+    // FIXME ONLY for MANY values
+    constructor(type, validator, target = 'group') {
         super();
 
         this.validateConfig(type, validator);
         this.type = type;
         this.validator = validator;
+        this.target = target;
     }
 
     get type() {
@@ -58,7 +61,7 @@ export default class Validator extends Element {
      * @returns {boolean}
      */
     validate(value) {
-        if(value === undefined || value === null) return false;
+        if(value === undefined) return false;
 
         switch(this.type) {
             case ValidatorTypes.required:
@@ -87,16 +90,13 @@ export default class Validator extends Element {
 
                 const lengthMin = this.validator.min ? value.length >= this.validator.min : true;
                 const lengthMax = this.validator.max ? value.length <= this.validator.max : true;
+
                 return lengthMin && lengthMax;
 
             case ValidatorTypes.fn:
                 const fnValue = this.validator.call(this, value);
                 if(fnValue !== true && fnValue !== false) throw new ValidatorException('V015');
-<<<<<<< 7d6568321d52d180a8f628ac10418b20288ce3ce
 
-=======
-                
->>>>>>> Removing React and Redux from the picture.
                 return fnValue;
 
         }

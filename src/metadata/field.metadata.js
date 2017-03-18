@@ -110,12 +110,42 @@ export default class Field extends Element {
                     if(valueType !== 'number' && !(value instanceof Date)) throw new DataValidationException('DV005');
                     break;
             }
+
+            const referenceField = !DataTypes[this.dataType];
+            if(referenceField) {
+                if('many' === this.multiplicity) {
+                    // TODO perform global array validations
+
+                    for(let multiItemIndex = 0; multiItemIndex < value.length; multiItemIndex++) {
+                        const multiValue = value[multiItemIndex];
+                        const validation = this.dataType.validate(multiValue);
+                        if(!validation) return false;
+                    }
+                }
+                else {
+                    if(!this.dataType.validate(value)) return false;
+                }
+            }
         }
 
         for(let validatorName in validators) {
             const validator = validators[validatorName];
 
-            const validates = validator.validate(value);
+            let validates = true;
+            if('many' === this.multiplicity && validator.target === 'unit') {
+                if(!(value instanceof Array)) {
+                    // TODO Throw some nice exception here.
+                }
+                for(let valueIndex = 0; valueIndex < value.length; valueIndex++) {
+                    const valueItem = value[valueIndex];
+                    if(!validator.validate(valueItem)) return false;
+                }
+            }
+            else {
+                if(!validator.validate(value)) {
+                    return false;
+                }
+            }
 
             if(!validates) {
                 // TODO Create different validation strategies
@@ -240,9 +270,14 @@ export default class Field extends Element {
      */
     set dataType(dataType) {
         if(!dataType) throw new MetadataIntegrityException('MIF005');
-        if(!DataTypes[dataType] && !(dataType instanceof Entity)) throw new MetadataIntegrityException('MIF006');
+        if(!DataTypes[dataType] && !dataType.getInstance && !(dataType instanceof Entity)) throw new MetadataIntegrityException('MIF006');
 
-        this.attr('dataType', dataType);
+        let realDataType = dataType;
+        if(dataType.getInstance) {
+            realDataType = dataType.getInstance();
+        }
+
+        this.attr('dataType', realDataType);
     }
 
     /**
@@ -290,7 +325,7 @@ export default class Field extends Element {
             let realValidator = validator;
 
             if(!(validator instanceof Validator)) {
-                realValidator = new Validator(validator.type, validator.validator);
+                realValidator = new Validator(validator.type, validator.validator, validator.target);
             }
 
             this.addValidator(validatorName, realValidator);
